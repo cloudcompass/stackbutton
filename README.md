@@ -1,2 +1,2 @@
 # stackbutton
-A friendly provisioning tool for DevOps tool chains.
+A friendly - but powerful - provisioning tool for DevOps tool chains and application infrastructure.
