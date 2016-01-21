@@ -1,0 +1,13 @@
+# Site settings
+title: StackButton
+description: > # this means to ignore newlines until "baseurl:"
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "" # the base hostname & protocol for your site
+
+email: shea.phillips@cloudcompass.ca
+twitter_username: stackbutton
+github_username: sheaphillips
+phone_number: +12502087874
+
+# Build settings
+markdown: kramdown
