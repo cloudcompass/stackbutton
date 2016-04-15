@@ -17,7 +17,11 @@
   ],
   "dependencies": {
     "angular": "^1.5.4",
-    "angular-material": "^1.0.7"
+    "angular-material": "^1.0.7",
+    "angular-cookies": "^1.5.3",
+    "angular-sanitize": "^1.5.3",
+    "angular-ui-router": "^0.2.18",
+    "angular-nvd3": "^1.0.6"
   },
   "resolutions": {
     "angular": "^1.5.4"
