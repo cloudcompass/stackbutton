@@ -1,9 +1,21 @@
 {
-  "name": "sb",
+  "name": "stackbutton",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "a Sails application",
+  "author": "wombat",
+  "license": "",
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wombat/sb.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js",
+    "postinstall": "bower install"
+  },
   "dependencies": {
     "ejs": "2.3.4",
     "include-all": "~0.1.6",
@@ -11,18 +23,6 @@
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9"
   },
-  "scripts": {
-    "debug": "node debug app.js",
-    "start": "node app.js",
-    "postinstall": "bower install"
-  },
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/wombat/sb.git"
-  },
-  "author": "wombat",
-  "license": "",
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",

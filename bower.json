@@ -1,25 +1,31 @@
 {
-  "name": "sb",
+  "name": "stackbutton",
+  "private": true,
   "description": "a Sails application",
-  "main": "app.js",
   "authors": [
     "wombat"
   ],
-  "license": "MIT",
+  "license": "",
   "homepage": "",
-  "private": true,
+  "main": "app.js",
+  "resolutions": {
+    "angular": "^1.5.4"
+  },
+  "dependencies": {
+    "angular": "^1.5.4",
+    "angular-animate": "^1.5.3",
+    "angular-cookies": "^1.5.3",
+    "angular-material": "^1.0.7",
+    "angular-nvd3": "^1.0.6",
+    "angular-sanitize": "^1.5.3",
+    "angular-touch": "^1.5.3",
+    "angular-ui-router": "^0.2.18"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": {
-    "angular": "^1.5.4",
-    "angular-material": "^1.0.7"
-  },
-  "resolutions": {
-    "angular": "^1.5.4"
-  }
+  ]
 }

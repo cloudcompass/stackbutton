@@ -17,6 +17,7 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
+  'bower_components/nvd3/build/nv.d3.css',
   'styles/**/*.css'
 ];
 
@@ -30,13 +31,24 @@ var jsFilesToInject = [
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
-  'bower_components/angular-animate/angular.min.js',
-  'bower_components/angular-animate/angular-animate.min.js',
-  'bower_components/angular-aria/angular-aria.min.js',
-  'bower_components/angular-material/angular-material.min.js',
+  'bower_components/jquery/dist/jquery.js',
+  'bower_components/angular/angular.js',
+  'bower_components/angular-animate/angular-animate.js',
+  'bower_components/angular-aria/angular-aria.js',
+  'bower_components/angular-cookies/angular-cookies.js',
+  'bower_components/angular-material/angular-material.js',
+  'bower_components/angular-messages/angular-messages.js',
+  'bower_components/angular-mocks/angular-mocks.js',
+  'bower_components/d3/d3.js',
+  'bower_components/nvd3/build/nv.d3.js',
+  'bower_components/angular-nvd3/dist/angular-nvd3.js',
+  'bower_components/angular-touch/angular-touch.js',
+  'bower_components/angular-sanitize/angular-sanitize.js',
+  'bower_components/angular-ui-router/release/angular-ui-router.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
+  'app/**/*.js',
   'js/**/*.js'
 ];
 
@@ -51,13 +63,9 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
+  'app/views/**/*.html',
   'templates/**/*.html'
 ];
-
-
-
-
-
 
 
 // Default path for public folder (see documentation for more information)
@@ -66,14 +74,14 @@ var tmpPath = '.tmp/public/';
 // Prefix relative paths to source files so they point to the proper locations
 // (i.e. where the other Grunt tasks spit them out, or in some cases, where
 // they reside in the first place)
-module.exports.cssFilesToInject = cssFilesToInject.map(function(cssPath) {
+module.exports.cssFilesToInject = cssFilesToInject.map(function (cssPath) {
   return require('path').join('.tmp/public/', cssPath);
 });
-module.exports.jsFilesToInject = jsFilesToInject.map(function(jsPath) {
+module.exports.jsFilesToInject = jsFilesToInject.map(function (jsPath) {
   return require('path').join('.tmp/public/', jsPath);
 });
-module.exports.templateFilesToInject = templateFilesToInject.map(function(tplPath) {
-  return require('path').join('assets/',tplPath);
+module.exports.templateFilesToInject = templateFilesToInject.map(function (tplPath) {
+  return require('path').join('assets/', tplPath);
 });
 
 
