@@ -14,21 +14,32 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
   function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
     $stateProvider
       .state('home', {
-        url: '',
+        url: '/welcome',
+        templateUrl: 'app/views/landing.html',
+      })
+      .state('app', {
+        url: '/app',
         templateUrl: 'app/views/main.html',
         controller: 'MainController',
         controllerAs: 'vm',
         abstract: true
       })
-      .state('home.dashboard', {
-        url: '/dashboard',
+      .state('app.projects', {
+        url: '/app/projects',
+        templateUrl: 'app/views/projects.html',
+        data: {
+          title: 'Projects'
+        }
+      })
+      .state('app.dashboard', {
+        url: '/app/dashboard',
         templateUrl: 'app/views/dashboard.html',
         data: {
           title: 'Dashboard'
         }
       })
-      .state('home.profile', {
-        url: '/profile',
+      .state('app.profile', {
+        url: '/app/profile',
         templateUrl: 'app/views/profile.html',
         controller: 'ProfileController',
         controllerAs: 'vm',
@@ -36,8 +47,8 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
           title: 'Profile'
         }
       })
-      .state('home.table', {
-        url: '/table',
+      .state('app.table', {
+        url: '/app/table',
         controller: 'TableController',
         controllerAs: 'vm',
         templateUrl: 'app/views/table.html',
@@ -46,7 +57,7 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
         }
       });
 
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise('/welcome');
 
     $mdThemingProvider
       .theme('default')
