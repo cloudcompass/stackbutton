@@ -18,8 +18,7 @@
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
   'styles/**/*.css',
-  'bower_components/nvd3/build/nv.d3.css',
-  'bower_components/angular/angular-csp.css'
+  'bower_components/nvd3/build/nv.d3.css'
 ];
 
 
