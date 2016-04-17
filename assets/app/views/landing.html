@@ -1,0 +1,291 @@
+<div class="top">
+  <style>
+    .nav-inner, .hero {
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+      padding: 0 20px;
+    }
+    .nav-inner:after, .hero:after {
+      content: " ";
+      display: block;
+      clear: both;
+    }
+    @media (min-width: 800px) {
+      .nav-inner, .hero {
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 80px;
+      }
+      .nav-inner:after, .hero:after {
+        content: " ";
+        display: block;
+        clear: both;
+      }
+    }
+
+    body,
+    html {
+      font-size: 20px;
+      font-family: 'Roboto Condensed', Roboto, sans-serif;
+      font-weight: 300;
+      line-height: 1.3;
+    }
+
+    .i {
+      font-style: italic;
+    }
+
+    .logo {
+      font-family: 'Roboto Slab', sans-serif;
+      font-weight: 700;
+      font-size: 1.4em;
+    }
+
+    .top {
+      height: 100vh;
+      color: white;
+      background: bottom -20px left -10px/280% no-repeat url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="148.32mm" width="560.24mm" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1985.1198 525.53019"><defs><linearGradient id="a"><stop stop-color="%23fff" offset="0"/><stop stop-color="%23fff" stop-opacity="0" offset="1"/></linearGradient><linearGradient id="b" y2="1252.4" xlink:href="%23a" gradientUnits="userSpaceOnUse" x2="937.3" gradientTransform="translate(7.495 -806.68)" y1="832.54" x1="937.3"/><linearGradient id="c" y2="860.65" xlink:href="%23a" gradientUnits="userSpaceOnUse" x2="288.08" gradientTransform="translate(718.15 -332.46)" y1="460.14" x1="248.67"/></defs><path d="M1.495 523.68l6-78 140-76 174 36 244-140 198 102 238-108 274 14 249.44-96.992 218.56 72.992 240-246v520" fill-rule="evenodd" stroke="%23fff" stroke-width="3" fill="url(%23b)"/><g fill="%23fff"><circle cx="147.5" cy="369.68" r="12"/><circle cy="405.68" cx="321.5" r="12"/><circle cx="565.5" cy="265.68" r="12"/><circle cy="367.68" cx="763.5" r="12"/><circle cx="1001.5" cy="259.68" r="12"/><circle cy="273.68" cx="1275.5" r="12"/><circle cx="1524.9" cy="176.69" r="12"/><circle cy="249.68" cx="1743.5" r="12"/></g><path d="M1275.5 273.68l-8.485 250m716.49-176.99l-240-97.005-476.49 274-503.51-156-348 156-94-118" stroke="url(%23c)" stroke-width="3" fill="none"/></svg>'), -webkit-linear-gradient(top, #45b0a0, #7bdacc);
+      background: bottom -20px left -10px/280% no-repeat url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="148.32mm" width="560.24mm" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1985.1198 525.53019"><defs><linearGradient id="a"><stop stop-color="%23fff" offset="0"/><stop stop-color="%23fff" stop-opacity="0" offset="1"/></linearGradient><linearGradient id="b" y2="1252.4" xlink:href="%23a" gradientUnits="userSpaceOnUse" x2="937.3" gradientTransform="translate(7.495 -806.68)" y1="832.54" x1="937.3"/><linearGradient id="c" y2="860.65" xlink:href="%23a" gradientUnits="userSpaceOnUse" x2="288.08" gradientTransform="translate(718.15 -332.46)" y1="460.14" x1="248.67"/></defs><path d="M1.495 523.68l6-78 140-76 174 36 244-140 198 102 238-108 274 14 249.44-96.992 218.56 72.992 240-246v520" fill-rule="evenodd" stroke="%23fff" stroke-width="3" fill="url(%23b)"/><g fill="%23fff"><circle cx="147.5" cy="369.68" r="12"/><circle cy="405.68" cx="321.5" r="12"/><circle cx="565.5" cy="265.68" r="12"/><circle cy="367.68" cx="763.5" r="12"/><circle cx="1001.5" cy="259.68" r="12"/><circle cy="273.68" cx="1275.5" r="12"/><circle cx="1524.9" cy="176.69" r="12"/><circle cy="249.68" cx="1743.5" r="12"/></g><path d="M1275.5 273.68l-8.485 250m716.49-176.99l-240-97.005-476.49 274-503.51-156-348 156-94-118" stroke="url(%23c)" stroke-width="3" fill="none"/></svg>'), linear-gradient(to bottom, #45b0a0, #7bdacc);
+    }
+    @media (min-width: 520px) {
+      .top {
+        background-size: 200%;
+      }
+    }
+
+    @media (min-width: 800px) {
+      .top {
+        background-size: 110%;
+      }
+    }
+    @media (max-height: 500px) {
+      .top {
+        background-position: bottom -80px left -10px, 0 0;
+      }
+    }
+    @media (min-width: 1400px) {
+      .top {
+        background-position: bottom -6vw left -10px, 0 0;
+      }
+    }
+
+    .nav {
+      width: 100%;
+      height: 60px;
+      position: absolute;
+      color: white;
+      background: rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .nav-inner {
+      height: 100%;
+    }
+
+    .hero {
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+      padding-top: 80px;
+    }
+
+    .hero-tag,
+    .hero-text {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+    @media (min-width: 520px) {
+      .hero-tag,
+      .hero-text {
+        height: 70%;
+      }
+    }
+    @media (min-width: 800px) {
+      .hero-tag,
+      .hero-text {
+        height: 80%;
+      }
+    }
+
+    .hero-tag {
+      width: 100%;
+      float: right;
+      margin-right: 0;
+    }
+    @media (min-width: 520px) {
+      .hero-tag {
+        width: 47.36842%;
+        float: left;
+        margin-right: 5.26316%;
+      }
+    }
+    @media (min-width: 800px) {
+      .hero-tag {
+        width: 31.03448%;
+        float: left;
+        margin-right: 3.44828%;
+      }
+    }
+
+    .hero-tag-inner {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      margin-top: 20px;
+      position: relative;
+      font-family: Roboto Slab;
+      font-size: 4vh;
+      font-weight: 700;
+      line-height: 1.15;
+      color: white;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 0  0 5px 5px;
+    }
+    .hero-tag-inner:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 20px;
+      bottom: 100%;
+      left: 0;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 5px 5px 0 0;
+    }
+    .hero-tag-inner:after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      bottom: 100%;
+      margin-bottom: 4px;
+      right: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      box-shadow: -16px 0 0 rgba(255, 255, 255, 0.5), -32px 0 0 rgba(255, 255, 255, 0.5);
+    }
+    .hero-tag-inner .hero-tag-line {
+      float: left;
+      clear: both;
+      font-size: 1.6em;
+    }
+    @media (min-width: 800px) {
+      .hero-tag-inner {
+        margin-top: 0;
+        padding: 0;
+        font-size: 2em;
+        background: none;
+      }
+      .hero-tag-inner:before, .hero-tag-inner:after {
+        content: none;
+        display: none;
+      }
+    }
+
+    .hero-text {
+      width: 100%;
+      float: right;
+      margin-right: 0;
+      text-align: center;
+    }
+    @media (min-width: 520px) {
+      .hero-text {
+        width: 47.36842%;
+        float: right;
+        margin-right: 0;
+      }
+    }
+    @media (min-width: 800px) {
+      .hero-text {
+        width: 48.27586%;
+        float: right;
+        margin-right: 0;
+        float: right;
+      }
+    }
+
+    .hero-text-content {
+      margin: 1.2em 0;
+    }
+    @media (min-width: 520px) {
+      .hero-text-content {
+        margin-top: 0;
+      }
+    }
+
+    .button {
+      padding: 0.5em 2em;
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      background: -webkit-linear-gradient(left, #028e8e, #029685);
+      background: linear-gradient(to right, #028e8e, #029685);
+      border-radius: 2em;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+      -webkit-transition: border 0.1s, box-shadow 0.1s;
+      transition: border 0.1s, box-shadow 0.1s;
+    }
+    .button:hover {
+      background: -webkit-linear-gradient(left, #03c0c0, #03c8b2);
+      background: linear-gradient(to right, #03c0c0, #03c8b2);
+      border: 1px solid white;
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+    }
+
+    .logo {
+      width: 21.05263%;
+      float: left;
+      margin-right: 5.26316%;
+      line-height: 60px;
+    }
+
+    .nav-links {
+      width: -5.26316%;
+      float: right;
+      margin-right: 0;
+      float: right;
+      font-size: 0.8em;
+      line-height: 60px;
+    }
+
+    .nav-item {
+      float: left;
+      margin-left: 1em;
+      cursor: pointer;
+      padding-top: 0.2em;
+    }
+  </style>
+  <nav class="nav">
+    <div class="nav-inner">
+      <h1 class="logo">StackButton</h1>
+      <ul class="nav-links">
+        <li class="nav-item"><a class="nav-link">About</a></li>
+        <li class="nav-item"><a class="nav-link">Log In</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="hero">
+    <div class="hero-tag">
+      <div class="hero-tag-inner">
+        <span class="hero-tag-line">Tool1</span>
+        <span class="hero-tag-line">Tool2</span>
+        <span class="hero-tag-line">Tool3</span>
+        <span class="hero-tag-line">And more...</span>
+      </div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-text-content">Your workflow in seconds. Your DevOps stack in minutes.</p><a href="#" class="button">Go to App</a>
+      </div>
+    </div>
+  </div>
+</div>

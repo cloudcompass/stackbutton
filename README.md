@@ -5,11 +5,14 @@ A friendly - but powerful - provisioning tool for DevOps tool chains and applica
 
   1. Install [nodejs](http://nodejs.org) version 4.4.3LTS.
   2. Install [sails](http://sailsjs.org/get-started).  Do *not* run the ```sails new...``` command.
-  3. Clone this repo via ```git clone https://github.com/sheaphillips/stackbutton.git```
-  4. From the command line, in the location you cloned the repo into:
+  3. Install [ruby](https://www.ruby-lang.org/en/).
+  4. Clone this repo via ```git clone https://github.com/sheaphillips/stackbutton.git```
+  5. From the command line, in the location you cloned the repo into:
 
   ```shell
+  npm install grunt bower -g
   npm install
+  gem install sass
   sails lift
   ```
 

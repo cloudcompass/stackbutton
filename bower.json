@@ -19,7 +19,8 @@
     "angular-nvd3": "^1.0.6",
     "angular-sanitize": "^1.5.3",
     "angular-touch": "^1.5.3",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "^0.2.18",
+    "jquery": "^2.2.3"
   },
   "ignore": [
     "**/.*",
