@@ -13,6 +13,13 @@ var sbapp = angular.module('sbapp', [
 sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
   function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
     $stateProvider
+      .state('welcome', {
+        url: '/welcome',
+        templateUrl: 'app/views/landing.html',
+        //controller: 'MainController',
+        //controllerAs: 'vm',
+        //abstract: true
+      })
       .state('home', {
         url: '',
         templateUrl: 'app/views/main.html',
@@ -46,15 +53,18 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
         }
       });
 
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise('/welcome');
 
     $mdThemingProvider
       .theme('default')
-      .primaryPalette('yellow', {
-        'default': '800'
+      .primaryPalette('amber', {
+        'default': '500',
+        'hue-1': '100',
+        'hue-2': '200',
+        'hue-3': '800'
       })
-      .accentPalette('indigo', {
-        'default': '400'
+      .accentPalette('teal', {
+        'default': '600'
       })
       .warnPalette('defaultPrimary');
 
