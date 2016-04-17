@@ -3,19 +3,34 @@ sbapp.service('navService', ['$q', navService]);
 function navService($q) {
   var menuItems = [
     {
-      name: 'Dashboard',
-      icon: 'dashboard',
+      name: 'Projects',
+      icon: 'work',
       sref: '.dashboard'
     },
     {
-      name: 'Profile',
-      icon: 'person',
+      name: 'Team',
+      icon: 'people',
       sref: '.profile'
     },
     {
-      name: 'Table',
-      icon: 'view_module',
-      sref: '.table'
+      name: 'Repositories',
+      icon: 'device_hub',
+      sref: '.repositories'
+    },
+    {
+      name: 'Ticketing',
+      icon: 'poll',
+      sref: '.ticking'
+    },
+    {
+      name: 'Hosting',
+      icon: 'cloud_queue',
+      sref: '.hosting'
+    },
+    {
+      name: 'Monitoring',
+      icon: 'multiline_chart',
+      sref: '.hosting'
     }
   ];
 
