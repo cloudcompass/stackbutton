@@ -176,3 +176,32 @@ md-backdrop.md-sidenav-backdrop {
 .orange .md-container {
   background-color: rgb(255, 236, 201)
 }
+
+.sb-logo {
+  content: url("../images/stacky500b.png");
+  margin: auto 5px;
+}
+
+.sb-logo-detail {
+  content: url("../images/stacky500p.png");
+}
+
+.sb-18px {
+  width: 18px;
+  height: 18px;
+}
+
+.sb-24px {
+  width: 24px;
+  height: 24px;
+}
+
+.sb-36px {
+  width: 36px;
+  height: 36px;
+}
+
+img.sb-48px {
+  width: 48px;
+  height: 48px;
+}

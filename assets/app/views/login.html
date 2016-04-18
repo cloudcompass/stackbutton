@@ -1,60 +1,52 @@
-<div flex="100" layout="column" layout-align="center">
-<!-- Login card with buttons -->
-  <div layout="column" layout-align="space-around center" layout-padding>
-    <md-card  md-whiteframe="24">
-      <!--StackButton toolbar with button back to landing -->
-      <div>
-        <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
-          <div layout="column" layout-xs="column" layout-align="center" ui-sref="welcome" class="button">
-            <!-- Previous smiley face logo with SB text-->
-            <!-- <md-icon class="material-icons md-48">tag_faces</md-icon> -->
-            <!-- <h2 hide-xs>StackButton</h2> -->
+<div ng-controller="AuthController as vm" flex="100" layout="column" layout-align="space-around center">
+  <!-- Login card with buttons -->
+  <md-card md-whiteframe="24">
+    <!--StackButton toolbar with button back to landing -->
+    <div>
+      <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
+        <div layout="row" layout-xs="column" layout-align="center center">
+          <img class="sb-logo sb-48px" ui-sref="welcome"/>
+          <h2 hide-xs>StackButton</h2>
+        </div>
+      </md-toolbar>
+    </div>
 
+    <md-divider></md-divider>
 
-            <!-- Playing around with test logo until new logo is created -->
-            <div>
-              <md-icon md-svg-src="/images/stacky.svg" aria-label="stacky" style="height: 400px; width: 400px" ></md-icon>
-            </div></br>
-            <div>
-              <p align="center"> Please login to StackButton to continue. </p>
-            </div>
-
+    <!-- Login form -->
+    <form>
+      <br>
+      <md-card-content layout="row" layout-align="space-around center">
+        <md-input-container>
+          <label for="userName">Username</label>
+          <input id="userName" type="text" name="userName" ng-model="vm.user" ng-required md-autofocus>
+          <div ng-messages="userForm.userName.$error">
+            <div ng-message="required">Username is required</div>
           </div>
-        </md-toolbar>
-      </div>
+        </md-input-container>
 
-      <md-divider></md-divider>
+        <!-- Password box -->
+        <md-input-container>
+          <label for="userPass">Password</label>
+          <input id="userPass" name="userPass" type="password" ng-model="vm.password" ng-required>
+          <div ng-messages="userForm.userPass.$error">
+            <div ng-message="required">Password is required</div>
+          </div>
+        </md-input-container>
+      </md-card-content>
 
-      <!-- Login form -->
-      <form>
-        <md-card-content>
 
-          <!-- Username box -->
-          <md-input-container>
-            <label for="userName">Username</label>
-            <input id="userName" type="text" name="userName" ng-model="userName" ng-required md-autofocus>
-            <div ng-messages="userForm.userName.$error">
-              <div ng-message="required">Username is required</div>
-            </div>
-          </md-input-container>
-
-          <!-- Password box -->
-          <md-input-container>
-            <label for="userPass">Password</label>
-            <input id="userPass" name="userPass" type="password" ng-model="userPass" ng-required>
-            <div ng-messages="userForm.userPass.$error">
-              <div ng-message="required">Password is required</div>
-            </div>
-          </md-input-container>
-        </md-card-content>
-
-        <!-- Buttons-->
-        <md-card-actions layout="row" layout-align="end center">
-            <md-button ui-sref="register" class="button">No account?</md-button>
-            <md-button ui-sref="home.dashboard" class="button">Forgot Password?</md-button>
-            <md-button ui-sref="home.dashboard" class="button" type="submit">Login</md-button>
-          </md-card-actions>
-      </form>
-    </md-card>
-  </div>
+      <!-- Buttons-->
+      <md-card-actions layout="row" layout-align="space-between center">
+        <div>
+          <md-button ui-sref="register" class="button">No account?</md-button>
+          <md-button ui-sref="home.dashboard" class="button">Forgot Password?</md-button>
+        </div>
+        <md-button ui-sref="home.dashboard" ng-click="vm.authenticate(vm.user,vm.password)"
+                   class="md-raised md-cornered md-primary"
+                   type="submit">Login
+        </md-button>
+      </md-card-actions>
+    </form>
+  </md-card>
 </div>
