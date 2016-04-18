@@ -6,6 +6,7 @@ function navService($q) {
       name: 'Projects',
       icon: 'work',
       sref: '.dashboard'
+
     },
     {
       name: 'Team',
@@ -15,22 +16,26 @@ function navService($q) {
     {
       name: 'Repositories',
       icon: 'device_hub',
-      sref: '.repositories'
+      sref: '.repositories',
+      children: [ 'GitHub', 'BitBucket']
     },
     {
       name: 'Ticketing',
       icon: 'poll',
-      sref: '.ticking'
+      sref: '.ticking',
+      children: ['Taiga', 'Jira']
     },
     {
       name: 'Hosting',
       icon: 'cloud_queue',
-      sref: '.hosting'
+      sref: '.hosting',
+      children: ['Server#01', 'Server#02', 'Server#03']
     },
     {
       name: 'Monitoring',
       icon: 'multiline_chart',
-      sref: '.hosting'
+      sref: '.hosting',
+      children: ['Data Traffic', 'RAM Usage', 'Network']
     }
   ];
 
