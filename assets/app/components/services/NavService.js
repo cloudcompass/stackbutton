@@ -5,37 +5,50 @@ function navService($q) {
     {
       name: 'Projects',
       icon: 'work',
-      sref: '.dashboard'
+      sref: '.table'
 
     },
     {
-      name: 'Team',
+      name: 'Account',
       icon: 'people',
       sref: '.profile'
     },
     {
       name: 'Repositories',
       icon: 'device_hub',
-      sref: '.repositories',
-      children: [ 'GitHub', 'BitBucket']
+      sref: '.',
+      children: [
+        {name: 'GitHub', sref: '.repo.github'},
+        {name: 'BitBucket', sref: '.repo.bitbucket'}
+      ]
     },
     {
       name: 'Ticketing',
       icon: 'poll',
-      sref: '.ticking',
-      children: ['Taiga', 'Jira']
+      sref: '.',
+      children: [
+        {name: 'Taiga', sref: '.repo.taiga'},
+        {name: 'Jira', sref: '.repo.jira'}
+      ]
     },
     {
       name: 'Hosting',
       icon: 'cloud_queue',
-      sref: '.hosting',
-      children: ['Server#01', 'Server#02', 'Server#03']
+      sref: '.',
+      children: [
+        {name: 'AWS', sref: '.repo.aws'},
+        {name: 'Docker', sref: '.repo.docker'}
+      ]
     },
     {
       name: 'Monitoring',
       icon: 'multiline_chart',
-      sref: '.hosting',
-      children: ['Data Traffic', 'RAM Usage', 'Network']
+      sref: '.',
+      children: [
+        {name: 'Storage', sref: '.monitoring.storage'},
+        {name: 'Memory', sref: '.monitoring.memory'},
+        {name: 'Network', sref: '.monitoring.network'}
+      ]
     }
   ];
 
