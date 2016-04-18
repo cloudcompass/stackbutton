@@ -1,43 +1,38 @@
-<!-- A nice blue colour because the white background made the card hard to view for testing -->
-<style>
-  body{
-    background-color: #0c8da0;
-  }
-</style>
-
 <!-- toolbar up top with button back to landing-->
 <div flex="100" layout="column">
-  <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
-    <md-button>
-      <div layout="row" layout-xs="column">
-        <md-icon class="material-icons md-48">tag_faces</md-icon>
-        <h2 hide-xs>StackButton</h2>
-      </div>
-    </md-button>
-  </md-toolbar>
-</div>
+  <div>
+    <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
+      <md-button ui-sref="welcome" class="button">
+        <div layout="row" layout-xs="column">
+          <md-icon class="material-icons md-48">tag_faces</md-icon>
+          <h2 hide-xs>StackButton</h2>
+        </div>
+      </md-button>
+    </md-toolbar>
+  </div>
 
 <!-- Login card with buttons -->
-<div layout="row" layout-align="center center" layout-padding>
-  <md-card>
-    <md-card-content>
-      <h2>Login</h2>
-      <!-- Username box -->
-      <form>
-        <md-input-container>
-          <label for="userName">Username</label>
-          <input id="userName" type="text" md-autofocus>
-        </md-input-container>
-      <!-- Password box -->
-        <md-input-container>
-          <label for="userPass">Password</label>
-          <input id="userPass" type="password" md-autofocus>
-        </md-input-container>
-      </form>
-    </md-card-content>
-    <!-- Login button for username/pass -->
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button>Login</md-button>
-    </md-card-actions>
-  </md-card>
+  <div layout="row" layout-align="center center" layout-padding>
+    <md-card  md-whiteframe="24">
+      <md-card-content>
+        <h2>Login</h2>
+        <!-- Username box -->
+        <form>
+          <md-input-container>
+            <label for="userName">Username</label>
+            <input id="userName" type="text" md-autofocus>
+          </md-input-container>
+          <!-- Password box -->
+          <md-input-container>
+            <label for="userPass">Password</label>
+            <input id="userPass" type="password" md-autofocus>
+          </md-input-container>
+        </form>
+      </md-card-content>
+      <!-- Login button for username/pass -->
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ui-sref="home.dashboard" class="button">Login</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
 </div>
