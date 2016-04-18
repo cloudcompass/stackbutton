@@ -9,8 +9,9 @@
     </md-button>
   </md-toolbar>
 
+  <!-- Menu items >
   <md-button ng-repeat-start="item in vm.menuItems" layout="row" layout-align="center center"
-             class="capitalize" ng-click="vm.selectItem(item)"
+              ng-click="vm.selectItem(item)"
              ui-sref-active="md-warn" ui-sref="{{item.sref}}">
     <div hide-sm class="md-tile-content">
       <i class="material-icons md-24">{{item.icon}}</i>
@@ -19,6 +20,102 @@
       {{item.name}}
     </div>
   </md-button>
+  < end Menu items -->
+
+
+  <!-- Project button -->
+  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
+    <span>
+      <i class="material-icons md-24">work</i>
+      Project
+    </span>
+  </md-button>
+  <!-- end Project button -->
+
+  <!-- Team button -->
+  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
+    <span >
+      <i class="material-icons md-24">people</i>
+      Team
+    </span>
+  </md-button>
+  <!-- end Team button -->
+
+  <!-- Repositories button -->
+  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
+    <span >
+      <i class="material-icons md-24">device_hub</i>
+      Repositories
+    </span>
+    <span>
+      <i class="material-icons md-24">expand_less</i> <!-- "expand_less" when you want the cheveron point up -->
+    </span>                                           <!-- "expand_more" when you want the cheveron point down -->
+  </md-button>
+  <div layout="column">
+    <!-- put submenu md-buttons here -->
+    <md-button layout="row" layout-align="start start"><span>GitHub</span></md-button>
+    <md-button layout="row" layout-align="start start"><span>BitBucket</span></md-button>
+  </div>
+  <!-- end Repositories button -->
+
+  <!-- Ticketing button -->
+  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
+    <span >
+      <i class="material-icons md-24">poll</i>
+      Ticketing
+    </span>
+    <span>
+      <i class="material-icons md-24">expand_less</i>
+    </span>
+  </md-button>
+  <div layout="column">
+    <!-- put submenu md-buttons here -->
+    <md-button layout="row" layout-align="start start"><span>Taiga</span></md-button>
+    <md-button layout="row" layout-align="start start"><span>Jira</span></md-button>
+  </div>
+  <!-- end Ticketing button -->
+
+  <!-- Hosting button -->
+  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
+    <span >
+      <i class="material-icons md-24">cloud_queue</i>
+      Hosting
+    </span>
+    <span>
+      <i class="material-icons md-24">expand_less</i>
+    </span>
+  </md-button>
+  <div layout="column">
+    <!-- put submenu md-buttons here -->
+    <md-button layout="row" layout-align="start start"><span>Server#01</span></md-button>
+    <md-button layout="row" layout-align="start start"><span>Server#02</span></md-button>
+    <md-button layout="row" layout-align="start start"><span>Server#03</span></md-button>
+  </div>
+  <!-- end Hosting button -->
+
+  <!-- Monitoring button -->
+  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
+    <span >
+      <i class="material-icons md-24">multiline_chart</i>
+      Monitoring
+    </span>
+    <span>
+      <i class="material-icons md-24">expand_less</i>
+    </span>
+  </md-button>
+  <div layout="column">
+    <!-- put submenu md-buttons here -->
+    <md-button layout="row" layout-align="start start"><span>Data Traffic</span></md-button>
+    <md-button layout="row" layout-align="start start"><span>RAM Usage</span></md-button>
+    <md-button layout="row" layout-align="start start"><span>Network</span></md-button>
+  </div>
+  <!-- end Monitoring button -->
+
+    <md-button class="sb-expanded">
+      <div class="sb-show">
+        <!-- put submenu md-buttons here -->
+      </div>
+
   <md-divider ng-repeat-end></md-divider>
   <md-button ng-click="vm.showActions($event)" layout-align="center center">
     <div class="md-tile-content">
@@ -30,25 +127,33 @@
 
 <div layout="column" flex>
   <!-- Top bar begin -->
+
+
   <md-toolbar layout="row" layout-align="end center">
-    <md-button hide-sm class="toolbar-button" aria-label="Search">
+    <!-- Hiding search and Notifications
+    <md-button hide-xs hide-md class="toolbar-button" aria-label="Search" hide>
       <i class="material-icons">search</i>
     </md-button>
-    <md-button hide-sm class="toolbar-button" aria-label="Notifications">
+    <md-button hide-sm class="toolbar-button" aria-label="Notifications" hide>
       <i class="material-icons">notifications</i>
       <span class="notifications-label">7</span>
     </md-button>
-    <md-button hide-sm class="toolbar-button" aria-label="Account" ng-click="vm.toggleRightSidebar()">
+    -->
+
+    <md-button hide-xs hide-sm hide-gt-md show-lg show-xl class="toolbar-button" aria-label="Account" ng-click="vm.toggleRightSidebar()">
       <i class="material-icons">account_circle</i>
       <span>Richard Feynman</span>
     </md-button>
-    <md-button hide-sm class="toolbar-button" aria-label="Settings">
-      <i class="material-icons">menu</i>
+
+    <md-button  hide-md hide-lg hide-xl class="toolbar-button" aria-label="Account" ng-click="vm.toggleRightSidebar()">
+      <i class="material-icons">account_circle</i>
     </md-button>
-    <md-button hide-gt-sm ng-click="vm.toggleItemsList()" aria-label="Menu">
+
+    <md-button hide-md hide-lg hide-xl ng-click="vm.toggleItemsList()" aria-label="Menu">
       <i class="material-icons">menu</i>
     </md-button>
   </md-toolbar>
+
   <!-- Top bar end -->
 
   <!-- Content begin -->
