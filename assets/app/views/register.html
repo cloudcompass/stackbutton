@@ -1,31 +1,3 @@
-<!-- Script for verifying username/password requirements-->
-<script type="text/javascript">
-  function checkPass()
-  {
-    //grab contents of form
-    var username=document.getElementById("userName").value
-      , userpass=document.getElementById("userPass").value
-      , userpassVerify=document.getElementById("userPassVerify").value;
-
-    //check for blank username
-    if(username.value == "") {
-      alert("Error: Username cannot be blank");
-      //form.userName.focus();
-      return false;
-    }
-
-    //check to see if passwords match
-    if(userpass.value != userpassVerify.value) {
-      alert("Error: Please check that you've entered and confirmed your password");
-      //userpassVerify.focus();
-      return false;
-    }
-
-    //If username is not blank and passwords are the same, return true
-    return true;
-  }
-</script>
-
 <!-- toolbar up top with button back to landing-->
 <div flex="100" layout="column">
   <div>
@@ -45,36 +17,49 @@
       <md-card-content>
         <h2>Register</h2>
         <form name="registerForm">
+
           <!-- Username box -->
           <md-input-container>
             <label for="userName">Username</label>
-            <input id="userName" required type="text" md-autofocus>
+            <input id="userName" type="text" name="userName" ng-model="userName" required md-autofocus>
+            <div ng-messages="userForm.userName.$error">
+              <div ng-message="required">Username is required</div>
+            </div>
           </md-input-container>
 
           <!-- Email box -->
           <md-input-container>
             <label for="userEmail">Email</label>
-            <input id="userEmail" required type="email">
+            <input id="userEmail" name="userEmail" type="email" ng-model="userEmail"required>
+            <div ng-messages="userForm.userEmail.$error">
+              <div ng-message="required">Email is required</div>
+            </div>
           </md-input-container>
           </br>
 
           <!-- Password box -->
           <md-input-container>
-            <label for="userPass">Password</label>
-            <input id="userPass" required type="password">
+            <label for="userPass">Email</label>
+            <input id="userPass" name="userPass" type="password" ng-model="userPass"required>
+            <div ng-messages="userForm.userPass.$error">
+              <div ng-message="required">Password is required</div>
+            </div>
           </md-input-container>
 
           <!-- Password verify box -->
           <md-input-container>
-            <label for="userPassVerify">Verify password</label>
-            <input id="userPassVerify" required type="password">
+            <label for="userPassVerify">Email</label>
+            <input id="userPassVerify" name="userPassVerify" type="password" ng-model="userPassVerify"required>
+            <div ng-messages="userForm.userPassVerify.$error">
+              <div ng-message="required">Please verify your password.</div>
+            </div>
           </md-input-container>
           </br>
 
           <!-- Register button in card -->
           <md-card-actions layout="row" layout-align="end center">
             <md-button ui-sref="login" class="button">Already have an account?</md-button>
-            <md-button ui-sref="home.dashboard" class="button" type="submit" onsubmit="return checkPass();">Register</md-button>
+            <md-button ui-sref="home.dashboard" class="button">Register</md-button>
           </md-card-actions>
 
         </form>

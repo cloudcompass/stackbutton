@@ -20,13 +20,21 @@
           <!-- Username box -->
           <md-input-container>
             <label for="userName">Username</label>
-            <input id="userName" required type="text" md-autofocus>
+            <input id="userName" type="text" name="userName" ng-model="userName" required md-autofocus>
+            <div ng-messages="userForm.userName.$error">
+              <div ng-message="required">Username is required</div>
+            </div>
           </md-input-container>
+
           <!-- Password box -->
           <md-input-container>
-            <label for="userPass">Password</label>
-            <input id="userPass" required type="password">
+            <label for="userPass">Email</label>
+            <input id="userPass" name="userPass" type="password" ng-model="userPass"required>
+            <div ng-messages="userForm.userPass.$error">
+              <div ng-message="required">Password is required</div>
+            </div>
           </md-input-container>
+
         </form>
       </md-card-content>
       <!-- Login button for username/pass -->
