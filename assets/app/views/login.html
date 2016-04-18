@@ -14,13 +14,14 @@
 <!-- Login card with buttons -->
   <div layout="row" layout-align="center center" layout-padding>
     <md-card  md-whiteframe="24">
-      <md-card-content>
-        <h2>Login</h2>
-        <form>
+      <form>
+        <md-card-content>
+          <h2>Login</h2>
+
           <!-- Username box -->
           <md-input-container>
             <label for="userName">Username</label>
-            <input id="userName" type="text" name="userName" ng-model="userName" required md-autofocus>
+            <input id="userName" type="text" name="userName" ng-model="userName" ng-required md-autofocus>
             <div ng-messages="userForm.userName.$error">
               <div ng-message="required">Username is required</div>
             </div>
@@ -28,21 +29,21 @@
 
           <!-- Password box -->
           <md-input-container>
-            <label for="userPass">Email</label>
-            <input id="userPass" name="userPass" type="password" ng-model="userPass"required>
+            <label for="userPass">Password</label>
+            <input id="userPass" name="userPass" type="password" ng-model="userPass" ng-required>
             <div ng-messages="userForm.userPass.$error">
               <div ng-message="required">Password is required</div>
             </div>
           </md-input-container>
+        </md-card-content>
 
-        </form>
-      </md-card-content>
-      <!-- Login button for username/pass -->
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button ui-sref="register" class="button">No account?</md-button>
-        <md-button ui-sref="home.dashboard" class="button">Forgot Password?</md-button>
-        <md-button ui-sref="home.dashboard" class="button">Login</md-button>
-      </md-card-actions>
+        <!-- Buttons-->
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ui-sref="register" class="button">No account?</md-button>
+            <md-button ui-sref="home.dashboard" class="button">Forgot Password?</md-button>
+            <md-button ui-sref="home.dashboard" class="button" type="submit">Login</md-button>
+          </md-card-actions>
+      </form>
     </md-card>
   </div>
 </div>
