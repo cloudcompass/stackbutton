@@ -2,12 +2,10 @@
 <div flex="100" layout="column">
   <div>
     <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
-      <md-button ui-sref="welcome" class="button">
-        <div layout="row" layout-xs="column">
+        <div layout="row" layout-xs="column" ui-sref="welcome" class="button">
           <md-icon class="material-icons md-48">tag_faces</md-icon>
           <h2 hide-xs>StackButton</h2>
         </div>
-      </md-button>
     </md-toolbar>
   </div>
 
@@ -39,7 +37,7 @@
 
           <!-- Password box -->
           <md-input-container>
-            <label for="userPass">Email</label>
+            <label for="userPass">Password</label>
             <input id="userPass" name="userPass" type="password" ng-model="userPass"required>
             <div ng-messages="userForm.userPass.$error">
               <div ng-message="required">Password is required</div>
@@ -48,7 +46,7 @@
 
           <!-- Password verify box -->
           <md-input-container>
-            <label for="userPassVerify">Email</label>
+            <label for="userPassVerify">Verify Password</label>
             <input id="userPassVerify" name="userPassVerify" type="password" ng-model="userPassVerify"required>
             <div ng-messages="userForm.userPassVerify.$error">
               <div ng-message="required">Please verify your password.</div>
