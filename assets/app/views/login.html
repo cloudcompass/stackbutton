@@ -16,21 +16,23 @@
     <md-card  md-whiteframe="24">
       <md-card-content>
         <h2>Login</h2>
-        <!-- Username box -->
         <form>
+          <!-- Username box -->
           <md-input-container>
             <label for="userName">Username</label>
-            <input id="userName" type="text" md-autofocus>
+            <input id="userName" required type="text" md-autofocus>
           </md-input-container>
           <!-- Password box -->
           <md-input-container>
             <label for="userPass">Password</label>
-            <input id="userPass" type="password" md-autofocus>
+            <input id="userPass" required type="password">
           </md-input-container>
         </form>
       </md-card-content>
       <!-- Login button for username/pass -->
       <md-card-actions layout="row" layout-align="end center">
+        <md-button ui-sref="register" class="button">No account?</md-button>
+        <md-button ui-sref="home.dashboard" class="button">Forgot Password?</md-button>
         <md-button ui-sref="home.dashboard" class="button">Login</md-button>
       </md-card-actions>
     </md-card>

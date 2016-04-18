@@ -1,13 +1,84 @@
-<div flex="100" layout="column">
-  <md-toolbar class="md-hue-3" md-theme="grey" md-tall
-              layout="row" layout-align="space-between center">
+<!-- Script for verifying username/password requirements-->
+<script type="text/javascript">
+  function checkPass()
+  {
+    //grab contents of form
+    var username=document.getElementById("userName").value
+      , userpass=document.getElementById("userPass").value
+      , userpassVerify=document.getElementById("userPassVerify").value;
 
-    <div layout="row" layout-xs="column">
-      <md-icon class="material-icons md-48">tag_faces</md-icon>
-      <h2 hide-xs>StackButton</h2>
-    </div>
-  </md-toolbar>
-  <md-content>
-    I am le register
-  </md-content>
+    //check for blank username
+    if(username.value == "") {
+      alert("Error: Username cannot be blank");
+      //form.userName.focus();
+      return false;
+    }
+
+    //check to see if passwords match
+    if(userpass.value != userpassVerify.value) {
+      alert("Error: Please check that you've entered and confirmed your password");
+      //userpassVerify.focus();
+      return false;
+    }
+
+    //If username is not blank and passwords are the same, return true
+    return true;
+  }
+</script>
+
+<!-- toolbar up top with button back to landing-->
+<div flex="100" layout="column">
+  <div>
+    <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
+      <md-button ui-sref="welcome" class="button">
+        <div layout="row" layout-xs="column">
+          <md-icon class="material-icons md-48">tag_faces</md-icon>
+          <h2 hide-xs>StackButton</h2>
+        </div>
+      </md-button>
+    </md-toolbar>
+  </div>
+
+  <!-- Register card with buttons -->
+  <div layout="row" layout-align="center center" layout-padding>
+    <md-card  md-whiteframe="24">
+      <md-card-content>
+        <h2>Register</h2>
+        <form name="registerForm">
+          <!-- Username box -->
+          <md-input-container>
+            <label for="userName">Username</label>
+            <input id="userName" required type="text" md-autofocus>
+          </md-input-container>
+
+          <!-- Email box -->
+          <md-input-container>
+            <label for="userEmail">Email</label>
+            <input id="userEmail" required type="email">
+          </md-input-container>
+          </br>
+
+          <!-- Password box -->
+          <md-input-container>
+            <label for="userPass">Password</label>
+            <input id="userPass" required type="password">
+          </md-input-container>
+
+          <!-- Password verify box -->
+          <md-input-container>
+            <label for="userPassVerify">Verify password</label>
+            <input id="userPassVerify" required type="password">
+          </md-input-container>
+          </br>
+
+          <!-- Register button in card -->
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button ui-sref="login" class="button">Already have an account?</md-button>
+            <md-button ui-sref="home.dashboard" class="button" type="submit" onsubmit="return checkPass();">Register</md-button>
+          </md-card-actions>
+
+        </form>
+      </md-card-content>
+    </md-card>
+  </div>
 </div>
