@@ -23,42 +23,63 @@
   < end Menu items -->
 
 
-  <!-- Project button -->
-  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
+  <div ng-repeat="item in vm.menuItems" layout="column" layout-align="center start">
+    <md-button class="sb-collapsed" layout="row" layout-align="space-between center" ng-click="vm.selectItem(item)"
+               ui-sref-active="md-warn" ui-sref="{{item.sref}}">
+      <span hide-sm class="material-icons md-24">{{item.icon}}</span>
+      <span class="md-tile-content">{{item.name}}</span>
+      <span flex> </span>
+      <span class="material-icons md-24" >expand_less</span>
+      <span class="material-icons md-24" >expand_more</span>
+    </md-button>
+
+    <div layout="column" layout-align="center start">
+      <md-button ng-repeat="child in item.children" >
+        <span class="md-tile-content">{{child}}</span>
+      </md-button>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Project button
+  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center" >
     <span>
       <i class="material-icons md-24">work</i>
       Project
     </span>
   </md-button>
-  <!-- end Project button -->
+   end Project button -->
 
-  <!-- Team button -->
+  <!-- Team button
   <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
     <span >
       <i class="material-icons md-24">people</i>
       Team
     </span>
   </md-button>
-  <!-- end Team button -->
+   end Team button -->
 
-  <!-- Repositories button -->
-  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
+  <!-- Repositories button
+  <md-button class="sb-collapsed"  layout="row" layout-align="space-between center" ng-click="showDetails = ! showDetails">
     <span >
       <i class="material-icons md-24">device_hub</i>
       Repositories
     </span>
     <span>
-      <i class="material-icons md-24">expand_less</i> <!-- "expand_less" when you want the cheveron point up -->
-    </span>                                           <!-- "expand_more" when you want the cheveron point down -->
+      <i class="material-icons md-24">expand_less</i> <!-- "expand_less" when you want the cheveron point up
+    </span>                                           <!-- "expand_more" when you want the cheveron point down
   </md-button>
   <div layout="column">
-    <!-- put submenu md-buttons here -->
+    <!-- put submenu md-buttons here
     <md-button layout="row" layout-align="start start"><span>GitHub</span></md-button>
     <md-button layout="row" layout-align="start start"><span>BitBucket</span></md-button>
   </div>
   <!-- end Repositories button -->
 
-  <!-- Ticketing button -->
+  <!-- Ticketing button
   <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
     <span >
       <i class="material-icons md-24">poll</i>
@@ -69,13 +90,13 @@
     </span>
   </md-button>
   <div layout="column">
-    <!-- put submenu md-buttons here -->
+    <!-- put submenu md-buttons here
     <md-button layout="row" layout-align="start start"><span>Taiga</span></md-button>
     <md-button layout="row" layout-align="start start"><span>Jira</span></md-button>
   </div>
   <!-- end Ticketing button -->
 
-  <!-- Hosting button -->
+  <!-- Hosting button
   <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
     <span >
       <i class="material-icons md-24">cloud_queue</i>
@@ -86,14 +107,14 @@
     </span>
   </md-button>
   <div layout="column">
-    <!-- put submenu md-buttons here -->
+    <!-- put submenu md-buttons here
     <md-button layout="row" layout-align="start start"><span>Server#01</span></md-button>
     <md-button layout="row" layout-align="start start"><span>Server#02</span></md-button>
     <md-button layout="row" layout-align="start start"><span>Server#03</span></md-button>
   </div>
   <!-- end Hosting button -->
 
-  <!-- Monitoring button -->
+  <!-- Monitoring button
   <md-button class="sb-collapsed"  layout="row" layout-align="space-between center">
     <span >
       <i class="material-icons md-24">multiline_chart</i>
@@ -104,17 +125,13 @@
     </span>
   </md-button>
   <div layout="column">
-    <!-- put submenu md-buttons here -->
+    <!-- put submenu md-buttons here
     <md-button layout="row" layout-align="start start"><span>Data Traffic</span></md-button>
     <md-button layout="row" layout-align="start start"><span>RAM Usage</span></md-button>
     <md-button layout="row" layout-align="start start"><span>Network</span></md-button>
   </div>
-  <!-- end Monitoring button -->
-
-    <md-button class="sb-expanded">
-      <div class="sb-show">
-        <!-- put submenu md-buttons here -->
-      </div>
+  <!-- end Monitoring button
+  -->
 
   <md-divider ng-repeat-end></md-divider>
   <md-button ng-click="vm.showActions($event)" layout-align="center center">
