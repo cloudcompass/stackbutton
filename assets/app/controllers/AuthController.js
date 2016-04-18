@@ -6,8 +6,8 @@ sbapp.controller('AuthController', [
 function AuthController($http) {
   var vm = this;
 
-  vm.user = 'username';
-  vm.password = 'password';
+  vm.user = 'admin@stackbutton.com';
+  vm.password = 'bi$on1234';
   vm.authenticate = authenticate;
 
   function authenticate(usr, pwd) {
