@@ -20,6 +20,14 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
         //controllerAs: 'vm',
         //abstract: true
       })
+      .state('login', {
+        url: '/login',
+        templateUrl: 'app/views/login.html',
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'app/views/register.html',
+      })
       .state('home', {
         url: '',
         templateUrl: 'app/views/main.html',

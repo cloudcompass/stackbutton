@@ -1,0 +1,69 @@
+<!-- toolbar up top with button back to landing-->
+<div flex="100" layout="column">
+  <div>
+    <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
+      <md-button ui-sref="welcome" class="button">
+        <div layout="row" layout-xs="column">
+          <md-icon class="material-icons md-48">tag_faces</md-icon>
+          <h2 hide-xs>StackButton</h2>
+        </div>
+      </md-button>
+    </md-toolbar>
+  </div>
+
+  <!-- Register card with buttons -->
+  <div layout="row" layout-align="center center" layout-padding>
+    <md-card  md-whiteframe="24">
+      <md-card-content>
+        <h2>Register</h2>
+        <form name="registerForm">
+
+          <!-- Username box -->
+          <md-input-container>
+            <label for="userName">Username</label>
+            <input id="userName" type="text" name="userName" ng-model="userName" required md-autofocus>
+            <div ng-messages="userForm.userName.$error">
+              <div ng-message="required">Username is required</div>
+            </div>
+          </md-input-container>
+
+          <!-- Email box -->
+          <md-input-container>
+            <label for="userEmail">Email</label>
+            <input id="userEmail" name="userEmail" type="email" ng-model="userEmail"required>
+            <div ng-messages="userForm.userEmail.$error">
+              <div ng-message="required">Email is required</div>
+            </div>
+          </md-input-container>
+          </br>
+
+          <!-- Password box -->
+          <md-input-container>
+            <label for="userPass">Email</label>
+            <input id="userPass" name="userPass" type="password" ng-model="userPass"required>
+            <div ng-messages="userForm.userPass.$error">
+              <div ng-message="required">Password is required</div>
+            </div>
+          </md-input-container>
+
+          <!-- Password verify box -->
+          <md-input-container>
+            <label for="userPassVerify">Email</label>
+            <input id="userPassVerify" name="userPassVerify" type="password" ng-model="userPassVerify"required>
+            <div ng-messages="userForm.userPassVerify.$error">
+              <div ng-message="required">Please verify your password.</div>
+            </div>
+          </md-input-container>
+          </br>
+
+          <!-- Register button in card -->
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button ui-sref="login" class="button">Already have an account?</md-button>
+            <md-button ui-sref="home.dashboard" class="button">Register</md-button>
+          </md-card-actions>
+
+        </form>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
