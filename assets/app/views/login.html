@@ -1,4 +1,5 @@
-<div ng-controller="AuthController as vm" flex="100" layout="column" layout-align="space-around center">
+<div ng-controller="AuthController as vm" class="page-content"
+     flex="100" layout="column" layout-align="space-around center">
   <!-- Login card with buttons -->
   <md-card md-whiteframe="24">
     <!--StackButton toolbar with button back to landing -->
@@ -15,7 +16,9 @@
 
     <!-- Login form -->
     <form>
-      <br>
+      <md-card-title>
+        <span class="md-headline">Login</span>
+      </md-card-title>
       <md-card-content layout="row" layout-align="space-around center">
         <md-input-container>
           <label for="userName">Username</label>
@@ -42,9 +45,8 @@
           <md-button ui-sref="register" class="button">No account?</md-button>
           <md-button ui-sref="home.dashboard" class="button">Forgot Password?</md-button>
         </div>
-        <md-button ui-sref="home.dashboard" ng-click="vm.authenticate(vm.user,vm.password)"
-                   class="md-raised md-cornered md-primary"
-                   type="submit">Login
+        <md-button ui-sref="home.table" ng-click="vm.authenticate(vm.user,vm.password)"
+                   class="md-raised md-cornered md-primary">Login
         </md-button>
       </md-card-actions>
     </form>

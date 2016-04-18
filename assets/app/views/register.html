@@ -1,26 +1,26 @@
-<!-- toolbar up top with button back to landing-->
-<div flex="100" layout="column" layout-align="center">
-  <!-- Register card with buttons -->
-  <div layout="row" layout-align="center center" layout-padding>
-    <md-card  md-whiteframe="24">
-      <md-card-content>
-        <!-- stackbutton header -->
-        <div>
-          <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
-            <div layout="row" layout-xs="column" ui-sref="welcome" class="button">
-              <md-icon class="material-icons md-48">tag_faces</md-icon>
-              <h2 hide-xs>StackButton</h2>
-            </div>
-          </md-toolbar>
+<div ng-controller="AuthController as vm" class="page-content"
+     flex="100" layout="column" layout-align="space-around center">
+  <md-card md-whiteframe="24">
+    <!--StackButton toolbar with button back to landing -->
+    <div>
+      <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
+        <div layout="row" layout-xs="column" layout-align="center center">
+          <img class="sb-logo sb-48px" ui-sref="welcome"/>
+          <h2 hide-xs>StackButton</h2>
         </div>
+      </md-toolbar>
+    </div>
 
-        <md-divider></md-divider>
+    <md-divider></md-divider>
 
+    <!-- Register form -->
+    <form name="registerForm">
+      <md-card-title>
+        <span class="md-headline">Register</span>
+      </md-card-title>
 
-        <h2>Register</h2>
-        <!-- Register form -->
-        <form name="registerForm">
-
+      <md-card-content layout="column" layout-align="space-around center">
+        <container>
           <!-- Username box -->
           <md-input-container>
             <label for="userName">Username</label>
@@ -33,17 +33,19 @@
           <!-- Email box -->
           <md-input-container>
             <label for="userEmail">Email</label>
-            <input id="userEmail" name="userEmail" type="email" ng-model="userEmail"required>
+            <input id="userEmail" name="userEmail" type="email" ng-model="userEmail" required>
             <div ng-messages="userForm.userEmail.$error">
               <div ng-message="required">Email is required</div>
             </div>
           </md-input-container>
           </br>
+        </container>
 
+        <container>
           <!-- Password box -->
           <md-input-container>
             <label for="userPass">Password</label>
-            <input id="userPass" name="userPass" type="password" ng-model="userPass"required>
+            <input id="userPass" name="userPass" type="password" ng-model="userPass" required>
             <div ng-messages="userForm.userPass.$error">
               <div ng-message="required">Password is required</div>
             </div>
@@ -52,21 +54,23 @@
           <!-- Password verify box -->
           <md-input-container>
             <label for="userPassVerify">Verify Password</label>
-            <input id="userPassVerify" name="userPassVerify" type="password" ng-model="userPassVerify"required>
+            <input id="userPassVerify" name="userPassVerify" type="password" ng-model="userPassVerify" required>
             <div ng-messages="userForm.userPassVerify.$error">
               <div ng-message="required">Please verify your password.</div>
             </div>
           </md-input-container>
-          </br>
-
-          <!-- Register button in card -->
-          <md-card-actions layout="row" layout-align="end center">
-            <md-button ui-sref="login" class="button">Already have an account?</md-button>
-            <md-button ui-sref="home.dashboard" class="button">Register</md-button>
-          </md-card-actions>
-
-        </form>
+        </container>
+        </br>
       </md-card-content>
-    </md-card>
-  </div>
+
+      <!-- Register button in card -->
+      <md-card-actions layout="row" layout-align="space-between center">
+        <md-button ui-sref="login" class="button">Already have an account?</md-button>
+        <md-button ui-sref="register" class="md-raised md-cornered md-accent">Register</md-button>
+      </md-card-actions>
+
+    </form>
+    </md-card-content>
+  </md-card>
 </div>
+
