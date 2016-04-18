@@ -1,19 +1,24 @@
 <!-- toolbar up top with button back to landing-->
-<div flex="100" layout="column">
-  <div>
-    <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
-        <div layout="row" layout-xs="column" ui-sref="welcome" class="button">
-          <md-icon class="material-icons md-48">tag_faces</md-icon>
-          <h2 hide-xs>StackButton</h2>
-        </div>
-    </md-toolbar>
-  </div>
-
+<div flex="100" layout="column" layout-align="center">
   <!-- Register card with buttons -->
   <div layout="row" layout-align="center center" layout-padding>
     <md-card  md-whiteframe="24">
       <md-card-content>
+        <!-- stackbutton header -->
+        <div>
+          <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="space-between center">
+            <div layout="row" layout-xs="column" ui-sref="welcome" class="button">
+              <md-icon class="material-icons md-48">tag_faces</md-icon>
+              <h2 hide-xs>StackButton</h2>
+            </div>
+          </md-toolbar>
+        </div>
+
+        <md-divider></md-divider>
+
+
         <h2>Register</h2>
+        <!-- Register form -->
         <form name="registerForm">
 
           <!-- Username box -->
