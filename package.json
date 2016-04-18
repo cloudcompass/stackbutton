@@ -19,9 +19,12 @@
   "dependencies": {
     "ejs": "2.3.4",
     "include-all": "~0.1.6",
+    "lodash": "^4.11.1",
     "rc": "1.0.1",
     "sails": "~0.12.3",
-    "sails-disk": "~0.10.9"
+    "sails-auth": "^2.1.3",
+    "sails-disk": "~0.10.9",
+    "sails-permissions": "^2.2.0"
   },
   "devDependencies": {
     "grunt": "0.4.5",
