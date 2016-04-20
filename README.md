@@ -35,6 +35,17 @@ A friendly - but powerful - provisioning tool for DevOps tool chains and applica
       database: 'blah' // or omit if not relevant
     }
   };
+
+  module.exports.models = {
+
+    /***************************************************************************
+     *                                                                          *
+     * Your app's default connection. i.e. the name of one of your app's        *
+     * connections (see `config/connections.js`)                                *
+     *                                                                          *
+     ***************************************************************************/
+    connection: 'stackbuttonMongo'
+  };
   ```
 
   4. Replace 'blah' in the block above with a value appropriate for your database.
