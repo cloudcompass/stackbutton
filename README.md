@@ -18,3 +18,26 @@ A friendly - but powerful - provisioning tool for DevOps tool chains and applica
 
   The above command should run the app and you will be able to view it at <http://localhost:1337> in your favourite browser.
 
+  To enable mongo:
+
+  1. Ensure you have the mongo sails adapter by running ```npm install```
+  2. Create a file config/local.js. *Do not add this to git*
+  3. Add the following block to your new local.js file:
+
+  ```javascript
+  module.exports.connections = {
+
+    stackbuttonMongo: {
+      host: 'blah', // defaults to `localhost` if omitted
+      port: blah, // defaults to 27017 if omitted
+      user: 'blah', // or omit if not relevant
+      password: 'blah', // or omit if not relevant
+      database: 'blah' // or omit if not relevant
+    }
+  };
+  ```
+
+  4. Replace 'blah' in the block above with a value appropriate for your database.
+
+
+
