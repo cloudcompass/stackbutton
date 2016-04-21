@@ -78,6 +78,15 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
           title: 'New Project'
         }
       })
+      .state('home.delete', {
+        url: '/delete',
+        templateUrl: 'app/views/deleteproject.html',
+        controller: 'MainController',
+        controllerAs: 'vm',
+        data: {
+          title: 'Delete Project'
+        }
+      })
     ;
 
     $urlRouterProvider.otherwise('/welcome');
