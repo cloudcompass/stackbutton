@@ -68,7 +68,17 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
         data: {
           title: 'Projects'
         }
-      });
+      })
+      .state('home.create', {
+        url: '/create',
+        templateUrl: 'app/views/createproject.html',
+        controller: 'MainController',
+        controllerAs: 'vm',
+        data: {
+          title: 'New Project'
+        }
+      })
+    ;
 
     $urlRouterProvider.otherwise('/welcome');
 
