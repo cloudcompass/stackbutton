@@ -1,12 +1,14 @@
 // COLORS
 $main-bg-color: #ECECEC;
-$text-color: #aaaaaa;
+$text-color: #7A7A7A;
+$text-color-nav: #aaaaaa;
 $accent-color: rgb(0, 150, 136);
 $warning-color: #FFFFFA;
 
 // VARIABLES
-$left-sidenav-width: 13em;
-$widget-height: 310px;
+$left-sidenav-width: 200px;
+$widget-height: 175px;
+$card-width: 275px;
 $font-weight-bold: 600;
 $font-size-large: 22px;
 
@@ -97,6 +99,10 @@ body {
   height: $widget-height;
 }
 
+.fixed-width {
+  width: $card-width;
+}
+
 // charts
 .donut-chart-title {
   text-align: center;
@@ -124,6 +130,10 @@ md-sidenav.md-locked-open.md-sidenav-left {
   max-width: $left-sidenav-width;
 }
 
+md-sidenav {
+  color: $text-color-nav;
+}
+
 a.md-button.md-warn.md-raised, a.md-button.md-warn.md-fab, .md-button.md-warn.md-raised, .md-button.md-warn.md-fab {
   color: white;
 }
@@ -138,6 +148,8 @@ md-toolbar h1 {
 
 md-toolbar .md-menu {
   margin: 0;
+  color: $text-color;
+
 }
 
 md-backdrop.md-sidenav-backdrop {
