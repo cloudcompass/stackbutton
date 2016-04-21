@@ -1,29 +1,38 @@
-<md-button class="md-raised" ui-sref="home.create">New Project</md-button>
-<md-button class="md-raised md-warn" ui-sref="home.delete">Delete Project</md-button>
+<!-- Temp storing fake project names in here for deving ui -->
+<div ng-app=""
+     ng-init="projects=[
+      {name:'FirstOne'},
+      {name:'SecondOne'},
+      {name:'ThirdOne'},
+      {name:'youcanjust'},
+      {name:'addasmany'},
+      {name:'projects as'},
+      {name:'youd like'}
+      ]">
 
-<div layout="row" layout-wrap>
-  <project-card title="Project 1" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 2" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 3" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 4" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 5" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 6" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 7" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 8" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 9" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 10" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 11" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
-  <project-card title="Project 12" template="app/views/partials/projectcard.html" flex="none"
-                class="fixed-width"></project-card>
+  <md-button class="md-raised" ui-sref="home.create">New Project</md-button>
+
+  <!-- Mini Menu for delete project option -->
+  <!--
+     When you click the "Delete" button, a list of all projects comes up.
+     Clicking on a project name will pop up the "Are you sure you want to delete this?" Dialog
+    -->
+  <md-menu md-offset="0 -7">
+
+    <md-button class="md-raised md-warn" ui-sref="home.delete" ng-click="$mdOpenMenu($event)">Delete Project</md-button>
+    <md-menu-content width="4">
+      <md-menu-item ng-repeat="project in projects">
+        <md-button ng-click="announceClick($index)"> {{project.name}} </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
+  <div layout="row" layout-wrap id="projects">
+    <project-card ng-repeat="project in projects"
+                  title={{project.name}}
+                  template="app/views/partials/projectcard.html"
+                  flex="none"
+                  class="fixed-width">
+    </project-card>
+  </div>
 </div>
