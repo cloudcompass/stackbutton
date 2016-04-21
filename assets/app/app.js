@@ -59,6 +59,15 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
         data: {
           title: 'Table'
         }
+      })
+      .state('home.projects', {
+        url: '/projects',
+        templateUrl: 'app/views/projects.html',
+        controller: 'MainController',
+        controllerAs: 'vm',
+        data: {
+          title: 'Projects'
+        }
       });
 
     $urlRouterProvider.otherwise('/welcome');
@@ -67,12 +76,15 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
       .theme('default')
       .primaryPalette('amber', {
         'default': '500',
-        'hue-1': '100',
-        'hue-2': '200',
-        'hue-3': '800'
+        'hue-1': 'A100',
+        'hue-2': '300',
+        'hue-3': '700'
       })
       .accentPalette('teal', {
-        'default': '600'
+        'default': '600',
+        'hue-1': 'A100',
+        'hue-2': '300',
+        'hue-3': '700'
       })
       .warnPalette('defaultPrimary');
 

@@ -1,22 +1,27 @@
 sbapp.service('navService', ['$q', navService]);
 
 function navService($q) {
-  var menuItems = [
+
+  var menuItems = {};
+  menuItems.static = [
     {
       name: 'Projects',
       icon: 'work',
-      sref: '.table'
+      sref: '.projects'
 
     },
     {
       name: 'Account',
       icon: 'people',
       sref: '.profile'
-    },
+    }
+  ];
+
+  menuItems.server = [
     {
       name: 'Repositories',
       icon: 'device_hub',
-      sref: '.',
+      sref: '.repos',
       children: [
         {name: 'GitHub', sref: '.repo.github'},
         {name: 'BitBucket', sref: '.repo.bitbucket'}
