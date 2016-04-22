@@ -15,17 +15,18 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
     $stateProvider
       .state('welcome', {
         url: '/welcome',
-        templateUrl: 'app/views/landing.html',
-        //controller: 'MainController',
-        //controllerAs: 'vm',
-        //abstract: true
+        templateUrl: 'app/views/landing.html'
       })
       .state('login', {
         url: '/login',
+        controller: 'AuthController',
+        controllerAs: 'va',
         templateUrl: 'app/views/login.html',
       })
       .state('register', {
         url: '/register',
+        controller: 'AuthController',
+        controllerAs: 'vm',
         templateUrl: 'app/views/register.html',
       })
       .state('home', {

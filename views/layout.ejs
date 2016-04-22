@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" ng-app="sbapp">
 <head>
-  <title><%= typeof title == 'undefined' ? 'New Sails App' : title %></title>
+  <title><%= typeof title == 'undefined' ? 'StackButton' : title %></title>
 
   <!-- Viewport mobile tag for sensible mobile support -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -100,6 +100,7 @@
 <script src="/bower_components/angular-nvd3/dist/angular-nvd3.min.js"></script>
 <script src="/bower_components/angular-touch/angular-touch.min.js"></script>
 <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="/bower_components/angular-mocks/angular-mocks.js"></script>
 <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="/bower_components/angular-material/angular-material.min.js"></script>
 <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -114,7 +115,6 @@
 <script src="/app/components/services/PerformanceService.js"></script>
 <script src="/app/components/services/TableService.js"></script>
 <script src="/app/components/services/TodoListService.js"></script>
-<script src="/app/controllers/AppCtrl.js"></script>
 <script src="/app/controllers/AuthController.js"></script>
 <script src="/app/controllers/ControlPanelController.js"></script>
 <script src="/app/controllers/MainController.js"></script>

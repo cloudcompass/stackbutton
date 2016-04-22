@@ -15,27 +15,28 @@
     <md-divider></md-divider>
 
     <!-- Login form -->
-    <form>
+    <form name="loginForm">
       <md-card-title>
         <span class="md-headline">Login</span>
       </md-card-title>
       <md-card-content layout="row" layout-align="space-around center">
+
         <md-input-container>
           <label for="userName">Username</label>
-          <input id="userName" type="text" name="userName" ng-model="vm.user" ng-required md-autofocus>
-          <div ng-messages="userForm.userName.$error">
+          <input id="userName" type="text" name="text" ng-model="vm.login.user" required md-autofocus>
+          <div ng-messages="loginForm.userName.$error">
             <div ng-message="required">Username is required</div>
           </div>
         </md-input-container>
-
         <!-- Password box -->
         <md-input-container>
           <label for="userPass">Password</label>
-          <input id="userPass" name="userPass" type="password" ng-model="vm.password" ng-required>
-          <div ng-messages="userForm.userPass.$error">
+          <input id="userPass" name="userPass" type="password" ng-model="vm.login.password" required>
+          <div ng-messages="loginForm.userPass.$error">
             <div ng-message="required">Password is required</div>
           </div>
         </md-input-container>
+
       </md-card-content>
 
 
@@ -45,7 +46,7 @@
           <md-button ui-sref="register" class="button">No account?</md-button>
           <md-button ui-sref="home.dashboard" class="button">Forgot Password?</md-button>
         </div>
-        <md-button ui-sref="home.table" ng-click="vm.authenticate(vm.user,vm.password)"
+        <md-button ng-click="vm.authenticate(vm.login.user,vm.login.password)"
                    class="md-raised md-cornered md-primary">Login
         </md-button>
       </md-card-actions>
