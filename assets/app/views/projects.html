@@ -10,7 +10,7 @@
       {name:'youd like'}
       ]">
 
-  <md-button class="md-raised" ui-sref="home.create">New Project</md-button>
+  <md-button class="md-raised" ng-click="vm.showDialog()">New Project</md-button>
 
   <div layout="row" layout-wrap id="projects">
     <project-card ng-repeat="project in projects"
@@ -20,17 +20,5 @@
                   class="fixed-width">
     </project-card>
   </div>
-
-  <!--
-  <md-dialog aria-label="Create Project"  >
-    <md-dialog-content>
-      <create-project>
-        There is a Directive that this is pulling the content from
-        The idea is to place this within a material design "Dialog" popup later in time
-      </create-project>
-    </md-dialog-content>
-  </md-dialog>
-  -->
-
 </div>
 

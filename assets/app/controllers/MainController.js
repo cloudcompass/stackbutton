@@ -6,10 +6,11 @@ sbapp.controller('MainController', [
   '$q',
   '$state',
   '$mdToast',
+  '$mdDialog',
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast) {
+function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast, $mdDialog) {
   var vm = this;
 
   vm.menuItems = [];
@@ -19,6 +20,7 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
   vm.title = $state.current.data.title;
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
+  vm.showDialog = showDialog;
 
   navService
     .loadAllItems()
@@ -86,4 +88,12 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
         .position('bottom right')
     );
   }
+
+  //This is used on the projects page for the dialogue popup
+  function showDialog() {
+    $mdDialog.show({
+      template: '<create-project></create-project>',
+    });
+  }
+//Last closing tag. don't touch him. He's special.
 }
