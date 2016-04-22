@@ -24,7 +24,7 @@
           <!-- Username box -->
           <md-input-container>
             <label for="userName">Username</label>
-            <input id="userName" type="text" name="userName" ng-model="userName" required md-autofocus>
+            <input id="userName" type="text" name="userName" ng-model="vm.reg.user" required md-autofocus>
             <div ng-messages="userForm.userName.$error">
               <div ng-message="required">Username is required</div>
             </div>
@@ -33,7 +33,7 @@
           <!-- Email box -->
           <md-input-container>
             <label for="userEmail">Email</label>
-            <input id="userEmail" name="userEmail" type="email" ng-model="userEmail" required>
+            <input id="userEmail" name="userEmail" type="email" ng-model="vm.reg.email" required>
             <div ng-messages="userForm.userEmail.$error">
               <div ng-message="required">Email is required</div>
             </div>
@@ -45,7 +45,7 @@
           <!-- Password box -->
           <md-input-container>
             <label for="userPass">Password</label>
-            <input id="userPass" name="userPass" type="password" ng-model="userPass" required>
+            <input id="userPass" name="userPass" type="password" ng-model="vm.reg.password" ng-required>
             <div ng-messages="userForm.userPass.$error">
               <div ng-message="required">Password is required</div>
             </div>
@@ -54,7 +54,8 @@
           <!-- Password verify box -->
           <md-input-container>
             <label for="userPassVerify">Verify Password</label>
-            <input id="userPassVerify" name="userPassVerify" type="password" ng-model="userPassVerify" required>
+            <input id="userPassVerify" name="userPassVerify" type="password" ng-model="vm.reg.passwordVerify"
+                   ng-required>
             <div ng-messages="userForm.userPassVerify.$error">
               <div ng-message="required">Please verify your password.</div>
             </div>
@@ -66,7 +67,9 @@
       <!-- Register button in card -->
       <md-card-actions layout="row" layout-align="space-between center">
         <md-button ui-sref="login" class="button">Already have an account?</md-button>
-        <md-button ui-sref="register" class="md-raised md-cornered md-accent">Register</md-button>
+        <md-button ui-sref="register" class="md-raised md-cornered md-accent"
+                   ng-click="vm.register(vm.reg.user,vm.reg.email,vm.reg.password,vm.reg.passwordVerify)">Register
+        </md-button>
       </md-card-actions>
 
     </form>

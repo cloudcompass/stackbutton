@@ -73,6 +73,10 @@ function AuthController($http, $q, $state) {
     vm.data = response.data;
     vm.status = response.status;
 
+    console.log("Success " + response.status, response);
+    $state.go('login');
+    vm.login.user = response.data.username;
+    vm.login.password = '';
     return response || $q.when(response);
   }
 
@@ -81,7 +85,7 @@ function AuthController($http, $q, $state) {
     vm.status = response.status;
 
     if (response.status != 200) {
-      console.log("Response Error " + response.status, response.data.reason, response.data);
+      console.log("Response Error " + response.status, response);
     }
 
     return $q.reject(response);
