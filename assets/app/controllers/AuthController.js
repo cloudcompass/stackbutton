@@ -1,27 +1,32 @@
 sbapp.controller('AuthController', [
-  '$http',
+  '$resource',
   AuthController
 ]);
 
-function AuthController($http) {
+function AuthController($resource) {
   var vm = this;
 
-  vm.user = 'admin@stackbutton.com';
-  vm.password = 'bi$on1234';
+  var Auth = $resource('/auth/local',
+    {}, {
+      auth: {method:'POST'}
+    });
+
+  vm.user = '';
+  vm.password = '';
   vm.authenticate = authenticate;
 
   function authenticate(usr, pwd) {
-    var data = {
+    var credentials = {
       "identifier": usr,
       "password": pwd
     };
-    $http.post('/auth/local', data, null).then(authSuccess, authError);
+    var newAuth = new Auth(credentials);
+
+    newAuth.$auth().then(authSuccess, authError);
   }
 
   function authSuccess(response) {
-    vm.data = response.data;
-    vm.status = response.status;
-    console.log(response.data);
+    console.log(response);
   }
 
   function authError(response) {

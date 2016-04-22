@@ -7,7 +7,8 @@ var sbapp = angular.module('sbapp', [
   'ngSanitize',
   'ui.router',
   'ngMaterial',
-  'nvd3'
+  'nvd3',
+  'ngResource'
 ]);
 
 sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
