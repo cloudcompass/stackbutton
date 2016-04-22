@@ -10,7 +10,7 @@ sbapp.controller('MainController', [
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast, $mdDialog) {
+function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast,$mdDialog) {
   var vm = this;
 
   vm.menuItems = [];
@@ -89,11 +89,11 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
     );
   }
 
-  //This is used on the projects page for the dialogue popup
-  function showDialog() {
+  function showDialog(){
     $mdDialog.show({
-      template: '<create-project></create-project>',
+      clickOutsideToClose: true,
+      escapeToClose: true,
+      template: '<create-project></create-project>'
     });
   }
-//Last closing tag. don't touch him. He's special.
 }
