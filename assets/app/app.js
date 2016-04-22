@@ -88,6 +88,15 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
           title: 'Delete Project'
         }
       })
+      .state('home.plugin', {
+        url: '/plugin',
+        templateUrl: 'app/views/pluginConfiguration.html',
+        controller: 'MainController',
+        controllerAs: 'vm',
+        data: {
+          title: 'Configure Plugins'
+        }
+      })
     ;
 
     $urlRouterProvider.otherwise('/welcome');

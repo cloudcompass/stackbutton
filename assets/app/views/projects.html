@@ -12,20 +12,6 @@
 
   <md-button class="md-raised" ui-sref="home.create">New Project</md-button>
 
-  <!-- Mini Menu for delete project option -->
-  <!--
-     When you click the "Delete" button, a list of all projects comes up.
-     Clicking on a project name will pop up the "Are you sure you want to delete this?" Dialog
-
-  <md-menu md-offset="0 -7">
-    <md-menu-content width="4">
-      <md-menu-item ng-repeat="project in projects">
-        <md-button ng-click="announceClick($index)"> {{project.name}} </md-button>
-      </md-menu-item>
-    </md-menu-content>
-  </md-menu>
-  -->
-
   <div layout="row" layout-wrap id="projects">
     <project-card ng-repeat="project in projects"
                   title={{project.name}}
@@ -34,4 +20,17 @@
                   class="fixed-width">
     </project-card>
   </div>
+
+  <!--
+  <md-dialog aria-label="Create Project"  >
+    <md-dialog-content>
+      <create-project>
+        There is a Directive that this is pulling the content from
+        The idea is to place this within a material design "Dialog" popup later in time
+      </create-project>
+    </md-dialog-content>
+  </md-dialog>
+  -->
+
 </div>
+

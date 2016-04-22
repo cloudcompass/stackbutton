@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-app=""
+     ng-init="plugins=[
+      {name:'FirstOne'},
+      {name:'SecondOne'},
+      {name:'ThirdOne'},
+      {name:'youcanjust'},
+      {name:'addasmany'},
+      {name:'projects as'},
+      {name:'youd like'}
+      ]">
 
-</body>
-</html>
+  <md-content>
+    <section>
+      <md-subheader class="md-primary">Source Control</md-subheader>
+      <div ng-repeat="plugin in plugins">
+        Card view for each Plugin (Github, bitbucket, etc.)
+      </div>
+    </section>
+    <section>
+      <md-subheader class="md-alert">Modules</md-subheader>
+      This will be the options for selecting what "modules" to use with each Plugin
+    </section>
+  </md-content>
+</div>
