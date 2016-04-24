@@ -1,14 +1,14 @@
 
 <!-- Visual representation of what the Dashboard could look like -->
 <div layout-gt-md="row" layout-align="center start" layout-wrap>
-  <panel-widget style="min-width: 500px; min-height: 200px" flex title="GitHub Changes"></panel-widget>
-  <panel-widget style="min-width: 500px; min-height: 200px" flex title="Stack Messages"></panel-widget>
-  <panel-widget style="min-width: 500px; min-height: 200px"  flex title="Calendar"></panel-widget>
-  <panel-widget style="min-width: 500px; min-height: 200px" flex title="Current Tasks"></panel-widget>
-  <panel-widget style="min-width: 500px; min-height: 200px"  flex title="Issue Board"></panel-widget>
-  <panel-widget style="min-width: 500px; min-height: 200px"  flex title="Days Left"></panel-widget>
-  <panel-widget style="min-width: 500px; min-height: 200px"  flex title="Server Status"></panel-widget>
-  <panel-widget style="min-width: 500px; min-height: 200px"  flex title="Current Team Members Online"></panel-widget>
+  <panel-widget flex title="GitHub" template="app/views/partials/repositoryControl.html"></panel-widget>
+  <panel-widget  flex title="Slack Messages"></panel-widget>
+  <panel-widget  flex title="Calendar"></panel-widget>
+  <panel-widget  flex title="Current Tasks"></panel-widget>
+  <panel-widget  flex title="Issue Board"></panel-widget>
+  <panel-widget  flex title="Days Left"></panel-widget>
+  <panel-widget  flex title="Server Status"></panel-widget>
+  <panel-widget  flex title="Current Team Members Online"></panel-widget>
 </div>
 <div layout-gt-md="row" layout-align="center start" >
   <md-menu>
@@ -17,13 +17,12 @@
       <span>Click me to add a Widget</span>
     </md-button>
     <md-menu-content>
-      <md-menu-item><md-button ng-click="doSomething()">Clock</md-button></md-menu-item>
-      <md-menu-item><md-button ng-click="doSomething()">Monitor</md-button></md-menu-item>
-      <md-menu-item><md-button ng-click="doSomething()">Tasks</md-button></md-menu-item>
-      <md-menu-item><md-button ng-click="doSomething()">Server</md-button></md-menu-item>
+      <md-menu-item><md-checkbox ng-checked="doSomething()">Monitor</md-checkbox></md-menu-item>
+      <md-menu-item><md-checkbox ng-click="doSomething()">Tasks</md-checkbox></md-menu-item>
+      <md-menu-item><md-checkbox ng-click="doSomething()">Server</md-checkbox></md-menu-item>
     </md-menu-content>
   </md-menu>
-
+</div>
 
 
 

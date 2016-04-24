@@ -10,21 +10,7 @@
       {name:'youd like'}
       ]">
 
-  <md-button class="md-raised" ui-sref="home.create">New Project</md-button>
-
-  <!-- Mini Menu for delete project option -->
-  <!--
-     When you click the "Delete" button, a list of all projects comes up.
-     Clicking on a project name will pop up the "Are you sure you want to delete this?" Dialog
-
-  <md-menu md-offset="0 -7">
-    <md-menu-content width="4">
-      <md-menu-item ng-repeat="project in projects">
-        <md-button ng-click="announceClick($index)"> {{project.name}} </md-button>
-      </md-menu-item>
-    </md-menu-content>
-  </md-menu>
-  -->
+  <md-button class="md-raised" ng-click="vm.showDialog()">New Project</md-button>
 
   <div layout="row" layout-wrap id="projects">
     <project-card ng-repeat="project in projects"
@@ -35,3 +21,4 @@
     </project-card>
   </div>
 </div>
+
