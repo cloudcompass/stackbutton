@@ -36,7 +36,7 @@
   <!--STYLES END-->
 </head>
 
-<body ng-controller="ApplicationController">
+<body>
 <%- body %>
 
 
@@ -100,11 +100,11 @@
 <script src="/bower_components/angular-nvd3/dist/angular-nvd3.min.js"></script>
 <script src="/bower_components/angular-touch/angular-touch.min.js"></script>
 <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-<script src="/bower_components/angular-mocks/angular-mocks.js"></script>
 <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="/bower_components/angular-material/angular-material.min.js"></script>
 <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/app/app.js"></script>
+<script src="/app/components/directives/createProjectTemplate.js"></script>
 <script src="/app/components/directives/messagesSection.js"></script>
 <script src="/app/components/directives/panelWidget.js"></script>
 <script src="/app/components/directives/projectCard.js"></script>
@@ -113,7 +113,7 @@
 <script src="/app/components/services/MessagesService.js"></script>
 <script src="/app/components/services/NavService.js"></script>
 <script src="/app/components/services/PerformanceService.js"></script>
-<script src="/app/components/services/SessionService.js"></script>
+<script src="/app/components/services/RepositoryService.js"></script>
 <script src="/app/components/services/TableService.js"></script>
 <script src="/app/components/services/TodoListService.js"></script>
 <script src="/app/controllers/ApplicationController.js"></script>
@@ -124,10 +124,10 @@
 <script src="/app/controllers/MessagesController.js"></script>
 <script src="/app/controllers/PerformanceController.js"></script>
 <script src="/app/controllers/ProfileController.js"></script>
+<script src="/app/controllers/RepositoryController.js"></script>
 <script src="/app/controllers/SearchController.js"></script>
 <script src="/app/controllers/TableController.js"></script>
 <script src="/app/controllers/TodoController.js"></script>
-<script src="/app/controllers/TopController.js"></script>
 <script src="/app/controllers/UsageController.js"></script>
 <script src="/app/controllers/VisitorsController.js"></script>
 <script src="/app/controllers/WarningsController.js"></script>
