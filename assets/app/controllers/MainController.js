@@ -20,6 +20,14 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
 
+  // $scope.currentUser = null;
+  // $scope.userRoles = USER_ROLES;
+  // $scope.isAuthorized = AuthService.isAuthorized;
+  //
+  // $scope.setCurrentUser = function (user) {
+  //   $scope.currentUser = user;
+  // };
+
   navService
     .loadAllItems()
     .then(function (menuItems) {

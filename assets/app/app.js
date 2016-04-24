@@ -10,7 +10,23 @@ var sbapp = angular.module('sbapp', [
   'nvd3'
 ]);
 
-sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
+sbapp.constant('AUTH_EVENTS', {
+    loginSuccess: 'auth-login-success',
+    loginFailed: 'auth-login-failed',
+    logoutSuccess: 'auth-logout-success',
+    sessionTimeout: 'auth-session-timeout',
+    notAuthenticated: 'auth-not-authenticated',
+    notAuthorized: 'auth-not-authorized'
+  })
+
+  .constant('USER_ROLES', {
+    all: '*',
+    admin: 'admin',
+    editor: 'editor',
+    guest: 'guest'
+  })
+
+  .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
   function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
     $stateProvider
       .state('welcome', {
@@ -21,13 +37,13 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
         url: '/login',
         controller: 'AuthController',
         controllerAs: 'va',
-        templateUrl: 'app/views/login.html',
+        templateUrl: 'app/views/login.html'
       })
       .state('register', {
         url: '/register',
         controller: 'AuthController',
         controllerAs: 'vm',
-        templateUrl: 'app/views/register.html',
+        templateUrl: 'app/views/register.html'
       })
       .state('home', {
         url: '',

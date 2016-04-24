@@ -20,6 +20,7 @@
       </md-card-title>
 
       <md-card-content layout="column" layout-align="space-around center">
+        <md-card-content class="md-warn" ng-if="vm.reg.error">{{vm.reg.error}}</md-card-content>
         <container>
           <!-- Username box -->
           <md-input-container>

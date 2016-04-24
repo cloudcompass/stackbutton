@@ -19,6 +19,7 @@
       <md-card-title>
         <span class="md-headline">Login</span>
       </md-card-title>
+      <md-card-content class="md-warn" ng-if="vm.login.error">{{vm.login.error}}</md-card-content>
       <md-card-content layout="row" layout-align="space-around center">
 
         <md-input-container>

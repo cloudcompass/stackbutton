@@ -21,9 +21,10 @@
     </md-button>
 
     <md-menu md-offset="0 55">
-      <md-button class="toolbar-button capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
+      <md-button class="toolbar-button" ng-click="$mdOpenMenu()" aria-label="Open menu">
         <i class="material-icons">account_circle</i>
-        <span hide-xs>Richard Feynman</span>
+        <!--<span hide-xs>Richard Feynman</span>-->
+        <span class="orig-case" hide-xs ng-if="currentUser">{{currentUser.username}}</span>
       </md-button>
       <md-menu-content width="3">
         <md-menu-item>

@@ -1,17 +1,31 @@
+sbapp.service('SessionService', function () {
+  this.create = function (sessionId, userId) {
+    this.id = sessionId;
+    this.userId = userId;
+    // this.userRole = userRole;
+  };
+  this.destroy = function () {
+    this.id = null;
+    this.userId = null;
+    // this.userRole = null;
+  };
+});
+
 sbapp.factory('AuthService', [
-  '$scope',
-  '$rootScope',
-  'AUTH_EVENTS',
+  '$cookies',
+  'SessionService',
   '$http',
   '$state',
   '$q',
   AuthService]
 );
 
-function AuthService($scope, $rootScope, AUTH_EVENTS, $http, $state, $q) {
+function AuthService($cookies, SessionService, $http, $state, $q) {
   var authService = {};
   authService.authenticate = authenticate;
   authService.register = register;
+  authService.isAuthenticated = isAuthenticated;
+  authService.isAuthorized = isAuthorized;
 
   /* LOGIN FUNCTIONS */
 
@@ -20,55 +34,52 @@ function AuthService($scope, $rootScope, AUTH_EVENTS, $http, $state, $q) {
       "identifier": email,
       "password": password
     };
-    $http.post('/auth/local', data, null).then(authSuccess, authError);
+    return $http.post('/auth/local', data, null).then(authSuccess, authError);
   }
 
   function authSuccess(response) {
-    if (response.status === 401 || response.status === 403) {
-      console.log("Response " + response.status);
-    }
-    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-    $scope.setCurrentUser(user);
+    console.log("Success ", response);
     $state.go('home.projects');
-    //return response || $q.when(response);
+    SessionService.create($cookies.get('sails.sid'), response.data.username);
+    return response.data || $q.when(response.data);
   }
 
   function authError(response) {
-    if (response.status === 401 || response.status === 403) {
-      console.log("Response Error " + response.status, response);
-    }
-    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-    //return $q.reject(response);
+    console.log("Error ", response.status, response);
+    return $q.reject(response);
   }
 
   /* REGISTER FUNCTIONS */
 
-  function register(username, email, password, passwordVerify) {
-    if (password == passwordVerify) {
-      var data = {
-        "username": username,
-        "email": email,
-        "password": password
-      };
-
-      $http.post('/user', data, null).then(regSuccess, regError);
-    } else {
-      var response = 'Passwords do not match';
-      console.log(response);
-    }
+  function register(username, email, password) {
+    var data = {
+      "username": username,
+      "email": email,
+      "password": password
+    };
+    return $http.post('/user', data, null).then(regSuccess, regError);
   }
 
   function regSuccess(response) {
-    console.log("Success " + response.status, response);
-    $state.go('login');
+    console.log("Success ", response.status, response);
     return response || $q.when(response);
   }
 
   function regError(response) {
-    if (response.status != 200) {
-      console.log("Response Error " + response.status, response);
-    }
+    console.log("Error ", response.status, response);
     return $q.reject(response);
+  }
+
+  function isAuthenticated() {
+    return !!SessionService.userId;
+  }
+
+  function isAuthorized(authorizedRoles) {
+    if (!angular.isArray(authorizedRoles)) {
+      authorizedRoles = [authorizedRoles];
+    }
+    return (authService.isAuthenticated() &&
+    authorizedRoles.indexOf(SessionService.userRole) !== -1);
   }
 
   return authService;

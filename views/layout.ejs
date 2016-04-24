@@ -36,7 +36,7 @@
   <!--STYLES END-->
 </head>
 
-<body>
+<body ng-controller="ApplicationController">
 <%- body %>
 
 
@@ -108,12 +108,15 @@
 <script src="/app/components/directives/messagesSection.js"></script>
 <script src="/app/components/directives/panelWidget.js"></script>
 <script src="/app/components/directives/projectCard.js"></script>
+<script src="/app/components/services/AuthService.js"></script>
 <script src="/app/components/services/CountriesService.js"></script>
 <script src="/app/components/services/MessagesService.js"></script>
 <script src="/app/components/services/NavService.js"></script>
 <script src="/app/components/services/PerformanceService.js"></script>
+<script src="/app/components/services/SessionService.js"></script>
 <script src="/app/components/services/TableService.js"></script>
 <script src="/app/components/services/TodoListService.js"></script>
+<script src="/app/controllers/ApplicationController.js"></script>
 <script src="/app/controllers/AuthController.js"></script>
 <script src="/app/controllers/ControlPanelController.js"></script>
 <script src="/app/controllers/MainController.js"></script>
@@ -124,6 +127,7 @@
 <script src="/app/controllers/SearchController.js"></script>
 <script src="/app/controllers/TableController.js"></script>
 <script src="/app/controllers/TodoController.js"></script>
+<script src="/app/controllers/TopController.js"></script>
 <script src="/app/controllers/UsageController.js"></script>
 <script src="/app/controllers/VisitorsController.js"></script>
 <script src="/app/controllers/WarningsController.js"></script>
