@@ -10,7 +10,7 @@
       {name:'youd like'}
       ]">
 
-  <md-button class="md-raised" ng-click="vm.showDialog()">New Project</md-button>
+  <md-button class="md-raised" ui-sref="home.create" >New Project</md-button> <!-- ng-click="vm.showDialog()" -->
 
   <div layout="row" layout-wrap id="projects">
     <project-card ng-repeat="project in projects"
