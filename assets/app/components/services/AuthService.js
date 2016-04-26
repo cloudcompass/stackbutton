@@ -1,13 +1,13 @@
 sbapp.service('SessionService', function () {
-  this.create = function (sessionId, userId) {
+  this.create = function (sessionId, userId, userRole) {
     this.id = sessionId;
     this.userId = userId;
-    // this.userRole = userRole;
+    this.userRole = userRole;
   };
   this.destroy = function () {
     this.id = null;
     this.userId = null;
-    // this.userRole = null;
+    this.userRole = null;
   };
 });
 
@@ -40,7 +40,7 @@ function AuthService($cookies, SessionService, $http, $state, $q) {
   function authSuccess(response) {
     console.log("Success ", response);
     $state.go('home.projects');
-    SessionService.create($cookies.get('sails.sid'), response.data.username);
+    SessionService.create($cookies.get('sails.sid'), response.data.username, 'admin');
     return response.data || $q.when(response.data);
   }
 

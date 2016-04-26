@@ -1,3 +1,4 @@
+/* Top-level controller -- all other scopes inherit from this one */
 sbapp.controller('ApplicationController', [
   '$scope',
   'USER_ROLES',
