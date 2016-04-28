@@ -1,3 +1,7 @@
-<div>project details</div>
-<!-- added for a link to dashboard -->
-<md-button class="md-raised" ui-sref="home.dashboard">Goto Project</md-button>
+<div ng-controller="projectController as vm">
+  <div layout="row" layout-align="start start" ng-repeat="project in vm.details">
+    <md-button ui-sref="home.dashboard">{{project.name}}</md-button>
+    <span>{{project.description}}</span>
+  </div>
+</div>
+

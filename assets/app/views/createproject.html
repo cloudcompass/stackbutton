@@ -14,40 +14,22 @@
           </div>
         </md-input-container>
       </md-card-content>
-      <!-- Project Type -->
-      <md-card-content>
-        <md-input-container>
-          <label>Type</label>
-          <input name="projectType" id="projectType" type="text" ng-model="vm.projectType">
-        </md-input-container>
-      </md-card-content>
       <!-- Project Description -->
       <md-card-content>
         <md-input-container>
           <label>Description</label>
           <textarea name="projectDescription" id="projectDescription" type="text"
-                    ng-model="vm.projectDescription"></textarea>
+                    ng-model="vm.projectDescription" required md-maxlength="50"></textarea>
+            <div ng-message="required">This is required!</div>
         </md-input-container>
       </md-card-content>
-    </div>
-
-    <div layout="column" layout-align="space-around start">
-      <!-- Project TimeLine -->
-      <md-input-container>
-        <label>Start Date</label>
-        <md-datepicker ng-model="projectDate" name="startDate" id="startDate"></md-datepicker>
-      </md-input-container>
-      <md-input-container>
-        <label>End Date</label>
-        <md-datepicker ng-model="projectDate" name="endDate" id="endDate"></md-datepicker>
-      </md-input-container>
     </div>
     </form>
   <md-divider></md-divider>
   <md-card-content class="md-warn" ng-if="vm.error">{{vm.error}}</md-card-content>
 
   <md-card-actions layout="row" layout-align="end center">
-    <md-button class="md-warn">Cancel</md-button>
+    <md-button class="md-warn" ui-sref="home.projects">Cancel</md-button>
     <!--<md-button>Save</md-button>-->
     <md-button class="md-primary"
                ng-click="vm.addProject(vm.projectName, vm.projectDescription, vm.projectStartDate, vm.projectEndDate)">

@@ -10,6 +10,8 @@ function ProjectService($cookies, $http, $state, $q) {
   var projService = {};
   projService.addProject = addProject;
 
+  addProject('Test', 'this is a test', 'now', 'then', '12345');
+
   function addProject(name, description, startDate, endDate, ownerid) {
     var data = {
       name: name,

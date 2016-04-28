@@ -6,11 +6,10 @@ sbapp.controller('MainController', [
   '$q',
   '$state',
   '$mdToast',
-  '$mdDialog',
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast,$mdDialog) {
+function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast) {
   var vm = this;
 
   vm.menuItems = [];
@@ -20,8 +19,8 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
   vm.title = $state.current.data.title;
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
-  vm.showDialog = showDialog;
   
+
 
   navService
     .loadAllItems()
@@ -88,13 +87,5 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
         .hideDelay(2000)
         .position('bottom right')
     );
-  }
-
-  function showDialog(){
-    $mdDialog.show({
-      clickOutsideToClose: true,
-      escapeToClose: true,
-      template: '<create-project></create-project>'
-    });
   }
 }

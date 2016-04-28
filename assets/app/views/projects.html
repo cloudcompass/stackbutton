@@ -1,24 +1,37 @@
-<!-- Temp storing fake project names in here for deving ui -->
-<div ng-app=""
-     ng-init="projects=[
-      {name:'FirstOne'},
-      {name:'SecondOne'},
-      {name:'ThirdOne'},
-      {name:'youcanjust'},
-      {name:'addasmany'},
-      {name:'projects as'},
-      {name:'youd like'}
-      ]">
-
-  <md-button class="md-raised" ui-sref="home.create" >New Project</md-button> <!-- ng-click="vm.showDialog()" -->
-
-  <div layout="row" layout-wrap id="projects">
-    <project-card ng-repeat="project in projects"
-                  title={{project.name}}
-                  template="app/views/partials/projectcard.html"
-                  flex="none"
-                  class="fixed-width">
-    </project-card>
-  </div>
+<div layout-wrap>
+  <project-card template="app/views/partials/projectcard.html" class="fixed-width"></project-card>
+</div>
+<div layout="row" layout-align="center start" >
+  <md-menu>
+    <md-button class="md-raised md-primary" ui-sref="home.create">
+      <span class="material-icons md-48">add</span>
+      <span>Create a New Project</span>
+    </md-button>
+  </md-menu>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Temp storing fake project names in here for deving ui -->
+  <!-- <div ng-app=""
+       ng-init="projects=[
+        {name:'FirstOne'},
+        {name:'SecondOne'},
+        {name:'ThirdOne'},
+        {name:'youcanjust'},
+        {name:'addasmany'},
+        {name:'projects as'},
+        {name:'youd like'}
+        ]">
+  -->
