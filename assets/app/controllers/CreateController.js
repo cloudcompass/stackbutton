@@ -1,36 +1,36 @@
 sbapp.controller('CreateController', [
-  'AUTH_EVENTS',
-  '$state',
   '$scope',
-  '$rootScope',
   'ProjectService',
   CreateController
 ]);
 
-function CreateController(AUTH_EVENTS, $state, $scope, $rootScope, ProjectService) {
+function CreateController($scope, ProjectService) {
+  // Expose variables and functions to the view:
   var vm = this;
   vm.error = null;
 
-  // Expose variables and functions to the view:
+  console.log('Loaded Create Controller');
 
+  //If the user has not logged in, redirect them to the login
+  // (IF USER == NULL)
+  if($scope.currentUser == null){
+    console.log('USER IS NULL');
+    window.location.replace('/#/login');
+  }
 
-  vm.addProject = function (name, description, startDate, endDate) {
-    if (startDate > endDate) {
-      vm.error = "Project start date cannot be later than end date"
-    } else {
-      ProjectService.addProject(name, description, startDate, endDate, $scope.currentUser.id)
-        .then(
-          function (project) {
-            vm.error = '';
-          },
-          function (res) {
-            vm.error = 'Couldn\'t create project';
-            for (item in res.data.invalidAttributes) {
-              vm.error += res.data.invalidAttributes[item][0].message + '\r\n';
-            }
+  vm.addProject = function (name, description) {
+    console.log('Add Project called');
+
+    ProjectService.addProject(name, description, $scope.currentUser.id)
+      .then(
+        function (project) { vm.error = ''; },
+        function (res) {
+          vm.error = 'Couldn\'t create project';
+          for (item in res.data.invalidAttributes) {
+            vm.error += res.data.invalidAttributes[item][0].message + '\r\n';
           }
-        );
-    }
+        }
+      );
   };
 
   // vm.register = function (username, email, password, passwordVerify) {
