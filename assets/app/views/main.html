@@ -31,7 +31,7 @@
           <md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ng-click="$mdCloseMenu()" ui-sref="home.dashboard">Log out</md-button>
+          <md-button ng-click="vm.logOut()">Log out</md-button>
         </md-menu-item>
       </md-menu-content>
     </md-menu>
@@ -120,7 +120,7 @@
             <md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="$mdCloseMenu()" ui-sref="home.dashboard">Log out</md-button>
+            <md-button ng-click="vm.logOut()">Logout</md-button>
           </md-menu-item>
         </md-menu-content>
       </md-menu>

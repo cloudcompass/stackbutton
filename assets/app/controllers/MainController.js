@@ -6,11 +6,11 @@ sbapp.controller('MainController', [
   '$q',
   '$state',
   '$mdToast',
-  '$mdDialog',
+  'SessionService',
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast,$mdDialog) {
+function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $mdToast, SessionService) {
   var vm = this;
 
   vm.menuItems = [];
@@ -20,8 +20,8 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
   vm.title = $state.current.data.title;
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
-  vm.showDialog = showDialog;
-  
+  vm.logOut = logOut;
+
 
   navService
     .loadAllItems()
@@ -90,11 +90,9 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
     );
   }
 
-  function showDialog(){
-    $mdDialog.show({
-      clickOutsideToClose: true,
-      escapeToClose: true,
-      template: '<create-project></create-project>'
-    });
+  function logOut() {
+    SessionService.destroy();
+    console.log("destroyed session");
+    
   }
 }

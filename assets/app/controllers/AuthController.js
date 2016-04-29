@@ -12,8 +12,8 @@ function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService) {
 
   // Expose variables and functions to the view:
   vm.login = {
-    user: 'admin@stackbutton.com',
-    password: 'bi$on1234',
+    user: 'admin@example.com',
+    password: 'admin1234',
     error: ''
   };
 

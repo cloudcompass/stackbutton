@@ -13,6 +13,7 @@ sbapp.service('SessionService', function () {
 
 sbapp.factory('AuthService', [
   '$cookies',
+  'USER_ROLES',
   'SessionService',
   '$http',
   '$state',
@@ -20,7 +21,7 @@ sbapp.factory('AuthService', [
   AuthService]
 );
 
-function AuthService($cookies, SessionService, $http, $state, $q) {
+function AuthService($cookies, USER_ROLES, SessionService, $http, $state, $q) {
   var authService = {};
   authService.authenticate = authenticate;
   authService.register = register;
@@ -39,8 +40,8 @@ function AuthService($cookies, SessionService, $http, $state, $q) {
 
   function authSuccess(response) {
     console.log("Success ", response);
-    $state.go('home.projects');
     SessionService.create($cookies.get('sails.sid'), response.data.username, 'admin');
+    $state.go('home.projects');
     return response.data || $q.when(response.data);
   }
 
@@ -75,11 +76,13 @@ function AuthService($cookies, SessionService, $http, $state, $q) {
   }
 
   function isAuthorized(authorizedRoles) {
+    console.log(SessionService.id, SessionService.userId, SessionService.userRole);
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }
-    return (authService.isAuthenticated() &&
-    authorizedRoles.indexOf(SessionService.userRole) !== -1);
+    // return true if public page OR if authenticated+authorized
+    return (authorizedRoles.indexOf(USER_ROLES.all) !== -1)
+      || (authService.isAuthenticated() && authorizedRoles.indexOf(SessionService.userRole) !== -1);
   }
 
   return authService;

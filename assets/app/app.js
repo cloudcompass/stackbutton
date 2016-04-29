@@ -37,13 +37,13 @@ sbapp
           url: '/welcome',
           templateUrl: 'app/views/landing.html',
           data: {
-            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            authorizedRoles: [USER_ROLES.all]
           }
         })
         .state('login', {
           url: '/login',
           controller: 'AuthController',
-          controllerAs: 'va',
+          controllerAs: 'vm',
           templateUrl: 'app/views/login.html',
           data: {
             authorizedRoles: [USER_ROLES.all]
@@ -53,7 +53,10 @@ sbapp
           url: '/register',
           controller: 'AuthController',
           controllerAs: 'vm',
-          templateUrl: 'app/views/register.html'
+          templateUrl: 'app/views/register.html',
+          data: {
+            authorizedRoles: [USER_ROLES.all]
+          }
         })
         .state('home', {
           url: '',
@@ -185,7 +188,6 @@ sbapp
   .run(function ($rootScope, AUTH_EVENTS, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
       var authorizedRoles = next.data.authorizedRoles;
-
       if (!AuthService.isAuthorized(authorizedRoles)) {
         event.preventDefault();
         if (AuthService.isAuthenticated()) {
@@ -206,7 +208,6 @@ sbapp
     $httpProvider.interceptors.push([
       '$injector',
       function ($injector) {
-
         console.log('inject');
         return $injector.get('AuthInterceptor');
       }
