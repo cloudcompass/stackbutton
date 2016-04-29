@@ -80,7 +80,7 @@ sbapp.constant('AUTH_EVENTS', {
       .state('home.projects', {
         url: '/projects',
         templateUrl: 'app/views/projects.html',
-        controller: 'MainController',
+        controller: 'ProjectController',
         controllerAs: 'vm',
         data: {
           title: 'Projects'

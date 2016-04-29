@@ -1,12 +1,14 @@
-sbapp.controller('projectController', [
-  'ProjectService', +
+sbapp.controller('ProjectController', [
+  'ProjectService',
   '$mdDialog',
-  projectController
+  ProjectController
 ]);
 
-function projectController(ProjectService, $mdDialog) {
+function ProjectController(ProjectService, $mdDialog) {
   var vm = this;
-  
+
+  console.log("projcontrollerloaded");
+
   vm.showDialog = showDialog;
 
   function showDialog(){
@@ -20,11 +22,5 @@ function projectController(ProjectService, $mdDialog) {
 
   vm.details = [];
   
-  
-  ProjectService
-    .loadAllItems()
-    .then(function (items) {
-      vm.details = [].concat(items);
-    });
 }
 

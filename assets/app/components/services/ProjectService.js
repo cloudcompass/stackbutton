@@ -1,16 +1,14 @@
 sbapp.factory('ProjectService', [
-  '$cookies',
   '$http',
-  '$state',
   '$q',
   ProjectService]
 );
 
-function ProjectService($cookies, $http, $state, $q) {
+function ProjectService($http, $q) {
   var projService = {};
   projService.addProject = addProject;
 
-  addProject('Test', 'this is a test', 'now', 'then', '12345');
+  //addProject('Test', 'this is a test', new Date(), new Date(), '12345');
 
   function addProject(name, description, startDate, endDate, ownerid) {
     var data = {
