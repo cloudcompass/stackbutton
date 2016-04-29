@@ -3,23 +3,24 @@ sbapp.directive('projectCard', function () {
     restrict: 'E',
     replace: true,
     transclude: true,
-    scope: true,
+    scope: {title: '@',description: '@', options: '@'},
     template: '' +
     '<section layout-margin class="md-whiteframe-z1 panel-widget fixed-height-widget fixed-width">' +
     '  <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">' +
-    '    <div class="md-toolbar-tools">' +
-    '      <h4 class="panel-widget-tittle">{{title}}</h4>' +
+    '    <div class="md-toolbar-tools" layout="row" layout-align="space-between start">' +
+    '      <h4 style="color: teal" class="panel-widget-tittle">{{title}}</h4>' +
     '      <md-button ng-click="hideOptions=!hideOptions" class="md-icon-button" aria-label="Show options">' +
-    '        <i class="material-icons">tab_unselected</i>' +
+    '        <i class="material-icons" ng-show="!hideOptions">flip_to_back</i>' +
+    '        <i class="material-icons" ng-show="hideOptions">flip_to_front</i>' +
     '      </md-button>' +
     '    </div>' +
     '  </md-toolbar>' +
     '  <div ng-show="!hideOptions">' +
-    '   stuff here' +
+    '   {{description}}' +
     '  </div>' +
     '  <div ng-show="hideOptions">' +
     '   <md-button class="md-raised" ui-sref="home.plugin" ng-click="$mdOpenMenu($event)">Edit Project</md-button>' +
-    '   <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog()">Delete Project</md-button>' +
+    '   <md-button class="md-raised md-warn" ng-click="vm.showDialog()">Delete Project</md-button>' +
     '  </div>' +
     '</section>',
     compile: function (element, attrs, linker) {

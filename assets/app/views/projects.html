@@ -1,6 +1,5 @@
-<div layout="row" layout-wrap>
-  <project-card ></project-card>
-  <project-card ></project-card>
+<div layout="row" layout-wrap ng-repeat="project in vm.projects">
+  <project-card title={{project.name}} description={{project.description}}></project-card>
 </div>
 <div layout="row" layout-align="center start" >
   <md-menu>
@@ -8,6 +7,5 @@
       <span class="material-icons md-48">add</span>
       <span>Create a New Project</span>
     </md-button>
-    <md-button>child2</md-button>
   </md-menu>
 </div>
