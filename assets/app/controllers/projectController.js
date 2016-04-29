@@ -30,6 +30,14 @@ function ProjectController(ProjectService, $mdDialog) {
     {
       name: 'Project 2',
       description: 'Vestibulum lacinia volutpat sapien, et faucibus lectus blandit ac.'
+    },
+    {
+      name: 'Project 3',
+      description: 'Nunc sollicitudin magna vitae ex porta varius.'
+    },
+    {
+      name: 'Project 4',
+      description: 'Fusce magna dui, pellentesque tincidunt posuere eu, varius at ligula.'
     }
   ];
 
