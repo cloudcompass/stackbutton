@@ -11,23 +11,40 @@ var sbapp = angular.module('sbapp', [
   'ngResource'
 ]);
 
-sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
+sbapp.constant('AUTH_EVENTS', {
+    loginSuccess: 'auth-login-success',
+    loginFailed: 'auth-login-failed',
+    logoutSuccess: 'auth-logout-success',
+    sessionTimeout: 'auth-session-timeout',
+    notAuthenticated: 'auth-not-authenticated',
+    notAuthorized: 'auth-not-authorized'
+  })
+
+  .constant('USER_ROLES', {
+    all: '*',
+    admin: 'admin',
+    editor: 'editor',
+    guest: 'guest'
+  })
+
+  .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
   function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
     $stateProvider
       .state('welcome', {
         url: '/welcome',
-        templateUrl: 'app/views/landing.html',
-        //controller: 'MainController',
-        //controllerAs: 'vm',
-        //abstract: true
+        templateUrl: 'app/views/landing.html'
       })
       .state('login', {
         url: '/login',
-        templateUrl: 'app/views/login.html',
+        controller: 'AuthController',
+        controllerAs: 'va',
+        templateUrl: 'app/views/login.html'
       })
       .state('register', {
         url: '/register',
-        templateUrl: 'app/views/register.html',
+        controller: 'AuthController',
+        controllerAs: 'vm',
+        templateUrl: 'app/views/register.html'
       })
       .state('home', {
         url: '',
@@ -60,7 +77,44 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
         data: {
           title: 'Table'
         }
-      });
+      })
+      .state('home.projects', {
+        url: '/projects',
+        templateUrl: 'app/views/projects.html',
+        controller: 'ProjectController',
+        controllerAs: 'vm',
+        data: {
+          title: 'Projects'
+        }
+      })
+      .state('home.create', {
+        url: '/create',
+        templateUrl: 'app/views/createproject.html',
+        controller: 'CreateController',
+        controllerAs: 'vm',
+        data: {
+          title: 'New Project'
+        }
+      })
+      .state('home.delete', {
+        url: '/delete',
+        templateUrl: 'app/views/deleteproject.html',
+        controller: 'MainController',
+        controllerAs: 'vm',
+        data: {
+          title: 'Delete Project'
+        }
+      })
+      .state('home.plugin', {
+        url: '/plugin',
+        templateUrl: 'app/views/pluginConfiguration.html',
+        controller: 'MainController',
+        controllerAs: 'vm',
+        data: {
+          title: 'Configure Plugins'
+        }
+      })
+    ;
 
     $urlRouterProvider.otherwise('/welcome');
 
@@ -68,12 +122,15 @@ sbapp.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$md
       .theme('default')
       .primaryPalette('amber', {
         'default': '500',
-        'hue-1': '100',
-        'hue-2': '200',
-        'hue-3': '800'
+        'hue-1': 'A100',
+        'hue-2': '300',
+        'hue-3': '700'
       })
       .accentPalette('teal', {
-        'default': '600'
+        'default': '600',
+        'hue-1': 'A100',
+        'hue-2': '300',
+        'hue-3': '700'
       })
       .warnPalette('defaultPrimary');
 

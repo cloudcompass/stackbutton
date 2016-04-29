@@ -1,4 +1,34 @@
-<div layout-gt-md="row">
+
+<!-- Visual representation of what the Dashboard could look like -->
+<div layout="row" layout-align="center start" layout-wrap>
+  <panel-widget flex title="GitHub" template="app/views/partials/repositoryControl.html"></panel-widget>
+  <panel-widget  flex title="Slack Messages"></panel-widget>
+  <panel-widget  flex title="Calendar"></panel-widget>
+  <panel-widget  flex title="Current Tasks"></panel-widget>
+  <panel-widget  flex title="Issue Board"></panel-widget>
+  <panel-widget  flex title="Days Left"></panel-widget>
+  <panel-widget  flex title="Server Status"></panel-widget>
+  <panel-widget  flex title="Current Team Members Online"></panel-widget>
+</div>
+<div layout="row" layout-align="center start" >
+  <md-menu>
+    <md-button class="md-raised md-primary" ng-click="$mdOpenMenu($event)">
+      <span class="material-icons md-48">add</span>
+      <span>Click me to add a Widget</span>
+    </md-button>
+    <md-menu-content>
+      <md-menu-item><md-checkbox ng-click="doSomething()">Monitor</md-checkbox></md-menu-item>
+      <md-menu-item><md-checkbox ng-click="doSomething()">Tasks</md-checkbox></md-menu-item>
+      <md-menu-item><md-checkbox ng-click="doSomething()">Server</md-checkbox></md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</div>
+
+
+
+
+<!-- orignial dashboard
+<div layout-gt-md="row" layout-align="start center">
   <panel-widget flex title="Site visitors" template="app/views/partials/visitors.html"
                 class="fixed-height-widget"></panel-widget>
   <panel-widget flex title="Warnings" template="app/views/partials/warnings.html"
@@ -7,16 +37,15 @@
                 class="fixed-height-widget"></panel-widget>
 </div>
 
-<div layout-gt-md="row">
+<div layout-gt-md="row" layout-align="center center">
   <panel-widget flex title="Server Control Panel" template="app/views/partials/controlPanel.html"
                 class="fixed-height-widget"></panel-widget>
   <panel-widget flex title="Usage Stats" template="app/views/partials/usage.html"
                 class="fixed-height-widget"></panel-widget>
-  <panel-widget flex title="Autocomplete Input" template="app/views/partials/autocomplete.html" options="true"
-                class="fixed-height-widget"></panel-widget>
 </div>
-
+<!-- orignial dashboard
 <div layout-gt-md="row">
   <panel-widget flex title="Performance" template="app/views/partials/performance.html" options="true"></panel-widget>
   <panel-widget flex title="TODO list" template="app/views/partials/checkboxes.html"></panel-widget>
 </div>
+-->

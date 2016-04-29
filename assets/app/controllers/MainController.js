@@ -19,6 +19,8 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state
   vm.title = $state.current.data.title;
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
+  
+
 
   navService
     .loadAllItems()

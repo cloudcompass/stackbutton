@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" ng-app="sbapp">
 <head>
-  <title><%= typeof title == 'undefined' ? 'New Sails App' : title %></title>
+  <title><%= typeof title == 'undefined' ? 'StackButton' : title %></title>
 
   <!-- Viewport mobile tag for sensible mobile support -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,14 +29,14 @@
   -->
 
   <!--STYLES-->
+  <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+  <link rel="stylesheet" href="/bower_components/nvd3/build/nv.d3.css">
   <link rel="stylesheet" href="/styles/iconfont/material-icons.css">
   <link rel="stylesheet" href="/styles/importer.css">
-  <link rel="stylesheet" href="/bower_components/nvd3/build/nv.d3.css">
-  <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
   <!--STYLES END-->
 </head>
 
-<body>
+<body ng-controller="ApplicationController">
 <%- body %>
 
 
@@ -105,28 +105,36 @@
 <script src="/bower_components/angular-material/angular-material.min.js"></script>
 <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/app/app.js"></script>
+<script src="/app/components/directives/createProjectTemplate.js"></script>
 <script src="/app/components/directives/messagesSection.js"></script>
 <script src="/app/components/directives/panelWidget.js"></script>
-<script src="/app/components/factories/AuthFactory.js"></script>
+<script src="/app/components/directives/projectCard.js"></script>
+<script src="/app/components/services/AuthService.js"></script>
 <script src="/app/components/services/CountriesService.js"></script>
 <script src="/app/components/services/MessagesService.js"></script>
 <script src="/app/components/services/NavService.js"></script>
 <script src="/app/components/services/PerformanceService.js"></script>
+<script src="/app/components/services/ProjectService.js"></script>
+<script src="/app/components/services/RepositoryService.js"></script>
 <script src="/app/components/services/TableService.js"></script>
 <script src="/app/components/services/TodoListService.js"></script>
+<script src="/app/controllers/ApplicationController.js"></script>
 <script src="/app/controllers/AuthController.js"></script>
 <script src="/app/controllers/ControlPanelController.js"></script>
+<script src="/app/controllers/CreateController.js"></script>
 <script src="/app/controllers/MainController.js"></script>
 <script src="/app/controllers/MemoryController.js"></script>
 <script src="/app/controllers/MessagesController.js"></script>
 <script src="/app/controllers/PerformanceController.js"></script>
 <script src="/app/controllers/ProfileController.js"></script>
+<script src="/app/controllers/RepositoryController.js"></script>
 <script src="/app/controllers/SearchController.js"></script>
 <script src="/app/controllers/TableController.js"></script>
 <script src="/app/controllers/TodoController.js"></script>
 <script src="/app/controllers/UsageController.js"></script>
 <script src="/app/controllers/VisitorsController.js"></script>
 <script src="/app/controllers/WarningsController.js"></script>
+<script src="/app/controllers/projectController.js"></script>
 <!--SCRIPTS END-->
 </body>
 </html>

@@ -1,0 +1,50 @@
+<div ng-app=""
+     ng-init="
+     gitSwitch=false,
+     bitSwitch=false,
+     otherSwitch=false,
+     plugins=[
+      {name:'FirstOne'},
+      {name:'SecondOne'},
+      {name:'ThirdOne'},
+      {name:'youcanjust'},
+      {name:'addasmany'},
+      {name:'projects as'},
+      {name:'youd like'}
+      ]">
+
+
+    <md-button class="md-raised" ng-click="gitSwitch = !gitSwitch" >GitHub</md-button>
+    <md-button class="md-raised" ng-click="bitSwitch = !bitSwitch" >BitBucket</md-button>
+    <md-button class="md-raised" ng-click="otherSwitch = !otherSwitch" >Other</md-button>
+    <div ng-show="gitSwitch">
+      <md-card >
+        <md-card-content>
+          <h2>Github options</h2>
+          <md-checkbox ng-model="GitisChecked1" aria-label="Option 1">Option 1</md-checkbox></br>
+          <md-checkbox ng-model="GitisChecked2" aria-label="Option 2">Option 2</md-checkbox></br>
+          <md-checkbox ng-model="GitisChecked3" aria-label="Option 3">Option 3</md-checkbox>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div ng-show="bitSwitch">
+      <md-card >
+        <md-card-content>
+          <h2>BitBucket options</h2>
+          <md-checkbox ng-model="BitisChecked1" aria-label="Option 1">Option 1</md-checkbox></br>
+          <md-checkbox ng-model="BitisChecked2" aria-label="Option 2">Option 2</md-checkbox></br>
+          <md-checkbox ng-model="BitisChecked3" aria-label="Option 3">Option 3</md-checkbox>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div ng-show="otherSwitch">
+      <md-card >
+        <md-card-content>
+          <h2>Other options</h2>
+          <md-checkbox ng-model="OthisChecked1" aria-label="Option 1">Option 1</md-checkbox></br>
+          <md-checkbox ng-model="OthisChecked2" aria-label="Option 2">Option 2</md-checkbox></br>
+          <md-checkbox ng-model="OthisChecked3" aria-label="Option 3">Option 3</md-checkbox>
+        </md-card-content>
+      </md-card>
+    </div>
+</div>
