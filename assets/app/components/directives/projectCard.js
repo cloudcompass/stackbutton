@@ -15,7 +15,7 @@ sbapp.directive('projectCard', function () {
     '      </md-button>' +
     '    </div>' +
     '  </md-toolbar>' +
-    '  <div ng-show="!hideOptions" ng-include="template"/>' +
+    '  <div ng-show="!hideOptions"/>' +
     '  <div ng-show="hideOptions">'+
     '   <md-button class="md-raised" ui-sref="home.plugin" ng-click="$mdOpenMenu($event)">Edit Project</md-button>' +
     '   <md-button class="md-raised md-warn" ng-click="vm.showDialog()">Delete Project</md-button>' +
