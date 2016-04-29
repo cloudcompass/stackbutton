@@ -4,6 +4,9 @@ sbapp.controller('ProjectController', [
   ProjectController
 ]);
 
+
+
+
 function ProjectController(ProjectService, $mdDialog) {
   var vm = this;
 
@@ -19,7 +22,16 @@ function ProjectController(ProjectService, $mdDialog) {
   }
 
 
-  vm.details = [];
+  vm.projects = [
+    {
+      name: 'Project 1',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tincidunt varius nulla quis ullamcorper.'
+    },
+    {
+      name: 'Project 2',
+      description: 'Vestibulum lacinia volutpat sapien, et faucibus lectus blandit ac.'
+    }
+  ];
 
 }
 
