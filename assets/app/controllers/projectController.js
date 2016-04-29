@@ -9,18 +9,17 @@ function ProjectController(ProjectService, $mdDialog) {
 
   console.log("projcontrollerloaded");
 
-  vm.showDialog = showDialog;
-
-  function showDialog(){
+  vm.showDeleteDialog = function(){
+    console.log("Delete Function Called");
     $mdDialog.show({
       clickOutsideToClose: true,
       escapeToClose: true,
-      template: '<create-project></create-project>'
+      template: '<delete-project></delete-project>'
     });
   }
 
 
   vm.details = [];
-  
+
 }
 

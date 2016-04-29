@@ -3,7 +3,7 @@ sbapp.directive('projectCard', function () {
     restrict: 'E',
     replace: true,
     transclude: true,
-    scope: {title: '@', options: '@'},
+    scope: true,
     template: '' +
     '<section layout-margin class="md-whiteframe-z1 panel-widget fixed-height-widget fixed-width">' +
     '  <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">' +
@@ -19,7 +19,7 @@ sbapp.directive('projectCard', function () {
     '  </div>' +
     '  <div ng-show="hideOptions">' +
     '   <md-button class="md-raised" ui-sref="home.plugin" ng-click="$mdOpenMenu($event)">Edit Project</md-button>' +
-    '   <md-button class="md-raised md-warn" ng-click="vm.showDialog()">Delete Project</md-button>' +
+    '   <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog()">Delete Project</md-button>' +
     '  </div>' +
     '</section>',
     compile: function (element, attrs, linker) {
