@@ -1,16 +1,19 @@
 <!-- Card view -->
+<!-- This card uses a count variable to hide or display divs as needed.
+     You can find the variable and inc/dec functions in the controller. -->
 <md-card>
   <md-card-content>
     <!-- Page 1 - Basic information -->
-    <div ng-hide="nextButton">
-      This is the first page of content
+    <div ng-show="vm.count < 1">
+      This is the first page of content {{vm.count}}
     </div>
     <!-- Page 2 - Git account link -->
-    <div ng-hide="!nextButton">
-      This is the second page of content
+    <div ng-show="vm.count >= 1">
+      This is the second page of content {{vm.count}}
     </div>
   </md-card-content>
 
+  <md-divider></md-divider>
   <!-- Back and forward buttons -->
   <md-card-actions layout="row" layout-align="end center">
     <!--
@@ -18,8 +21,8 @@
       - Hide the next button on the second page
       - Show the finish button on the second page
     -->
-    <md-button ng-show="nextButton" class="md-raised" ng-click="nextButton = !nextButton" >Back</md-button>
-    <md-button ng-hide="nextButton" class="md-raised" ng-click="nextButton = !nextButton" >Next</md-button>
-    <md-button ng-show="nextButton" class="md-raised" ui-sref="home.dashboard">Finish</md-button>
+    <md-button ng-show="vm.count >= 1" class="md-raised" ng-click="vm.decCount()" >Back</md-button>
+    <md-button ng-hide="vm.count >= 1" class="md-raised" ng-click="vm.incCount()" >Next</md-button>
+    <md-button ng-show="vm.count >= 1" class="md-raised" ui-sref="home.dashboard">Finish</md-button>
   </md-card-actions>
 </md-card>

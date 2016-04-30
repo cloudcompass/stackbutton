@@ -116,7 +116,7 @@ sbapp.constant('AUTH_EVENTS', {
       .state('home.addtool', {
         url: '/addtool',
         templateUrl: 'app/views/addATool.html',
-        controller: 'MainController',
+        controller: 'ToolController',
         controllerAs: 'vm',
         data: {
           title: 'Add a tool'
