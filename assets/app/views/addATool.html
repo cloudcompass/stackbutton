@@ -1,0 +1,25 @@
+<!-- Card view -->
+<md-card>
+  <md-card-content>
+    <!-- Page 1 - Basic information -->
+    <div ng-hide="nextButton">
+      This is the first page of content
+    </div>
+    <!-- Page 2 - Git account link -->
+    <div ng-hide="!nextButton">
+      This is the second page of content
+    </div>
+  </md-card-content>
+
+  <!-- Back and forward buttons -->
+  <md-card-actions layout="row" layout-align="end center">
+    <!--
+      - Hide the back button on the first page
+      - Hide the next button on the second page
+      - Show the finish button on the second page
+    -->
+    <md-button ng-show="nextButton" class="md-raised" ng-click="nextButton = !nextButton" >Back</md-button>
+    <md-button ng-hide="nextButton" class="md-raised" ng-click="nextButton = !nextButton" >Next</md-button>
+    <md-button ng-show="nextButton" class="md-raised" ui-sref="home.dashboard">Finish</md-button>
+  </md-card-actions>
+</md-card>

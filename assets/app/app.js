@@ -113,6 +113,15 @@ sbapp.constant('AUTH_EVENTS', {
           title: 'Configure Plugins'
         }
       })
+      .state('home.addtool', {
+        url: '/addtool',
+        templateUrl: 'app/views/addATool.html',
+        controller: 'MainController',
+        controllerAs: 'vm',
+        data: {
+          title: 'Add a tool'
+        }
+      })
     ;
 
     $urlRouterProvider.otherwise('/welcome');
