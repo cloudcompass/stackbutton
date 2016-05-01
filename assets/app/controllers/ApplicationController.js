@@ -57,8 +57,7 @@ function ApplicationController($state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialo
   // AUTH EVENT LISTENERS
 
   $scope.$on(AUTH_EVENTS.notAuthenticated, function (event) {
-    console.log('event: ', event);
-    console.log('current:', $state.current);
+    console.log('event fired: ', event.name);
     // show dialog if event fired from a non-login page
     if ($state.current.name != 'account.login') {
       authDialog('partials/login.html');
