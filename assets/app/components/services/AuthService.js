@@ -46,7 +46,7 @@ function AuthService($cookies, USER_ROLES, SessionService, $http, $state, $q) {
   }
 
   function authError(response) {
-    console.log('AuthService.authenticate():', response);
+    console.log('authenticate():', response);
     return $q.reject(response);
   }
 
@@ -76,7 +76,7 @@ function AuthService($cookies, USER_ROLES, SessionService, $http, $state, $q) {
   }
 
   function isAuthorized(authorizedRoles) {
-    console.log('AuthService.isAuthorized(): current session =', {
+    console.log('isAuthorized(): current session =', {
       id: SessionService.id,
       userId: SessionService.userId,
       userRole: SessionService.userRole
