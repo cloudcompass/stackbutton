@@ -28,6 +28,7 @@ function CreateController($state, $scope, ProjectService) {
         function (resp) {
           //error callback
           console.log('addProject() error:', resp);
+          //TODO add error handling feedback
         }
       );
     }

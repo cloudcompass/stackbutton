@@ -8,14 +8,26 @@ sbapp.controller('ProjectController', [
 function ProjectController($scope, ProjectService, $mdDialog) {
   var vm = this;
 
-  console.log("projcontrollerloaded");
-
-  vm.showDeleteDialog = function(){
+  vm.showDeleteDialog = function (project) {
     console.log("Delete Function Called");
     $mdDialog.show({
       clickOutsideToClose: true,
       escapeToClose: true,
-      template: '<delete-project></delete-project>'
+      template: '' +
+      '<md-card style="max-width: 350px;">' +
+      '<div>' +
+      '<p class="md-headline">Would you like to permanently DELETE ' + project.name + '?</p>' +
+      '</div>' +
+      '<div>' +
+      '<p class="md-headline">Please type the name of the project to confirm deletion.</p>' +
+      '<md-input-container>' +
+      '<label>Project Name</label>' +
+      '<input type="text" ng-model="confirmBox" required>' +
+      '</md-input-container>' +
+      '</div>' +
+      '<md-button class="md-primary" ng-show="confirmBox">DELETE PROJECT</md-button>' +
+      '<md-button class="md-warn" ui-sref="home.projects">Cancel</md-button>' +
+      '</md-card>'
     });
   };
 
