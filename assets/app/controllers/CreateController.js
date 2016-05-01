@@ -17,16 +17,31 @@ function CreateController($scope, ProjectService) {
     if($scope.currentUser == null){
       console.log('USER IS NULL');
     }else{
-      ProjectService.addProject(name, description, $scope.currentUser.id)
-        .then(
-          function (project) { vm.error = ''; },
-          function (res) {
-            vm.error = 'Couldn\'t create project';
-            for (item in res.data.invalidAttributes) {
-              vm.error += res.data.invalidAttributes[item][0].message + '\r\n';
-            }
-          }
-        );
+      var newProj = {
+        name: name,
+        description: description,
+        ownerId: $scope.currentUser.id
+      };
+      console.log('addProject() adding:', newProj);
+      ProjectService.save(newProj,
+        function (project, headers) {
+          //success callback
+          console.log('addProject() success:', project);
+        },
+        function (resp) {
+          //error callback
+          console.log('addProject() error:', resp);
+        }
+      );
+      // .then(
+      //   function (project) { vm.error = ''; },
+      //   function (res) {
+      //     vm.error = 'Couldn\'t create project';
+      //     for (item in res.data.invalidAttributes) {
+      //       vm.error += res.data.invalidAttributes[item][0].message + '\r\n';
+      //     }
+      //   }
+      // );
     }
   };
 

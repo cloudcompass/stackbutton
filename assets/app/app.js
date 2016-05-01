@@ -1,6 +1,7 @@
 'use strict';
 
 var sbapp = angular.module('sbapp', [
+  'ngResource',
   'ngAnimate',
   'ngCookies',
   'ngSanitize',
@@ -149,7 +150,8 @@ sbapp
           controller: 'ToolController',
           controllerAs: 'vm',
           data: {
-            title: 'Add a tool'
+            title: 'Add a tool',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
       ;

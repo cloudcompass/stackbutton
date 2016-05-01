@@ -29,12 +29,6 @@ module.exports = {
     },
     plugins: {
       type: "array"
-    },
-    startDate: {
-      type: "date"
-    },
-    endDate: {
-      type: "date"
     }
 
   }
