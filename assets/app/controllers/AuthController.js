@@ -10,10 +10,9 @@ sbapp.controller('AuthController', [
 function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService) {
   var vm = this;
 
-  // Expose variables and functions to the view:
   vm.login = {
-    user: 'admin@stackbutton.com',
-    password: 'bi$on1234',
+    user: 'admin@example.com',
+    password: 'admin1234',
     error: ''
   };
 
@@ -31,6 +30,7 @@ function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService) {
         function (user) {
           vm.login.error = '';
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+          console.log('logged in');
           $scope.setCurrentUser(user);
         },
         function () {
@@ -47,7 +47,7 @@ function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService) {
       AuthService.register(username, email, password)
         .then(
           function (res) {
-            $state.go('login');
+            $state.go('account.login');
           },
           function (res) {
             vm.reg.error = '';
