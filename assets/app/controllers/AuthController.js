@@ -30,11 +30,11 @@ function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService) {
         function (user) {
           vm.login.error = '';
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-          console.log('logged in');
+          console.log('authenticate(): logged in');
           $scope.setCurrentUser(user);
         },
         function () {
-          vm.login.error = 'User and password combination is not correct';
+          vm.login.error = 'User and password combination is incorrect';
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         }
       );
