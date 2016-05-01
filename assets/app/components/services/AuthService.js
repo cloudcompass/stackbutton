@@ -39,14 +39,14 @@ function AuthService($cookies, USER_ROLES, SessionService, $http, $state, $q) {
   }
 
   function authSuccess(response) {
-    console.log("Success ", response);
+    console.log('AuthService.authenticate():', response);
     SessionService.create($cookies.get('sails.sid'), response.data.username, 'admin');
     $state.go('home.projects');
     return response.data || $q.when(response.data);
   }
 
   function authError(response) {
-    console.log("Error ", response.status, response);
+    console.log('AuthService.authenticate():', response);
     return $q.reject(response);
   }
 
@@ -76,7 +76,11 @@ function AuthService($cookies, USER_ROLES, SessionService, $http, $state, $q) {
   }
 
   function isAuthorized(authorizedRoles) {
-    console.log(SessionService.id, SessionService.userId, SessionService.userRole);
+    console.log('AuthService.isAuthorized(): current session =', {
+      id: SessionService.id,
+      userId: SessionService.userId,
+      userRole: SessionService.userRole
+    });
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }

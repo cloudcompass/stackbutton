@@ -3,7 +3,7 @@
 var sbapp = angular.module('sbapp', [
   'ngAnimate',
   'ngCookies',
-  'ngTouch',
+//  'ngTouch',
   'ngSanitize',
   'ui.router',
   'ngMaterial',
@@ -40,20 +40,28 @@ sbapp
             authorizedRoles: [USER_ROLES.all]
           }
         })
-        .state('login', {
-          url: '/login',
+        .state('account', {
+          url: '',
           controller: 'AuthController',
           controllerAs: 'vm',
-          templateUrl: 'app/views/login.html',
+          templateUrl: 'app/views/grayback.html',
+          abstract: true,
           data: {
             authorizedRoles: [USER_ROLES.all]
           }
         })
-        .state('register', {
+        .state('account.login', {
+          url: '/login',
+          templateUrl: 'app/views/partials/login.html',
+          data: {
+            authorizedRoles: [USER_ROLES.all]
+          }
+        })
+        .state('account.register', {
           url: '/register',
           controller: 'AuthController',
           controllerAs: 'vm',
-          templateUrl: 'app/views/register.html',
+          templateUrl: 'app/views/partials/register.html',
           data: {
             authorizedRoles: [USER_ROLES.all]
           }
@@ -72,7 +80,8 @@ sbapp
           url: '/dashboard',
           templateUrl: 'app/views/dashboard.html',
           data: {
-            title: 'Dashboard'
+            title: 'Dashboard',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
         .state('home.profile', {
@@ -81,7 +90,8 @@ sbapp
           controller: 'ProfileController',
           controllerAs: 'vm',
           data: {
-            title: 'Profile'
+            title: 'Profile',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
         .state('home.table', {
@@ -90,16 +100,16 @@ sbapp
           controllerAs: 'vm',
           templateUrl: 'app/views/table.html',
           data: {
-            title: 'Table'
+            title: 'Table',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
         .state('home.projects', {
           url: '/projects',
           templateUrl: 'app/views/projects.html',
-          controller: 'MainController',
-          controllerAs: 'vm',
           data: {
-            title: 'Projects'
+            title: 'Projects',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
         .state('home.create', {
@@ -108,7 +118,8 @@ sbapp
           controller: 'CreateController',
           controllerAs: 'vm',
           data: {
-            title: 'New Project'
+            title: 'New Project',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
         .state('home.delete', {
@@ -117,7 +128,8 @@ sbapp
           controller: 'MainController',
           controllerAs: 'vm',
           data: {
-            title: 'Delete Project'
+            title: 'Delete Project',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
         .state('home.plugin', {
@@ -126,7 +138,8 @@ sbapp
           controller: 'MainController',
           controllerAs: 'vm',
           data: {
-            title: 'Configure Plugins'
+            title: 'Configure Plugins',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
       ;
@@ -189,14 +202,15 @@ sbapp
     $rootScope.$on('$stateChangeStart', function (event, next) {
       var authorizedRoles = next.data.authorizedRoles;
       if (!AuthService.isAuthorized(authorizedRoles)) {
-        event.preventDefault();
+        //event.preventDefault();
+        console.log("event: ", event);
         if (AuthService.isAuthenticated()) {
           // user is not allowed
-          console.log("not all");
+          console.log("unauthorized");
           $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
         } else {
           // user is not logged in
-          console.log("not log");
+          console.log("unauthenticated");
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
         }
       }
@@ -208,7 +222,6 @@ sbapp
     $httpProvider.interceptors.push([
       '$injector',
       function ($injector) {
-        console.log('inject');
         return $injector.get('AuthInterceptor');
       }
     ]);
@@ -219,11 +232,11 @@ sbapp
       return {
         responseError: function (response) {
           $rootScope.$broadcast({
-            401: AUTH_EVENTS.notAuthenticated,
-            403: AUTH_EVENTS.notAuthorized,
+            403: AUTH_EVENTS.notAuthenticated,
+            404: AUTH_EVENTS.notAuthorized,
             419: AUTH_EVENTS.sessionTimeout,
             440: AUTH_EVENTS.sessionTimeout
-          }[response.status], response);
+          }[response.status]);
           return $q.reject(response);
         }
       };
