@@ -6,7 +6,7 @@ sbapp.controller('DashboardController', [
 
 function DashboardController($scope, ProjectService) {
   var vm = this;
-  vm.widgets = []
+  vm.widgets = [];
 
   dashboards = ProjectService.dashboard.query({project: $scope.currentProject.id, populate: 'widgets'},
     function (res, headers) {

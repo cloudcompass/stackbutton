@@ -45,8 +45,8 @@
 
       <!-- Nickname for this account -->
       <md-input-container>
-        <label>Nickname (optional)</label>
-        <textarea ng-Model="gitNickname" type="text"></textarea>
+        <label>Account Name</label>
+        <textarea disabled ng-Model="vm.gitNickname" type="text"></textarea>
       </md-input-container>
 
       <!-- Auth token for this account -->
@@ -54,6 +54,8 @@
         <label>Github Auth-Token</label>
         <textarea ng-Model="gitToken" type="text"></textarea>
       </md-input-container>
+      <md-button ng-click="vm.checkToken(gitToken)"><i class="material-icons">check_circle</i></md-button>
+
     </div>
 
     <!-- Page 2 - Bit account link -->

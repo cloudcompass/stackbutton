@@ -1,9 +1,9 @@
 sbapp.controller('RepositoryController', [
-  'repositoryService',
+  'RepositoryService',
   RepositoryController
 ]);
 
-function RepositoryController(repositoryService) {
+function RepositoryController(RepositoryService) {
   var vm = this;
   vm.commits = [];
 
@@ -49,7 +49,7 @@ function RepositoryController(repositoryService) {
     }
   ];
 
-  repositoryService
+  RepositoryService
     .loadAllItems()
     .then(function (commits) {
       vm.commits = [].concat(commits);

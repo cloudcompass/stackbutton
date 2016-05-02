@@ -1,8 +1,8 @@
-sbapp.controller('ToolController', [
+sbapp.controller('ToolController', ['RepositoryService',
   ToolController
 ]);
 
-function ToolController() {
+function ToolController(RepositoryService) {
   var vm = this;
   vm.back = back;
   vm.next = next;
@@ -34,4 +34,17 @@ function ToolController() {
     console.log("Bitbucket selected");
     this.count = 2;
   }
+
+  vm.checkToken = function (gitToken) {
+    console.log("checking token", gitToken);
+    RepositoryService.github.get({access_token: gitToken},
+      function (res, headers) {
+        vm.gitNickname = res.login;
+        console.log('success:', res);
+      },
+      function (err) {
+        console.log('error:', err);
+      }
+    );
+  };
 }
