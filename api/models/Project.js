@@ -17,18 +17,16 @@ module.exports = {
       type: "string",
       required: true
     },
-    ownerId: {
-      type: "int",
-      required: true
-    },
     contributers: {
-      type: "array"
+      collection: 'user'
     },
-    teams: {
-      type: "array"
+    dashboards: {
+      collection: "dashboard",
+      via: 'project'
     },
-    plugins: {
-      type: "array"
+    services: {
+      collection: "service",
+      via: 'project'
     }
 
   }

@@ -16,8 +16,7 @@ function CreateController($state, $scope, ProjectService) {
     } else {
       var newProj = {
         name: name,
-        description: description,
-        ownerId: $scope.currentUser.id
+        description: description
       };
       ProjectService.save(newProj,
         function (project, headers) {
