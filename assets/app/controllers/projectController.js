@@ -1,11 +1,12 @@
 sbapp.controller('ProjectController', [
+  '$state',
   '$scope',
   'ProjectService',
   '$mdDialog',
   ProjectController
 ]);
 
-function ProjectController($scope, ProjectService, $mdDialog) {
+function ProjectController($state, $scope, ProjectService, $mdDialog) {
   var vm = this;
 
   vm.showDeleteDialog = function (project) {
@@ -32,15 +33,27 @@ function ProjectController($scope, ProjectService, $mdDialog) {
       '</md-card>',
       controller: function DialogController($scope, $mdDialog) {
         $scope.confirm = function (id) {
-          console.log("deleting", id);
           //TODO add delete functionality
+          projectResource = ProjectService.delete({projid: id});
+          console.log("deleted", projectResource);
           $mdDialog.hide();
+
         };
         $scope.cancelDialog = function () {
           $mdDialog.cancel();
+          // clear text input:
+          eval('$scope.confirmBox' + project.id + '=null');
         }
       }
-    });
+    }).then(
+      // dialog resolved handler
+      function () {
+        $state.reload();
+      },
+      // dialog cancelled handler
+      function () {
+        console.log('dialog cancelled');
+      });
   };
 
   vm.projects = ProjectService.query({ownerId: $scope.currentUser.id});
