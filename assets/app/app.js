@@ -78,6 +78,8 @@ sbapp
         })
         .state('home.dashboard', {
           url: '/dashboard',
+          controller: 'DashboardController',
+          controllerAs: 'vm',
           templateUrl: 'app/views/dashboard.html',
           data: {
             title: 'Dashboard',

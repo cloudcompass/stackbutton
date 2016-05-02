@@ -36,23 +36,23 @@
     <h3 ng-show="vm.count == 0">Other DevOps Tools</h3>
 
     <!-- Page 1 - Git account link -->
-    <div ng-show="vm.count == 1" layout-align="space-around center">
+    <div ng-show="vm.count == 1" layout="row" layout-align="space-around center">
       <!-- Account name -->
-      <md-input-container>
-        <label>Name</label>
-          <textarea name="gitaccountName" type="text"></textarea>
-      </md-input-container>
+      <!--<md-input-container>-->
+      <!--<label>Name</label>-->
+      <!--<textarea name="gitaccountName" type="text"></textarea>-->
+      <!--</md-input-container>-->
 
       <!-- Nickname for this account -->
       <md-input-container>
-        <label>Nickname (to identify this account)</label>
-        <textarea name="gitaccountNick" type="text"></textarea>
+        <label>Nickname (optional)</label>
+        <textarea ng-Model="gitNickname" type="text"></textarea>
       </md-input-container>
 
       <!-- Auth token for this account -->
       <md-input-container>
         <label>Github Auth-Token</label>
-        <textarea name="gitaccountAuthtoken" type="text"></textarea>
+        <textarea ng-Model="gitToken" type="text"></textarea>
       </md-input-container>
     </div>
 
@@ -72,6 +72,6 @@
     -->
     <md-button ng-show="vm.count > 0" class="md-raised" ng-click="vm.back()" >Back</md-button>
     <md-button ng-show="vm.count > 1" class="md-raised" ng-click="vm.incCount()" >Next</md-button>
-    <md-button ng-show="vm.count >= 1" class="md-raised" ui-sref="home.dashboard">Finish</md-button>
+    <md-button ng-show="vm.count >= 1" class="md-raised">Finish</md-button>
   </md-card-actions>
 </md-card>

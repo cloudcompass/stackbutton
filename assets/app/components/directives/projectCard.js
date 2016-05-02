@@ -1,13 +1,11 @@
 sbapp.directive('projectCard', function () {
   return {
     restrict: 'E',
-    //replace: true,
-    //transclude: true,
-    scope: {project: '=', prompt: '&'},
+    scope: {project: '=', prompt: '&', select: '&'},
     template: '' +
     '<section layout-margin class="md-whiteframe-z1 panel-widget fixed-height-widget fixed-width">' +
     '  <div class="md-title" layout="row" layout-align="space-between start">' +
-    '    <md-button ng-show="!showBack" ui-sref="home.dashboard" layout="row" layout-align="start">' +
+    '    <md-button ng-show="!showBack" ng-click="select(project)" ui-sref="home.dashboard" layout="row" layout-align="start">' +
     '      <span class="md-accent panel-widget-tittle">{{project.name}}</span>' +
     '    </md-button>' +
     '    <span class="panel-widget-tittle" layout-padding ng-show="showBack"></span>' +

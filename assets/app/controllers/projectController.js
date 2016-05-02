@@ -9,6 +9,8 @@ sbapp.controller('ProjectController', [
 function ProjectController($state, $scope, ProjectService, $mdDialog) {
   var vm = this;
 
+  vm.setCurrentProject = $scope.setCurrentProject;
+
   vm.showDeleteDialog = function (project) {
     console.log("Delete Function Called");
     $mdDialog.show({
@@ -33,7 +35,7 @@ function ProjectController($state, $scope, ProjectService, $mdDialog) {
       '</md-card>',
       controller: function DialogController($scope, $mdDialog) {
         $scope.confirm = function (id) {
-          projectResource = ProjectService.delete({projid: id});
+          projectResource = ProjectService.project.remove({projid: id});
           console.log("deleted", projectResource);
           $mdDialog.hide();
 
@@ -55,7 +57,7 @@ function ProjectController($state, $scope, ProjectService, $mdDialog) {
       });
   };
 
-  vm.projects = ProjectService.query({owner: $scope.currentUser.id});
+  vm.projects = ProjectService.project.query({owner: $scope.currentUser.id});
 
 }
 

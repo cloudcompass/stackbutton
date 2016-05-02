@@ -1,22 +1,20 @@
 sbapp.directive('panelWidget', function () {
   return {
     restrict: 'E',
-    replace: true,
-    transclude: true,
-    scope: {title: '@', template: '@', options: '@'},
+    scope: {widget: '='},
     template: '' +
-    '<section layout-margin class="md-whiteframe-z1 panel-widget" style="min-width: 300px; min-height: 150px">' +
-    '    <div class="md-title" layout="row" layout-align="space-between start">' +
-    '      <span class="panel-widget-tittle">{{title}}</span>' +
+    '<md-card layout-margin class="md-whiteframe-z1 panel-widget" style="min-width: 300px; min-height: 150px">' +
+    '    <div class="panel-widget-tittle md-title" layout="row" layout-align="start center">' +
+    '      {{widget.template}}' +
     '    </div>' +
-    '    <div ng-include="template"/>' +
-    '</section>',
-    compile: function (element, attrs, linker) {
-      return function (scope, element) {
-        linker(scope, function (clone) {
-          element.append(clone);
-        });
-      };
-    }
-  };
+    '    <md-divider></md-divider>' +
+    '    <div ng-include="vm.templateUrl"/>' +
+    '</md-card>',
+    controller: function ($scope) {
+      var vm = this;
+      // TODO extend this to allow for other directories
+      vm.templateUrl = 'app/views/widget/repo/' + $scope.widget.template + '.html';
+    },
+    controllerAs: 'vm'
+  }
 });

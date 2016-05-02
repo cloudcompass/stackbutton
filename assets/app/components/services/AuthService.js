@@ -76,11 +76,11 @@ function AuthService($cookies, USER_ROLES, SessionService, $http, $state, $q) {
   }
 
   function isAuthorized(authorizedRoles) {
-    console.log('isAuthorized(): current session =', {
-      id: SessionService.id,
-      userId: SessionService.userId,
-      userRole: SessionService.userRole
-    });
+    // console.log('isAuthorized(): current session =', {
+    //   id: SessionService.id,
+    //   userId: SessionService.userId,
+    //   userRole: SessionService.userRole
+    // });
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }

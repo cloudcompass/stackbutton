@@ -9,11 +9,24 @@ sbapp.controller('ApplicationController', [
 ]);
 
 function ApplicationController($state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialog) {
-  $scope.currentUser = null;
   $scope.userRoles = USER_ROLES;
+  $scope.currentUser = null;
+  $scope.currentProject = null;
+  $scope.currentDashboard = null;
 
   $scope.setCurrentUser = function (user) {
     $scope.currentUser = user;
+    console.log('current user:', user);
+  };
+  $scope.setCurrentProject = function (project) {
+    $scope.currentProject = project;
+    console.log('current project:', project);
+
+  };
+  $scope.setCurrentDashboard = function (dashboard) {
+    $scope.currentDashboard = dashboard;
+    console.log('current dashboard:', dashboard);
+
   };
 
   function authDialog(template) {

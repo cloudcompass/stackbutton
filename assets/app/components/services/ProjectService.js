@@ -1,22 +1,45 @@
 sbapp.factory('ProjectService', [
   '$resource',
-  '$http',
-  '$q',
   ProjectService]
 );
 
-function ProjectService($resource, $q) {
+function ProjectService($resource) {
 
-  var project = $resource('/project/:projid', {projid: '@id'}, {
+  var projService = {};
+
+  projService.project = $resource('/project/:projid', {projid: '@id'}, {
     update: {
       method: 'PUT'
     }
   });
 
+  projService.dashboard = $resource('/dashboard/:dashboardid', {dashboardid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
+
+  projService.service = $resource('/project/:serviceid', {serviceid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
+
+  projService.widget = $resource('/widget/:widgetid', {projid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
+
+  projService.module = $resource('/project/:moduleid', {moduleid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
   /*
    Usage:
 
-   {} = ProjectService.get({projid: <5555>);
+   {} = ProjectService.get({projid: <5555>});
    [] = ProjectService.query({ownerId: <99>}); -- can use different/additional attributes
    ProjectService.delete({projid: <5555>);
 
@@ -46,6 +69,6 @@ function ProjectService($resource, $q) {
   //   return $q.reject(response);
   // }
 
-  return project;
+  return projService;
 }
 

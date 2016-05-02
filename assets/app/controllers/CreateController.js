@@ -18,7 +18,7 @@ function CreateController($state, $scope, ProjectService) {
         name: name,
         description: description
       };
-      ProjectService.save(newProj,
+      ProjectService.project.save(newProj,
         function (project, headers) {
           //success callback
           console.log('addProject() success:', project);
