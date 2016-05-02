@@ -21,7 +21,7 @@ sbapp.directive('projectCard', function () {
     '    {{project.description}}' +
     '  </div>' +
     '  <div ng-show="showBack" layout="column" layout-align="start center">' +
-    '    <md-button class="md-raised" ui-sref="home.plugin" ng-click="$mdOpenMenu($event)">Edit Project</md-button>' +
+    '    <md-button class="md-raised" ui-sref="home.plugin">Edit Project</md-button>' +
     '    <md-button class="md-raised md-warn" ng-click="prompt(project)">Delete Project</md-button>' +
     '  </div>' +
     '  <md-divider ng-show="!showBack"/>' +
