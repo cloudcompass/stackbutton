@@ -5,9 +5,11 @@ sbapp.directive('panelWidget', function () {
     transclude: true,
     scope: {title: '@', template: '@', options: '@'},
     template: '' +
-    '<section layout-margin class="md-whiteframe-z1 panel-widget" style="min-width: 350px; min-height: 150px">' +
-    '      <h3 class="panel-widget-tittle">{{title}}</h3>' +
-    '  <div ng-include="template"/>' +
+    '<section layout-margin class="md-whiteframe-z1 panel-widget" style="min-width: 300px; min-height: 150px">' +
+    '    <div class="md-title" layout="row" layout-align="space-between start">' +
+    '      <span class="panel-widget-tittle">{{title}}</span>' +
+    '    </div>' +
+    '    <div ng-include="template"/>' +
     '</section>',
     compile: function (element, attrs, linker) {
       return function (scope, element) {

@@ -36,8 +36,24 @@
     <h3 ng-show="vm.count == 0">Other DevOps Tools</h3>
 
     <!-- Page 1 - Git account link -->
-    <div ng-show="vm.count == 1">
-      GITHUB
+    <div ng-show="vm.count == 1" layout-align="space-around center">
+      <!-- Account name -->
+      <md-input-container>
+        <label>Name</label>
+          <textarea name="gitaccountName" type="text"></textarea>
+      </md-input-container>
+
+      <!-- Nickname for this account -->
+      <md-input-container>
+        <label>Nickname (to identify this account)</label>
+        <textarea name="gitaccountNick" type="text"></textarea>
+      </md-input-container>
+
+      <!-- Auth token for this account -->
+      <md-input-container>
+        <label>Github Auth-Token</label>
+        <textarea name="gitaccountAuthtoken" type="text"></textarea>
+      </md-input-container>
     </div>
 
     <!-- Page 2 - Bit account link -->
