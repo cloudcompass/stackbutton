@@ -9,7 +9,6 @@ function repositoryService($q) {
       files: '1'
     }
   ];
-
   return {
     loadAllItems: function () {
       return $q.when(commits);

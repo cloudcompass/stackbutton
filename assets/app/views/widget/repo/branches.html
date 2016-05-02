@@ -1,0 +1,10 @@
+<div ng-controller="RepositoryController as vm">
+  <md-divider></md-divider>
+  <div layout="row" layout-align="start center" ng-repeat="branch in vm.branches" >
+    <i class="material-icons md-48">{{branch.type}}</i>
+    <div layout="column" layout-align="space-around start" layout-padding>
+      <span class="{{branch.current}}">{{branch.name}}: {{branch.activity}}</span>
+    </div>
+  </div>
+  <!-- end of scope for vm -->
+</div>
