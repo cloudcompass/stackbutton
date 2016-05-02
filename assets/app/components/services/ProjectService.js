@@ -13,6 +13,12 @@ function ProjectService($resource, $q) {
     }
   });
 
+  // Usage:
+  // {} = ProjectService.get({projid: 5555);
+  // [] = ProjectService.query({ownerId: 99});
+  // ProjectService.delete({projid: 5555);
+  //
+
   // var projService = {};
   // projService.addProject = addProject;
   //
