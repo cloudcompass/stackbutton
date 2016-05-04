@@ -1,0 +1,18 @@
+dev:
+  build: .
+  ports:
+    - 8080:1337
+  links:
+    - mongo:mongo
+prod:
+  build: .
+  ports:
+    - 8081:1337
+  links:
+    - mongo:mongo
+  environment:
+    - NODE_ENV=production
+mongo:
+  image: mongo
+  ports:
+    - 27017
