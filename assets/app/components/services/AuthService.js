@@ -1,18 +1,19 @@
 sbapp.service('SessionService', function () {
-  this.create = function (sessionId, userId) {
+  this.create = function (sessionId, userId, userRole) {
     this.id = sessionId;
     this.userId = userId;
-    // this.userRole = userRole;
+    this.userRole = userRole;
   };
   this.destroy = function () {
     this.id = null;
     this.userId = null;
-    // this.userRole = null;
+    this.userRole = null;
   };
 });
 
 sbapp.factory('AuthService', [
   '$cookies',
+  'USER_ROLES',
   'SessionService',
   '$http',
   '$state',
@@ -20,7 +21,7 @@ sbapp.factory('AuthService', [
   AuthService]
 );
 
-function AuthService($cookies, SessionService, $http, $state, $q) {
+function AuthService($cookies, USER_ROLES, SessionService, $http, $state, $q) {
   var authService = {};
   authService.authenticate = authenticate;
   authService.register = register;
@@ -38,14 +39,14 @@ function AuthService($cookies, SessionService, $http, $state, $q) {
   }
 
   function authSuccess(response) {
-    console.log("Success ", response);
+    console.log('AuthService.authenticate():', response);
+    SessionService.create($cookies.get('sails.sid'), response.data.username, 'admin');
     $state.go('home.projects');
-    SessionService.create($cookies.get('sails.sid'), response.data.username);
     return response.data || $q.when(response.data);
   }
 
   function authError(response) {
-    console.log("Error ", response.status, response);
+    console.log('authenticate():', response);
     return $q.reject(response);
   }
 
@@ -75,11 +76,17 @@ function AuthService($cookies, SessionService, $http, $state, $q) {
   }
 
   function isAuthorized(authorizedRoles) {
+    // console.log('isAuthorized(): current session =', {
+    //   id: SessionService.id,
+    //   userId: SessionService.userId,
+    //   userRole: SessionService.userRole
+    // });
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }
-    return (authService.isAuthenticated() &&
-    authorizedRoles.indexOf(SessionService.userRole) !== -1);
+    // return true if public page OR if authenticated+authorized
+    return (authorizedRoles.indexOf(USER_ROLES.all) !== -1)
+      || (authService.isAuthenticated() && authorizedRoles.indexOf(SessionService.userRole) !== -1);
   }
 
   return authService;

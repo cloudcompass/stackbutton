@@ -17,26 +17,34 @@ module.exports = {
       type: "string",
       required: true
     },
-    ownerId: {
-      type: "int",
-      required: true
-    },
     contributers: {
-      type: "array"
+      collection: 'user'
     },
-    teams: {
-      type: "array"
+    dashboards: {
+      collection: "dashboard",
+      via: 'project'
     },
-    plugins: {
-      type: "array"
-    },
-    startDate: {
-      type: "date"
-    },
-    endDate: {
-      type: "date"
+    services: {
+      collection: "service",
+      via: 'project'
     }
+  },
 
-  }
+  afterCreate: [
+    function createDashboard(project, next) {
+      sails.log.info('Project.afterCreate.createDashboard', project);
+      Project.findOne({id: project.id}).populate('dashboards')
+        .exec(function (err, res) {
+          res.dashboards.add({name: 'Default', project: project.id, private: false});
+          res.save(function (err, res) {
+            if (err) {
+              sails.log.error(err);
+              next(err);
+            } else {
+              next();
+            }
+          });
+        });
+    }
+  ]
 };
-

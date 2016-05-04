@@ -1,13 +1,12 @@
-<div layout="row" layout-wrap>
-  <project-card ></project-card>
-  <project-card ></project-card>
+<div layout="row" layout-wrap layout-align="center start">
+  <div layout="row" layout-align="start start" layout-wrap ng-repeat="project in vm.projects">
+    <project-card project="project" prompt="vm.showDeleteDialog(project)"
+                  select="vm.setCurrentProject(project)"></project-card>
+  </div>
 </div>
-<div layout="row" layout-align="center start" >
-  <md-menu>
-    <md-button class="md-raised md-primary" ui-sref="home.create">
-      <span class="material-icons md-48">add</span>
-      <span>Create a New Project</span>
-    </md-button>
-    <md-button>child2</md-button>
-  </md-menu>
+<div layout="row" layout-align="center start">
+  <md-button class="md-raised md-primary" ui-sref="home.create">
+    <span class="material-icons md-48">add</span>
+    <span>Create a New Project</span>
+  </md-button>
 </div>

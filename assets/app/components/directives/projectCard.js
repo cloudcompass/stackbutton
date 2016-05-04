@@ -1,33 +1,28 @@
 sbapp.directive('projectCard', function () {
   return {
     restrict: 'E',
-    replace: true,
-    transclude: true,
-    scope: true,
+    scope: {project: '=', prompt: '&', select: '&'},
     template: '' +
     '<section layout-margin class="md-whiteframe-z1 panel-widget fixed-height-widget fixed-width">' +
-    '  <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">' +
-    '    <div class="md-toolbar-tools">' +
-    '      <h4 class="panel-widget-tittle">{{title}}</h4>' +
-    '      <md-button ng-click="hideOptions=!hideOptions" class="md-icon-button" aria-label="Show options">' +
-    '        <i class="material-icons">tab_unselected</i>' +
-    '      </md-button>' +
-    '    </div>' +
-    '  </md-toolbar>' +
-    '  <div ng-show="!hideOptions">' +
-    '   stuff here' +
+    '  <div class="md-title" layout="row" layout-align="space-between start">' +
+    '    <md-button ng-show="!showBack" ng-click="select(project)" ui-sref="home.dashboard" layout="row" layout-align="start">' +
+    '      <span class="md-accent panel-widget-tittle">{{project.name}}</span>' +
+    '    </md-button>' +
+    '    <span class="panel-widget-tittle" layout-padding ng-show="showBack"></span>' +
+    '    <md-button ng-click="showBack=!showBack" class="md-icon-button" aria-label="Show options">' +
+    '      <i class="material-icons" ng-show="!showBack">flip_to_back</i>' +
+    '      <i class="material-icons" ng-show="showBack">flip_to_front</i>' +
+    '    </md-button>' +
     '  </div>' +
-    '  <div ng-show="hideOptions">' +
-    '   <md-button class="md-raised" ui-sref="home.plugin" ng-click="$mdOpenMenu($event)">Edit Project</md-button>' +
-    '   <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog()">Delete Project</md-button>' +
+    '  <md-divider ng-show="!showBack"/>' +
+    '  <div ng-show="!showBack">' +
+    '    {{project.description}}' +
     '  </div>' +
-    '</section>',
-    compile: function (element, attrs, linker) {
-      return function (scope, element) {
-        linker(scope, function (clone) {
-          element.append(clone);
-        });
-      };
-    }
+    '  <div ng-show="showBack" layout="column" layout-align="start center">' +
+    '    <md-button class="md-raised" ui-sref="home.plugin">Edit Project</md-button>' +
+    '    <md-button class="md-raised md-warn" ng-click="prompt(project)">Delete Project</md-button>' +
+    '  </div>' +
+    '  <md-divider ng-show="!showBack"/>' +
+    '</section>'
   };
 });

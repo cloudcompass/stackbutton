@@ -1,6 +1,8 @@
-sbapp.service('repositoryService', ['$q', repositoryService]);
+sbapp.service('RepositoryService', ['$q', '$resource', RepositoryService]);
 
-function repositoryService($q) {
+function RepositoryService($q, $resource) {
+  var service = {}
+
   var commits = [
     {
       description: 'Linked Controller to View',
@@ -9,10 +11,11 @@ function repositoryService($q) {
       files: '1'
     }
   ];
-
-  return {
-    loadAllItems: function () {
-      return $q.when(commits);
-    }
+  service.loadAllItems = function () {
+    return $q.when(commits);
   };
+
+  service.github = $resource('https://api.github.com/user', {});
+
+  return service;
 }

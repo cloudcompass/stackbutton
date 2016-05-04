@@ -7,13 +7,13 @@ function navService($q) {
     {
       name: 'Projects',
       icon: 'work',
-      sref: '.projects'
+      sref: 'home.projects'
 
     },
     {
       name: 'Account',
       icon: 'people',
-      sref: '.profile'
+      sref: 'home.profile'
     }
   ];
 
@@ -21,7 +21,7 @@ function navService($q) {
     {
       name: 'Repositories',
       icon: 'device_hub',
-      sref: '.repos',
+      sref: 'home.repos',
       children: [
         {name: 'GitHub', sref: '.repo.github'},
         {name: 'BitBucket', sref: '.repo.bitbucket'}

@@ -6,15 +6,6 @@
       <img class="sb-logo-detail sb-48px" ui-sref="welcome"/>
       <h1> StackButton</h1>
     </md-button>
-    <!-- Hiding search and Notifications
-    <md-button hide-xs hide-md class="toolbar-button" aria-label="Search" hide>
-      <i class="material-icons">search</i>
-    </md-button>
-    <md-button hide-sm class="toolbar-button" aria-label="Notifications" hide>
-      <i class="material-icons">notifications</i>
-      <span class="notifications-label">7</span>
-    </md-button>
-    -->
 
     <md-button hide show-xs ng-click="vm.toggleItemsList()" aria-label="Menu">
       <i class="material-icons">menu</i>
@@ -24,14 +15,14 @@
       <md-button class="toolbar-button" ng-click="$mdOpenMenu()" aria-label="Open menu">
         <i class="material-icons">account_circle</i>
         <!--<span hide-xs>Richard Feynman</span>-->
-        <span class="orig-case" hide-xs ng-if="currentUser">{{currentUser.username}}</span>
+        <span class="orig-case" hide-xs>{{ currentUser==null ? 'unknown' : currentUser.username }}</span>
       </md-button>
       <md-menu-content width="3">
         <md-menu-item>
           <md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ng-click="$mdCloseMenu()" ui-sref="home.dashboard">Log out</md-button>
+          <md-button ng-click="vm.logOut()">Log out</md-button>
         </md-menu-item>
       </md-menu-content>
     </md-menu>
@@ -86,14 +77,6 @@
       </div>
       <md-divider ng-repeat-end></md-divider>
       <!-- end Menu items -->
-
-      <!--
-      <md-button ng-click="vm.showActions($event)" layout-align="center center">
-        <div class="md-tile-content">
-          Actions
-        </div>
-      </md-button>
-      -->
     </md-sidenav>
     <!-- Left nav end -->
 
@@ -105,35 +88,35 @@
   </div>
 </div>
 
-<!-- Right pop-out begin-->
-<md-sidenav md-component-id="right" class="md-whiteframe-z2 md-sidenav-right">
-  <md-toolbar>
-    <md-toolbar class="md-warn" layout="row" layout-align="center center">
-      <img class="img-circle" ng-src="/images/feynman.jpg">
-      <md-menu md-offset="0 20">
-        <md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
-          <span>Richard Feynman</span>
-          <i class="material-icons">keyboard_arrow_down</i>
-        </md-button>
-        <md-menu-content width="3">
-          <md-menu-item>
-            <md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="$mdCloseMenu()" ui-sref="home.dashboard">Log out</md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
-    </md-toolbar>
-  </md-toolbar>
+<!--&lt;!&ndash; Right pop-out begin&ndash;&gt;-->
+<!--<md-sidenav md-component-id="right" class="md-whiteframe-z2 md-sidenav-right">-->
+<!--<md-toolbar>-->
+<!--<md-toolbar class="md-warn" layout="row" layout-align="center center">-->
+<!--<img class="img-circle" ng-src="/images/feynman.jpg">-->
+<!--<md-menu md-offset="0 20">-->
+<!--<md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">-->
+<!--<span>Richard Feynman</span>-->
+<!--<i class="material-icons">keyboard_arrow_down</i>-->
+<!--</md-button>-->
+<!--<md-menu-content width="3">-->
+<!--<md-menu-item>-->
+<!--<md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button>-->
+<!--</md-menu-item>-->
+<!--<md-menu-item>-->
+<!--<md-button ng-click="vm.logOut()">Logout</md-button>-->
+<!--</md-menu-item>-->
+<!--</md-menu-content>-->
+<!--</md-menu>-->
+<!--</md-toolbar>-->
+<!--</md-toolbar>-->
 
-  <section>
-    <md-toolbar md-theme="grey" class="md-hue-1">
-      <div class="md-toolbar-tools">
-        <h3>Messages</h3>
-      </div>
-    </md-toolbar>
-    <div ng-include src="'app/views/partials/messages.html'"/>
-  </section>
-</md-sidenav>
-<!-- Right pop-out end -->
+<!--<section>-->
+<!--<md-toolbar md-theme="grey" class="md-hue-1">-->
+<!--<div class="md-toolbar-tools">-->
+<!--<h3>Messages</h3>-->
+<!--</div>-->
+<!--</md-toolbar>-->
+<!--<div ng-include src="'app/views/partials/messages.html'"/>-->
+<!--</section>-->
+<!--</md-sidenav>-->
+<!--&lt;!&ndash; Right pop-out end &ndash;&gt;-->

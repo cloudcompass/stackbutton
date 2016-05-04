@@ -1,18 +1,21 @@
 
 <!-- Visual representation of what the Dashboard could look like -->
 <div layout="row" layout-align="center start" layout-wrap>
-  <panel-widget flex title="GitHub" template="app/views/partials/repositoryControl.html"></panel-widget>
-  <panel-widget  flex title="Slack Messages"></panel-widget>
-  <panel-widget  flex title="Calendar"></panel-widget>
-  <panel-widget  flex title="Current Tasks"></panel-widget>
-  <panel-widget  flex title="Issue Board"></panel-widget>
-  <panel-widget  flex title="Days Left"></panel-widget>
-  <panel-widget  flex title="Server Status"></panel-widget>
-  <panel-widget  flex title="Current Team Members Online"></panel-widget>
+  <!--<panel-widget flex title="GitHub Commits" template="app/views/widget/repo/commits.html"></panel-widget>-->
+  <!--<panel-widget  flex title="Contributors" template="app/views/widget/repo/contributors.html"></panel-widget>-->
+  <!--<panel-widget  flex title="Branches" template="app/views/widget/repo/branches.html"></panel-widget>-->
+  <!--<panel-widget  flex title="Current Tasks"></panel-widget>-->
+  <!--<panel-widget  flex title="Issue Board"></panel-widget>-->
+  <!--<panel-widget  flex title="Days Left"></panel-widget>-->
+  <!--<panel-widget  flex title="Server Status"></panel-widget>-->
+  <!--<panel-widget  flex title="Current Team Members Online"></panel-widget>-->
+  <div layout="row" layout-align="start start" layout-wrap ng-repeat="widget in vm.widgets">
+    <panel-widget flex widget="widget"></panel-widget>
+  </div>
 </div>
 <div layout="row" layout-align="center start" >
   <md-menu>
-    <md-button class="md-raised md-primary" ng-click="$mdOpenMenu($event)">
+    <md-button class="md-raised md-primary" ui-sref="home.addtool">
       <span class="material-icons md-48">add</span>
       <span>Click me to add a Widget</span>
     </md-button>

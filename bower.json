@@ -21,7 +21,8 @@
     "angular-sanitize": "^1.5.3",
     "angular-touch": "^1.5.3",
     "angular-ui-router": "^0.2.18",
-    "jquery": "^2.2.3"
+    "jquery": "^2.2.3",
+    "angular-resource": "^1.5.5"
   },
   "ignore": [
     "**/.*",

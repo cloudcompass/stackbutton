@@ -1,35 +1,35 @@
 sbapp.controller('CreateController', [
-  'AUTH_EVENTS',
   '$state',
   '$scope',
-  '$rootScope',
   'ProjectService',
   CreateController
 ]);
 
-function CreateController(AUTH_EVENTS, $state, $scope, $rootScope, ProjectService) {
+function CreateController($state, $scope, ProjectService) {
+  // Expose variables and functions to the view:
   var vm = this;
   vm.error = null;
 
-  // Expose variables and functions to the view:
-
-
-  vm.addProject = function (name, description, startDate, endDate) {
-    if (startDate > endDate) {
-      vm.error = "Project start date cannot be later than end date"
+  vm.addProject = function (name, description) {
+    if($scope.currentUser == null){
+      console.log('addProject(): null user. Aborting.');
     } else {
-      ProjectService.addProject(name, description, startDate, endDate, $scope.currentUser.id)
-        .then(
-          function (project) {
-            vm.error = '';
-          },
-          function (res) {
-            vm.error = 'Couldn\'t create project';
-            for (item in res.data.invalidAttributes) {
-              vm.error += res.data.invalidAttributes[item][0].message + '\r\n';
-            }
-          }
-        );
+      var newProj = {
+        name: name,
+        description: description
+      };
+      ProjectService.project.save(newProj,
+        function (project, headers) {
+          //success callback
+          console.log('addProject() success:', project);
+          $state.go('home.projects');
+        },
+        function (resp) {
+          //error callback
+          console.log('addProject() error:', resp);
+          //TODO add error handling feedback
+        }
+      );
     }
   };
 

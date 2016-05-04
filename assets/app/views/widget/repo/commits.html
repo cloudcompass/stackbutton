@@ -1,0 +1,13 @@
+<div layout="row" layout-align="space-between center" ng-controller="RepositoryController as vm">
+  <i class="material-icons md-24">chevron_left</i>
+  <div layout="column" layout-align="start center" ng-repeat="commit in vm.commits">
+    <span class="md-title">{{commit.description}}</span>
+    <div layout="column" layout-align="center start">
+      <span>Date: {{commit.date}}</span>
+      <span>Author: {{commit.author}}</span>
+      <span>Files modified: {{commit.files}}</span>
+      <br>
+    </div>
+  </div>
+  <i class="material-icons md-24">chevron_right</i>
+</div>
