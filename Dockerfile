@@ -82,18 +82,18 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 # End of Ruby Install
 
 # Sails and Stackbutton setup
-RUN mkdir /app/
 WORKDIR /app/
-# ADD package.json package.json
-# ADD Gruntfile.js Gruntfile.js
-# ADD bower.json bower.json
-ADD . .
+RUN gem install sass
+ADD package.json /app/
+ADD Gruntfile.js /app/
+ADD bower.json /app/
+ADD .bowerrc /app/
 RUN npm install grunt bower -g
-RUN bower install --allow-root
 RUN npm -g install sails
 RUN npm install sails-disk --save
 RUN npm install
-RUN gem install sass
+RUN bower install --allow-root
+ADD . .
 
-CMD ["sails","lift","--models.migrate=create"]
+CMD ["sails","lift","--models.migrate=create", "--verbose"]
 # CMD ["sails","lift"]
