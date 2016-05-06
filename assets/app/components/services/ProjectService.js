@@ -19,7 +19,7 @@ function ProjectService($resource) {
     }
   });
 
-  projService.service = $resource('/project/:serviceid', {serviceid: '@id'}, {
+  projService.service = $resource('/service/:serviceid', {serviceid: '@id'}, {
     update: {
       method: 'PUT'
     }
@@ -31,7 +31,7 @@ function ProjectService($resource) {
     }
   });
 
-  projService.module = $resource('/project/:moduleid', {moduleid: '@id'}, {
+  projService.module = $resource('/module/:moduleid', {moduleid: '@id'}, {
     update: {
       method: 'PUT'
     }

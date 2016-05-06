@@ -7,11 +7,11 @@
 
 module.exports = {
   attributes: {
-    name: {
-      type: "string",
-      required: true,
-      minLength: 2
-    },
+    // name: {
+    //   type: "string",
+    //   required: true,
+    //   minLength: 2
+    // },
     platform: {
       type: 'string',
       required: true
@@ -27,6 +27,17 @@ module.exports = {
     project: {
       model: "project"
     }
-  }
+  },
+  beforeCreate: [
+    function checkToken(service, next) {
+      sails.log.info('Service.beforeCreate.checkToken', service);
+      var accName;
+      switch (service.platform) {
+        case 'github':
+          GithubService.validateToken(service.token, next);
+          break;
+      }
+    }
+  ]
 };
 
