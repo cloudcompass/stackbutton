@@ -211,26 +211,6 @@ sbapp
     }
   ])
 
-  // Check authorization on state change
-  .run(function ($rootScope, AUTH_EVENTS, AuthService) {
-    $rootScope.$on('$stateChangeStart', function (event, next) {
-      var authorizedRoles = next.data.authorizedRoles;
-      if (!AuthService.isAuthorized(authorizedRoles)) {
-        //event.preventDefault();
-        console.log("event: ", event);
-        if (AuthService.isAuthenticated()) {
-          // user is not allowed
-          console.log("unauthorized");
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-        } else {
-          // user is not logged in
-          console.log("unauthenticated");
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-        }
-      }
-    });
-  })
-
   // Broadcast events upon 4xx responses from server
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push([
@@ -246,8 +226,8 @@ sbapp
       return {
         responseError: function (response) {
           $rootScope.$broadcast({
-            403: AUTH_EVENTS.notAuthenticated,
-            404: AUTH_EVENTS.notAuthorized,
+            401: AUTH_EVENTS.notAuthenticated,
+            403: AUTH_EVENTS.notAuthorized,
             419: AUTH_EVENTS.sessionTimeout,
             440: AUTH_EVENTS.sessionTimeout
           }[response.status]);

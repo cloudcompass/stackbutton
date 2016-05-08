@@ -57,7 +57,7 @@ function ProjectController($state, $scope, ProjectService, $mdDialog) {
       });
   };
 
-  vm.projects = ProjectService.project.query({owner: $scope.currentUser.id});
+  vm.projects = $scope.currentUser ? ProjectService.project.query({owner: $scope.currentUser.id}) : [];
 
 }
 

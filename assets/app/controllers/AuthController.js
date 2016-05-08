@@ -4,43 +4,51 @@ sbapp.controller('AuthController', [
   '$scope',
   '$rootScope',
   'AuthService',
+  'SessionService',
   AuthController
 ]);
 
-function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService) {
+function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService, SessionService) {
   var vm = this;
 
+  /* CALLABLE MEMBERS */
+  vm.authenticate = authenticate;
+  vm.register = register;
+  vm.reg = {};
   vm.login = {
     user: 'admin@example.com',
     password: 'admin1234',
     error: ''
   };
 
-  vm.reg = {
-    user: '',
-    email: '',
-    password: '',
-    passwordVerify: '',
-    error: ''
-  };
 
-  vm.authenticate = function (email, password) {
+  /* FUNCTIONS */
+
+  function authenticate(email, password) {
     AuthService.authenticate(email, password)
       .then(
         function (user) {
           vm.login.error = '';
-          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           console.log('authenticate(): logged in');
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+          SessionService.create(null, user.username, 'admin');
           $scope.setCurrentUser(user);
+          // redirect
+          if ($state.current.name == 'account.login') {
+            $state.go('home.projects');
+          } else {
+            $state.reload();
+          }
+
         },
         function () {
           vm.login.error = 'User and password combination is incorrect';
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         }
       );
-  };
+  }
 
-  vm.register = function (username, email, password, passwordVerify) {
+  function register(username, email, password, passwordVerify) {
     if (password != passwordVerify) {
       vm.reg.error = 'Passwords do not match'
     } else {
