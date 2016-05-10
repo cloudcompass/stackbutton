@@ -226,8 +226,8 @@ sbapp
       return {
         responseError: function (response) {
           $rootScope.$broadcast({
-            403: AUTH_EVENTS.notAuthenticated,
-            404: AUTH_EVENTS.notAuthorized,
+            401: AUTH_EVENTS.notAuthenticated,
+            403: AUTH_EVENTS.notAuthorized,
             419: AUTH_EVENTS.sessionTimeout,
             440: AUTH_EVENTS.sessionTimeout
           }[response.status]);
