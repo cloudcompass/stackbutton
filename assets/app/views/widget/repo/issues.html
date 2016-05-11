@@ -1,0 +1,34 @@
+<section class="md-whiteframe-z1 panel-widget" style="max-width: 300px; ">
+  <div class="md-title color-inherit dash-widget-topbar" layout="row" layout-align="space-between start">
+    <span class="dash-widget-topbar-text" layout-padding>Issues</span>
+  </div>
+  <md-divider></md-divider>
+  <div layout="column" layout-align="start stretch">
+    <md-button  layout="row" layout-align="space-between center" ng-click="showNew=!showNew">
+      <span class="dash-widget-font"> Open:</span>
+      <i class="material-icons md-24" ng-show="!showNew" >expand_more</i>
+      <i class="material-icons md-24" ng-show="showNew" >expand_less</i>
+    </md-button>
+  </div>
+  <!-- items -->
+  <div layout="row" layout-align="space-between center" ng-show="showNew" ng-repeat="post in newposts">
+    <md-button class="md-icon-button {{post.priority}}"><i class="material-icons ">mode_comment</i></md-button>
+    <span class="dash-widget-text">{{post.number}} {{post.text}}</span>
+    <md-button class="md-icon-button" ><i class="material-icons">format_align_justify</i></md-button>
+  </div>
+  <!-- items end -->
+  <div layout="column" layout-align="start stretch">
+    <md-button layout="row" layout-align="space-between center" ng-click="showOld=!showOld">
+      <span class="dash-widget-font"> Closed:</span>
+      <i class="material-icons md-24" ng-show="!showOld">expand_more</i>
+      <i class="material-icons md-24" ng-show="showOld">expand_less</i>
+    </md-button>
+  </div>
+  <!-- old items -->
+  <div layout="row" layout-align="space-between center" ng-show="showOld" ng-repeat="post in oldposts">
+    <md-button class="md-icon-button {{post.priority}}"><i class="material-icons ">mode_comment</i></md-button>
+    <span class="dash-widget-text">{{post.number}} {{post.text}}</span>
+    <md-button class="md-icon-button" ><i class="material-icons">format_align_justify</i></md-button>
+  </div>
+  <!-- old items end-->
+</section>
