@@ -1,7 +1,7 @@
 <div layout="row" layout-wrap layout-align="center start">
   <div layout="row" layout-align="start start" layout-wrap ng-repeat="project in vm.projects">
     <project-card project="project" prompt="vm.showDeleteDialog(project)"
-                  select="vm.setCurrentProject(project)"></project-card>
+                  select="vm.setCurrentProject(project.id)"></project-card>
   </div>
 </div>
 <div layout="row" layout-align="center start">
@@ -10,3 +10,4 @@
     <span>Create a New Project</span>
   </md-button>
 </div>
+<md-button class="md-raised" ui-sref="home.widgettest">GO TO TEST DASHBOARD</md-button>

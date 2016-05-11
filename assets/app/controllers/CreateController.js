@@ -6,12 +6,18 @@ sbapp.controller('CreateController', [
 ]);
 
 function CreateController($state, $scope, ProjectService) {
-  // Expose variables and functions to the view:
   var vm = this;
-  vm.error = null;
 
-  vm.addProject = function (name, description) {
-    if($scope.currentUser == null){
+  /* CALLABLE MEMBERS */
+
+  vm.error = null;
+  vm.addProject = addProject;
+
+
+  /* FUNCTIONS */
+
+  function addProject(name, description) {
+    if ($scope.currentUser == null) {
       console.log('addProject(): null user. Aborting.');
     } else {
       var newProj = {
@@ -22,7 +28,8 @@ function CreateController($state, $scope, ProjectService) {
         function (project, headers) {
           //success callback
           console.log('addProject() success:', project);
-          $state.go('home.projects');
+          $scope.setCurrentProject(project.id);
+          $state.go('home.addtool');
         },
         function (resp) {
           //error callback
@@ -31,25 +38,6 @@ function CreateController($state, $scope, ProjectService) {
         }
       );
     }
-  };
+  }
 
-  // vm.register = function (username, email, password, passwordVerify) {
-  //   if (password != passwordVerify) {
-  //     vm.reg.error = 'Passwords do not match'
-  //   } else {
-  //     AuthService.register(username, email, password)
-  //       .then(
-  //         function (res) {
-  //           $state.go('login');
-  //         },
-  //         function (res) {
-  //           vm.reg.error = '';
-  //           for (item in res.data.invalidAttributes) {
-  //             vm.reg.error += res.data.invalidAttributes[item][0].message;
-  //           }
-  //         }
-  //       );
-  //   }
-  // }
-
-}
+} // CreateController end

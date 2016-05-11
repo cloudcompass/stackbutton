@@ -1,50 +1,111 @@
-sbapp.controller('ToolController', ['RepositoryService',
+sbapp.controller('ToolController', [
+  '$scope',
+  'ToolService',
+  'ProjectService',
   ToolController
 ]);
 
-function ToolController(RepositoryService) {
+function ToolController($scope, ToolService, ProjectService) {
   var vm = this;
+
+  /* CALLABLE MEMBERS */
+
+  vm.addService = addService;
+  vm.tools = {};
+  vm.modules = ToolService.modules;
+  vm.repos = [];
   vm.back = back;
   vm.next = next;
-  vm.gitSelect = gitSelect;
-  vm.bitSelect = bitSelect;
+  vm.selectTool = selectTool;
+  vm.templatePath = '';
+  vm.loadRepos = loadRepos;
+  vm.currentServiceId = null;
+  vm.currentPlatform = null;
 
   //Used for page back/next and div displays on addATool.html
-  vm.count = 0;
+  vm.currentPage = 0;
+  vm.pageCount = 0;
 
-  //Using a numeric system to hide and show pages of this setup
-  // 0 = Main page
-  // 1 = Github setup
-  // 2 = other. - Bitbucket setup is not implemented
+
+  /* ACTIONS */
+
+  // Populate vm.tools
+  ToolService.loadTools().then(function (tools) {
+    for (i = 0; i < tools.length; i++) {
+      for (j = 0; j < tools[i].modules.length; j++) {
+        // create new key if undefined
+        if (typeof vm.tools[tools[i].modules[j]] == 'undefined') {
+          vm.tools[tools[i].modules[j]] = [];
+        }
+        // fill arrays: vm.tools.repo, vm.tools.wiki, etc.
+        vm.tools[tools[i].modules[j]].push(tools[i]);
+      }
+    }
+    //console.log('tools loaded:',vm.tools);
+  });
+
+
+  /* FUNCTIONS */
 
   function back(){
-    this.count = 0;
+    vm.currentPage--;
   }
 
   function next(){
-    this.count -= 1;
+    vm.currentPage++;
   }
 
-  function gitSelect(){
-    console.log("github selected");
-    this.count = 1;
+  function selectTool(tool) {
+    vm.templatePath = 'app/views/setup/' + tool.name + '.html';
+    vm.currentPlatform = tool.name;
+    vm.currentPage = 1;
+    // TODO move owner filter on service objects to backend row-level permissions
+    ProjectService.service.query({project: $scope.currentProject, platform: tool.name, owner: $scope.currentUser.id},
+      function (services) {
+        vm.services = services;
+      });
   }
 
-  function bitSelect(){
-    console.log("Bitbucket selected");
-    this.count = 2;
+  function addService(platform, token) {
+    if ($scope.currentProject == null) {
+      console.log('addService(): null project. Aborting.');
+    } else {
+      var newService = {
+        platform: platform,
+        token: token,
+        project: $scope.currentProject
+      };
+      ProjectService.service.save(newService,
+        //success callback
+        function (service) {
+          //TODO modify this to not display tokens locally
+          console.log('addService() success:', service);
+          vm.currentServiceId = service.id;
+          vm.loadRepos(service.id);
+          vm.next();
+        },
+        //error callback
+        function (err) {
+          console.log('addService() error:', err);
+          vm.currentServiceId = null;
+          //TODO add error handling feedback
+        }
+      );
+    }
   }
 
-  vm.checkToken = function (gitToken) {
-    console.log("checking token", gitToken);
-    RepositoryService.github.get({access_token: gitToken},
-      function (res, headers) {
-        vm.gitNickname = res.login;
-        console.log('success:', res);
+  function loadRepos(serviceId) {
+    //TODO something something
+    console.log('Not yet implemented. Go get repos for service', serviceId);
+    vm.repos = [
+      {
+        id: 1,
+        full_name: 'Repo1'
       },
-      function (err) {
-        console.log('error:', err);
+      {
+        id: 2,
+        full_name: 'SomeOtherRepo'
       }
-    );
-  };
+    ]
+  }
 }
