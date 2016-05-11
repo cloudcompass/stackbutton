@@ -1,46 +1,45 @@
-<!-- Page 1 - Git account link -->
-<div ng-show="vm.currentPage == 1" layout="row" layout-align="space-around center">
-  <!-- Account name -->
-  <!--<md-input-container>-->
-  <!--<label>Name</label>-->
-  <!--<textarea name="gitaccountName" type="text"></textarea>-->
-  <!--</md-input-container>-->
+<!--STEP 1-->
+<div ng-init="vm.pageCount=3" ng-show="vm.currentPage == 1" layout="column" layout-align="start center">
 
-  <!-- Nickname for this account -->
-  <md-input-container>
-    <label>Account Name</label>
-    <textarea disabled ng-Model="vm.gitNickname" type="text"></textarea>
-  </md-input-container>
+  <!-- Show existing services -->
+  <div layout="row">
+    <md-button ng-repeat="service in vm.services" ng-click="vm.currentServiceId=service.id">
+      {{service.token}}
+    </md-button>
+  </div>
 
-  <!-- Auth token for this account -->
+  <!--Input for new token-->
   <md-input-container>
     <label>Github Auth-Token</label>
-    <textarea ng-Model="gitToken" type="text"></textarea>
+    <input ng-Model="token" type="text">
   </md-input-container>
-  <md-button ng-click="vm.checkToken(gitToken)"><i class="material-icons">check_circle</i></md-button>
 
+  <!--Buttons-->
   <md-card-actions layout="row" layout-align="end center">
-    <!--
-      - Hide the back button on the first page
-      - Hide the next button on the second page
-      - Show the finish button on the second page
-    -->
     <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()">Back</md-button>
     <md-button ng-show="vm.currentPage < vm.pageCount" class="md-raised"
-               ng-click="vm.addService(vm.currentPlatform, gitToken)">Next
+               ng-click="vm.addService(vm.currentPlatform, token)">Next
     </md-button>
     <md-button ng-show="vm.currentPage == vm.pageCount" class="md-raised">Finish</md-button>
   </md-card-actions>
-</div>
+  <!--Buttons end-->
 
+</div>
+<!--STEP 1 END-->
+
+<!--STEP 2-->
 <div ng-show="vm.currentPage == 2" layout="column" layout-align="start center">
+
   Choose a repository:
   <md-button ng-repeat="repo in vm.repos">{{repo.full_name}}</md-button>
 
 </div>
+<!--STEP 2 END-->
 
+<!--STEP 3-->
 <div ng-show="vm.currentPage == 3" layout="row" layout-align="space-around center">
 
   third page
 
 </div>
+<!--STEP 3 END-->

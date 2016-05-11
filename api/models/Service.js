@@ -28,10 +28,10 @@ module.exports = {
       model: "project"
     }
   },
+
   beforeCreate: [
     function checkToken(service, next) {
       sails.log.info('Service.beforeCreate.checkToken', service);
-      var accName;
       switch (service.platform) {
         case 'github':
           GithubService.validateToken(service.token, next);
@@ -39,5 +39,7 @@ module.exports = {
       }
     }
   ]
+
+
 };
 

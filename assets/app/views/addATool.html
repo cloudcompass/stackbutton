@@ -1,46 +1,25 @@
-<!-- Card view -->
-<!-- This card uses a count variable to hide or display divs as needed.
-     You can find the variable and inc/dec functions in the controller. -->
 <h1>Current page index: {{vm.currentPage}}/{{vm.pageCount}}</h1>
 <md-card>
   <md-card-content>
-    <!-- Using a numeric system to hide and show pages of this setup,
-         0 = Main page
-         1 = Github setup
-         2 = other. //Bitbucket setup is not implemented
-    -->
-
     <!-- Page 0 - Tool Choice -->
     <div ng-show="vm.currentPage == 0">
       Choose a service:
-      <h4>Source Control</h4>
-      <!-- Github Button -->
-      <md-button class="md-raised"
-                 ng-click="vm.select('github')"
-                 layout-align="center center">
-        <h2>Github</h2>
-        <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
-             style="max-height: 100px; max-width: 100px;"/>
-      </md-button>
 
-      <!-- BitBucket Button -->
-      <md-button ng-disabled="true"
-                 class="md-raised"
-                 ng-click="vm.select('bitbucket')"
-                 layout-align="center center">
-        <h2>Bitbucket</h2>
-        <img src="https://worldvectorlogo.com/logos/bitbucket.svg" style="max-height: 100px; max-width: 100px;"/>
-      </md-button>
+      <h4 ng-repeat-start="module in vm.modules">{{module.display}}</h4>
+      <div layout="row" layout-align="center start" layout-wrap>
+        <md-button layout="column" ng-repeat="tool in vm.tools[module.name]" ng-click="vm.selectTool(tool)">
+          {{tool.name}}
+          <img src={{tool.image}} style="max-height: 50px; max-width: 50px;">
+        </md-button>
+      </div>
 
-      <h4>Other DevOps Tools</h4>
+      <md-divider ng-repeat-end=""></md-divider>
+
     </div>
 
-    <!--steps injection-->
+    <!--Further pages injected here-->
     <div ng-include="vm.templatePath"></div>
 
   </md-card-content>
-
-  <md-divider ng-show="vm.currentPage > 0"></md-divider>
-  <!-- Back and forward buttons -->
 
 </md-card>

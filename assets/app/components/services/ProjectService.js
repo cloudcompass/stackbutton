@@ -22,6 +22,10 @@ function ProjectService($resource) {
   projService.service = $resource('/service/:serviceid', {serviceid: '@id'}, {
     update: {
       method: 'PUT'
+    },
+    getAccount: {
+      method: 'POST',
+      url: '/service/getAccount'
     }
   });
 
@@ -36,6 +40,7 @@ function ProjectService($resource) {
       method: 'PUT'
     }
   });
+
   /*
    Usage:
 
@@ -44,30 +49,6 @@ function ProjectService($resource) {
    ProjectService.delete({projid: <5555>);
 
    */
-
-  // var projService = {};
-  // projService.addProject = addProject;
-  //
-  // function addProject(name, description, ownerid) {
-  //   var data = {
-  //     name: name,
-  //     description: description,
-  //     ownerId: ownerid
-  //   };
-  //   //return $http.post('/project', data, null).then(addSuccess, addError);
-  //   var newProj = $resource('/project');
-  //
-  // }
-  //
-  // function addSuccess(response) {
-  //   console.log("Success ", response.status, response);
-  //   return response || $q.when(response);
-  // }
-  //
-  // function addError(response) {
-  //   console.log("Error ", response.status, response);
-  //   return $q.reject(response);
-  // }
 
   return projService;
 }

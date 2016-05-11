@@ -7,11 +7,12 @@ sbapp.controller('ApplicationController', [
   'AUTH_EVENTS',
   '$mdDialog',
   'AuthService',
+  'SessionService',
   '$rootScope',
   ApplicationController
 ]);
 
-function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialog, AuthService, $rootScope) {
+function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialog, AuthService, SessionService, $rootScope) {
   /* CALLABLE MEMBERS */
 
   $scope.userRoles = USER_ROLES;
@@ -48,6 +49,7 @@ function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENT
   function restoreSession(callback) {
     $resource('/user/me').get(function (user) {
       if (user.id) {
+        SessionService.create(null, user.username, 'admin');
         $scope.setCurrentUser(user);
       }
       if (typeof callback !== 'undefined') {

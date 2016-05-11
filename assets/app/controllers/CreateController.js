@@ -28,7 +28,8 @@ function CreateController($state, $scope, ProjectService) {
         function (project, headers) {
           //success callback
           console.log('addProject() success:', project);
-          $state.go('home.projects');
+          $scope.setCurrentProject(project.id);
+          $state.go('home.addtool');
         },
         function (resp) {
           //error callback
