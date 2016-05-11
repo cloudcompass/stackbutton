@@ -75,6 +75,48 @@ body {
   right: 2px;
   background-color: $warning-color;
 }
+// dash-widget
+.dash-widget {
+  background-color: white;
+
+  &-topbar {
+    background-color: #0b97c4;
+  }
+
+  &-topbar-text {
+    color: white;
+  }
+
+  &-text {
+    color: dimgray;
+  }
+
+  &-font {
+    color: #0b97c4;
+    font-size: medium;
+  }
+
+  &-priority-color-normal {
+    color: #00A000;
+    max-width: 15px;
+  }
+
+  &-priority-color-important {
+    color: darkgoldenrod;
+    max-width: 15px;
+  }
+
+  &-priority-color-critial {
+    color: red;
+    max-width: 15px;
+  }
+
+  &-priority-color-other {
+    color: blueviolet;
+    max-width: 15px;
+  }
+
+}
 
 // panel-widget
 .panel-widget {

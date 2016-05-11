@@ -156,6 +156,16 @@ sbapp
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
+        .state('home.widgettest', {
+          url: '/widgettest',
+          templateUrl: 'app/views/widgetstest.html',
+          controller: '',
+          controllerAs: 'vm',
+          data: {
+            title: 'TEST',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
+        })
       ;
 
       // Redirect unknown URLs
