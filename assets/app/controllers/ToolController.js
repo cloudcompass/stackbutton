@@ -11,14 +11,23 @@ function ToolController($scope, ToolService, ProjectService) {
   /* CALLABLE MEMBERS */
 
   vm.addService = addService;
+  vm.addModule = addModule;
   vm.tools = {};
+  vm.currentModule = {
+    type: null,
+    config: {},
+    service: null
+  };
   vm.modules = ToolService.modules;
   vm.repos = [];
   vm.back = back;
   vm.next = next;
   vm.selectTool = selectTool;
+  vm.configureModule = configureModule;
   vm.templatePath = '';
   vm.loadRepos = loadRepos;
+  vm.selectService = selectService;
+  vm.loadServices = loadServices;
   vm.currentServiceId = null;
   vm.currentPlatform = null;
 
@@ -47,23 +56,43 @@ function ToolController($scope, ToolService, ProjectService) {
 
   /* FUNCTIONS */
 
-  function back(){
+  function back() {
     vm.currentPage--;
   }
 
-  function next(){
+  function next() {
     vm.currentPage++;
   }
 
-  function selectTool(tool) {
+  function configureModule(key, value) {
+    vm.currentModule.config[key] = value.full_name;
+    console.log(vm.currentModule);
+  }
+
+  function selectTool(moduleType, tool) {
     vm.templatePath = 'app/views/setup/' + tool.name + '.html';
     vm.currentPlatform = tool.name;
+    vm.currentModule.type = moduleType;
     vm.currentPage = 1;
-    // TODO move owner filter on service objects to backend row-level permissions
-    ProjectService.service.query({project: $scope.currentProject, platform: tool.name, owner: $scope.currentUser.id},
+    loadServices();
+  }
+
+  function selectService(service) {
+    vm.currentServiceId = service.id;
+    vm.currentModule.service = service.id;
+    vm.loadRepos(service.id);
+  }
+
+  function loadServices() {
+    ProjectService.service.query({
+        project: $scope.currentProject,
+        platform: vm.currentPlatform,
+        owner: $scope.currentUser.id
+      },
       function (services) {
         vm.services = services;
-      });
+      }
+    );
   }
 
   function addService(platform, token) {
@@ -80,9 +109,7 @@ function ToolController($scope, ToolService, ProjectService) {
         function (service) {
           //TODO modify this to not display tokens locally
           console.log('addService() success:', service);
-          vm.currentServiceId = service.id;
-          vm.loadRepos(service.id);
-          vm.next();
+          loadServices();
         },
         //error callback
         function (err) {
@@ -94,18 +121,65 @@ function ToolController($scope, ToolService, ProjectService) {
     }
   }
 
+  function addModule(module) {
+    if ($scope.currentProject == null) {
+      console.log('addModule(): null project. Aborting.');
+    } else {
+      var newModule = ProjectService.module.save(module,
+        //success callback
+        function (module) {
+          console.log('addModule() success:', module);
+          vm.currentPage = 0;
+
+          /////
+          // TODO to be removed. This is to add a first widget to the default dashboard"
+          var dashRes = ProjectService.dashboard.query({
+              project: $scope.currentProject.id,
+              name: 'default',
+              populate: 'widgets'
+            },
+            function (dashboard) {
+              console.log('found dashboard', dashRes);
+              dashRes[0].widgets.push(
+                {
+                  template: 'commits',
+                  modules: [module.id]
+                }
+              );
+              dashRes[0].$save().then(function (res) {
+                  console.log('saved widget:', res);
+                },
+                function (err) {
+                  console.log('could not save widget:', err);
+                });
+            },
+            function (err) {
+              console.log('error:', err);
+            }
+          );
+          /////
+
+        },
+        //error callback
+        function (err) {
+          console.log('addModule() error:', err);
+          //TODO add error handling feedback
+        }
+      );
+    }
+  }
+
   function loadRepos(serviceId) {
     //TODO something something
-    console.log('Not yet implemented. Go get repos for service', serviceId);
-    vm.repos = [
-      {
-        id: 1,
-        full_name: 'Repo1'
+    console.log('hello?');
+    ToolService.loadServiceRepos.query({service: serviceId},
+      function (repos) {
+        console.log("retrieved repos:", repos.length);
+        vm.repos = repos;
       },
-      {
-        id: 2,
-        full_name: 'SomeOtherRepo'
+      function (err) {
+        console.log("error:", err);
       }
-    ]
+    );
   }
 }

@@ -1,29 +1,31 @@
 <!--STEP 1-->
-<div ng-init="vm.pageCount=3" ng-show="vm.currentPage == 1" layout="column" layout-align="start center">
+<div ng-init="vm.pageCount=2" ng-show="vm.currentPage == 1" layout="column" layout-align="start center">
 
   <!-- Show existing services -->
+
+  <md-button ng-repeat="service in vm.services" ng-click="vm.selectService(service)">
+    {{service.token}}
+  </md-button>
+
   <div layout="row">
-    <md-button ng-repeat="service in vm.services" ng-click="vm.currentServiceId=service.id">
-      {{service.token}}
+    <!--Input for new token-->
+    <md-input-container>
+      <label>Personal token</label>
+      <input ng-Model="token" type="text">
+    </md-input-container>
+    <md-button class="md-fab" ng-click="vm.addService(vm.currentPlatform, token)"><i class="material-icons">add</i>
     </md-button>
   </div>
-
-  <!--Input for new token-->
-  <md-input-container>
-    <label>Github Auth-Token</label>
-    <input ng-Model="token" type="text">
-  </md-input-container>
 
   <!--Buttons-->
   <md-card-actions layout="row" layout-align="end center">
     <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()">Back</md-button>
     <md-button ng-show="vm.currentPage < vm.pageCount" class="md-raised"
-               ng-click="vm.addService(vm.currentPlatform, token)">Next
+               ng-click="vm.next()" ng-disabled="vm.currentServiceId==null">Next
     </md-button>
     <md-button ng-show="vm.currentPage == vm.pageCount" class="md-raised">Finish</md-button>
   </md-card-actions>
   <!--Buttons end-->
-
 </div>
 <!--STEP 1 END-->
 
@@ -31,15 +33,22 @@
 <div ng-show="vm.currentPage == 2" layout="column" layout-align="start center">
 
   Choose a repository:
-  <md-button ng-repeat="repo in vm.repos">{{repo.full_name}}</md-button>
+  <md-button ng-repeat="repo in vm.repos" ng-click="vm.configureModule('repoFullName', repo)">{{repo.full_name}}
+  </md-button>
+
+  <!--Buttons-->
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()">Back</md-button>
+    <md-button ng-show="vm.currentPage < vm.pageCount" class="md-raised"
+               ng-click="vm.next()" ng-disabled="vm.currentModule.config.repoFullName==null">Next
+    </md-button>
+    <md-button ng-show="vm.currentPage == vm.pageCount" ng-click="vm.addModule(vm.currentModule)" class="md-raised">
+      Finish
+    </md-button>
+  </md-card-actions>
+  <!--Buttons end-->
 
 </div>
 <!--STEP 2 END-->
 
-<!--STEP 3-->
-<div ng-show="vm.currentPage == 3" layout="row" layout-align="space-around center">
 
-  third page
-
-</div>
-<!--STEP 3 END-->

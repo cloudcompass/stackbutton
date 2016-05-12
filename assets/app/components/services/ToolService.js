@@ -1,13 +1,14 @@
 /**
  * Created by tiffa on 2016-05-10.
  */
-sbapp.service('ToolService', ['$q', ToolService]);
+sbapp.service('ToolService', ['$resource', '$q', ToolService]);
 
-function ToolService($q) {
+function ToolService($resource, $q) {
   /* CALLABLE MEMBERS */
   var ToolService = {};
 
   ToolService.loadTools = loadTools;
+  ToolService.loadServiceRepos = $resource('/service/getRepos');
   ToolService.modules = [
     {name: 'repo', display: 'Repository'},
     {name: 'issues', display: 'Issue Tracking'},

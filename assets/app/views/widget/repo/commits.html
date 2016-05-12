@@ -1,13 +1,15 @@
-<div layout="row" layout-align="space-between center" ng-controller="RepositoryController as vm">
-  <i class="material-icons md-24">chevron_left</i>
-  <div layout="column" layout-align="start center" ng-repeat="commit in vm.commits">
-    <span class="md-title">{{commit.description}}</span>
+<div layout="row" layout-align="space-between center" ng-controller="RepositoryController as vm"
+     ng-init="vm.currentCommit=0">
+  <i class="material-icons md-24" ng-click="vm.currentCommit = vm.currentCommit-1">chevron_left</i>
+  <div layout="column" layout-align="start center" ng-repeat="commit in vm.commits" ng-hide="$index!=vm.currentCommit">
     <div layout="column" layout-align="center start">
-      <span>Date: {{commit.date}}</span>
-      <span>Author: {{commit.author}}</span>
-      <span>Files modified: {{commit.files}}</span>
+      <span style="word-break: break-all;"><i>{{commit.commit.message}}</i></span>
+      <br>
+      <span><b>Date:</b> {{commit.commit.author.date}}</span>
+      <span><b>Author:</b> {{commit.author.login}}</span>
+      <!--<span>Files modified: coming soon</span>-->
       <br>
     </div>
   </div>
-  <i class="material-icons md-24">chevron_right</i>
+  <i class="material-icons md-24" ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right</i>
 </div>
