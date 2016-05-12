@@ -1,0 +1,85 @@
+<div ng-app="" ng-init="commwid=[
+  {
+   text :'Issues',
+   pic :'issues-widget-detail',
+   description : 'The isssues widget shows open and closed notes on your repository.'
+  }
+  ]">
+</div>
+<div ng-app="" ng-init="repowid=[
+  {
+   text :'Commits',
+   pic :'commits-widget-detail',
+   description : 'The Commits widget shows the lastest commit that was push to your repository.'
+  }
+  ]">
+</div>
+<div ng-app="" ng-init="infowid=[
+  {
+   text :'Contributors',
+   pic :'',
+   description : ''
+  }
+  ]">
+</div>
+
+
+<h2>Select Widget: </h2>
+<section class="md-whiteframe-z2 panel-widget">
+  <!-- Widget dropdown -->
+  <div layout="column" layout-align="start stretch">
+    <md-divider></md-divider>
+    <md-button  layout="row" layout-align="space-between center" ng-click="showcomm=!showcomm">
+      <span class="dash-widget-font"> Communitcation</span>
+      <i class="material-icons md-24" ng-show="!showcomm" >expand_more</i>
+      <i class="material-icons md-24" ng-show="showcomm" >expand_less</i>
+    </md-button>
+    <md-divider></md-divider>
+  </div>
+  <div layout="row" layout-align="space-around center" ng-show="showcomm" ng-repeat="tool in commwid" layout-padding>
+    <div layout="column" layout-align="space-between start" layout-padding>
+      <md-checkbox><h4>{{tool.text}}</h4></md-checkbox>
+      <img class="{{tool.pic}}">
+    </div>
+    <div layout="column" layout-align="space-between start" layout-padding>
+      <h4>Description:</h4>
+      <span>{{tool.description}}</span>
+    </div>
+  </div>
+
+  <!-- Widget dropdown -->
+  <div layout="column" layout-align="start stretch">
+    <md-divider></md-divider>
+    <md-button  layout="row" layout-align="space-between center" ng-click="showrep=!showrep">
+      <span class="dash-widget-font"> Repository</span>
+      <i class="material-icons md-24" ng-show="!showrep" >expand_more</i>
+      <i class="material-icons md-24" ng-show="showrep" >expand_less</i>
+    </md-button>
+    <md-divider></md-divider>
+  </div>
+  <div layout="row" layout-align="space-around center" ng-show="showrep" ng-repeat="tool in repowid" layout-padding>
+    <div layout="column" layout-align="space-between start" layout-padding>
+      <md-checkbox><h4>{{tool.text}}</h4></md-checkbox>
+      <img class="{{tool.pic}}">
+    </div>
+    <div layout="column" layout-align="space-between start" layout-padding>
+      <h4>Description:</h4>
+      <span>{{tool.description}}</span>
+    </div>
+  </div>
+
+
+  <div layout="column" layout-align="start stretch">
+    <md-divider></md-divider>
+    <md-button  layout="row" layout-align="space-between center" ng-click="showinfo=!showinfo">
+      <span class="dash-widget-font"> Information</span>
+      <i class="material-icons md-24" ng-show="!showinfo" >expand_more</i>
+      <i class="material-icons md-24" ng-show="showinfo" >expand_less</i>
+    </md-button>
+    <md-divider></md-divider>
+  </div>
+</section>
+
+<div layout="row" layout-align="end end">
+  <md-button class="md-raised md-primary">Save</md-button>
+</div>
