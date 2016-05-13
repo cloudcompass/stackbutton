@@ -13,18 +13,10 @@
     <panel-widget flex widget="widget"></panel-widget>
   </div>
 </div>
-<div layout="row" layout-align="center start" >
-  <md-menu>
-    <md-button class="md-raised md-primary" ui-sref="home.addtool">
-      <span class="material-icons md-48">add</span>
-      <span>Click me to add a Widget</span>
+<div layout="column" layout-align="end end" >
+  <md-button class="md-fab" ui-sref="home.addwidget">
+      <i class="material-icons md-24">add</i>
     </md-button>
-    <md-menu-content>
-      <md-menu-item><md-checkbox ng-click="doSomething()">Monitor</md-checkbox></md-menu-item>
-      <md-menu-item><md-checkbox ng-click="doSomething()">Tasks</md-checkbox></md-menu-item>
-      <md-menu-item><md-checkbox ng-click="doSomething()">Server</md-checkbox></md-menu-item>
-    </md-menu-content>
-  </md-menu>
 </div>
 
 

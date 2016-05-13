@@ -167,6 +167,16 @@ sbapp
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
+        .state('home.addwidget', {
+          url: '/addwidget',
+          templateUrl: 'app/views/addAWidget.html',
+          controller: '',
+          controllerAs: 'vm',
+          data: {
+            title: 'Add a Widget',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
+        })
       ;
 
       // Redirect unknown URLs

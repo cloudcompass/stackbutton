@@ -1,10 +1,13 @@
 sbapp.controller('RepositoryController', [
+  '$scope',
   'RepositoryService',
   RepositoryController
 ]);
 
-function RepositoryController(RepositoryService) {
+function RepositoryController($scope, RepositoryService) {
   var vm = this;
+
+  vm.loadCommits = loadCommits;
   vm.commits = [];
 
   vm.repository = [{repository: 'stackbutton', type: 'private'}];
@@ -49,9 +52,24 @@ function RepositoryController(RepositoryService) {
     }
   ];
 
-  RepositoryService
-    .loadAllItems()
-    .then(function (commits) {
-      vm.commits = [].concat(commits);
-    });
+  console.log($scope.$parent.$parent.widget);
+  loadCommits($scope.$parent.$parent.widget.id);
+
+  function loadCommits(widgetId) {
+    RepositoryService.getCommits.query({widget: widgetId},
+      function (commits) {
+        console.log("retrieved commits:", commits);
+        vm.commits = commits;
+      },
+      function (err) {
+        console.log("error:", err);
+      }
+    );
+  }
+
+  // RepositoryService
+  //   .loadAllItems()
+  //   .then(function (commits) {
+  //     vm.commits = [].concat(commits);
+  //   });
 }

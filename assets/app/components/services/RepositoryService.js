@@ -4,6 +4,7 @@ function RepositoryService($q, $resource) {
   var service = {};
 
   service.loadAllItems = loadAllItems;
+  service.getCommits = $resource('/service/getCommits');
 
   service.commits = [
     {
@@ -17,7 +18,7 @@ function RepositoryService($q, $resource) {
   return service;
 
   function loadAllItems() {
-    return $q.when(commits);
+    return $q.when(service.commits);
   }
 
 

@@ -7,7 +7,8 @@
 
       <h4 ng-repeat-start="module in vm.modules">{{module.display}}</h4>
       <div layout="row" layout-align="center start" layout-wrap>
-        <md-button layout="column" ng-repeat="tool in vm.tools[module.name]" ng-click="vm.selectTool(tool)">
+        <md-button layout="column" ng-repeat="tool in vm.tools[module.name]"
+                   ng-click="vm.selectTool(module.name, tool)">
           {{tool.name}}
           <img src={{tool.image}} style="max-height: 50px; max-width: 50px;">
         </md-button>

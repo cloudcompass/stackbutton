@@ -3,7 +3,7 @@ sbapp.directive('panelWidget', function () {
     restrict: 'E',
     scope: {widget: '='},
     template: '' +
-    '<md-card layout-margin class="md-whiteframe-z1 panel-widget" style="min-width: 300px; min-height: 150px">' +
+    '<md-card layout-margin class="md-whiteframe-z1 panel-widget" style="width: 300px; min-height: 150px">' +
     '    <div class="panel-widget-tittle md-title" layout="row" layout-align="start center">' +
     '      {{widget.template}}' +
     '    </div>' +
@@ -14,6 +14,7 @@ sbapp.directive('panelWidget', function () {
       var vm = this;
       // TODO extend this to allow for other directories
       vm.templateUrl = 'app/views/widget/repo/' + $scope.widget.template + '.html';
+      console.log('file:', vm.templateUrl);
     },
     controllerAs: 'vm'
   }
