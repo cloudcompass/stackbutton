@@ -1,0 +1,10 @@
+stackbutton:
+  image: swcurran/noderubysails
+  ports:
+    - "8080:1337"
+  links:
+    - mongo:mongo
+mongo:
+  image: mongo
+  ports:
+    - "27017"
