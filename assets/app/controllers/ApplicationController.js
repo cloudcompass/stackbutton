@@ -1,25 +1,67 @@
 /* Top-level controller -- all other scopes inherit from this one */
 sbapp.controller('ApplicationController', [
+  '$resource',
   '$state',
   '$scope',
   'USER_ROLES',
   'AUTH_EVENTS',
   '$mdDialog',
+  'AuthService',
+  'SessionService',
+  '$rootScope',
   ApplicationController
 ]);
 
-function ApplicationController($state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialog) {
-  $scope.currentUser = null;
-  $scope.userRoles = USER_ROLES;
+function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialog, AuthService, SessionService, $rootScope) {
+  /* CALLABLE MEMBERS */
 
-  $scope.setCurrentUser = function (user) {
+  $scope.userRoles = USER_ROLES;
+  $scope.currentUser = null;
+  $scope.currentProject = null;
+  $scope.currentDashboard = null;
+
+  $scope.setCurrentUser = setCurrentUser;
+  $scope.setCurrentProject = setCurrentProject;
+  $scope.setCurrentDashboard = setCurrentDashboard;
+
+  /* FUNCTIONS */
+
+  function setCurrentUser(user) {
     $scope.currentUser = user;
-  };
+    if (user !== null) {
+      console.log('user set:', user);
+    }
+  }
+
+  function setCurrentProject(project) {
+    $scope.currentProject = project;
+    console.log('project set:', project);
+
+  }
+
+  function setCurrentDashboard(dashboard) {
+    $scope.currentDashboard = dashboard;
+    console.log('dashboard set:', dashboard);
+
+  }
+
+  // Restore session from /user/me endpoint with optional callback function
+  function restoreSession(callback) {
+    $resource('/user/me').get(function (user) {
+      if (user.id) {
+        SessionService.create(null, user.username, 'admin');
+        $scope.setCurrentUser(user);
+      }
+      if (typeof callback !== 'undefined') {
+        callback();
+      }
+    });
+  }
 
   function authDialog(template) {
     console.log('authDialog(): dialog triggered');
     $mdDialog.show({
-      escapeToClose: false, // set to false in production
+      escapeToClose: false,
       scope: $scope,
       preserveScope: true,
       template: '<md-dialog aria-label="Popup">' +
@@ -52,9 +94,9 @@ function ApplicationController($state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialo
     }).then(function () {
       console.log('authDialog(): dialog resolved');
     });
-  };
+  }
 
-  // AUTH EVENT LISTENERS
+  /* ACTIONS */
 
   $scope.$on(AUTH_EVENTS.notAuthenticated, function (event) {
     console.log('event fired: ', event.name);
@@ -64,10 +106,35 @@ function ApplicationController($state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialo
     }
   });
 
-  // TODO
+  // TODO 403 errors
   // $scope.$on(AUTH_EVENTS.notAuthorized, function(event, message) {
   //   console.log('event: ', event.name);
   //   authDialog('???');
   // });
+
+  // Broadcast auth events on every state change
+  $scope.$on('$stateChangeStart', function (event, next) {
+    var authorizedRoles = next.data.authorizedRoles;
+
+    function check() {
+      if (!AuthService.isAuthorized(authorizedRoles)) {
+        if (AuthService.isAuthenticated()) {
+          console.log("unauthorized"); // user is not allowed
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+        } else {
+          console.log("unauthenticated"); // user is not logged in
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+        }
+      }
+    }
+
+    // restore session if needed before checking access
+    if (!AuthService.isAuthenticated()) {
+      restoreSession(check);
+    } else {
+      check();
+    }
+  });
+
 
 }

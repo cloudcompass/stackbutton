@@ -2,12 +2,12 @@
   <p class="md-headline"> Create Project </p>
   <!-- Create project form -->
   <md-card-content>
-    <form name="userForm" layout="row" layout-align="space-around center">
+    <form name="projectForm" layout="row" layout-align="space-around center">
       <!--Project name container and error message -->
       <md-input-container>
         <label>Project Name</label>
-        <input name="projectName" type="text" ng-model="projectName">
-        <div ng-messages="userForm.lastName.$error" ng-show="userForm.lastName.$dirty">
+        <input name="projectName" type="text" ng-model="vm.projectName">
+        <div ng-messages="projectForm.projectName.$error" required ng-show="projectForm.projectName.$dirty">
           <div ng-message="required">This is required!</div>
         </div>
       </md-input-container>
@@ -16,8 +16,11 @@
       <md-card-content>
         <md-input-container>
           <label>Description</label>
-        <textarea name="projectDescription" type="text" ng-model="projectDescription" required md-maxlength="50"></textarea>
-          <div ng-message="required">This is required!</div>
+          <textarea name="projectDescription" type="text" ng-model="vm.projectDescription" required
+                    md-maxlength="50"></textarea>
+          <div ng-messages="projectForm.projectDescription.$error" ng-show="projectForm.projectDescription.$dirty">
+            <div ng-message="required">This is required!</div>
+          </div>
         </md-input-container>
       </md-card-content>
     </form>

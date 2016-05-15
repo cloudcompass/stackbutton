@@ -4,27 +4,36 @@ sbapp.controller('MainController', [
   '$mdBottomSheet',
   '$q',
   '$state',
+  '$scope',
   '$mdToast',
+  'AuthService',
   'SessionService',
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $mdToast, SessionService) {
+function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $scope, $mdToast, AuthService, SessionService) {
   var vm = this;
-  
+
+  /* CALLABLE MEMBERS */
+
   vm.menuItems = [];
   vm.selectItem = selectItem;
   vm.toggleItemsList = toggleItemsList;
-  vm.title = $state.current.data.title;
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
   vm.logOut = logOut;
-  
+
+
+  /* ACTIONS */
+
   navService
     .loadAllItems()
     .then(function (menuItems) {
       vm.menuItems = [].concat(menuItems);
     });
+
+
+  /* FUNCTIONS */
 
   function toggleRightSidebar() {
     $mdSidenav('right').toggle();
@@ -53,9 +62,9 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $mdT
   }
 
   function logOut() {
+    AuthService.logout();
     SessionService.destroy();
-    $state.reload();
-    console.log("MainController.logout(): destroyed session");
+    $scope.setCurrentUser(null);
   }
 
 } // MainController end

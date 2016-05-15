@@ -8,7 +8,7 @@ $warning-color: #FFFFFA;
 // VARIABLES
 $left-sidenav-width: 200px;
 $widget-height: 175px;
-$card-width: 275px;
+$card-width: 300px;
 $font-weight-bold: 600;
 $font-size-large: 22px;
 
@@ -74,6 +74,48 @@ body {
   top: 2px;
   right: 2px;
   background-color: $warning-color;
+}
+// dash-widget
+.dash-widget {
+  background-color: white;
+
+  &-topbar {
+    background-color: #0b97c4;
+  }
+
+  &-topbar-text {
+    color: white;
+  }
+
+  &-text {
+    color: dimgray;
+  }
+
+  &-font {
+    color: #0b97c4;
+    font-size: medium;
+  }
+
+  &-priority-color-normal {
+    color: #00A000;
+    max-width: 15px;
+  }
+
+  &-priority-color-important {
+    color: darkgoldenrod;
+    max-width: 15px;
+  }
+
+  &-priority-color-critial {
+    color: red;
+    max-width: 15px;
+  }
+
+  &-priority-color-other {
+    color: blueviolet;
+    max-width: 15px;
+  }
+
 }
 
 // panel-widget
@@ -208,6 +250,14 @@ md-backdrop.md-sidenav-backdrop {
 
 .sb-logo-detail {
   content: url("../images/stacky500p.png");
+}
+
+.issues-widget-detail {
+  content: url("../images/Issues_widget.PNG");
+}
+
+.commits-widget-detail {
+  content: url("../images/Commits_widget.PNG");
 }
 
 .sb-18px {

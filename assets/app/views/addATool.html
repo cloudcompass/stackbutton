@@ -1,28 +1,26 @@
-<!-- Card view -->
-<!-- This card uses a count variable to hide or display divs as needed.
-     You can find the variable and inc/dec functions in the controller. -->
+<h1>Current page index: {{vm.currentPage}}/{{vm.pageCount}}</h1>
 <md-card>
   <md-card-content>
-    <!-- Page 1 - Basic information -->
-    <div ng-show="vm.count < 1">
-      This is the first page of content {{vm.count}}
+    <!-- Page 0 - Tool Choice -->
+    <div ng-show="vm.currentPage == 0">
+      Choose a service:
+
+      <h4 ng-repeat-start="module in vm.modules">{{module.display}}</h4>
+      <div layout="row" layout-align="center start" layout-wrap>
+        <md-button layout="column" ng-repeat="tool in vm.tools[module.name]"
+                   ng-click="vm.selectTool(module.name, tool)">
+          {{tool.name}}
+          <img src={{tool.image}} style="max-height: 50px; max-width: 50px;">
+        </md-button>
+      </div>
+
+      <md-divider ng-repeat-end=""></md-divider>
+
     </div>
-    <!-- Page 2 - Git account link -->
-    <div ng-show="vm.count >= 1">
-      This is the second page of content {{vm.count}}
-    </div>
+
+    <!--Further pages injected here-->
+    <div ng-include="vm.templatePath"></div>
+
   </md-card-content>
 
-  <md-divider></md-divider>
-  <!-- Back and forward buttons -->
-  <md-card-actions layout="row" layout-align="end center">
-    <!--
-      - Hide the back button on the first page
-      - Hide the next button on the second page
-      - Show the finish button on the second page
-    -->
-    <md-button ng-show="vm.count >= 1" class="md-raised" ng-click="vm.decCount()" >Back</md-button>
-    <md-button ng-hide="vm.count >= 1" class="md-raised" ng-click="vm.incCount()" >Next</md-button>
-    <md-button ng-show="vm.count >= 1" class="md-raised" ui-sref="home.dashboard">Finish</md-button>
-  </md-card-actions>
 </md-card>

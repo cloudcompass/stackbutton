@@ -1,0 +1,54 @@
+<!--STEP 1-->
+<div ng-init="vm.pageCount=2" ng-show="vm.currentPage == 1" layout="column" layout-align="start center">
+
+  <!-- Show existing services -->
+
+  <md-button ng-repeat="service in vm.services" ng-click="vm.selectService(service)">
+    {{service.token}}
+  </md-button>
+
+  <div layout="row">
+    <!--Input for new token-->
+    <md-input-container>
+      <label>Personal token</label>
+      <input ng-Model="token" type="text">
+    </md-input-container>
+    <md-button class="md-fab" ng-click="vm.addService(vm.currentPlatform, token)"><i class="material-icons">add</i>
+    </md-button>
+  </div>
+
+  <!--Buttons-->
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()">Back</md-button>
+    <md-button ng-show="vm.currentPage < vm.pageCount" class="md-raised"
+               ng-click="vm.next()" ng-disabled="vm.currentServiceId==null">Next
+    </md-button>
+    <md-button ng-show="vm.currentPage == vm.pageCount" class="md-raised">Finish</md-button>
+  </md-card-actions>
+  <!--Buttons end-->
+</div>
+<!--STEP 1 END-->
+
+<!--STEP 2-->
+<div ng-show="vm.currentPage == 2" layout="column" layout-align="start center">
+
+  Choose a repository:
+  <md-button ng-repeat="repo in vm.repos" ng-click="vm.configureModule('repoFullName', repo)">{{repo.full_name}}
+  </md-button>
+
+  <!--Buttons-->
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()">Back</md-button>
+    <md-button ng-show="vm.currentPage < vm.pageCount" class="md-raised"
+               ng-click="vm.next()" ng-disabled="vm.currentModule.config.repoFullName==null">Next
+    </md-button>
+    <md-button ng-show="vm.currentPage == vm.pageCount" ng-click="vm.addModule(vm.currentModule)" class="md-raised">
+      Finish
+    </md-button>
+  </md-card-actions>
+  <!--Buttons end-->
+
+</div>
+<!--STEP 2 END-->
+
+

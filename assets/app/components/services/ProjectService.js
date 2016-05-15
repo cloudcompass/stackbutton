@@ -1,36 +1,54 @@
 sbapp.factory('ProjectService', [
-  '$http',
-  '$q',
+  '$resource',
   ProjectService]
 );
 
-function ProjectService($http, $q) {
+function ProjectService($resource) {
+
   var projService = {};
-  projService.addProject = addProject;
 
-  function addProject(name, description, startDate, endDate, ownerid) {
-    var data = {
-      name: name,
-      description: description,
-      ownerId: ownerid,
-      contributers: [],
-      teams: [],
-      plugins: [],
-      startDate: startDate,
-      endDate: endDate
-    };
-    return $http.post('/project', data, null).then(addSuccess, addError);
-  }
+  projService.project = $resource('/project/:projid', {projid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
 
-  function addSuccess(response) {
-    console.log("Success ", response.status, response);
-    return response || $q.when(response);
-  }
+  projService.dashboard = $resource('/dashboard/:dashboardid', {dashboardid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
 
-  function addError(response) {
-    console.log("Error ", response.status, response);
-    return $q.reject(response);
-  }
+  projService.service = $resource('/service/:serviceid', {serviceid: '@id'}, {
+    update: {
+      method: 'PUT'
+    },
+    getAccount: {
+      method: 'POST',
+      url: '/service/getAccount'
+    }
+  });
+
+  projService.widget = $resource('/widget/:widgetid', {projid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
+
+  projService.module = $resource('/module/:moduleid', {moduleid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
+
+  /*
+   Usage:
+
+   {} = ProjectService.get({projid: <5555>});
+   [] = ProjectService.query({ownerId: <99>}); -- can use different/additional attributes
+   ProjectService.delete({projid: <5555>);
+
+   */
 
   return projService;
 }
