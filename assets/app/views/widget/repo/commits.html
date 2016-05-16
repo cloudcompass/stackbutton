@@ -1,21 +1,29 @@
-<!-- currently not working, to view working model go to /widgettest -->
-<section class="md-whiteframe-z1 panel-widget" style="max-width: 400px; min-height: 200px; ">
-  <div class="md-title color-inherit dash-widget-topbar" layout="row" layout-align="space-between start">
-    <span class="dash-widget-topbar-text" layout-padding>Issues</span>
-  </div>
-  <div layout="row" layout-align="space-between center" ng-controller="RepositoryController as vm"
-       ng-init="vm.currentCommit=0">
-    <i class="material-icons md-24" ng-click="vm.currentCommit = vm.currentCommit-1">chevron_left</i>
-    <div layout="column" layout-align="start center" ng-repeat="commit in vm.commits" ng-hide="$index!=vm.currentCommit">
-      <div layout="column" layout-align="center start">
-        <span class="dash-widget-font" style="word-break: break-all;"><i>{{commit.commit.message}}</i></span>
+<div flex="grow" layout="column" layout-align="space-between stretch" ng-controller="RepositoryController as vm"
+     ng-init="vm.currentCommit=0">
+  <div ng-repeat="commit in vm.commits"
+       ng-if="$index==vm.currentCommit">
+    <!-- Commit message -->
+    <pre layout-padding class="dash-widget-font"
+         style="white-space:pre-wrap;word-break:break-word;min-height:3em; margin:0">{{commit.commit.message}}</pre>
+
+    <!-- Author section -->
+    <div class="dash-widget-text" layout layout-padding>
+      <img style="height: 3em; width: 3em;" src={{commit.author.avatar_url}}>
+      <span>
+        <b>Date:</b> {{commit.commit.author.date}}
         <br>
-        <span class="dash-widget-text"><b>Date:</b> {{commit.commit.author.date}}</span>
-        <span class="dash-widget-text"><b>Author:</b> {{commit.author.login}}</span>
-        <!--<span>Files modified: coming soon</span>-->
-        <br>
-      </div>
+        <b>Author:</b> {{commit.author.login}}
+      </span>
+      <!--<span>Files modified: coming soon</span>-->
     </div>
-    <i class="material-icons md-24" ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right</i>
   </div>
-</section>
+
+  <!-- Arrow Buttons -->
+  <div layout layout-align="space-between end">
+    <md-button class="material-icons md-24" ng-click="vm.currentCommit = vm.currentCommit-1">chevron_left
+    </md-button>
+    <md-button class="material-icons md-24" ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right
+    </md-button>
+  </div>
+
+</div>
