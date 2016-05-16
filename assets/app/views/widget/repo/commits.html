@@ -1,15 +1,21 @@
-<div layout="row" layout-align="space-between center" ng-controller="RepositoryController as vm"
-     ng-init="vm.currentCommit=0">
-  <i class="material-icons md-24" ng-click="vm.currentCommit = vm.currentCommit-1">chevron_left</i>
-  <div layout="column" layout-align="start center" ng-repeat="commit in vm.commits" ng-hide="$index!=vm.currentCommit">
-    <div layout="column" layout-align="center start">
-      <span style="word-break: break-all;"><i>{{commit.commit.message}}</i></span>
-      <br>
-      <span><b>Date:</b> {{commit.commit.author.date}}</span>
-      <span><b>Author:</b> {{commit.author.login}}</span>
-      <!--<span>Files modified: coming soon</span>-->
-      <br>
-    </div>
+<!-- currently not working, to view working model go to /widgettest -->
+<section class="md-whiteframe-z1 panel-widget" style="max-width: 400px; min-height: 200px; ">
+  <div class="md-title color-inherit dash-widget-topbar" layout="row" layout-align="space-between start">
+    <span class="dash-widget-topbar-text" layout-padding>Issues</span>
   </div>
-  <i class="material-icons md-24" ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right</i>
-</div>
+  <div layout="row" layout-align="space-between center" ng-controller="RepositoryController as vm"
+       ng-init="vm.currentCommit=0">
+    <i class="material-icons md-24" ng-click="vm.currentCommit = vm.currentCommit-1">chevron_left</i>
+    <div layout="column" layout-align="start center" ng-repeat="commit in vm.commits" ng-hide="$index!=vm.currentCommit">
+      <div layout="column" layout-align="center start">
+        <span class="dash-widget-font" style="word-break: break-all;"><i>{{commit.commit.message}}</i></span>
+        <br>
+        <span class="dash-widget-text"><b>Date:</b> {{commit.commit.author.date}}</span>
+        <span class="dash-widget-text"><b>Author:</b> {{commit.author.login}}</span>
+        <!--<span>Files modified: coming soon</span>-->
+        <br>
+      </div>
+    </div>
+    <i class="material-icons md-24" ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right</i>
+  </div>
+</section>
