@@ -166,6 +166,16 @@ sbapp
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
+        .state('home.editproject', {
+          url: '/editproject',
+          templateUrl: 'app/views/editproject.html',
+          controller: '',
+          controllerAs: 'vm',
+          data: {
+            title: 'Edit Project',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
+        })
         .state('home.addwidget', {
           url: '/addwidget',
           templateUrl: 'app/views/addAWidget.html',
