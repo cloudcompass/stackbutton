@@ -8,10 +8,11 @@ sbapp.controller('MainController', [
   '$mdToast',
   'AuthService',
   'SessionService',
+  'ProjectService',
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $scope, $mdToast, AuthService, SessionService) {
+function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $scope, $mdToast, AuthService, SessionService, ProjectService) {
   var vm = this;
 
   /* CALLABLE MEMBERS */
@@ -22,7 +23,9 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
   vm.logOut = logOut;
-
+  vm.loadProjects = loadProjects;
+  vm.projectList = [];
+  vm.selectProject = selectProject;
 
   /* ACTIONS */
 
@@ -32,8 +35,18 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
       vm.menuItems = [].concat(menuItems);
     });
 
-
   /* FUNCTIONS */
+  function selectProject(project) {
+    $scope.setCurrentProject(project);
+    $state.go('home.dashboard', {}, {reload: 'home.dashboard'});
+  }
+
+  function loadProjects() {
+    return ProjectService.project.query({owner: $scope.currentUser.id},
+      function (projects) {
+        vm.projectList = projects;
+      })
+  }
 
   function toggleRightSidebar() {
     $mdSidenav('right').toggle();

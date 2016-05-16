@@ -5,7 +5,7 @@ sbapp.directive('panelWidget', function () {
     template: '' +
     '<md-card class="md-whiteframe-z1 panel-widget" layout="column" style="width: 300px; min-height: 200px">' +
     '    <div class="color-inherit dash-widget-topbar" layout-padding>' +
-    '      <span class="dash-widget-topbar-text">{{widget.template}}</span>' +
+    '      <span class="dash-widget-topbar-text capitalize">{{widget.template}}</span>' +
     '    </div>' +
     '    <div flex="grow" layout ng-include="vm.templateUrl"/>' +
     '</md-card>',
