@@ -169,7 +169,7 @@ sbapp
         .state('home.editproject', {
           url: '/editproject',
           templateUrl: 'app/views/editproject.html',
-          controller: '',
+          controller: 'EditProject',
           controllerAs: 'vm',
           data: {
             title: 'Edit Project',
