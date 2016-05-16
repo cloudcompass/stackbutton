@@ -1,7 +1,13 @@
 <div flex="grow" layout="column" layout-align="space-between stretch" ng-controller="RepositoryController as vm"
      ng-init="vm.currentCommit=0">
-  <div ng-repeat="commit in vm.commits"
-       ng-if="$index==vm.currentCommit">
+
+  <!-- Loading indicator-->
+  <div ng-if="vm.commits.length==0" layout layout-align="center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <div ng-repeat="commit in vm.commits" ng-if="vm.commits.length>0&&$index==vm.currentCommit">
+
     <!-- Commit message -->
     <pre layout-padding class="dash-widget-font"
          style="white-space:pre-wrap;word-break:break-word;min-height:3em; margin:0">{{commit.commit.message}}</pre>
@@ -25,5 +31,4 @@
     <md-button class="material-icons md-24" ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right
     </md-button>
   </div>
-
 </div>
