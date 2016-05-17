@@ -36,24 +36,37 @@
     <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="left" show hide="vm.title=='Projects'"
                 class="md-whiteframe-z2 md-sidenav-left" md-theme="dark">
 
-      <!-- Static Menu items -->
-      <div ng-repeat-start="item in vm.menuItems[0].static" layout="column" layout-align="start stretch">
-        <md-button layout="row" layout-align="space-between center" class="capitalize"
-                   ng-click="vm.selectItem(item)" ui-sref="{{item.sref}}">
-       <span>
-         <i hide-sm class="material-icons md-24">{{item.icon}}</i>
-         {{item.name}}
-       </span>
-        </md-button>
+      <!--&lt;!&ndash; Static Menu items &ndash;&gt;-->
+      <!--<div ng-repeat-start="item in vm.menuItems[0].static" layout="column" layout-align="start stretch">-->
+      <!--<md-button layout="row" layout-align="space-between center" class="capitalize"-->
+      <!--ng-click="vm.selectItem(item)" ui-sref="{{item.sref}}">-->
+      <!--<span>-->
+      <!--<i hide-sm class="material-icons md-24">{{item.icon}}</i>-->
+      <!--{{item.name}}-->
+      <!--</span>-->
+      <!--</md-button>-->
+      <!--</div>-->
+      <!--<md-divider ng-repeat-end></md-divider>-->
+      <!--&lt;!&ndash; end Static Menu items &ndash;&gt;-->
+      <span layout-margin ui-sref="home.projects">
+          Project:
+        </span>
+      <div layout="column" layout-align="start start">
+
+        <md-select placeholder="Select a Project" ng-model="currentProject" md-on-open="vm.loadProjects()"
+                   style="min-width:100%;margin:0 0 2em 0">
+          <md-option ng-repeat="project in vm.projectList" ng-value="project" ng-click="vm.selectProject(project)">
+            {{project.name}}
+          </md-option>
+        </md-select>
       </div>
-      <md-divider ng-repeat-end></md-divider>
-      <!-- end Static Menu items -->
 
       <!-- Menu items -->
-      <div ng-repeat-start="item in vm.menuItems[0].server" layout="column" layout-align="start stretch">
-        <md-button layout="row" layout-align="space-between center" class="capitalize"
-                   ng-click="item.expanded=!item.expanded" ng-click="vm.selectItem(item)"
-                   ui-sref="{{item.sref}}">
+      <div ng-hide="currentProject==null">
+        <div ng-repeat-start="item in vm.menuItems[0].server" layout="column" layout-align="start stretch">
+          <md-button layout="row" layout-align="space-between center" class="capitalize"
+                     ng-click="item.expanded=!item.expanded" ng-click="vm.selectItem(item)"
+                     ui-sref="{{item.sref}}">
        <span>
          <i hide-sm class="material-icons md-24">{{item.icon}}</i>
          {{item.name}}
@@ -63,19 +76,20 @@
          <i class="material-icons md-24" ng-hide="item.expanded||!item.children">expand_more</i>
        </span>
 
-        </md-button>
-
-        <div layout="column" layout-align="start stretch"
-             ui-sref-active="md-warn"
-             ng-show="item.expanded">
-          <md-button ng-repeat="child in item.children" ui-sref="{{child.sref}}"
-                     class="capitalize" ng-click="vm.toggleItemsList()"
-                     flex-offset="20" layout="row" layout-align="start center">
-            {{child.name}}
           </md-button>
+
+          <div layout="column" layout-align="start stretch"
+               ui-sref-active="md-warn"
+               ng-show="item.expanded">
+            <md-button ng-repeat="child in item.children" ui-sref="{{child.sref}}"
+                       class="capitalize" ng-click="vm.toggleItemsList()"
+                       flex-offset="20" layout="row" layout-align="start center">
+              {{child.name}}
+            </md-button>
+          </div>
         </div>
+        <md-divider ng-repeat-end></md-divider>
       </div>
-      <md-divider ng-repeat-end></md-divider>
       <!-- end Menu items -->
     </md-sidenav>
     <!-- Left nav end -->

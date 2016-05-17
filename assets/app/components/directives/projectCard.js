@@ -3,26 +3,18 @@ sbapp.directive('projectCard', function () {
     restrict: 'E',
     scope: {project: '=', prompt: '&', select: '&'},
     template: '' +
-    '<section layout-margin class="md-whiteframe-z1 panel-widget fixed-height-widget fixed-width">' +
-    '  <div class="md-title" layout="row" layout-align="space-between start">' +
-    '    <md-button ng-show="!showBack" ng-click="select(project)" ui-sref="home.dashboard" layout="row" layout-align="start">' +
-    '      <span class="md-accent panel-widget-tittle">{{project.name}}</span>' +
+    '<section class="md-whiteframe-z1 panel-widget fixed-height-widget fixed-width">' +
+    '  <md-toolbar class="md-accent" layout="row" layout-align="space-between center">' +
+    '    <md-button ng-click="select(project)" ui-sref="home.dashboard" layout="row" layout-align="start">' +
+    '      <span class="dash-widget-topbar-text capitalize">{{project.name}}</span>' +
     '    </md-button>' +
-    '    <span class="panel-widget-tittle" layout-padding ng-show="showBack"></span>' +
-    '    <md-button ng-click="showBack=!showBack" class="md-icon-button" aria-label="Show options">' +
-    '      <i class="material-icons" ng-show="!showBack">flip_to_back</i>' +
-    '      <i class="material-icons" ng-show="showBack">flip_to_front</i>' +
+    '    <md-button class="md-icon-button" md-theme="dark" aria-label="Edit project" ui-sref="home.editproject" ng-click="select(project)">' +
+    '      <i class="dash-widget-topbar-text material-icons">mode_edit</i>' +
     '    </md-button>' +
-    '  </div>' +
-    '  <md-divider ng-show="!showBack"/>' +
-    '  <div ng-show="!showBack">' +
+    '  </md-toolbar>' +
+    '  <div layout-padding>' +
     '    {{project.description}}' +
     '  </div>' +
-    '  <div ng-show="showBack" layout="column" layout-align="start center">' +
-    '    <md-button class="md-raised" ui-sref="home.addtool" ng-click="select(project)">Edit Project</md-button>' +
-    '    <md-button class="md-raised md-warn" ng-click="prompt(project)">Delete Project</md-button>' +
-    '  </div>' +
-    '  <md-divider ng-show="!showBack"/>' +
     '</section>'
   };
 });

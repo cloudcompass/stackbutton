@@ -9,12 +9,12 @@ function navService($q) {
       icon: 'work',
       sref: 'home.projects'
 
-    },
-    {
-      name: 'Account',
-      icon: 'people',
-      sref: 'home.profile'
     }
+    // {
+    //   name: 'Account',
+    //   icon: 'people',
+    //   sref: 'home.profile'
+    // }
   ];
 
   menuItems.server = [

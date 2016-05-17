@@ -83,14 +83,14 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 
 # Sails and Stackbutton setup
 WORKDIR /app/
+RUN npm install grunt bower -g
 RUN gem install sass
+RUN npm -g install sails
+RUN npm install sails-disk --save
 ADD package.json /app/
 ADD Gruntfile.js /app/
 ADD bower.json /app/
 ADD .bowerrc /app/
-RUN npm install grunt bower -g
-RUN npm -g install sails
-RUN npm install sails-disk --save
 RUN npm install
 RUN bower install --allow-root
 ADD . .

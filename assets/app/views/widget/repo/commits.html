@@ -1,15 +1,34 @@
-<div layout="row" layout-align="space-between center" ng-controller="RepositoryController as vm"
+<div flex="grow" layout="column" layout-align="space-between stretch" ng-controller="RepositoryController as vm"
      ng-init="vm.currentCommit=0">
-  <i class="material-icons md-24" ng-click="vm.currentCommit = vm.currentCommit-1">chevron_left</i>
-  <div layout="column" layout-align="start center" ng-repeat="commit in vm.commits" ng-hide="$index!=vm.currentCommit">
-    <div layout="column" layout-align="center start">
-      <span style="word-break: break-all;"><i>{{commit.commit.message}}</i></span>
-      <br>
-      <span><b>Date:</b> {{commit.commit.author.date}}</span>
-      <span><b>Author:</b> {{commit.author.login}}</span>
+
+  <!-- Loading indicator-->
+  <div ng-if="vm.commits.length==0" layout layout-align="center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <div ng-repeat="commit in vm.commits" ng-if="vm.commits.length>0&&$index==vm.currentCommit">
+
+    <!-- Commit message -->
+    <pre layout-padding class="dash-widget-font"
+         style="white-space:pre-wrap;word-break:break-word;min-height:3em; margin:0">{{commit.commit.message}}</pre>
+
+    <!-- Author section -->
+    <div class="dash-widget-text" layout layout-padding>
+      <img style="height: 3em; width: 3em;" src={{commit.author.avatar_url}}>
+      <span>
+        <b>Date:</b> {{commit.commit.author.date}}
+        <br>
+        <b>Author:</b> {{commit.author.login}}
+      </span>
       <!--<span>Files modified: coming soon</span>-->
-      <br>
     </div>
   </div>
-  <i class="material-icons md-24" ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right</i>
+
+  <!-- Arrow Buttons -->
+  <div layout layout-align="space-between end">
+    <md-button class="material-icons md-24" ng-click="vm.currentCommit = vm.currentCommit-1">chevron_left
+    </md-button>
+    <md-button class="material-icons md-24" ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right
+    </md-button>
+  </div>
 </div>

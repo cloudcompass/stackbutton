@@ -1,0 +1,26 @@
+<!--
+- Created to replace the previous edit project dialog
+- REQUIRED/TODO: Hookup backend so that project information is save-able
+ -->
+
+<!-- Project Title -->
+<md-content md-theme="dark" class="md-padding" layout="column" layout-align="center">
+  <md-input-container>
+    <label>Project Title</label>
+    <input ng-model="currentProject.name" md-maxlength="50" >
+  </md-input-container>
+
+  <!-- Project Description -->
+  <md-input-container flex>
+    <label>Project Description</label>
+    <textarea ng-model="currentProject.description" columns="1" md-maxlength="50"></textarea>
+  </md-input-container>
+
+
+  <!-- Page controls/buttons -->
+  <div layout="row">
+    <md-button class="md-raised" ui-sref="home.projects">Back</md-button>
+    <!-- Needs hookup ng-model="" --><md-button class="md-raised">Save</md-button>
+  </div>
+</md-content>
+

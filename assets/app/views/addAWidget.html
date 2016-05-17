@@ -1,41 +1,46 @@
+<!-- TEMP, to be replaced with calls from a controller/service -->
 <div ng-init="commwid=[
   {
-   text :'Issues',
-   pic :'issues-widget-detail',
-   description : 'The isssues widget shows open and closed notes on your repository.'
+    text :'Issues',
+    pic :'issues-widget-detail',
+    description : 'The isssues widget shows open and closed notes on your repository.'
   }
   ]">
 </div>
 <div ng-app="" ng-init="repowid=[
   {
-   text :'Commits',
-   pic :'commits-widget-detail',
-   description : 'The Commits widget shows the lastest commit that was push to your repository.'
+    text :'Commits',
+    pic :'commits-widget-detail',
+    description : 'The Commits widget shows the lastest commit that was push to your repository.'
   }
   ]">
 </div>
 <div ng-app="" ng-init="infowid=[
   {
-   text :'Contributors',
-   pic :'',
-   description : ''
+    text :'Contributors',
+    pic :'',
+    description : ''
   }
   ]">
 </div>
+<!-- end of TEMP -->
 
 
+<!-- Widget selector view -->
 <h2>Select Widget: </h2>
 <section class="md-whiteframe-z2 panel-widget">
-  <!-- Widget dropdown -->
+
+  <!-- Communication widget dropdown -->
   <div layout="column" layout-align="start stretch">
     <md-divider></md-divider>
     <md-button layout="row" layout-align="space-between center" ng-click="showcomm=!showcomm">
-      <span class="dash-widget-font"> Communitcation</span>
+      <span class="dash-widget-font"> Communication</span>
       <i class="material-icons md-24" ng-show="!showcomm">expand_more</i>
       <i class="material-icons md-24" ng-show="showcomm">expand_less</i>
     </md-button>
     <md-divider></md-divider>
   </div>
+
   <div layout="row" layout-align="space-around center" ng-show="showcomm" ng-repeat="tool in commwid" layout-padding>
     <div layout="column" layout-align="space-between start" layout-padding>
       <md-checkbox><h4>{{tool.text}}</h4></md-checkbox>
@@ -46,8 +51,9 @@
       <span>{{tool.description}}</span>
     </div>
   </div>
+  <!-- end of Communication widget dropdown -->
 
-  <!-- Widget dropdown -->
+  <!-- Repository widget dropdown -->
   <div layout="column" layout-align="start stretch">
     <md-divider></md-divider>
     <md-button layout="row" layout-align="space-between center" ng-click="showrep=!showrep">
@@ -57,6 +63,7 @@
     </md-button>
     <md-divider></md-divider>
   </div>
+
   <div layout="row" layout-align="space-around center" ng-show="showrep" ng-repeat="tool in repowid" layout-padding>
     <div layout="column" layout-align="space-between start" layout-padding>
       <md-checkbox><h4>{{tool.text}}</h4></md-checkbox>
@@ -67,8 +74,9 @@
       <span>{{tool.description}}</span>
     </div>
   </div>
+  <!-- end of Repository widget dropdown -->
 
-
+  <!-- Information widget dropdown -->
   <div layout="column" layout-align="start stretch">
     <md-divider></md-divider>
     <md-button layout="row" layout-align="space-between center" ng-click="showinfo=!showinfo">
@@ -78,7 +86,10 @@
     </md-button>
     <md-divider></md-divider>
   </div>
+  <!-- end of Information widget dropdown -->
+
 </section>
+<!-- end of Widget selector view -->
 
 <div layout="row" layout-align="end end">
   <md-button class="md-raised md-primary">Save</md-button>
