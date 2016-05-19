@@ -10,7 +10,8 @@
        layout-padding layout="column" layout-align="center center">
 
     <!-- Commit message -->
-    <span class="dash-widget-message capitalize">{{commit.commit.message}}</span>
+    <pre layout-padding class="dash-widget-font capitalize"
+     style="white-space:pre-wrap;word-break:break-word;min-height:3em; margin:0; font-size: large">{{commit.commit.message}}</pre>
 
     <!-- Author section -->
     <div class="dash-widget-text" layout layout-padding>
