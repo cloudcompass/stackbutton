@@ -8,7 +8,7 @@ sbapp.directive('projectCard', function () {
     '    <md-button ng-click="select(project)" ui-sref="home.dashboard" layout="row" layout-align="start">' +
     '      <span class="dash-widget-topbar-text capitalize">{{project.name}}</span>' +
     '    </md-button>' +
-    '    <md-button class="md-icon-button" md-theme="dark" aria-label="Edit project" ui-sref="home.editproject" ng-click="select(project)">' +
+    '    <md-button class="toolbar-button" md-theme="dark" aria-label="Edit project" ui-sref="home.editproject" ng-click="select(project)">' +
     '      <i class="dash-widget-topbar-text material-icons">mode_edit</i>' +
     '    </md-button>' +
     '  </md-toolbar>' +

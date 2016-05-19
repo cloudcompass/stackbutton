@@ -59,7 +59,7 @@ body {
   position: relative;
 
   &-content {
-    height: 100vh;
+    height: 100%;
   }
 }
 
@@ -162,6 +162,13 @@ body {
 
 // OVERRIDES
 // angular material overrides
+
+.logo-box {
+  width: $left-sidenav-width;
+  background: white;
+  cursor: pointer;
+}
+
 md-radio-group {
   border: none;
 }
@@ -248,7 +255,7 @@ md-backdrop.md-sidenav-backdrop {
   margin: auto 5px;
 }
 
-.sb-logo-detail {
+.sb-logo.detail {
   content: url("../images/stacky500p.png");
 }
 

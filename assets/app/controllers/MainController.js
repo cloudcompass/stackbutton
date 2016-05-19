@@ -6,13 +6,14 @@ sbapp.controller('MainController', [
   '$state',
   '$scope',
   '$mdToast',
+  '$mdMedia',
   'AuthService',
   'SessionService',
   'ProjectService',
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $scope, $mdToast, AuthService, SessionService, ProjectService) {
+function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $scope, $mdToast, $mdMedia, AuthService, SessionService, ProjectService) {
   var vm = this;
 
   /* CALLABLE MEMBERS */
@@ -26,6 +27,7 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   vm.loadProjects = loadProjects;
   vm.projectList = [];
   vm.selectProject = selectProject;
+  vm.showActivities = $mdMedia('gt-xs') ? true : false;
 
   /* ACTIONS */
 
@@ -49,7 +51,7 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   }
 
   function toggleRightSidebar() {
-    $mdSidenav('right').toggle();
+    vm.showActivities = !vm.showActivities;
   }
 
   function toggleItemsList() {

@@ -1,23 +1,20 @@
-sbapp.directive('messagesSection', messagesSectionDirective);
-
-function messagesSectionDirective() {
+sbapp.directive('activityGroup', function () {
   return {
     restrict: 'E',
     scope: {
       title: '@',
       theme: '@',
-      messages: '='
+      activities: '='
     },
     template: '' +
     '<section>' +
     '  <md-subheader ng-class="theme">{{title}}</md-subheader>' +
     '  <md-list>' +
-    '    <md-list-item class="md-3-line" ng-repeat="message in messages">' +
+    '    <md-list-item class="md-3-line" ng-repeat="activity in activities">' +
     '    <img class="md-avatar" ng-src="/images/einstein.jpg">' +
     '    <div class="md-list-item-text">' +
-    '      <h3>{{message.subject}}</h3>' +
-    '      <h4>{{message.userName}}</h4>' +
-    '      <p>{{message.text}}</p>' +
+    '      {{activity.text}}' +
+    '      <p style="font-size: smaller">{{activity.date}}</p>' +
     '    </div>' +
     '    </md-list-item>' +
     '  </md-list>' +
@@ -25,4 +22,4 @@ function messagesSectionDirective() {
     link: function (scope, element, attrs) {
     }
   };
-}
+});
