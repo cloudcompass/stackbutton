@@ -1,7 +1,7 @@
 <div flex="grow" layout="column" layout-align="start stretch">
 
   <!-- Open Dropdown row -->
-  <div layout="column" layout-align="start stretch" ng-init="newposts=[{number :'#1' ,text :'Connect to blank',priority :'line-marker-normal'},{number :'#2',text :'Link to pages',priority :'line-marker-note'},{number :'#3',text :'Display info',priority :'line-marker-critical'}]">
+  <div layout="column" layout-align="start stretch" ng-init="newposts=[{number :'#1' ,text :'Connect to blank',priority :'github-labels-help_wanted'},{number :'#2',text :'Link to pages',priority :'github-labels-bug'},{number :'#3',text :'Display info',priority :'github-labels-enhancement'}]">
     <!-- open button -->
     <md-button  layout="row" layout-align="space-between center" ng-click="showNew=!showNew">
       <span class="dash-widget-font"> Open:</span>
@@ -36,7 +36,7 @@
 
 
   <!-- Closed Dropdown row -->
-  <div layout="column" layout-align="start stretch" ng-init="oldposts=[{number :'#54',text :'old post',priority :'line-marker-note'}]">
+  <div layout="column" layout-align="start stretch" ng-init="oldposts=[{number :'#54',text :'old post',priority :'github-labels-question'}]">
     <!-- button -->
     <md-button layout="row" layout-align="space-between center" ng-click="showOld=!showOld">
       <span class="dash-widget-font"> Closed:</span>

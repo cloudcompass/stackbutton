@@ -281,25 +281,50 @@ md-backdrop.md-sidenav-backdrop {
 .issues-widget-detail {
   content: url("../images/Issues_widget.PNG");
 }
+.github-labels {
 
-.line-marker-normal {
-  background-color: green;
-  height: 3em;
-  width: .4em;
+  &-help_wanted {
+    background-color: green;
+    height: 3em;
+    width: .4em;
+  }
+
+  &-bug {
+    background-color: #fc2929;
+    height: 3em;
+    width: .4em;
+  }
+
+  &-duplicate {
+    background-color: #cccccc;
+    height: 3em;
+    width: .4em;
+  }
+
+  &-enhancement {
+    background-color: #84b6eb;
+    height: 3em;
+    width: .4em;
+  }
+
+  &-invaild {
+    background-color: #e6e6e6;
+    height: 3em;
+    width: .4em;
+  }
+
+  &-question {
+    background-color: #cc317c;
+    height: 3em;
+    width: .4em;
+  }
+
+  &-wontfix {
+    background-color: #ffffff;
+    height: 3em;
+    width: .4em;
+  }
 }
-
-.line-marker-critical {
-  background-color: red;
-  height: 3em;
-  width: .4em;
-}
-
-.line-marker-note {
-  background-color: darkgoldenrod;
-  height: 3em;
-  width: .4em;
-}
-
 .commits-widget-detail {
   content: url("../images/Commits_widget.PNG");
 }
