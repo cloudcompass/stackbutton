@@ -75,6 +75,20 @@ body {
   right: 2px;
   background-color: $warning-color;
 }
+
+.notifications-label-widget {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  font-size: 12px;
+  top: 2px;
+  right: 2px;
+  background-color: #0b97c4;
+  color: white;
+}
 // dash-widget
 .dash-widget {
   background-color: white;
@@ -268,8 +282,22 @@ md-backdrop.md-sidenav-backdrop {
   content: url("../images/Issues_widget.PNG");
 }
 
-.line-marker {
-  content: url("../images/line-marker.PNG");
+.line-marker-normal {
+  background-color: green;
+  height: 3em;
+  width: .4em;
+}
+
+.line-marker-critical {
+  background-color: red;
+  height: 3em;
+  width: .4em;
+}
+
+.line-marker-note {
+  background-color: darkgoldenrod;
+  height: 3em;
+  width: .4em;
 }
 
 .commits-widget-detail {
@@ -296,22 +324,20 @@ md-backdrop.md-sidenav-backdrop {
   height: 48px;
 }
 
-.dont-break-out {
+.message-wrap {
+  white-space:pre-wrap;
+  word-break:break-word;
+  min-height:3em;
+  margin:0;
+  font-size: large;
+}
 
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-
-  -ms-word-break: break-all;
-  /* This is the dangerous one in WebKit, as it breaks things wherever */
-  word-break: break-all;
-  /* Instead use this non-standard one: */
-  word-break: break-word;
-
-  /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+.message-break {
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  font-size: medium;
+  width:100%;
+  text-align: left;
 
 }

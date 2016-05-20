@@ -1,34 +1,71 @@
-<section class="md-whiteframe-z1 panel-widget" style="max-width: 300px; ">
-  <div class="md-title color-inherit dash-widget-topbar" layout="row" layout-align="space-between start">
-    <span class="dash-widget-topbar-text" layout-padding>Issues</span>
-  </div>
-  <md-divider></md-divider>
-  <div layout="column" layout-align="start stretch">
+<div flex="grow" layout="column" layout-align="start stretch">
+
+  <!-- Open Dropdown row -->
+  <div layout="column" layout-align="start stretch" ng-init="newposts=[{number :'#1' ,text :'Connect to blank',priority :'line-marker-normal'},{number :'#2',text :'Link to pages',priority :'line-marker-note'},{number :'#3',text :'Display info',priority :'line-marker-critical'}]">
+    <!-- open button -->
     <md-button  layout="row" layout-align="space-between center" ng-click="showNew=!showNew">
       <span class="dash-widget-font"> Open:</span>
-      <i class="material-icons md-24" ng-show="!showNew" >expand_more</i>
-      <i class="material-icons md-24" ng-show="showNew" >expand_less</i>
+      <i class="material-icons md-24">{{showNew==true ?'expand_less':'expand_more'}}</i>
+      <b class="notifications-label-widget">+{{newposts.length}}</b>
     </md-button>
+
+    <!-- Open Issue message -->
+    <div  layout="row" layout-align="space-between center" ng-show="showNew" ng-repeat="post in newposts">
+      <!-- priority bar -->
+      <img class="{{post.priority}}">
+      <!-- Message -->
+      <p layout-padding class="dash-widget-text message-break">{{post.number}} {{post.text}}</p>
+      <!-- Side nav icon -->
+      <md-menu>
+        <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
+          <i class="material-icons">format_align_justify</i>
+        </md-button>
+        <!-- pop out menu -->
+        <md-menu-content>
+          <md-menu-item>
+            <md-button class="md-warn md-raised" ng-click="doSomething()">Resolve</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="doSomething()">Goto</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </div>
+
   </div>
-  <!-- items -->
-  <div layout="row" layout-align="space-between center" ng-show="showNew" ng-repeat="post in newposts">
-    <md-button class="md-icon-button {{post.priority}}"><i class="material-icons ">mode_comment</i></md-button>
-    <span class="dash-widget-text">{{post.number}} {{post.text}}</span>
-    <md-button class="md-icon-button" ><i class="material-icons">format_align_justify</i></md-button>
-  </div>
-  <!-- items end -->
-  <div layout="column" layout-align="start stretch">
+
+
+  <!-- Closed Dropdown row -->
+  <div layout="column" layout-align="start stretch" ng-init="oldposts=[{number :'#54',text :'old post',priority :'line-marker-note'}]">
+    <!-- button -->
     <md-button layout="row" layout-align="space-between center" ng-click="showOld=!showOld">
       <span class="dash-widget-font"> Closed:</span>
-      <i class="material-icons md-24" ng-show="!showOld">expand_more</i>
-      <i class="material-icons md-24" ng-show="showOld">expand_less</i>
+      <b class="notifications-label-widget">{{oldposts.length}}</b>
+      <i class="material-icons md-24">{{showOld==true ?'expand_less':'expand_more'}}</i>
     </md-button>
+
+    <!-- Closed Issue messages -->
+    <div layout="row" layout-align="space-between center" ng-show="showOld" ng-repeat="post in oldposts">
+      <!-- priority bar -->
+      <img class="{{post.priority}}">
+      <!-- Message -->
+      <p layout-padding class="dash-widget-text message-break">{{post.number}} {{post.text}}</p>
+      <!-- Side nav icon -->
+      <md-menu>
+        <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
+          <i class="material-icons">format_align_justify</i>
+        </md-button>
+        <!-- Pop out menu -->
+        <md-menu-content>
+          <md-menu-item>
+            <md-button class="md-warn md-raised" ng-click="doSomething()">Resolve</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="doSomething()">Goto</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </div>
   </div>
-  <!-- old items -->
-  <div layout="row" layout-align="space-between center" ng-show="showOld" ng-repeat="post in oldposts">
-    <md-button class="md-icon-button {{post.priority}}"><i class="material-icons ">mode_comment</i></md-button>
-    <span class="dash-widget-text">{{post.number}} {{post.text}}</span>
-    <md-button class="md-icon-button" ><i class="material-icons">format_align_justify</i></md-button>
-  </div>
-  <!-- old items end-->
-</section>
+
+</div>
