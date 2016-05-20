@@ -46,6 +46,11 @@ module.exports.policies = {
   UserController: {
     me: 'passport',
     create: true
+  },
+
+  VCSController: {
+    //TODO lock this down
+    getCommits: true
   }
   /***************************************************************************
   *                                                                          *

@@ -27,14 +27,6 @@ module.exports = {
     GithubService.getRepos(service, function (err, data, headers) {
       return res.json(data);
     });
-  },
-
-
-  getCommits: function (req, res) {
-    sails.log.debug("getCommits request body", req.param('widget'));
-    var widget = req.param('widget');
-    GithubService.getCommits(widget, function (err, data, headers) {
-      return res.json(data);
-    });
   }
+  
 };
