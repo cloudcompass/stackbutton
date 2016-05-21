@@ -1,8 +1,8 @@
 <div layout="column" flex>
   <!-- Top bar begin -->
   <md-toolbar layout="row" layout-align="space-between stretch">
-    <div layout="row" layout-align="start center" class="capitalize logo-box" hide-xs>
-      <img ui-sref="home.projects" class="sb-logo detail sb-48px">
+    <div ui-sref="home.projects" layout="row" layout-align="start center" class="capitalize logo-box" hide-xs>
+      <img class="sb-logo detail sb-48px">
       <h1> StackButton</h1>
     </div>
 
@@ -36,20 +36,22 @@
 
   <div layout="row" flex>
     <!-- Left nav begin -->
-    <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="left" show hide="vm.title=='Projects'"
+    <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="left"
                 class="md-whiteframe-z2 md-sidenav-left" md-theme="dark">
 
-      <span layout-margin ui-sref="home.projects">
-          Project:
-        </span>
-      <div layout="column" layout-align="start start">
-
-        <md-select placeholder="Select a Project" ng-model="currentProject" md-on-open="vm.loadProjects()"
-                   style="min-width:100%;margin:0 0 2em 0">
-          <md-option ng-repeat="project in vm.projectList" ng-value="project" ng-click="vm.selectProject(project)">
-            {{project.name}}
-          </md-option>
-        </md-select>
+      <!--Project selector -->
+      <div class="fixed-height-widget" md-theme="default" layout="column">
+        <md-toolbar class="md-accent" layout="row" layout-align="space-between center">
+          <md-select placeholder="Select a Project" ng-model="currentProject" md-on-open="vm.loadProjects()"
+                     style="width:100%" class="md-body-1 capitalize">
+            <md-option ng-repeat="project in vm.projectList" ng-value="project" ng-click="vm.selectProject(project)">
+              {{project.name}}
+            </md-option>
+          </md-select>
+        </md-toolbar>
+        <md-content flex ng-show="currentProject!=null" layout-padding class="panel-widget">
+          {{currentProject.description}}
+        </md-content>
       </div>
 
       <!-- Menu items -->

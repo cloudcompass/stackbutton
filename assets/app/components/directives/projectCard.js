@@ -1,7 +1,7 @@
 sbapp.directive('projectCard', function () {
   return {
     restrict: 'E',
-    scope: {project: '=', prompt: '&', select: '&'},
+    scope: {project: '=', select: '&'},
     template: '' +
     '<section class="md-whiteframe-z1 panel-widget fixed-height-widget fixed-width">' +
     '  <md-toolbar class="md-accent" layout="row" layout-align="space-between center">' +

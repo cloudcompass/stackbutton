@@ -3,7 +3,7 @@ $main-bg-color: #ECECEC;
 $text-color: #7A7A7A;
 $text-color-nav: #aaaaaa;
 $accent-color: rgb(0, 150, 136);
-$warning-color: #FFFFFA;
+$warning-color: #f6f6f6;
 
 // VARIABLES
 $left-sidenav-width: 200px;
@@ -363,4 +363,8 @@ md-backdrop.md-sidenav-backdrop {
   width:100%;
   text-align: left;
 
+}
+
+md-select-value {
+  color: $warning-color !important;
 }
