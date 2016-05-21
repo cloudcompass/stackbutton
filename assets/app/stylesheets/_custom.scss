@@ -74,21 +74,18 @@ body {
   top: 2px;
   right: 2px;
   background-color: $warning-color;
+
+
+  &-issues {
+
+    width: 16px;
+    border-radius: 30%;
+    font-size: 12px;
+    background-color: #0b97c4;
+    color: white;
+  }
 }
 
-.notifications-label-widget {
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
-  text-align: center;
-  border-radius: 50%;
-  position: absolute;
-  font-size: 12px;
-  top: 2px;
-  right: 2px;
-  background-color: #0b97c4;
-  color: white;
-}
 // dash-widget
 .dash-widget {
   background-color: white;
@@ -355,14 +352,20 @@ md-backdrop.md-sidenav-backdrop {
   font-size: large;
 }
 
-.message-break {
+.message-ellipsis {
   white-space:nowrap;
-  overflow:hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   font-size: medium;
   width:100%;
   text-align: left;
 
+}
+
+.message-issues-wrap {
+  font-size: medium;
+  width:100%;
+  text-align: left;
 }
 
 md-select-value {

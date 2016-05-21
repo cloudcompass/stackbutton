@@ -12,24 +12,35 @@ function RepositoryController($scope, RepositoryService, ProjectService) {
   vm.repoName = null;
   vm.commits = [];
 
-  vm.repository = [{repository: 'stackbutton', type: 'private'}];
+  vm.repository = [{repository: 'sheaphillips / stackbutton', type: 'private'}];
 
   vm.contributors = [
     {
       name: 'tiffanytangt',
-      amount: '40',
+      amount: '57',
       level: 'whatshot'
     },
     {
       name: 'Foxfrie',
-      amount: '30',
+      amount: '33',
       level: ''
     },
     {
       name: 'pcridge',
-      amount: '13',
+      amount: '21',
+      level: ''
+    },
+    {
+      name: 'sheaphillips',
+      amount: '5',
+      level: ''
+    },
+    {
+      name: 'swcurren',
+      amount: '5',
       level: ''
     }
+
   ];
 
   vm.branches = [

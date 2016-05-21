@@ -16,11 +16,10 @@
     <textarea ng-model="currentProject.description" columns="1" md-maxlength="50"></textarea>
   </md-input-container>
 
-
   <!-- Page controls/buttons -->
   <div layout="row">
     <md-button class="md-raised" ui-sref="home.projects">Back</md-button>
-    <!-- Needs hookup ng-model="" --><md-button class="md-raised">Save</md-button>
+    <md-button class="md-raised" ng-click="vm.updateProject(currentProject.name, currentProject.description)">Save</md-button>
   </div>
 </md-content>
 
