@@ -14,12 +14,8 @@ function EditProject($scope, $state, ProjectService) {
     //Grab id to target PUT to
     var projId = $scope.currentProject.id;
 
-    console.log(projId);
     //Call update functionality from ProjectService.
     ProjectService.project.update(
-      //Resource to update
-      '/project',
-
       //Data to insert
       {
         id: projId,
