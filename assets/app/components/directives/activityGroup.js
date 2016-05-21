@@ -14,7 +14,7 @@ sbapp.directive('activityGroup', function () {
     '    <img class="md-avatar" ng-src="/images/einstein.jpg">' +
     '    <div class="md-list-item-text">' +
     '      {{activity.text}}' +
-    '      <p style="font-size: smaller">{{activity.date}}</p>' +
+    '      <p class="md-caption">{{activity.date}}</p>' +
     '    </div>' +
     '    </md-list-item>' +
     '  </md-list>' +

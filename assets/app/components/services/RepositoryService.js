@@ -4,16 +4,7 @@ function RepositoryService($q, $resource) {
   var service = {};
 
   service.loadAllItems = loadAllItems;
-  service.getCommits = $resource('/service/getCommits');
-
-  service.commits = [
-    {
-      description: 'Linked Controller to View',
-      author: 'Paul Cridge',
-      date: '2016-04-24',
-      files: '1'
-    }
-  ];
+  service.getCommits = $resource('/VCS/getCommits');
 
   return service;
 

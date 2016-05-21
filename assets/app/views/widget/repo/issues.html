@@ -1,12 +1,13 @@
 <div flex="grow" layout="column" layout-align="start stretch">
 
   <!-- Open Dropdown row -->
-  <div layout="column" layout-align="start stretch" ng-init="newposts=[{number :'#1' ,text :'Connect to blank',priority :'github-labels-help_wanted'},{number :'#2',text :'Link to pages',priority :'github-labels-bug'},{number :'#3',text :'Display info',priority :'github-labels-enhancement'}]">
+  <div layout="column" layout-align="start stretch" ng-init="newposts=[{number :'#1' ,text :'Gather contact information for team members',priority :'github-labels-help_wanted'},{number :'#2',text :'Create Stackbutton Slack account',priority :'github-labels-bug'},{number :'#3',text :'Intro meeting',priority :'github-labels-enhancement'}]">
     <!-- open button -->
     <md-button  layout="row" layout-align="space-between center" ng-click="showNew=!showNew">
-      <span class="dash-widget-font"> Open:</span>
+      <span layout="row" class="dash-widget-font"> Open:
+        <div class="notifications-label-issues">{{newposts.length}}</div>
+      </span>
       <i class="material-icons md-24">{{showNew==true ?'expand_less':'expand_more'}}</i>
-      <b class="notifications-label-widget">+{{newposts.length}}</b>
     </md-button>
 
     <!-- Open Issue message -->
@@ -14,7 +15,7 @@
       <!-- priority bar -->
       <img class="{{post.priority}}">
       <!-- Message -->
-      <p layout-padding class="dash-widget-text message-break">{{post.number}} {{post.text}}</p>
+      <p layout-padding class="dash-widget-text message-issues-wrap">{{post.number}} {{post.text}}</p>
       <!-- Side nav icon -->
       <md-menu>
         <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
@@ -36,11 +37,12 @@
 
 
   <!-- Closed Dropdown row -->
-  <div layout="column" layout-align="start stretch" ng-init="oldposts=[{number :'#54',text :'old post',priority :'github-labels-question'}]">
+  <div layout="column" layout-align="start stretch" ng-init="oldposts=[{number :'#54',text :'Invite team members to repo',priority :'github-labels-question'}]">
     <!-- button -->
     <md-button layout="row" layout-align="space-between center" ng-click="showOld=!showOld">
-      <span class="dash-widget-font"> Closed:</span>
-      <b class="notifications-label-widget">{{oldposts.length}}</b>
+      <span layout="row" class="dash-widget-font"> Closed:
+        <div class="notifications-label-issues">{{oldposts.length}}</div>
+      </span>
       <i class="material-icons md-24">{{showOld==true ?'expand_less':'expand_more'}}</i>
     </md-button>
 
@@ -49,7 +51,7 @@
       <!-- priority bar -->
       <img class="{{post.priority}}">
       <!-- Message -->
-      <p layout-padding class="dash-widget-text message-break">{{post.number}} {{post.text}}</p>
+      <p layout-padding class="dash-widget-text message-issues-wrap">{{post.number}} {{post.text}}</p>
       <!-- Side nav icon -->
       <md-menu>
         <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
