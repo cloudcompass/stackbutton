@@ -10,11 +10,11 @@ sbapp.directive('activityGroup', function () {
     '<section>' +
     '  <md-subheader ng-class="theme">{{title}}</md-subheader>' +
     '  <md-list>' +
-    '    <md-list-item class="md-3-line" ng-repeat="activity in activities | orderBy: \'createdAt\':true">' +
-    '    <i class="mdi mdi-bell"></i> ' +
-    '    <div class="md-list-item-text">' +
+    '    <md-list-item layout="row" layout-align="start start" ng-repeat="activity in activities | orderBy: \'createdAt\':true">' +
+    '    <i class="md-title mdi mdi-github-box" style="font-size: 2em"></i> ' +
+    '    <div>' +
     '      {{activity.actor_name}} {{activity.event_action}} to {{activity.target_name}}' +
-    '      <p class="md-caption">{{activity.createdAt | date : "M/dd/yyyy, h:mma"}}</p>' +
+    '      <span class="md-caption">{{activity.createdAt | date : "M/dd/yyyy, h:mma"}}</span>' +
     '    </div>' +
     '    </md-list-item>' +
     '  </md-list>' +
