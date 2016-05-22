@@ -174,7 +174,7 @@ function ToolController($scope, ToolService, ProjectService) {
     console.log('hello?');
     ToolService.loadServiceRepos.query({service: serviceId},
       function (repos) {
-        console.log("retrieved repos:", repos.length);
+        console.log("retrieved repos:", repos);
         vm.repos = repos;
       },
       function (err) {

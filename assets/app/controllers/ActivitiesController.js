@@ -10,19 +10,25 @@ function ActivitiesController(activitiesService, $sails) {
   vm.activities = [];
   vm.test = [];
 
-  $sails.get('/event', function (resData, jwres) {
-    console.log(resData);
-  });
+  // retrieve events
+  getEvents();
 
+
+  // listen for new events
   $sails.on("event", function (message) {
-    console.log(message);
+    if (message.verb == 'created') {
+      console.log(message.data);
+      getEvents();
+      
+    }
   });
 
-
-
-  activitiesService
-    .loadAllItems()
-    .then(function (activities) {
-      vm.activities = [].concat(activities);
-    });
+  function getEvents() {
+    activitiesService
+      .loadAllItems().then(
+      function (resp) {
+        vm.activities = [].concat(resp.data);
+        console.log('activities', vm.activities);
+      });
+  }
 }

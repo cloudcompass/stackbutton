@@ -9,11 +9,12 @@ module.exports = {
     var client = github.client(module.service.token);
     var ghrepo = client.repo(module.config.repoFullName);
     ghrepo.hook({
-      "name": "web",
-      "active": true,
-      "add_events": ["push", "create", "delete", "member"],
-      "config": {
-        "url": "http://a82ca316.ngrok.io/payload/" + module.service.project + "/" + module.id
+      name: "web",
+      active: true,
+      events: ["push", "create", "delete", "member"],
+      config: {
+        url: "http://a82ca316.ngrok.io/payload/" + module.service.project + "/" + module.id,
+        content_type: "json"
       }
     }, cb);
   },
@@ -26,13 +27,15 @@ module.exports = {
     event.event_type = req.headers['x-github-event'];
     switch (event.event_type) {
       case 'push':
-        sails.log.info('creating push event');
         event.event_action = 'pushed';
         event.source_url = req.body.compare;
         break;
+      case 'ping':
+        event.event_action = 'pinged'
+        break;
     }
     event.actor_name = req.body.sender.login;
-    event.target_name = req.body.repository.full_name;
+    event.target_name = req.body.repository.name;
     event.target_url = req.body.repository.url;
     event.project = req.param('projectId');
     event.module = req.param('moduleId');

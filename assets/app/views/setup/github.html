@@ -33,7 +33,9 @@
 <div ng-show="vm.currentPage == 2" layout="column" layout-align="start center">
 
   Choose a repository:
-  <md-button ng-repeat="repo in vm.repos" ng-click="vm.configureModule('repoFullName', repo)">{{repo.full_name}}
+  <md-button ng-repeat="repo in vm.repos" ng-click="vm.configureModule('repoFullName', repo)"
+             ng-disabled="repo.permissions.admin==false">
+    {{repo.full_name}}
   </md-button>
 
   <!--Buttons-->

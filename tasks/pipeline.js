@@ -19,6 +19,7 @@
 var cssFilesToInject = [
   'bower_components/angular-material/angular-material.css',
   'bower_components/nvd3/build/nv.d3.css',
+  'bower_components/mdi/css/materialdesignicons.min.css',
   'styles/**/*.css'
 ];
 

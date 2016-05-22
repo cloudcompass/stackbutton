@@ -21,9 +21,9 @@ sbapp.factory('AuthService', [
 );
 
 function AuthService(USER_ROLES, SessionService, $http, $q, $state) {
+  var authService = {};
 
   /* CALLABLE MEMBERS */
-  var authService = {};
 
   authService.authenticate = authenticate;
   authService.isAuthenticated = isAuthenticated;
