@@ -106,8 +106,12 @@ body {
     color: #0b97c4;
   }
 
-  &-message {
-    color: #0b97c4;
+  &-status {
+    border-style: solid;
+    border-width: thin;
+    border-radius: 10%;
+    border-color: teal;
+    color: teal;
   }
 
 }

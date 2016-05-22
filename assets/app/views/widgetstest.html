@@ -18,10 +18,21 @@
     }
     ">
 </div>
+<div ng-init="branches=
+    {
+      template: 'branches',
+      dashboard:1,
+      createdAt: null,
+      updatedAt: null,
+      id:1
+    }
+    ">
+</div>
 
 <div flex="grow" layout="row" layout-align="center start" layout-wrap>
     <panel-widget flex widget="issues"></panel-widget>
     <panel-widget flex widget="contributors"></panel-widget>
+    <panel-widget flex widget="branches"></panel-widget>
 </div>
 
 <div layout="column" layout-align="end end">
