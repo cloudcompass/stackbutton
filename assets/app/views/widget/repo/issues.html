@@ -5,11 +5,11 @@
     <!-- open button -->
     <md-button  layout="row" layout-align="space-between center" ng-click="showNew=!showNew">
       <span layout="row" class="dash-widget-font">{{newposts.length}}  Open:</span>
-      <i class="material-icons md-24">{{showNew==true ?'expand_less':'expand_more'}}</i>
+      <i class="material-icons md-24">{{showNew==true ?'expand_more':'expand_less'}}</i>
     </md-button>
 
     <!-- Open Issue message -->
-    <div  layout="row" layout-align="space-between center" ng-show="showNew" ng-repeat="post in newposts">
+    <div  layout="row" layout-align="space-between center" ng-show="!showNew" ng-repeat="post in newposts">
       <!-- priority bar -->
       <img class="{{post.priority}}">
       <!-- Message -->
