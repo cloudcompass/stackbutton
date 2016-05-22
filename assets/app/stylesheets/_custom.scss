@@ -78,8 +78,8 @@ body {
 
   &-issues {
 
-    width: 16px;
-    border-radius: 30%;
+    //width: 25px;
+    border-radius: 25%;
     font-size: 12px;
     background-color: #0b97c4;
     color: white;
@@ -108,26 +108,6 @@ body {
 
   &-message {
     color: #0b97c4;
-  }
-
-  &-priority-color-normal {
-    color: #00A000;
-    max-width: 15px;
-  }
-
-  &-priority-color-important {
-    color: darkgoldenrod;
-    max-width: 15px;
-  }
-
-  &-priority-color-critial {
-    color: red;
-    max-width: 15px;
-  }
-
-  &-priority-color-other {
-    color: blueviolet;
-    max-width: 15px;
   }
 
 }
@@ -319,6 +299,7 @@ md-backdrop.md-sidenav-backdrop {
     height: 3em;
     width: .4em;
   }
+
 }
 .commits-widget-detail {
   content: url("../images/Commits_widget.PNG");

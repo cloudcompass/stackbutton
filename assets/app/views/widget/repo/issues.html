@@ -4,9 +4,7 @@
   <div layout="column" layout-align="start stretch" ng-init="newposts=[{number :'#1' ,text :'Gather contact information for team members',priority :'github-labels-help_wanted'},{number :'#2',text :'Create Stackbutton Slack account',priority :'github-labels-bug'},{number :'#3',text :'Intro meeting',priority :'github-labels-enhancement'}]">
     <!-- open button -->
     <md-button  layout="row" layout-align="space-between center" ng-click="showNew=!showNew">
-      <span layout="row" class="dash-widget-font"> Open:
-        <div class="notifications-label-issues">{{newposts.length}}</div>
-      </span>
+      <span layout="row" class="dash-widget-font">{{newposts.length}}  Open:</span>
       <i class="material-icons md-24">{{showNew==true ?'expand_less':'expand_more'}}</i>
     </md-button>
 
@@ -40,9 +38,7 @@
   <div layout="column" layout-align="start stretch" ng-init="oldposts=[{number :'#54',text :'Invite team members to repo',priority :'github-labels-question'}]">
     <!-- button -->
     <md-button layout="row" layout-align="space-between center" ng-click="showOld=!showOld">
-      <span layout="row" class="dash-widget-font"> Closed:
-        <div class="notifications-label-issues">{{oldposts.length}}</div>
-      </span>
+      <span layout="row" class="dash-widget-font">{{oldposts.length}}  Closed:</span>
       <i class="material-icons md-24">{{showOld==true ?'expand_less':'expand_more'}}</i>
     </md-button>
 

@@ -45,23 +45,34 @@ function RepositoryController($scope, RepositoryService, ProjectService) {
 
   vm.branches = [
     {
-      type: 'star_border',
-      name: 'Master',
-      current: 'md-title',
-      activity: 'Default'
-    },
-    {
-      type: 'timeline',
-      name: 'sess-test',
-      current: '',
-      activity: 'Active'
+
+      name: 'master',
+      current: 'dash-widget-font',
+      activity: 'Default',
+      button: 'md-raised md-primary',
+      color: 'github-labels-default',
+      active: 'Current'
 
     },
     {
-      type: 'timeline',
+
       name: 'gh-pages',
-      current: '',
-      activity: 'Stale'
+      current: 'dash-widget-text',
+      activity: 'Stale',
+      color: 'github-labels-stale',
+      ahead: 'Ahead: 2',
+      behind: 'Behind: 149'
+
+    },
+    {
+
+      name: 'ssh-table',
+      current: 'dash-widget-text',
+      activity: 'Stale',
+      color: 'github-labels-stale',
+      ahead: 'Ahead: 0',
+      behind: 'Behind: 149'
+
     }
   ];
 
