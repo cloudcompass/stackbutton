@@ -1,4 +1,4 @@
-sbapp.service('activitiesService', ['$q', activitiesService]);
+sbapp.service('activitiesService', ['$q', '$sails', activitiesService]);
 
 function activitiesService($q) {
   var activities = [

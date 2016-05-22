@@ -28,7 +28,8 @@ var cssFilesToInject = [
 var jsFilesToInject = [
 
   // Load sails.io before everything else
-  'js/dependencies/sails.io.js',
+  // 'js/dependencies/sails.io.js',
+  'bower_components/sails.io.js/dist/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
@@ -41,12 +42,11 @@ var jsFilesToInject = [
   'bower_components/nvd3/build/nv.d3.min.js',
   'bower_components/angular-nvd3/dist/angular-nvd3.min.js',
   '/bower_components/angular-resource/angular-resource.min.js',
-  //'bower_components/angular-touch/angular-touch.min.js',
   'bower_components/angular-sanitize/angular-sanitize.min.js',
-  //'bower_components/angular-mocks/angular-mocks.js',
   'bower_components/angular-messages/angular-messages.min.js',
   'bower_components/angular-material/angular-material.min.js',
   'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+  'bower_components/angular-sails/dist/angular-sails.min.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.

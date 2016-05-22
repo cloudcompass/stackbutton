@@ -51,6 +51,11 @@ module.exports.policies = {
   VCSController: {
     //TODO lock this down
     getCommits: true
+  },
+
+  PayloadController: {
+    //TODO lock this down
+    addEvent: true
   }
   /***************************************************************************
   *                                                                          *

@@ -34,6 +34,12 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
+  },
+
+  'post /payload/:projectId/:moduleId': {
+    controller: 'PayloadController',
+    action: 'addEvent',
+    skipAssets: true
   }
 
   /***************************************************************************

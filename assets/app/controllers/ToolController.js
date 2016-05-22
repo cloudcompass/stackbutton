@@ -85,7 +85,7 @@ function ToolController($scope, ToolService, ProjectService) {
 
   function loadServices() {
     ProjectService.service.query({
-        project: $scope.currentProject,
+        project: $scope.currentProject.id,
         platform: vm.currentPlatform,
         owner: $scope.currentUser.id
       },

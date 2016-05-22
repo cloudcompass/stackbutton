@@ -4,6 +4,42 @@ var github = require('octonode');
 
 module.exports = {
 
+  createWebhook: function (module, cb) {
+    sails.log.info('adding webhook', module.service.project, module.id, module.service.token);
+    var client = github.client(module.service.token);
+    var ghrepo = client.repo(module.config.repoFullName);
+    ghrepo.hook({
+      "name": "web",
+      "active": true,
+      "add_events": ["push", "create", "delete", "member"],
+      "config": {
+        "url": "http://a82ca316.ngrok.io/payload/" + module.service.project + "/" + module.id
+      }
+    }, cb);
+  },
+
+  createEvent: function (req, cb) {
+    sails.log.info('creating event', req.body);
+
+    var event = {};
+    event.platform = 'github';
+    event.event_type = req.headers['x-github-event'];
+    switch (event.event_type) {
+      case 'push':
+        sails.log.info('creating push event');
+        event.event_action = 'pushed';
+        event.source_url = req.body.compare;
+        break;
+    }
+    event.actor_name = req.body.sender.login;
+    event.target_name = req.body.repository.full_name;
+    event.target_url = req.body.repository.url;
+    event.project = req.param('projectId');
+    event.module = req.param('moduleId');
+    //event.created_at = (new Date()).toJSON();
+    return event;
+  },
+
   getAccount: function (serviceID, cb) {
     sails.log.debug('finding service:', serviceID);
     Service.findOne({id: serviceID})

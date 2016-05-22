@@ -7,12 +7,6 @@
 
 module.exports = {
 
-  nope: function (req, res) {
-    return res.json({
-      todo: 'Not implemented yet!'
-    });
-  },
-
   getAccount: function (req, res) {
     sails.log.debug("getAccount request body:", req.param('service'));
     var service = req.param('service');

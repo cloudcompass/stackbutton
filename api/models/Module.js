@@ -23,6 +23,17 @@ module.exports = {
     service: {
       model: 'service'
     }
+  },
+
+  afterCreate: function (module, next) {
+    sails.log.info('Project.afterCreate.createWebhook', module);
+    Module.findOne({id: module.id}).populate('service')
+      .exec(function (err, res) {
+        if (res.service.platform == 'github') {
+          GithubService.createWebhook(res, next);
+        }
+      });
   }
+
 };
 
