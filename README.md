@@ -7,7 +7,14 @@ A friendly - but powerful - provisioning tool for DevOps tool chains and applica
   2. Install [sails](http://sailsjs.org/get-started).  Do *not* run the ```sails new...``` command.
   3. Install [ruby](https://www.ruby-lang.org/en/).
   4. Clone this repo via ```git clone https://github.com/sheaphillips/stackbutton.git```
-  5. From the command line, in the location you cloned the repo into:
+  5. Add the following to config/local.js
+  ```javascript
+  module.exports.url = {
+    hooks: 'http://your-url-here.com'
+  };
+  ```
+
+  6. From the command line, in the location you cloned the repo into:
 
   ```shell
   npm install grunt bower -g
