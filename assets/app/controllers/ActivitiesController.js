@@ -19,7 +19,6 @@ function ActivitiesController(activitiesService, $sails) {
     if (message.verb == 'created') {
       console.log(message.data);
       getEvents();
-      
     }
   });
 

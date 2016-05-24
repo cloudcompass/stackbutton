@@ -8,12 +8,12 @@ sbapp.controller('VCSController', [
 function VCSController($scope, RepositoryService, ProjectService) {
   var vm = this;
 
+  /* CALLABLE MEMBERS */
+
   vm.loadCommits = loadCommits;
   vm.repoName = null;
   vm.commits = [];
-
   vm.repository = [{repository: 'sheaphillips / stackbutton', type: 'private'}];
-
   vm.contributors = [
     {
       name: 'tiffanytangt',
@@ -42,7 +42,6 @@ function VCSController($scope, RepositoryService, ProjectService) {
     }
 
   ];
-
   vm.branches = [
     {
 
@@ -76,9 +75,13 @@ function VCSController($scope, RepositoryService, ProjectService) {
     }
   ];
 
-  console.log($scope.$parent.$parent.widget);
+  /* ACTIONS */
+
   loadCommits($scope.$parent.$parent.widget.id);
   loadName($scope.$parent.$parent.widget.id);
+
+
+  /* FUNCTIONS */
 
   function loadName(widgetId) {
     ProjectService.widget.get({widgetid: widgetId, populate: 'modules'},

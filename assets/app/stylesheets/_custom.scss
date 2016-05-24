@@ -4,6 +4,7 @@ $text-color: #7A7A7A;
 $text-color-nav: #aaaaaa;
 $accent-color: rgb(0, 150, 136);
 $warning-color: #f6f6f6;
+$widget-accent: #0b84ae;
 
 // VARIABLES
 $left-sidenav-width: 200px;
@@ -75,13 +76,12 @@ body {
   right: 2px;
   background-color: $warning-color;
 
-
   &-issues {
 
     //width: 25px;
     border-radius: 25%;
     font-size: 12px;
-    background-color: #0b97c4;
+    background-color: $widget-accent;
     color: white;
   }
 }
@@ -91,7 +91,7 @@ body {
   background-color: white;
 
   &-topbar {
-    background-color: #0b97c4;
+    background-color: $widget-accent;
   }
 
   &-topbar-text {
@@ -103,7 +103,7 @@ body {
   }
 
   &-font {
-    color: #0b97c4;
+    color: $widget-accent;
   }
 
   &-status {
@@ -260,51 +260,16 @@ md-backdrop.md-sidenav-backdrop {
 .issues-widget-detail {
   content: url("../images/Issues_widget.PNG");
 }
-.github-labels {
 
-  &-help_wanted {
-    background-color: green;
-    height: 3em;
-    width: .4em;
+.issue-label {
+  height: 3em;
+  width: .4em;
+
+  &-border {
+    border: 1px solid #dddddd;
   }
-
-  &-bug {
-    background-color: #fc2929;
-    height: 3em;
-    width: .4em;
-  }
-
-  &-duplicate {
-    background-color: #cccccc;
-    height: 3em;
-    width: .4em;
-  }
-
-  &-enhancement {
-    background-color: #84b6eb;
-    height: 3em;
-    width: .4em;
-  }
-
-  &-invaild {
-    background-color: #e6e6e6;
-    height: 3em;
-    width: .4em;
-  }
-
-  &-question {
-    background-color: #cc317c;
-    height: 3em;
-    width: .4em;
-  }
-
-  &-wontfix {
-    background-color: #ffffff;
-    height: 3em;
-    width: .4em;
-  }
-
 }
+
 .commits-widget-detail {
   content: url("../images/Commits_widget.PNG");
 }
@@ -330,26 +295,26 @@ md-backdrop.md-sidenav-backdrop {
 }
 
 .message-wrap {
-  white-space:pre-wrap;
-  word-break:break-word;
-  min-height:3em;
-  margin:0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 3em;
+  margin: 0;
   font-size: large;
 }
 
 .message-ellipsis {
-  white-space:nowrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: medium;
-  width:100%;
+  width: 100%;
   text-align: left;
 
 }
 
 .message-issues-wrap {
   font-size: medium;
-  width:100%;
+  width: 100%;
   text-align: left;
 }
 
