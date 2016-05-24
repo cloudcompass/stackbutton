@@ -1,19 +1,19 @@
-sbapp.controller('RepositoryController', [
+sbapp.controller('VCSController', [
   '$scope',
   'RepositoryService',
   'ProjectService',
-  RepositoryController
+  VCSController
 ]);
 
-function RepositoryController($scope, RepositoryService, ProjectService) {
+function VCSController($scope, RepositoryService, ProjectService) {
   var vm = this;
+
+  /* CALLABLE MEMBERS */
 
   vm.loadCommits = loadCommits;
   vm.repoName = null;
   vm.commits = [];
-
   vm.repository = [{repository: 'sheaphillips / stackbutton', type: 'private'}];
-
   vm.contributors = [
     {
       name: 'tiffanytangt',
@@ -42,7 +42,6 @@ function RepositoryController($scope, RepositoryService, ProjectService) {
     }
 
   ];
-
   vm.branches = [
     {
 
@@ -76,20 +75,25 @@ function RepositoryController($scope, RepositoryService, ProjectService) {
     }
   ];
 
-  console.log($scope.$parent.$parent.widget);
+  /* ACTIONS */
+
   loadCommits($scope.$parent.$parent.widget.id);
   loadName($scope.$parent.$parent.widget.id);
+
+
+  /* FUNCTIONS */
 
   function loadName(widgetId) {
     ProjectService.widget.get({widgetid: widgetId, populate: 'modules'},
       function (widget) {
-        vm.repoName = widget.modules[0].config.repoFullName;
+        vm.repoName = widget.modules[0].config.full_name;
       },
       function (err) {
         console.log("error:", err);
       }
     );
   }
+
   function loadCommits(widgetId) {
     RepositoryService.getCommits.query({widget: widgetId},
       function (commits) {

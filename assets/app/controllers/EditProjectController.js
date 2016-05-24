@@ -1,22 +1,26 @@
-sbapp.controller('EditProject', [
+sbapp.controller('EditProjectController', [
   '$scope',
   '$state',
   '$mdDialog',
   'ProjectService',
-  EditProject
+  EditProjectController
 ]);
 
-function EditProject($scope, $state, $mdDialog, ProjectService) {
+function EditProjectController($scope, $state, $mdDialog, ProjectService) {
   var vm = this;
-  vm.updateProject = updateProject;
 
-  //vm.showDeleteDialog = showDeleteDialog;
+  /* CALLABLE MEMBERS */
+
+  vm.updateProject = updateProject;
+  vm.showDeleteDialog = showDeleteDialog;
+
+  /* ACTIONS */
+// execute stuff here on load
+
+  /* FUNCTIONS */
 
   //DELETE PROJECT DIALOG
-  vm.showDeleteDialog = function (project) {
-    //Grabbing current project to delete
-    var currentProject = $scope.currentProject;
-
+  function showDeleteDialog(project) {
     console.log("Delete Function Called");
     $mdDialog.show({
       clickOutsideToClose: true,
@@ -25,18 +29,18 @@ function EditProject($scope, $state, $mdDialog, ProjectService) {
       preserveScope: true,
       template: '' +
       '<md-card style="max-width: 350px;">' +
-        '<div>' +
-          '<p class="md-headline">Would you like to permanently DELETE ' + currentProject.name + '?</p>' +
-        '</div>' +
-        '<div>' +
-          '<p class="md-headline">Please type the name of the project to confirm deletion.</p>' +
-          '<md-input-container>' +
-            '<label>Project Name</label>' +
-            '<input type="text" ng-model="confirmBox' + currentProject.id + '" required>' +
-          '</md-input-container>' +
-        '</div>' +
-        '<md-button class="md-primary" ng-if="confirmBox' + currentProject.id + '==\'' + currentProject.name + '\'" ng-click="confirm(' + currentProject.id + ')">DELETE PROJECT</md-button>' +
-        '<md-button class="md-warn" ui-sref="home.projects" ng-click="cancelDialog()">Cancel</md-button>' +
+      ' <div>' +
+      '   <p>Would you like to permanently DELETE ' + project.name + '?</p>' +
+      ' </div>' +
+      ' <div>' +
+      '   <p>Please type the name of the project to confirm deletion.</p>' +
+      '   <md-input-container>' +
+      '     <label>Project Name</label>' +
+      '     <input type="text" ng-model="confirmBox" required>' +
+      '   </md-input-container>' +
+      ' </div>' +
+      '<md-button class="md-primary" ng-if="confirmBox==\'' + project.name + '\'" ng-click="confirm(' + project.id + ')">DELETE PROJECT</md-button>' +
+      '<md-button class="md-warn" ng-click="cancelDialog()">Cancel</md-button>' +
       '</md-card>',
       controller: function DialogController($scope, $mdDialog) {
         $scope.confirm = function (id) {
@@ -48,7 +52,7 @@ function EditProject($scope, $state, $mdDialog, ProjectService) {
         $scope.cancelDialog = function () {
           $mdDialog.cancel();
           // clear text input:
-          eval('$scope.confirmBox' + currentProject.id + '=null');
+          eval('$scope.confirmBox=null');
         }
       }
     }).then(
@@ -56,14 +60,12 @@ function EditProject($scope, $state, $mdDialog, ProjectService) {
       function () {
         //Redundant go code to fix issue with page not reloading properly after project deletion
         $state.go('home.projects');
-        $state.reload();
-        $state.go('home.projects');
       },
       // dialog cancelled handler
       function () {
         console.log('dialog cancelled');
       });
-  };
+  }
 
   //UPDATE PROJECT DESCRIPTION
   function updateProject(newName, newDescription) {

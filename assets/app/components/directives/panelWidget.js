@@ -13,7 +13,7 @@ sbapp.directive('panelWidget', function () {
       var vm = this;
       // TODO extend this to allow for other directories
       vm.templateUrl = 'app/views/widget/repo/' + $scope.widget.template + '.html';
-      console.log('file:', vm.templateUrl);
+      //console.log('file:', vm.templateUrl);
     },
     controllerAs: 'vm'
   }

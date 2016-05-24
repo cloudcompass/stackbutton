@@ -1,69 +1,78 @@
-<div flex="grow" layout="column" layout-align="start stretch">
+<div flex="grow" layout="column" layout-align="start stretch" ng-controller="IssuesController as vm">
 
-  <!-- Open Dropdown row -->
-  <div layout="column" layout-align="start stretch" ng-init="newposts=[{number :'#1' ,text :'Gather contact information for team members',priority :'github-labels-help_wanted'},{number :'#2',text :'Create Stackbutton Slack account',priority :'github-labels-bug'},{number :'#3',text :'Intro meeting',priority :'github-labels-enhancement'}]">
-    <!-- open button -->
-    <md-button  layout="row" layout-align="space-between center" ng-click="showNew=!showNew">
-      <span layout="row" class="dash-widget-font">{{newposts.length}}  Open:</span>
-      <i class="material-icons md-24">{{showNew==true ?'expand_more':'expand_less'}}</i>
-    </md-button>
+  <!--Display reponame-->
+  <div class="md-caption" layout-margin layout="row" layout-align="center center">{{vm.repoName}}</div>
 
-    <!-- Open Issue message -->
-    <div  layout="row" layout-align="space-between center" ng-show="!showNew" ng-repeat="post in newposts">
-      <!-- priority bar -->
-      <img class="{{post.priority}}">
-      <!-- Message -->
-      <p layout-padding class="dash-widget-text message-issues-wrap">{{post.number}} {{post.text}}</p>
-      <!-- Side nav icon -->
-      <md-menu>
-        <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
-          <i class="material-icons">format_align_justify</i>
-        </md-button>
-        <!-- pop out menu -->
-        <md-menu-content>
-          <md-menu-item>
-            <md-button class="md-warn md-raised" ng-click="doSomething()">Resolve</md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="doSomething()">Goto</md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
-    </div>
-
+  <!-- open button -->
+  <div class="dash-widget-font" layout="row" layout-align="space-between center" ng-click="showNew=!showNew">
+    <span layout-padding>{{vm.issues.length}} Open:</span>
+    <md-button class="md-icon-button material-icons md-24">{{showNew==true ?'expand_more':'expand_less'}}</md-button>
   </div>
 
-
-  <!-- Closed Dropdown row -->
-  <div layout="column" layout-align="start stretch" ng-init="oldposts=[{number :'#54',text :'Invite team members to repo',priority :'github-labels-question'}]">
-    <!-- button -->
-    <md-button layout="row" layout-align="space-between center" ng-click="showOld=!showOld">
-      <span layout="row" class="dash-widget-font">{{oldposts.length}}  Closed:</span>
-      <i class="material-icons md-24">{{showOld==true ?'expand_less':'expand_more'}}</i>
-    </md-button>
-
-    <!-- Closed Issue messages -->
-    <div layout="row" layout-align="space-between center" ng-show="showOld" ng-repeat="post in oldposts">
-      <!-- priority bar -->
-      <img class="{{post.priority}}">
-      <!-- Message -->
-      <p layout-padding class="dash-widget-text message-issues-wrap">{{post.number}} {{post.text}}</p>
-      <!-- Side nav icon -->
-      <md-menu>
-        <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
-          <i class="material-icons">format_align_justify</i>
-        </md-button>
-        <!-- Pop out menu -->
-        <md-menu-content>
-          <md-menu-item>
-            <md-button class="md-warn md-raised" ng-click="doSomething()">Resolve</md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="doSomething()">Goto</md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+  <!-- Open Issue message -->
+  <div layout="row" layout-align="space-between center" ng-show="!showNew" ng-repeat="issue in vm.issues">
+    <!-- label bars -->
+    <div layout="row" class="issue-label-border">
+      <div class="issue-label" style="background-color:#{{label.color}}" ng-repeat="label in issue.labels">
+        <md-tooltip>{{label.name}}</md-tooltip>
+      </div>
     </div>
+
+    <!-- Message -->
+    <div layout-padding class="message-issues-wrap">#{{issue.number}} {{issue.body}}</div>
+
+    <!-- icon -->
+    <md-menu>
+      <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
+        <i class="material-icons">format_align_justify</i>
+      </md-button>
+      <!-- pop out menu -->
+      <md-menu-content>
+        <md-menu-item>
+          <md-button class="md-warn md-raised" ng-click="doSomething()">Resolve</md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="doSomething()">Goto</md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+
+  <!-- CLOSED SECTION BEGIN-->
+
+  <!-- button -->
+  <div class="dash-widget-font" layout="row" layout-align="space-between center" ng-click="showOld=!showOld">
+    <span layout-padding>{{vm.oldissues.length}} Closed:</span>
+    <md-button class="md-icon-button material-icons md-24">{{showOld==true ?'expand_less':'expand_more'}}</md-button>
+  </div>
+
+  <!-- Closed Issue message -->
+  <div layout="row" layout-align="space-between center" ng-show="!showOld" ng-repeat="issue in vm.oldissues">
+    <!-- label bars -->
+    <div layout="row" class="issue-label-border">
+      <div class="issue-label" style="background-color:#{{label.color}}" ng-repeat="label in issue.labels">
+        <md-tooltip>{{label.name}}</md-tooltip>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div layout-padding class="message-issues-wrap">#{{issue.number}} {{issue.body}}</div>
+
+    <!-- icon -->
+    <md-menu>
+      <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Closed issue menu">
+        <i class="material-icons">format_align_justify</i>
+      </md-button>
+      <!-- pop out menu -->
+      <md-menu-content>
+        <md-menu-item>
+          <md-button class="md-warn md-raised" ng-click="doSomething()">Resolve</md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="doSomething()">Goto</md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
   </div>
 
 </div>

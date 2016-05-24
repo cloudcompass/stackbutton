@@ -95,7 +95,7 @@ function AuthService(USER_ROLES, SessionService, $http, $q, $state) {
   }
 
   function isAuthorized(authorizedRoles) {
-    console.log('isAuthorized(): current session', SessionService);
+    //console.log('isAuthorized(): current session', SessionService);
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }

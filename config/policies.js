@@ -52,6 +52,10 @@ module.exports.policies = {
     //TODO lock this down
     getCommits: true
   },
+  IssuesController: {
+    //TODO lock this down
+    getIssues: true
+  },
 
   PayloadController: {
     //TODO lock this down

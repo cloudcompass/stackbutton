@@ -15,7 +15,7 @@
     <label>Project Description</label>
     <textarea ng-model="currentProject.description" columns="1" md-maxlength="50"></textarea>
   </md-input-container>
-  
+
   <!-- Page controls/buttons -->
   <div layout="row" layout-align="end">
     <md-button class="md-raised" ui-sref="home.projects">Back</md-button>
@@ -24,6 +24,6 @@
 
   <!-- Delete button (Separate from page controls)-->
   <div layout-align="start">
-    <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog()">Delete Project</md-button>
+    <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog(currentProject)">Delete Project</md-button>
   </div>
 </md-content>
