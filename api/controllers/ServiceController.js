@@ -7,14 +7,6 @@
 
 module.exports = {
 
-  getAccount: function (req, res) {
-    sails.log.debug("getAccount request body:", req.param('service'));
-    var service = req.param('service');
-    GithubService.getAccount(service, function (err, data, headers) {
-      return res.json(data);
-    });
-  },
-
   getRepos: function (req, res) {
     sails.log.debug("getRepos request body", req.param('service'));
     var service = req.param('service');
