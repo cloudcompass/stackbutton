@@ -30,10 +30,6 @@ module.exports.connections = {
   ***************************************************************************/
   localDiskDb: {
     adapter: 'sails-disk'
-  },
-
-  stackbuttonMongo: {
-    adapter: 'sails-mongo'
   }
 
   /***************************************************************************
