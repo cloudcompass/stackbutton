@@ -39,7 +39,8 @@ A friendly - but powerful - provisioning tool for DevOps tool chains and applica
       port: blah, // defaults to 27017 if omitted
       user: 'blah', // or omit if not relevant
       password: 'blah', // or omit if not relevant
-      database: 'blah' // or omit if not relevant
+      database: 'blah', // or omit if not relevant
+      adapter: 'sails-mongo'
     }
   };
 
@@ -52,6 +53,15 @@ A friendly - but powerful - provisioning tool for DevOps tool chains and applica
      *                                                                          *
      ***************************************************************************/
     connection: 'stackbuttonMongo'
+  };
+
+  /* increase timeout for mongo*/
+  module.exports.orm = {
+    _hookTimeout: 60000 // I used 60 seconds
+  };module.exports.permissions = {
+    _hookTimeout: 60000 // I used 60 seconds
+  };module.exports.pubsub = {
+    _hookTimeout: 60000 // I used 60 seconds
   };
   ```
 
