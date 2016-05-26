@@ -2,9 +2,9 @@
   <!--StackButton toolbar with button back to landing -->
   <div>
     <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
-      <div layout="row" layout-xs="column" layout-align="center center">
-        <img class="sb-logo sb-48px" ui-sref="welcome"/>
-        <h2 hide-xs>StackButton</h2>
+      <div layout="row" layout-align="center center">
+        <img class="sb-logo detail sb-48px" ui-sref="welcome"/>
+        <h2>StackButton</h2>
       </div>
     </md-toolbar>
   </div>
@@ -16,9 +16,13 @@
     <md-card-title>
       <span class="md-headline">Login</span>
     </md-card-title>
-    <md-card-content class="md-warn" ng-if="vm.login.error">{{vm.login.error}}</md-card-content>
-    <md-card-content layout="row" layout-align="space-around center">
 
+    <!-- Error message -->
+    <md-card-content class="md-warn" ng-if="vm.login.error">{{vm.login.error}}</md-card-content>
+
+    <md-card-content layout-xs="column" layout="row" layout-align="space-around center">
+
+      <!-- Username/email box -->
       <md-input-container>
         <label for="userName">Username</label>
         <input id="userName" type="text" name="text" ng-model="vm.login.user" required md-autofocus>
@@ -26,6 +30,7 @@
           <div ng-message="required">Username is required</div>
         </div>
       </md-input-container>
+
       <!-- Password box -->
       <md-input-container>
         <label for="userPass">Password</label>
@@ -37,10 +42,9 @@
 
     </md-card-content>
 
-
     <!-- Buttons-->
-    <md-card-actions layout="row" layout-align="space-between center">
-      <div>
+    <md-card-actions layout-xs="column" layout="row" layout-align="space-between center">
+      <div flex-order-xs="2" >
         <md-button ui-sref="account.register" class="button">No account?</md-button>
         <md-button ui-sref="welcome" class="button">Forgot Password?</md-button>
       </div>

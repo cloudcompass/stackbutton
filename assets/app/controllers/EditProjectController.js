@@ -39,13 +39,15 @@ function EditProjectController($scope, $state, $mdDialog, ProjectService) {
       '     <input type="text" ng-model="confirmBox" required>' +
       '   </md-input-container>' +
       ' </div>' +
-      '<md-button class="md-primary" ng-if="confirmBox==\'' + project.name + '\'" ng-click="confirm(' + project.id + ')">DELETE PROJECT</md-button>' +
+      '<md-button class="md-primary" ng-if="confirmBox==\'' + project.name + '\'" ng-click="confirm(\'' + project.id + '\')">DELETE PROJECT</md-button>' +
       '<md-button class="md-warn" ng-click="cancelDialog()">Cancel</md-button>' +
       '</md-card>',
       controller: function DialogController($scope, $mdDialog) {
         $scope.confirm = function (id) {
           projectResource = ProjectService.project.remove({projid: id});
           console.log("deleted", projectResource);
+          // clear text input:
+          eval('$scope.confirmBox=null');
           $mdDialog.hide();
 
         };
