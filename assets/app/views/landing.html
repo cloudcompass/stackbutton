@@ -43,29 +43,18 @@
     }
   }
 
-  .button {
-    padding: 0.5em 2em;
+  a.button {
     display: inline-block;
-    color: white;
-    text-decoration: none;
-    background: -webkit-linear-gradient(left, #028e8e, #029685);
-    background: linear-gradient(to right, #028e8e, #029685);
-    border-radius: 2em;
-    border: 1px solid transparent;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    -webkit-transition: border 0.1s, box-shadow 0.1s;
-    transition: border 0.1s, box-shadow 0.1s;
+    border-radius: 2em !important;
   }
 
-  .button:hover {
+  a.button:hover {
     background: -webkit-linear-gradient(left, #03c0c0, #03c8b2);
     background: linear-gradient(to right, #03c0c0, #03c8b2);
-    border: 1px solid white;
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
   }
 
   p {
-    width: 60%;
+    width: 65%;
   }
 
 </style>
@@ -74,7 +63,7 @@
               layout="row" layout-align="space-between center">
 
     <div layout="row" layout-xs="column" layout-align="center center">
-      <img class="sb-logo sb-48px"/>
+      <img class="sb-logo detail sb-48px"/>
       <h2 hide-xs>StackButton</h2>
     </div>
 
@@ -88,7 +77,7 @@
       <h1 hide-gt-xs>StackButton</h1>
       <i class="material-icons md-48">layers</i>
       <p>Your workflow in seconds. <br hide-gt-xs> DevOps stack in minutes.</p>
-      <md-button ui-sref="home.projects" class="button">Go to App</md-button>
+      <md-button ui-sref="home.projects" class="button md-raised md-cornered md-accent" layout-padding>Go to App</md-button>
     </div>
     <div layout="column" layout-align="start center">
       <h1>Lorem ipsum</h1>

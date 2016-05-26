@@ -1,80 +1,73 @@
-<div ng-controller="AuthController as vm" class="page-content"
-     flex="100" layout="column" layout-align="space-around center">
-  <md-card md-whiteframe="24">
-    <!--StackButton toolbar with button back to landing -->
-    <div>
-      <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
-        <div layout="row" layout-xs="column" layout-align="center center">
-          <img class="sb-logo sb-48px" ui-sref="welcome"/>
-          <h2 hide-xs>StackButton</h2>
-        </div>
-      </md-toolbar>
-    </div>
+<md-card md-whiteframe="24" style="max-width:600px;height:auto">
+  <!--StackButton toolbar with button back to landing -->
+  <div>
+    <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
+      <div layout="row" layout-align="center center">
+        <img class="sb-logo detail sb-48px" ui-sref="welcome"/>
+        <h2>StackButton</h2>
+      </div>
+    </md-toolbar>
+  </div>
 
-    <md-divider></md-divider>
+  <md-divider></md-divider>
 
-    <!-- Register form -->
-    <form name="registerForm">
-      <md-card-title>
-        <span class="md-headline">Register</span>
-      </md-card-title>
+  <!-- Register form -->
+  <div>
+    <md-card-title>
+      <span class="md-headline">Register</span>
+    </md-card-title>
+  </div>
 
-      <md-card-content layout="column" layout-align="space-around center">
-        <md-card-content class="md-warn" ng-if="vm.reg.error">{{vm.reg.error}}</md-card-content>
-        <container>
-          <!-- Username box -->
-          <md-input-container>
-            <label for="userName">Username</label>
-            <input id="userName" type="text" name="userName" ng-model="vm.reg.user" required md-autofocus>
-            <div ng-messages="userForm.userName.$error">
-              <div ng-message="required">Username is required</div>
-            </div>
-          </md-input-container>
+  <md-card-content layout="row" layout-align="start center" layout-wrap>
+    <md-card-content flex="90" class="md-warn" ng-if="vm.reg.error">{{vm.reg.error}}</md-card-content>
+    <!-- Username box -->
+    <md-input-container flex="45" flex-xs="90">
+      <label for="userName">Username</label>
+      <input id="userName" type="text" name="userName" ng-model="vm.reg.user" required md-autofocus>
+      <div ng-messages="userForm.userName.$error">
+        <div ng-message="required">Username is required</div>
+      </div>
+    </md-input-container>
 
-          <!-- Email box -->
-          <md-input-container>
-            <label for="userEmail">Email</label>
-            <input id="userEmail" name="userEmail" type="email" ng-model="vm.reg.email" required>
-            <div ng-messages="userForm.userEmail.$error">
-              <div ng-message="required">Email is required</div>
-            </div>
-          </md-input-container>
-          </br>
-        </container>
+    <!-- Email box -->
+    <md-input-container flex="45" flex-xs="90">
+      <label for="userEmail">Email</label>
+      <input id="userEmail" name="userEmail" type="email" ng-model="vm.reg.email" required>
+      <div ng-messages="userForm.userEmail.$error">
+        <div ng-message="required">Email is required</div>
+      </div>
+    </md-input-container>
+    <br>
 
-        <container>
-          <!-- Password box -->
-          <md-input-container>
-            <label for="userPass">Password</label>
-            <input id="userPass" name="userPass" type="password" ng-model="vm.reg.password" ng-required>
-            <div ng-messages="userForm.userPass.$error">
-              <div ng-message="required">Password is required</div>
-            </div>
-          </md-input-container>
+    <!-- Password box -->
+    <md-input-container flex="45" flex-xs="90">
+      <label for="userPass">Password</label>
+      <input id="userPass" name="userPass" type="password" ng-model="vm.reg.password" ng-required>
+      <div ng-messages="userForm.userPass.$error">
+        <div ng-message="required">Password is required</div>
+      </div>
+    </md-input-container>
 
-          <!-- Password verify box -->
-          <md-input-container>
-            <label for="userPassVerify">Verify Password</label>
-            <input id="userPassVerify" name="userPassVerify" type="password" ng-model="vm.reg.passwordVerify"
-                   ng-required>
-            <div ng-messages="userForm.userPassVerify.$error">
-              <div ng-message="required">Please verify your password.</div>
-            </div>
-          </md-input-container>
-        </container>
-        </br>
-      </md-card-content>
+    <!-- Password verify box -->
+    <md-input-container flex="45" flex-xs="90">
+      <label for="userPassVerify">Verify Password</label>
+      <input id="userPassVerify" name="userPassVerify" type="password" ng-model="vm.reg.passwordVerify"
+             ng-required>
+      <div ng-messages="userForm.userPassVerify.$error">
+        <div ng-message="required">Please verify your password.</div>
+      </div>
+    </md-input-container>
+    <br>
+  </md-card-content>
 
-      <!-- Register button in card -->
-      <md-card-actions layout="row" layout-align="space-between center">
-        <md-button ui-sref="account.login" class="button">Already have an account?</md-button>
-        <md-button class="md-raised md-cornered md-accent"
-                   ng-click="vm.register(vm.reg.user,vm.reg.email,vm.reg.password,vm.reg.passwordVerify)">Register
-        </md-button>
-      </md-card-actions>
+  <!-- Register button in card -->
+  <md-card-actions layout="row" layout-xs="column" layout-align="space-between center">
+    <md-button flex-order-xs="2" ui-sref="account.login" class="button">Already have an account?</md-button>
+    <md-button class="md-raised md-cornered md-accent"
+               ng-click="vm.register(vm.reg.user,vm.reg.email,vm.reg.password,vm.reg.passwordVerify)">Register
+    </md-button>
+  </md-card-actions>
 
-    </form>
-    </md-card-content>
-  </md-card>
-</div>
+
+</md-card>
 
