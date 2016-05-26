@@ -2,7 +2,7 @@
 $main-bg-color: #ECECEC;
 $text-color: #7A7A7A;
 $text-color-nav: #aaaaaa;
-$accent-color: rgb(0, 150, 136);
+$accent-color: rgb(0, 137, 123);
 $warning-color: #f6f6f6;
 $widget-accent: #0b84ae;
 
@@ -17,6 +17,10 @@ $font-size-large: 22px;
 body {
   color: $text-color;
 
+}
+
+a {
+  color: $accent-color;
 }
 
 .toolbar-button {
