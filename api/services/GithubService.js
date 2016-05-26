@@ -22,10 +22,20 @@ module.exports = {
     sails.log.info('adding webhook', module.service.project, module.id, module.service.token);
     var client = github.client(module.service.token);
     var ghrepo = client.repo(module.config.full_name);
+    var evts;
+    switch (module.type) {
+      case 'repo':
+        evts = ["push", "create", "delete", "member"];
+        break;
+      case 'issues':
+        evts = ['issues'];
+        break;
+    }
+
     ghrepo.hook({
       name: "web",
       active: true,
-      events: ["push", "create", "delete", "member"],
+      events: evts,
       config: {
         url: sails.config.url.hooks + "/payload/" + module.service.project + "/" + module.id,
         content_type: "json"
