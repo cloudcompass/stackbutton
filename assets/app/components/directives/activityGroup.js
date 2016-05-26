@@ -13,13 +13,11 @@ sbapp.directive('activityGroup', function () {
     '    <md-list-item layout="row" layout-align="start start" ng-repeat="activity in activities | orderBy: \'createdAt\':true">' +
     '    <i class="md-title mdi mdi-github-box" style="font-size: 2em"></i> ' +
     '    <div>' +
-    '      {{activity.actor_name}} {{activity.event_action}} to {{activity.target_name}}' +
+    '      {{activity.actor_name}} <span ng-bind-html="activity.event_action"></span> {{activity.target_name}}' +
     '      <span class="md-caption">{{activity.createdAt | date : "M/dd/yyyy, h:mma"}}</span>' +
     '    </div>' +
     '    </md-list-item>' +
     '  </md-list>' +
-    '</section>',
-    link: function (scope, element, attrs) {
-    }
+    '</section>'
   };
 });

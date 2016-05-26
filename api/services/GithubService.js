@@ -40,25 +40,25 @@ module.exports = {
     var event = {};
     event.platform = 'github';
     event.event_type = req.headers['x-github-event'];
-    switch (event.event_type) {
-      case 'push':
-        event.event_action = 'pushed';
-        event.source_url = req.body.compare;
-        break;
-      case 'issues':
-        event.event_action = req.body.action;
-        event.source_url = req.body.issue.html_url;
-        break;
-      case 'ping':
-        event.event_action = 'pinged';
-        break;
-    }
     event.actor_name = req.body.sender.login;
     event.target_name = req.body.repository.name;
     event.target_url = req.body.repository.url;
     event.project = req.param('projectId');
     event.module = req.param('moduleId');
-    //event.created_at = (new Date()).toJSON();
+
+    switch (event.event_type) {
+      case 'push':
+        event.source_url = req.body.compare;
+        event.event_action = 'pushed ' + '<a href="' + event.source_url + '">' + req.body.commits.length + ' ' + 'commits' + '</a> to';
+        break;
+      case 'issues':
+        event.source_url = req.body.issue.html_url;
+        event.event_action = req.body.action + ' an <a href="' + event.source_url + '">issue</a> on';
+        break;
+      case 'ping':
+        event.event_action = 'pinged from';
+        break;
+    }
     return event;
   },
 
