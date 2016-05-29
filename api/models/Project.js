@@ -17,7 +17,7 @@ module.exports = {
       type: "string",
       required: true
     },
-    contributers: {
+    contributors: {
       collection: 'user'
     },
     dashboards: {
