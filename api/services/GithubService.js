@@ -19,28 +19,38 @@ module.exports = {
 
   // automates github webhook creation on creation of Module model instance
   createWebhook: function (module, cb) {
-    sails.log.info('adding webhook', module.service.project, module.id, module.service.token);
-    var client = github.client(module.service.token);
-    var ghrepo = client.repo(module.config.full_name);
-    var evts;
-    switch (module.type) {
-      case 'repo':
-        evts = ["push", "create", "delete", "member"];
-        break;
-      case 'issues':
-        evts = ['issues'];
-        break;
-    }
+    if (!_.has(module, 'config.full_name')) return cb("Repository name not provided");
 
-    ghrepo.hook({
-      name: "web",
-      active: true,
-      events: evts,
-      config: {
-        url: sails.config.url.hooks + "/payload/" + module.service.project + "/" + module.id,
-        content_type: "json"
+    var serviceId = _.has(module.service, 'id') ? module.service.id : module.service;
+
+    Service.findOne({id: serviceId}).exec(function (err, service) {
+      if (err) return cb(err);
+      if (service == undefined) return cb('Invalid parent service');
+
+      sails.log.info('adding webhook', service.project, service.token);
+      var client = github.client(service.token);
+      var ghrepo = client.repo(module.config.full_name);
+      var evts;
+      switch (module.type) {
+        case 'repo':
+          evts = ["push", "create", "delete", "member"];
+          break;
+        case 'issues':
+          evts = ['issues'];
+          break;
       }
-    }, cb);
+
+      ghrepo.hook({
+        name: "web",
+        active: true,
+        events: evts,
+        config: {
+          url: sails.config.url.hooks + "/payload/" + service.project,
+          content_type: "json"
+        }
+      }, cb);
+    });
+
   },
 
   // constructs Event model instance for PayloadController
@@ -54,7 +64,6 @@ module.exports = {
     event.target_name = req.body.repository.name;
     event.target_url = req.body.repository.url;
     event.project = req.param('projectId');
-    event.module = req.param('moduleId');
 
     switch (event.event_type) {
       case 'push':
