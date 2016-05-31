@@ -12,7 +12,7 @@ function ProjectController($state, $scope, ProjectService, $mdDialog) {
   /* CALLABLE MEMBERS */
 
   vm.setCurrentProject = $scope.setCurrentProject;
-  vm.projects = $scope.currentUser ? ProjectService.project.query({owner: $scope.currentUser.id}) : [];
+  vm.projects = $scope.currentUser ? ProjectService.project.query() : [];
 
 
   /* ACTIONS */

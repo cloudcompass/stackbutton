@@ -35,9 +35,6 @@ module.exports = {
     },
     project: {
       model: "project"
-    },
-    module: {
-      model: "module"
     }
 
   }

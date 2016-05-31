@@ -21,16 +21,18 @@ module.exports = {
       via: 'modules'
     },
     service: {
-      model: 'service'
+      model: 'service',
+      required: true
     }
   },
 
-  afterCreate: function (module, next) {
-    sails.log.info('Project.afterCreate.createWebhook', module);
-    Module.findOne({id: module.id}).populate('service')
-      .exec(function (err, res) {
-        if (res.service.platform == 'github') {
-          GithubService.createWebhook(res, next);
+  beforeCreate: function (module, next) {
+    sails.log.info('Project.beforeCreate.createWebhook', module);
+    var serviceId = _.has(module.service, 'id') ? module.service.id : module.service;
+    Service.findOne({id: serviceId})
+      .exec(function (err, service) {
+        if (service.platform == 'github') {
+          GithubService.createWebhook(module, next);
         }
       });
   }

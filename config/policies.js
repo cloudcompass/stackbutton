@@ -35,7 +35,7 @@ module.exports.policies = {
     'AuditPolicy',
     'OwnerPolicy',
     'PermissionPolicy',
-    'RolePolicy',
+    'SBRolePolicy',
     'CriteriaPolicy'
   ],
 
