@@ -82,7 +82,7 @@ module.exports = {
         AuthService.getAuthorizedProjects(userId, function (err, projects) {
           allowedRecords = _.filter(records, function (o) {
             if (modelIdentity == 'project') return _.includes(projects, o.id);
-            return _.includes(projects, o.project);
+            return _.includes(projects, o.project) || _.includes(projects, o.project.id);
           });
           cb(allowedRecords);
         });
@@ -92,7 +92,7 @@ module.exports = {
         AuthService.getAuthorizedServices(userId, function (err, services) {
           allowedRecords = _.filter(records, function (o) {
             if (modelIdentity == 'service') return _.includes(services, o.id);
-            return _.includes(services, o.service);
+            return _.includes(services, o.service) || _.includes(services, o.service.id);
           });
           cb(allowedRecords);
         });
@@ -102,7 +102,7 @@ module.exports = {
         AuthService.getAuthorizedDashboards(userId, function (err, dashboards) {
           allowedRecords = _.filter(records, function (o) {
             if (modelIdentity == 'dashboard') return _.includes(dashboards, o.id);
-            return _.includes(dashboards, o.dashboard);
+            return _.includes(dashboards, o.dashboard) || _.includes(dashboards, o.dashboard.id);
           });
           cb(allowedRecords);
         });
