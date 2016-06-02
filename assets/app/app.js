@@ -149,7 +149,7 @@ sbapp
         })
         // PROJECT DASHBOARD
         .state('home.dashboard', {
-          url: '/dashboard',
+          url: '/dashboard/{dashboardId:.+}',
           controller: 'DashboardController',
           controllerAs: 'vm',
           templateUrl: 'app/views/dashboard.html',

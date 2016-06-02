@@ -56,7 +56,6 @@ module.exports = {
   // constructs Event model instance for PayloadController
   createEvent: function (req, cb) {
     sails.log.info('creating event', req.body);
-
     var event = {};
     event.platform = 'github';
     event.event_type = req.headers['x-github-event'];
@@ -83,7 +82,6 @@ module.exports = {
 
   // exposed to client in ServiceController
   getRepos: function (serviceID, cb) {
-    sails.log.debug('finding service:', serviceID);
     Service.findOne({id: serviceID})
       .exec(function (err, res) {
         if (res) {
@@ -98,7 +96,6 @@ module.exports = {
 
   // exposed to client in VCSController
   getCommits: function (widgetId, cb) {
-    sails.log.debug('finding widget:', widgetId);
     Widget.findOne({id: widgetId}).populate('modules')
       .exec(function (err, widget) {
         if (widget) {
