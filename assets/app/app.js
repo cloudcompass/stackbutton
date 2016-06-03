@@ -180,6 +180,17 @@ sbapp
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
+        // TEAM CONFIG
+        .state('home.team', {
+          url: '/team',
+          templateUrl: 'app/views/teamconfig.html',
+          controller: 'TeamController',
+          controllerAs: 'vm',
+          data: {
+            title: 'Team',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
+        })  
         // FOR DEVELOPMENT
         .state('home.widgettest', {
           url: '/widgettest',
