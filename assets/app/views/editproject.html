@@ -1,29 +1,33 @@
-<!--
-- Created to replace the previous edit project dialog
-- REQUIRED/TODO: Hookup backend so that project information is save-able
- -->
+<md-content md-theme="dark" class="md-padding">
+  <form name="editproj" ng-disabled="editproj.$submitted" ng-submit="vm.updateProject(vm.name, vm.description)"
+        layout="column" layout-align="center">
 
-<!-- Project Title -->
-<md-content md-theme="dark" class="md-padding" layout="column" layout-align="center">
-  <md-input-container>
-    <label>Project Title</label>
-    <input ng-model="currentProject.name" md-maxlength="50" >
-  </md-input-container>
+    <!-- Project Title -->
+    <md-input-container>
+      <label>Project Title</label>
+      <input ng-model="vm.name" md-maxlength="50">
+    </md-input-container>
 
-  <!-- Project Description -->
-  <md-input-container flex>
-    <label>Project Description</label>
-    <textarea ng-model="currentProject.description" columns="1" md-maxlength="50"></textarea>
-  </md-input-container>
+    <!-- Project Description -->
+    <md-input-container flex>
+      <label>Project Description</label>
+      <textarea ng-model="vm.description" columns="1" md-maxlength="100"></textarea>
+    </md-input-container>
 
-  <!-- Page controls/buttons -->
-  <div layout="row" layout-align="end">
-    <md-button class="md-raised" ui-sref="home.projects">Back</md-button>
-    <md-button class="md-raised" ng-click="vm.updateProject(currentProject.name, currentProject.description)">Save</md-button>
-  </div>
+    <!-- Page controls/buttons -->
+    <div layout="row" layout-align="space-between center">
+      <!-- Delete button (Separate from page controls)-->
+      <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog(currentProject)">Delete Project</md-button>
 
-  <!-- Delete button (Separate from page controls)-->
-  <div layout-align="start">
-    <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog(currentProject)">Delete Project</md-button>
-  </div>
+      <span layout layout-align="end center">
+        <button class="md-button md-raised" ui-sref="home.projects">Back</button>
+        <button class="md-button md-accent md-raised" ng-disabled="editproj.$invalid || editproj.$submitted"
+                type="submit">
+          <md-progress-linear ng-show="editproj.$submitted" class="md-accent"></md-progress-linear>
+          <span ng-hide="editproj.$submitted">Save</span>
+        </button>
+      </span>
+    </div>
+
+  </form>
 </md-content>

@@ -8,12 +8,17 @@ $widget-accent: #0b84ae;
 
 // VARIABLES
 $left-sidenav-width: 200px;
-$widget-height: 175px;
-$card-width: 200px;
+$proj-height: 150px;
+$proj-width: 200px;
 $font-weight-bold: 600;
 $font-size-large: 22px;
 
 // LAYOUT
+project-card section {
+  min-height: $proj-height;
+  width: $proj-width;
+}
+
 body {
   color: $text-color;
 
@@ -144,13 +149,6 @@ a {
   opacity: 0;
 }
 
-.fixed-height-widget {
-  height: $widget-height;
-}
-
-.fixed-width {
-  width: $card-width;
-}
 
 // charts
 .donut-chart-title {
