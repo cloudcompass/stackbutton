@@ -51,6 +51,8 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
 
   function toggleRightSidebar() {
     vm.showActivities = !vm.showActivities;
+    // vm.hideMobileClass = vm.showActivities ? 'hide-xs' : '';
+    // console.log(vm.hideMobileClass);
   }
 
   function toggleItemsList() {
