@@ -26,12 +26,12 @@
 
     <!-- Author/avatar section -->
     <div layout layout-padding>
-      <img style="height: 3em; width: 3em;" src={{commit.author.avatar_url}}>
+      <img style="height: 3em; width: 3em;" ng-src="{{commit.author.avatar_url}}">
       <span layout="column" layout-align="start start">
         <b>By:
-          <span class="dash-widget-font">{{commit.author.login}}</span>
+          <span class="dash-widget-font">{{commit.author? commit.author.login : commit.commit.committer.name}}</span>
         </b>
-        <span class="md-caption">{{commit.commit.author.date | date : "M/dd/yyyy',' h:mma"}}</span>
+        <span class="md-caption">{{commit.commit.commiter.date | date : "M/dd/yyyy',' h:mma"}}</span>
       </span>
     </div>
 
