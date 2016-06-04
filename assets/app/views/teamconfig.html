@@ -1,73 +1,39 @@
-<!-- Team config view -->
-<div ng-controller="TeamController as vm" layout="column" ng-cloak>
+<div ng-controller="TeamController as ctrl" layout="column" ng-cloak>
+  <md-content class="md-padding autocomplete" layout="column">
 
-  <md-content class="md-padding">
-    <!-- SEARCH BAR -->
-    <h3>Add team member: </h3>
-    <form>
-      <p>Search for a Stackbutton user to add them to your team.</p>
-      <md-autocomplete
-        ng-disabled="ctrl.isDisabled"
-        md-selected-item="search.selectedItem"
-        md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-        md-search-text="ctrl.searchText"
-        md-selected-item-change="ctrl.selectedItemChange(item)"
-        md-items="user in vm.contributors"
-        md-item-text="user.name"
-        md-min-length="0"
-        placeholder="Search for a Stackbutton user">
-        <md-item-template>
-          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-        </md-item-template>
-        <md-not-found>
-          No states matching "{{ctrl.searchText}}" were found.
-          <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
-        </md-not-found>
-      </md-autocomplete>
-      <br/>
-      <md-checkbox>Search only Team Members</md-checkbox>
-      <md-checkbox ng-model="ctrl.isDisabled">Disable the input?</md-checkbox>
-    </form>
+    <!-- Search bar -->
+    <h2>Add a team member:</h2>
+    <p>Use the Search bar below to search stackbutton for a user to add them to your team. You can select more than one use at a time.</p>
+    <md-contact-chips
+      ng-model="ctrl.asyncContacts"
+      md-contacts="ctrl.delayedQuerySearch($query)"
+      md-contact-name="name"
+      md-contact-image="image"
+      md-contact-email="email"
+      md-require-match="true"
+      md-highlight-flags="i"
+      filter-selected="ctrl.filterSelected"
+      placeholder="To">
+    </md-contact-chips>
 
-    <md-divider></md-divider>
+    <!--Team member list -->
+    <h2>Your Team:</h2>
+    <md-checkbox ng-model="editTeamSelected">Edit team members</md-checkbox>
 
-    <!--TEAM CARDS DISPLAY -->
-    <h3>Your Team:</h3>
-    <div layout="row" layout-wrap layout-margin>
+    <p>These are your current team members.</p>
 
-      <!--User card -->
+    <!-- Repeated contacts -->
+    <md-list class="fixedRows" flex>
+      <md-list-item class="md-2-line contact-item selected" ng-repeat="contact in ctrl.users">
+        <img ng-src="images/stacky500p.png" class="md-avatar"/>
+        <div class="md-list-item-text compact md-raised">
+          <h3>{{contact.username}}</h3>
+          <p>{{contact.email}}</p>
+          <md-button class="md-raised md-warn" ng-hide="!editTeamSelected">Remove</md-button>
+        </div>
 
-      <md-card ng-repeat="user in vm.contributors" ng-click="showDetails = ! showDetails">
-        <md-card-header>
-
-          <!--User profile image -->
-          <md-card-avatar>
-            <img class="md-user-avatar" src="images/stacky500p.png"/>
-          </md-card-avatar>
-
-          <!--User name and email -->
-          <md-card-header-text>
-            <span class="md-title">{{user.name}}</span>
-            <span class="md-subhead">{{user.name}}</span>
-          </md-card-header-text>
-        </md-card-header>
-
-        <!-- User description (Hidden until clicked)
-                - Email
-                - Bio
-        -->
-        <p ng-hide="!showDetails">
-          Email: email@company.de </br>
-          Bio: THIS IS A GENERIC USER DESCRIPTION
-        </p>
-
-        <!--User actions (Hidden until clicked) -->
-        <md-card-actions layout="row" layout-align="end center" ng-hide="!showDetails">
-          <md-button class="md-raised">View Profile</md-button>
-          <md-button class="md-raised md-warn">remove</md-button>
-        </md-card-actions>
-      </md-card>
-    </div>
-
+      </md-list-item>
+    </md-list>
+    <br>
   </md-content>
 </div>
