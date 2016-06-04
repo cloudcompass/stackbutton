@@ -23,7 +23,6 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   vm.toggleItemsList = toggleItemsList;
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
-  vm.logOut = logOut;
   vm.loadProjects = loadProjects;
   vm.projectList = [];
   vm.selectProject = selectProject;
@@ -74,12 +73,6 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
         .hideDelay(2000)
         .position('bottom right')
     );
-  }
-
-  function logOut() {
-    AuthService.logout();
-    SessionService.destroy();
-    $scope.setCurrentUser(null);
   }
 
 } // MainController end

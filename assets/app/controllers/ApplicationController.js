@@ -21,8 +21,15 @@ function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENT
 
   $scope.setCurrentUser = setCurrentUser;
   $scope.setCurrentProject = setCurrentProject;
+  $scope.logOut = logOut;
 
   /* FUNCTIONS */
+
+  function logOut() {
+    AuthService.logout();
+    SessionService.destroy();
+    setCurrentUser(null);
+  }
 
   function setCurrentUser(user) {
     $scope.currentUser = user;

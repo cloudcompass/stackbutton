@@ -8,7 +8,8 @@ var sbapp = angular.module('sbapp', [
   'ui.router',
   'ngMaterial',
   'nvd3',
-  'ngSails'
+  'ngSails',
+  'ngMessages'
 ]);
 
 sbapp
