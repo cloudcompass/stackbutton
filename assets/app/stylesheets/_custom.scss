@@ -8,6 +8,7 @@ $widget-accent: #0b84ae;
 
 // VARIABLES
 $left-sidenav-width: 200px;
+$right-sidenav-width: 250px;
 $proj-height: 150px;
 $proj-width: 200px;
 $font-weight-bold: 600;
@@ -183,6 +184,12 @@ md-sidenav.md-locked-open.md-sidenav-left {
   width: $left-sidenav-width;
   min-width: $left-sidenav-width;
   max-width: $left-sidenav-width;
+}
+
+md-sidenav.md-locked-open.md-sidenav-right {
+  width: $right-sidenav-width;
+  min-width: $right-sidenav-width;
+  max-width: $right-sidenav-width;
 }
 
 md-sidenav {

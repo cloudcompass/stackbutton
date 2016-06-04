@@ -8,7 +8,8 @@ var sbapp = angular.module('sbapp', [
   'ui.router',
   'ngMaterial',
   'nvd3',
-  'ngSails'
+  'ngSails',
+  'ngMessages'
 ]);
 
 sbapp
@@ -146,6 +147,16 @@ sbapp
             title: 'Add a tool',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
+        })// SERVICE CONFIG
+        .state('home.servicesconfig', {
+          url: '/servicesconfig',
+          templateUrl: 'app/views/servicesconfig.html',
+          controller: 'ServicesconfigController',
+          controllerAs: 'vm',
+          data: {
+            title: 'Configure Services',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
         })
         // PROJECT DASHBOARD
         .state('home.dashboard', {
@@ -188,17 +199,6 @@ sbapp
           controllerAs: 'vm',
           data: {
             title: 'Team',
-            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-          }
-        })  
-        // FOR DEVELOPMENT
-        .state('home.widgettest', {
-          url: '/widgettest',
-          templateUrl: 'app/views/widgetstest.html',
-          controller: '',
-          controllerAs: 'vm',
-          data: {
-            title: 'TEST',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })

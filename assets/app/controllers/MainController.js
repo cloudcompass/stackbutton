@@ -23,7 +23,6 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   vm.toggleItemsList = toggleItemsList;
   vm.showSimpleToast = showSimpleToast;
   vm.toggleRightSidebar = toggleRightSidebar;
-  vm.logOut = logOut;
   vm.loadProjects = loadProjects;
   vm.projectList = [];
   vm.selectProject = selectProject;
@@ -52,6 +51,8 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
 
   function toggleRightSidebar() {
     vm.showActivities = !vm.showActivities;
+    // vm.hideMobileClass = vm.showActivities ? 'hide-xs' : '';
+    // console.log(vm.hideMobileClass);
   }
 
   function toggleItemsList() {
@@ -74,12 +75,6 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
         .hideDelay(2000)
         .position('bottom right')
     );
-  }
-
-  function logOut() {
-    AuthService.logout();
-    SessionService.destroy();
-    $scope.setCurrentUser(null);
   }
 
 } // MainController end
