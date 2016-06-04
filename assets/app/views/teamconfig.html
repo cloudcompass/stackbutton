@@ -1,0 +1,39 @@
+<div ng-controller="TeamController as ctrl" layout="column" ng-cloak>
+  <md-content class="md-padding autocomplete" layout="column">
+
+    <!-- Search bar -->
+    <h2>Add a team member:</h2>
+    <p>Use the Search bar below to search stackbutton for a user to add them to your team. You can select more than one use at a time.</p>
+    <md-contact-chips
+      ng-model="ctrl.asyncContacts"
+      md-contacts="ctrl.delayedQuerySearch($query)"
+      md-contact-name="name"
+      md-contact-image="image"
+      md-contact-email="email"
+      md-require-match="true"
+      md-highlight-flags="i"
+      filter-selected="ctrl.filterSelected"
+      placeholder="To">
+    </md-contact-chips>
+
+    <!--Team member list -->
+    <h2>Your Team:</h2>
+    <md-checkbox ng-model="editTeamSelected">Edit team members</md-checkbox>
+
+    <p>These are your current team members.</p>
+
+    <!-- Repeated contacts -->
+    <md-list class="fixedRows" flex>
+      <md-list-item class="md-2-line contact-item selected" ng-repeat="contact in ctrl.users">
+        <img ng-src="images/stacky500p.png" class="md-avatar"/>
+        <div class="md-list-item-text compact md-raised">
+          <h3>{{contact.username}}</h3>
+          <p>{{contact.email}}</p>
+          <md-button class="md-raised md-warn" ng-hide="!editTeamSelected">Remove</md-button>
+        </div>
+
+      </md-list-item>
+    </md-list>
+    <br>
+  </md-content>
+</div>
