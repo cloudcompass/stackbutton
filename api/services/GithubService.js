@@ -67,11 +67,11 @@ module.exports = {
     switch (event.event_type) {
       case 'push':
         event.source_url = req.body.compare;
-        event.event_action = 'pushed ' + '<a href="' + event.source_url + '">' + req.body.commits.length + ' ' + 'commits' + '</a> to';
+        event.event_action = 'pushed ' + '<a href="' + event.source_url + '" target="_blank">' + req.body.commits.length + ' ' + 'commits' + '</a> to';
         break;
       case 'issues':
         event.source_url = req.body.issue.html_url;
-        event.event_action = req.body.action + ' an <a href="' + event.source_url + '">issue</a> on';
+        event.event_action = req.body.action + ' an <a href="' + event.source_url + '" target="_blank">issue</a> on';
         break;
       case 'ping':
         event.event_action = 'pinged from';
