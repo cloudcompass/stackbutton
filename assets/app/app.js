@@ -146,6 +146,16 @@ sbapp
             title: 'Add a tool',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
+        })// SERVICE CONFIG
+        .state('home.servicesconfig', {
+          url: '/servicesconfig',
+          templateUrl: 'app/views/servicesconfig.html',
+          controller: 'ServicesconfigController',
+          controllerAs: 'vm',
+          data: {
+            title: 'Configure Services',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
         })
         // PROJECT DASHBOARD
         .state('home.dashboard', {
@@ -190,7 +200,7 @@ sbapp
             title: 'Team',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
-        })  
+        })
         // FOR DEVELOPMENT
         .state('home.widgettest', {
           url: '/widgettest',
