@@ -8,7 +8,8 @@ var sbapp = angular.module('sbapp', [
   'ui.router',
   'ngMaterial',
   'nvd3',
-  'ngSails'
+  'ngSails',
+  'ngMessages'
 ]);
 
 sbapp
@@ -190,7 +191,7 @@ sbapp
             title: 'Team',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
-        })  
+        })
         // FOR DEVELOPMENT
         .state('home.widgettest', {
           url: '/widgettest',
