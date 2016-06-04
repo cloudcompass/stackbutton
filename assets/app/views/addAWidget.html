@@ -3,11 +3,11 @@
   {
     text :'Issues',
     pic :'issues-widget-detail',
-    description : 'The isssues widget shows open and closed notes on your repository.'
+    description : 'The Isssues widget shows open and closed notes on your repository.'
   }
   ]">
 </div>
-<div ng-app="" ng-init="repowid=[
+<div ng-init="repowid=[
   {
     text :'Commits',
     pic :'commits-widget-detail',
@@ -15,11 +15,16 @@
   }
   ]">
 </div>
-<div ng-app="" ng-init="infowid=[
+<div ng-init="infowid=[
   {
     text :'Contributors',
-    pic :'',
-    description : ''
+    pic :'contributors-widget-detail',
+    description : 'The Contributors widget shows the list of users who have contributed to the repository.'
+  },
+  {
+    text :'Branches',
+    pic :'branches-widget-detail',
+    description : 'The Branches widget shows the list of branches that currently exist on the repository.'
   }
   ]">
 </div>
@@ -86,6 +91,18 @@
     </md-button>
     <md-divider></md-divider>
   </div>
+
+  <div layout="row" layout-align="space-around center" ng-show="showinfo" ng-repeat="tool in infowid" layout-padding>
+    <div layout="column" layout-align="space-between start" layout-padding>
+      <md-checkbox><h4>{{tool.text}}</h4></md-checkbox>
+      <img class="{{tool.pic}}">
+    </div>
+    <div layout="column" layout-align="space-between start" layout-padding>
+      <h4>Description:</h4>
+      <span>{{tool.description}}</span>
+    </div>
+  </div>
+
   <!-- end of Information widget dropdown -->
 
 </section>
