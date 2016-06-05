@@ -7,9 +7,8 @@
     </div>
 
     <!--Top Project Selector -->
-    <md-menu layout="row" layout-align="start center">
-      <md-button ng-hide="currentProject==null" ng-click="$mdOpenMenu()" style="width:100%"
-                 class="md-raised md-primary">
+    <md-menu layout="row" layout-align="start center" flex="20" md-position-mode="target-right target" >
+      <md-button ng-click="$mdOpenMenu()" style="width:100%" class="md-primary" >
         <span>Project Selector</span>
         <i class="material-icons">arrow_drop_down</i>
       </md-button>
@@ -21,14 +20,8 @@
     </md-menu>
     <!-- end Top Project Selector -->
 
-    <!-- allow white space for project selector -->
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <!-- end allow white space for project selector -->
+    <!--  push project selector to the left -->
+    <div flex="50"></div>
 
     <!-- user options selector -->
     <md-button hide show-xs ng-click="vm.toggleItemsList()" aria-label="Menu">
@@ -52,19 +45,24 @@
       </md-menu>
     </div>
     <!-- user options selector -->
-
   </md-toolbar>
-  <!-- Top bar end -->
+  <!-- end Top bar  -->
 
-  <!-- Left nav begin -->
+
   <div layout="row" flex>
 
-    <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="left"
-                class="md-whiteframe-z2 md-sidenav-left" md-theme="dark">
+    <!-- Left nav begin -->
+    <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left"
+                md-theme="dark">
 
       <!--Project selector -->
-      <div class="fixed-height-widget" md-theme="default" layout="column" ng-hide="currentProject==null">
-        <md-toolbar class="md-accent" layout="row" layout-align="space-between center">
+      <div class="fixed-height-widget" layout="column" ng-hide="currentProject==null">
+          <md-button ui-sref="home.projects" layout="row" layout-align="start center">
+            <i class="dash-widget-topbar-text material-icons" flex="33">navigate_before</i>
+            <span>Projects</span>
+          </md-button>
+
+          <md-toolbar class="md-accent" layout="row" layout-align="space-between center">
            <span style="width:100%" class="md-body-1 capitalize" layout-padding>
              {{currentProject.name}}
            </span>
@@ -73,48 +71,74 @@
             <i class="dash-widget-topbar-text material-icons">mode_edit</i>
           </md-button>
         </md-toolbar>
+
         <p layout-padding>
           {{currentProject.description}}
         </p>
       </div>
       <md-divider></md-divider>
+      <!-- end Project selector -->
 
       <!-- Menu items -->
-      <div layout="column" layout-align="center start" ng-hide="currentProject==null"
-           ng-init="Menu=[{name: 'Dashboard',sub1: 'Dashboard 1',sub2: 'Dashboard 2' ,icon: 'add'},{name:'Modules'},{name:'Services'}]">
+        <div layout="column" layout-align="center start" ng-hide="currentProject==null">
 
-        <div ng-repeat="item in Menu">
-          <md-list>
-            <div layout="row" layout-align="space-between center">
-              <div class="issue-label" style="background-color:lightgray"></div>
+          <!-- Dashboard Button -->
+          <div layout="row" layout-align="space-between center">
+            <span class="leftnav-color-indent-item"></span>
+            <md-button>
+              <span>Dashboard</span>
+            </md-button>
+
+            <!-- add Dashboard -->
+            <md-button style="min-width: 1px">
+              <i class="material-icons">add</i>
+            </md-button>
+          </div>
+
+          <!-- separate buttons-->
+          <md-divider></md-divider>
+
+          <!-- sub dashboards 1/2 -->
+            <div layout="row" layout-align="start center">
+              <span class="leftnav-color-indent-sub"></span>
               <md-button>
-                <span>{{item.name}}</span>
-              </md-button>
-
-              <md-button ng-hide="'{{item.name}}'!='Dashboard'" style="min-width: 1px">
-                <i class="material-icons">{{item.icon}}</i>
+                <span>Dashboard 1</span>
               </md-button>
             </div>
 
-            <div layout="column" layout-align="center center" ng-hide="'{{item.name}}'!='Dashboard'">
-              <div layout="row" layout-align="start stretch">
-                <div class="issue-label" style="background-color:gray"></div>
-                <md-button>
-                  <span>{{item.sub1}}</span>
-                </md-button>
-              </div>
-
-              <div layout="row" layout-align="start center">
-                <div class="issue-label" style="background-color:gray"></div>
-                <md-button>
-                  <span>{{item.sub2}}</span>
-                </md-button>
-              </div>
+            <div layout="row" layout-align="start center">
+              <span class="leftnav-color-indent-sub"></span>
+              <md-button>
+                <span>Dashboard 2</span>
+              </md-button>
             </div>
+          <!-- end sub dashboards -->
+
+          <!-- separate buttons-->
+          <md-divider></md-divider>
+
+          <!-- Module Button -->
+          <div layout="row" layout-align="start center">
+            <span class="leftnav-color-indent-item"></span>
+            <md-button>
+              <span>Modules</span>
+            </md-button>
+          </div>
+
+          <!-- separate buttons-->
+          <md-divider></md-divider>
+
+          <!-- Service Button -->
+          <div layout="row" layout-align="start center">
+            <span class="leftnav-color-indent-item"></span>
+            <md-button>
+              <span>Services</span>
+            </md-button>
+          </div>
+
+          <!-- separate buttons-->
+          <md-divider></md-divider>
         </div>
-      </div>
-      <!-- end Menu items -->
-
     </md-sidenav>
     <!-- Left nav end -->
 
@@ -140,14 +164,13 @@
       <!-- Right pop-out end -->
     </md-content>
     <!-- Content end -->
-
-
   </div>
 </div>
 
 
 <!-- old menu item -->
-<!--        <div ng-repeat-start="item in vm.menuItems[0].server" layout="column" layout-align="start stretch">
+<!--
+<div ng-repeat-start="item in vm.menuItems[0].server" layout="column" layout-align="start stretch">
 <md-button layout="row" layout-align="space-between center" class="capitalize"
            ng-click="item.expanded=!item.expanded" ng-click="vm.selectItem(item)"
            ui-sref="{{item.sref}}">
@@ -171,5 +194,6 @@
     {{child.name}}
   </md-button>
 </div>
-</div>-->
+</div>
+-->
 <!-- end old Menu items -->
