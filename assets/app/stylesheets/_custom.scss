@@ -2,9 +2,10 @@
 $main-bg-color: #ECECEC;
 $text-color: #7A7A7A;
 $text-color-nav: #aaaaaa;
-$accent-color: rgb(0, 137, 123);
+$accent-color: #009688;
 $warning-color: #f6f6f6;
-$widget-accent: #0b84ae;
+$widget-accent: #00796B;
+$widget-width: 250px;
 
 // VARIABLES
 $left-sidenav-width: 200px;
@@ -15,7 +16,7 @@ $font-weight-bold: 600;
 $font-size-large: 22px;
 
 // LAYOUT
-project-card section {
+project-card {
   min-height: $proj-height;
   width: $proj-width;
   word-break: break-word;
@@ -130,6 +131,8 @@ a {
 
 // panel-widget
 .panel-widget {
+  width: $widget-width;
+  min-height: 200px;
   background-color: white;
 
   &-toolbar {
@@ -284,15 +287,13 @@ md-backdrop.md-sidenav-backdrop {
 .leftnav-color-indent {
 
   &-item{
-    background-color:lightgray;
-    width: 10px;
-    height: 35px
+    background-color: gray;
+    width: 5px;
   }
 
   &-sub {
-    background-color:gray;
-    width: 30px;
-    height: 35px
+    background-color: lightgray;
+    width: 5px;
   }
 
 }

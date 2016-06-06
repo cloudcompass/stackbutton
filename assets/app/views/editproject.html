@@ -1,4 +1,4 @@
-<md-content md-theme="dark" class="md-padding">
+<md-content md-theme="dark" class="md-padding md-whiteframe-2dp" layout-margin>
   <form name="editproj" ng-disabled="editproj.$submitted" ng-submit="vm.updateProject(vm.name, vm.description)"
         layout="column" layout-align="center">
 
@@ -15,7 +15,7 @@
     </md-input-container>
 
     <!-- Page controls/buttons -->
-    <div layout="row" layout-align="space-between center">
+    <div layout="row" layout-align="space-between center" layout-xs="column">
       <!-- Delete button (Separate from page controls)-->
       <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog(currentProject)">Delete Project</md-button>
 

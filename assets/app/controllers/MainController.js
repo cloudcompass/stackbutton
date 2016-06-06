@@ -19,19 +19,19 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   /* CALLABLE MEMBERS */
 
   vm.menuItems = [];
-  vm.selectItem = selectItem;
-  vm.toggleItemsList = toggleItemsList;
-  vm.showSimpleToast = showSimpleToast;
-  vm.toggleRightSidebar = toggleRightSidebar;
-  vm.loadProjects = loadProjects;
   vm.projectList = [];
+  vm.showActivities = false;
+  vm.loadProjects = loadProjects;
+  vm.selectItem = selectItem;
   vm.selectProject = selectProject;
-  vm.showActivities = $mdMedia('gt-xs') ? true : false;
+  vm.showSimpleToast = showSimpleToast;
+  vm.toggleActivityDrawer = toggleActivityDrawer;
+  vm.toggleLeftNav = toggleLeftNav;
 
   /* ACTIONS */
 
-  navService
-    .loadAllItems()
+  $scope.currentUser && loadProjects();
+  navService.loadAllItems()
     .then(function (menuItems) {
       vm.menuItems = [].concat(menuItems);
     });
@@ -43,23 +43,19 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   }
 
   function loadProjects() {
-    return ProjectService.project.query({owner: $scope.currentUser.id},
+    return ProjectService.project.query({populate: 'dashboards'},
       function (projects) {
         vm.projectList = projects;
       })
   }
 
-  function toggleRightSidebar() {
+  function toggleActivityDrawer() {
     vm.showActivities = !vm.showActivities;
-    // vm.hideMobileClass = vm.showActivities ? 'hide-xs' : '';
-    // console.log(vm.hideMobileClass);
+    $mdSidenav('activitydrawer').toggle();
   }
 
-  function toggleItemsList() {
-    var pending = $mdBottomSheet.hide() || $q.when(true);
-    pending.then(function () {
-      $mdSidenav('left').toggle();
-    });
+  function toggleLeftNav() {
+    $mdSidenav('leftnav').toggle();
   }
 
   function selectItem(item) {

@@ -10,7 +10,7 @@ function ToolService($resource, $q) {
   ToolService.loadTools = loadTools;
   ToolService.loadServiceRepos = $resource('/service/getRepos');
   ToolService.modules = [
-    {name: 'repo', display: 'Repository'},
+    {name: 'repo', display: 'Source Control'},
     {name: 'issues', display: 'Issue Tracking'},
     {name: 'wiki', display: 'Wiki'},
     {name: 'chat', display: 'Messaging'}

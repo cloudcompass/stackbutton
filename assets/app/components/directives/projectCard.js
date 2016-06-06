@@ -3,7 +3,7 @@ sbapp.directive('projectCard', function () {
     restrict: 'E',
     scope: {project: '=', select: '&'},
     template: '' +
-    '<section class="md-whiteframe-z1 panel-widget">' +
+    '<md-card>' +
     '  <md-toolbar class="md-accent" layout="row" layout-align="space-between center">' +
     '    <md-button class="toolbar-button" ui-sref="home.dashboard({dashboardId:project.dashboards[0].id})">' +
     '      <span class="dash-widget-topbar-text capitalize">{{project.name}}</span>' +
@@ -15,6 +15,6 @@ sbapp.directive('projectCard', function () {
     '  <p layout-padding>' +
     '    {{project.description}}' +
     '  </p>' +
-    '</section>'
+    '</md-card>'
   };
 });
