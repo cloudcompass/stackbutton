@@ -1,5 +1,6 @@
 <div layout="row" layout-wrap layout-margin layout-align="center start">
   <md-progress-circular mode="indeterminate" ng-show="vm.loading" md-diameter="96"></md-progress-circular>
+  <span ng-if="!vm.loading&&vm.widgets.length==0">Oops, you have no widgets. This message will be made prettier.</span>
 
   <panel-widget ng-repeat="widget in vm.widgets" widget="widget"></panel-widget>
 
