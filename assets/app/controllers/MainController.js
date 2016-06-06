@@ -35,6 +35,7 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
     .then(function (menuItems) {
       vm.menuItems = [].concat(menuItems);
     });
+  loadProjects();
 
   /* FUNCTIONS */
   function selectProject(project) {
@@ -43,7 +44,7 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   }
 
   function loadProjects() {
-    return ProjectService.project.query({owner: $scope.currentUser.id},
+    return ProjectService.project.query({populate: 'dashboards'},
       function (projects) {
         vm.projectList = projects;
       })

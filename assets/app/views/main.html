@@ -12,14 +12,14 @@
     </md-button>
 
     <!--Top Project Selector -->
-    <md-menu layout="row" layout-align="start center" flex="20" md-position-mode="target-right target" >
-      <md-button ng-click="$mdOpenMenu()" style="width:100%" class="md-primary" >
-        <span>Project Selector</span>
+    <md-menu layout="row" layout-align="start center" flex="20" md-position-mode="target-right target" md-offset="0 48">
+      <md-button ng-click="$mdOpenMenu()" style="width:100%" class="md-primary">
+        <span>{{currentProject.name || 'Select a project'}}</span>
         <i class="material-icons">arrow_drop_down</i>
       </md-button>
-      <md-menu-content>
-        <md-menu-item>
-          <md-button>Project One</md-button>
+      <md-menu-content width="3">
+        <md-menu-item ng-repeat="project in vm.projectList">
+          <md-button ui-sref="home.dashboard({dashboardId:project.dashboards[0].id})">{{project.name}}</md-button>
         </md-menu-item>
       </md-menu-content>
     </md-menu>
@@ -30,7 +30,7 @@
 
     <!-- User profile menu -->
     <div layout="row" layout-align="start center">
-      <md-menu>
+      <md-menu md-offset="0 48">
         <md-button ng-click="$mdOpenMenu()" aria-label="Open menu" class="toolbar-button">
           <span class="orig-case" hide-xs>{{ currentUser==null ? 'unknown' : currentUser.username }}</span>
           <i class="material-icons">account_circle</i>
@@ -56,91 +56,72 @@
     <!-- Left nav begin -->
     <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="leftnav"
                 class="md-whiteframe-z2 md-sidenav-left" md-theme="dark" md-swipe-left="vm.toggleLeftNav()">
-
-      <!--Project selector -->
-      <div class="fixed-height-widget" layout="column" ng-hide="currentProject==null">
-          <md-button ui-sref="home.projects" layout="row" layout-align="start center">
-            <i class="dash-widget-topbar-text material-icons" flex="33">navigate_before</i>
-            <span>Projects</span>
-          </md-button>
-
-          <md-toolbar class="md-accent" layout="row" layout-align="space-between center">
-           <span style="width:100%" class="md-body-1 capitalize" layout-padding>
-             {{currentProject.name}}
+      <md-button ui-sref="home.projects" layout="row" layout-align="start center">
+        <i class="dash-widget-topbar-text material-icons">navigate_before</i>
+        <span>Projects</span>
+      </md-button>
+      <!--Project indicator -->
+      <div layout="column" ng-hide="currentProject==null">
+        <md-toolbar class="md-accent" layout="column">
+           <span layout layout-align="space-between center">
+             <span class="md-body-2" layout-padding>{{currentProject.name}}</span>
+             <md-button class="md-icon-button" aria-label="Edit project" ui-sref="home.editproject"
+                        ng-click="select(project)">
+               <i class="dash-widget-topbar-text material-icons">mode_edit</i>
+             </md-button>
            </span>
-          <md-button class="toolbar-button" aria-label="Edit project" ui-sref="home.editproject"
-                     ng-click="select(project)">
-            <i class="dash-widget-topbar-text material-icons">mode_edit</i>
-          </md-button>
+          <md-divider></md-divider>
+          <span class="md-body-1" layout-padding>{{currentProject.description}}</span>
         </md-toolbar>
 
-        <p layout-padding>
-          {{currentProject.description}}
-        </p>
       </div>
       <md-divider></md-divider>
-      <!-- end Project selector -->
+      <!-- end Project indicator -->
 
       <!-- Menu items -->
-        <div layout="column" layout-align="center start" ng-hide="currentProject==null">
+      <div layout="column" ng-hide="currentProject==null">
 
-          <!-- Dashboard Button -->
-          <div layout="row" layout-align="space-between center">
-            <span class="leftnav-color-indent-item"></span>
-            <md-button>
-              <span>Dashboard</span>
-            </md-button>
-
-            <!-- add Dashboard -->
-            <md-button style="min-width: 1px">
-              <i class="material-icons">add</i>
-            </md-button>
-          </div>
-
-          <!-- separate buttons-->
-          <md-divider></md-divider>
-
-          <!-- sub dashboards 1/2 -->
-            <div layout="row" layout-align="start center">
-              <span class="leftnav-color-indent-sub"></span>
-              <md-button>
-                <span>Dashboard 1</span>
-              </md-button>
-            </div>
-
-            <div layout="row" layout-align="start center">
-              <span class="leftnav-color-indent-sub"></span>
-              <md-button>
-                <span>Dashboard 2</span>
-              </md-button>
-            </div>
-          <!-- end sub dashboards -->
-
-          <!-- separate buttons-->
-          <md-divider></md-divider>
-
-          <!-- Module Button -->
-          <div layout="row" layout-align="start center">
-            <span class="leftnav-color-indent-item"></span>
-            <md-button>
-              <span>Modules</span>
-            </md-button>
-          </div>
-
-          <!-- separate buttons-->
-          <md-divider></md-divider>
-
-          <!-- Service Button -->
-          <div layout="row" layout-align="start center">
-            <span class="leftnav-color-indent-item"></span>
-            <md-button>
-              <span>Services</span>
-            </md-button>
-          </div>
-
-          <!-- separate buttons-->
-          <md-divider></md-divider>
+        <!-- Dashboard Button -->
+        <div layout="row">
+          <div class="leftnav-color-indent-item"></div>
+          <md-button layout="row" layout-align="start center">Dashboards</md-button>
+          <!-- add Dashboard -->
+          <span flex></span>
+          <md-button class="md-icon-button"><i class="material-icons">add</i></md-button>
         </div>
+
+        <!-- separate buttons-->
+        <md-divider></md-divider>
+
+        <!-- sub dashboards 1/2 -->
+        <div layout="row">
+          <div class="leftnav-color-indent-item"></div>
+          <div class="leftnav-color-indent-sub"></div>
+          <md-button layout="row" layout-align="start center">Dashboard 1</md-button>
+        </div>
+        <!-- end sub dashboards -->
+
+        <!-- separate buttons-->
+        <md-divider></md-divider>
+
+        <!-- Module Button -->
+        <div layout="row">
+          <div class="leftnav-color-indent-item"></div>
+          <md-button>Modules</md-button>
+        </div>
+
+        <!-- separate buttons-->
+        <md-divider></md-divider>
+
+        <!-- Service Button -->
+        <div layout="row">
+          <div class="leftnav-color-indent-item"></div>
+          <md-button>Services</md-button>
+        </div>
+
+        <!-- separate buttons-->
+        <md-divider></md-divider>
+      </div>
     </md-sidenav>
     <!-- Left nav end -->
 
