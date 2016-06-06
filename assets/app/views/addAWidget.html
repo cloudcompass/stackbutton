@@ -32,7 +32,7 @@
 
 
 <!-- Widget selector view -->
-<h2>Select Widget: </h2>
+<h3>Select Widget: </h3>
 <section class="md-whiteframe-z2 panel-widget">
 
   <!-- Communication widget dropdown -->
@@ -40,15 +40,14 @@
     <md-divider></md-divider>
     <md-button layout="row" layout-align="space-between center" ng-click="showcomm=!showcomm">
       <span class="dash-widget-font"> Communication</span>
-      <i class="material-icons md-24" ng-show="!showcomm">expand_more</i>
-      <i class="material-icons md-24" ng-show="showcomm">expand_less</i>
+      <i class="material-icons md-24">{{showcomm==true ?'expand_less':'expand_more'}}</i>
     </md-button>
     <md-divider></md-divider>
   </div>
 
   <div layout="row" layout-align="space-around center" ng-show="showcomm" ng-repeat="tool in commwid" layout-padding>
     <div layout="column" layout-align="space-between start" layout-padding>
-      <md-checkbox><h4>{{tool.text}}</h4></md-checkbox>
+      <md-checkbox ng-model="data.cb1"><h4>{{tool.text}}</h4></md-checkbox>
       <img class="{{tool.pic}}">
     </div>
     <div layout="column" layout-align="space-between start" layout-padding>
@@ -63,8 +62,7 @@
     <md-divider></md-divider>
     <md-button layout="row" layout-align="space-between center" ng-click="showrep=!showrep">
       <span class="dash-widget-font"> Repository</span>
-      <i class="material-icons md-24" ng-show="!showrep">expand_more</i>
-      <i class="material-icons md-24" ng-show="showrep">expand_less</i>
+      <i class="material-icons md-24">{{showrep==true ?'expand_less':'expand_more'}}</i>
     </md-button>
     <md-divider></md-divider>
   </div>
@@ -86,8 +84,7 @@
     <md-divider></md-divider>
     <md-button layout="row" layout-align="space-between center" ng-click="showinfo=!showinfo">
       <span class="dash-widget-font"> Information</span>
-      <i class="material-icons md-24" ng-show="!showinfo">expand_more</i>
-      <i class="material-icons md-24" ng-show="showinfo">expand_less</i>
+      <i class="material-icons md-24">{{showinfo==true ?'expand_less':'expand_more'}}</i>
     </md-button>
     <md-divider></md-divider>
   </div>
@@ -102,12 +99,11 @@
       <span>{{tool.description}}</span>
     </div>
   </div>
-
   <!-- end of Information widget dropdown -->
 
 </section>
 <!-- end of Widget selector view -->
 
 <div layout="row" layout-align="end end">
-  <md-button class="md-raised md-primary">Save</md-button>
+  <md-button class="md-raised md-primary" ui-sref="home.projects">Save</md-button>
 </div>

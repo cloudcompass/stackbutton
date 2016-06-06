@@ -284,6 +284,23 @@ md-backdrop.md-sidenav-backdrop {
   }
 }
 
+.leftnav-color-indent {
+
+  &-item{
+    background-color:lightgray;
+    width: 10px;
+    height: 35px
+  }
+
+  &-sub {
+    background-color:gray;
+    width: 30px;
+    height: 35px
+  }
+
+}
+
+
 .commits-widget-detail {
   content: url("../images/Commits_widget.PNG");
 }
