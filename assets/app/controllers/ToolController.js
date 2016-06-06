@@ -32,8 +32,8 @@ function ToolController($scope, ToolService, ProjectService) {
   vm.currentPlatform = null;
 
   //Used for page back/next and div displays on addATool.html
-  vm.currentPage = 0;
-  vm.pageCount = 0;
+  vm.currentPage = 1;
+  vm.pageCount = 3;
 
 
   /* ACTIONS */

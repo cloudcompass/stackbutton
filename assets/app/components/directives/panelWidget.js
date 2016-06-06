@@ -3,7 +3,7 @@ sbapp.directive('panelWidget', function () {
     restrict: 'E',
     scope: {widget: '='},
     template: '' +
-    '<md-card class="md-whiteframe-z1 panel-widget" layout="column" style="width: 300px; min-height: 200px">' +
+    '<md-card class="md-whiteframe-z1 panel-widget" layout="column">' +
     '    <div class="color-inherit dash-widget-topbar" layout-padding>' +
     '      <span class="dash-widget-topbar-text capitalize">{{widget.template}}</span>' +
     '    </div>' +

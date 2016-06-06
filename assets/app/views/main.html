@@ -1,4 +1,4 @@
-<div layout="column" flex>
+<div flex-grow layout="column">
   <!-- Top bar begin -->
   <md-toolbar layout="row" layout-align="space-between stretch">
     <div ui-sref="home.projects" layout="row" layout-align="start center" class="capitalize logo-box" hide-xs>
@@ -7,7 +7,7 @@
     </div>
 
     <!--Mobile only menu button-->
-    <md-button hide show-xs ng-click="vm.toggleLeftNav()" aria-label="Menu">
+    <md-button class="toolbar-button" hide-gt-xs ng-click="vm.toggleLeftNav()" aria-label="Open Menu">
       <i class="material-icons">menu</i>
     </md-button>
 
@@ -35,7 +35,7 @@
     <span></span>
     <!-- end allow white space for project selector -->
 
-    <!-- user options selector -->
+    <!-- User profile menu -->
     <div layout="row" layout-align="start center">
       <md-menu>
         <md-button ng-click="$mdOpenMenu()" aria-label="Open menu" class="toolbar-button">
@@ -52,7 +52,7 @@
         </md-menu-content>
       </md-menu>
     </div>
-    <!-- user options selector -->
+    <!-- End User profile menu -->
 
   </md-toolbar>
   <!-- Top bar end -->
@@ -119,20 +119,20 @@
     </md-sidenav>
     <!-- Left nav end -->
 
+
     <!-- Content begin -->
-    <md-content flex-grow class="page-content" layout="row" style="position:relative">
-      <div flex-grow layout="column" layout-align="start stretch" style="position:relative">
-        <div flex-grow layout="column" layout-align="start stretch" ng-class="{'hide-xs':vm.showActivities}" ui-view>
-        </div>
-        <!-- Drawer Button-->
-        <md-button class="toolbar-button md-raised md-primary md-no-ink" style="position:absolute;top:0;right:-8px;"
-                   md-swipe-left="vm.toggleActivityDrawer()" ng-click="vm.toggleActivityDrawer()"
-                   aria-label="Open activity feed">
-          <i class="material-icons">{{vm.showActivities==true ? 'keyboard_arrow_right':'notifications'}}</i>
-        </md-button>
-      </div>
-    </md-content>
+    <div flex-grow layout="row" class="page-content" style="position:relative">
+      <!--Inject view-->
+      <div flex ng-class="{'hide-xs':vm.showActivities}" ui-view style="overflow:auto;"></div>
+      <!-- Drawer Button-->
+      <md-button class="toolbar-button md-raised md-primary md-no-ink page-content" aria-label="Open activity feed"
+                 style="position:absolute;right:-8px;z-index:10"
+                 md-swipe-left="vm.toggleActivityDrawer()" ng-click="vm.toggleActivityDrawer()">
+        <i class="material-icons">{{vm.showActivities==true ? 'keyboard_arrow_right':'notifications'}}</i>
+      </md-button>
+    </div>
     <!-- Content end -->
+
 
     <!-- Right pop-out begin-->
     <md-sidenav md-component-id="activitydrawer" md-is-locked-open="$mdMedia('gt-xs')&&vm.showActivities"

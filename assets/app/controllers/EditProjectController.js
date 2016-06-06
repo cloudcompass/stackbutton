@@ -29,21 +29,22 @@ function EditProjectController($scope, $state, $mdDialog, ProjectService) {
       clickOutsideToClose: true,
       escapeToClose: true,
       template: '' +
-      '<md-card style="max-width: 350px;">' +
-      '   <p>Are you sure you want to permanently DELETE</p>' +
+      '<div layout="column" layout-align="center center" layout-padding style="max-width: 350px;">' +
+      '   <span style="text-align:center;">Are you sure you want to permanently DELETE' +
       '   <h3 align="center">' + project.name + '</h3>' +
-      '   <p class="md-warn"> This action cannot be undone!</p>' +
-      '   <p>Please type the name of the project to confirm.</p>' +
+      '   This action cannot be undone! Please type the name of the project to confirm.</span>' +
       '   <md-input-container>' +
       '     <label>Project Name</label>' +
       '     <input type="text" ng-model="confirmBox" required>' +
       '   </md-input-container>' +
-      '   <md-button class="md-warn md-raised" ng-disabled="submitted || confirmBox!=\'' + project.name + '\'" ng-click="delete(\'' + project.id + '\')">' +
-      '     <md-progress-linear ng-show="submitted" class="md-warn"></md-progress-linear>' +
-      '     <span ng-hide="submitted">DELETE PROJECT</span>' +
-      '   </md-button>' +
-      '   <md-button class="md-raised md-primary" ng-click="cancelDialog()" ng-disabled="submitted">Cancel</md-button>' +
-      '</md-card>',
+      '   <span layout="row" layout-xs="column" layout-align="center center">' +
+      '     <md-button class="md-warn md-raised" ng-disabled="submitted || confirmBox!=\'' + project.name + '\'" ng-click="delete(\'' + project.id + '\')">' +
+      '       <md-progress-linear ng-show="submitted" class="md-warn"></md-progress-linear>' +
+      '       <span ng-hide="submitted">DELETE PROJECT</span>' +
+      '     </md-button>' +
+      '     <md-button class="md-raised md-primary" ng-click="cancelDialog()" ng-disabled="submitted">Cancel</md-button>' +
+      '   </span>' +
+      '</div>',
       controller: function DialogController($scope, $mdDialog) {
         $scope.delete = function (id) {
           $scope.submitted = true;
@@ -62,14 +63,13 @@ function EditProjectController($scope, $state, $mdDialog, ProjectService) {
           $mdDialog.cancel();
         }
       }
-    }).finally(
-      function () {
-        // clean form & redirect
-        $scope.confirmBox = null;
-        $scope.submitted = false;
-        $state.go('home.projects');
-      }
-    );
+    }).then(function () {
+      $state.go('home.projects');
+    }).finally(function () {
+      // clean form & redirect
+      $scope.confirmBox = null;
+      $scope.submitted = false;
+    });
   }
 
   //UPDATE PROJECT DESCRIPTION

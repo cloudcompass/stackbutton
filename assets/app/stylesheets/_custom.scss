@@ -5,6 +5,7 @@ $text-color-nav: #aaaaaa;
 $accent-color: #009688;
 $warning-color: #f6f6f6;
 $widget-accent: #00796B;
+$widget-width: 250px;
 
 // VARIABLES
 $left-sidenav-width: 200px;
@@ -15,7 +16,7 @@ $font-weight-bold: 600;
 $font-size-large: 22px;
 
 // LAYOUT
-project-card section {
+project-card {
   min-height: $proj-height;
   width: $proj-width;
   word-break: break-word;
@@ -130,6 +131,8 @@ a {
 
 // panel-widget
 .panel-widget {
+  width: $widget-width;
+  min-height: 200px;
   background-color: white;
 
   &-toolbar {

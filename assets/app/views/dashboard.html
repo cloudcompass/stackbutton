@@ -1,10 +1,9 @@
-<div flex="grow" layout="row" layout-align="center start" layout-wrap>
-  <div layout="row" layout-align="start start" layout-wrap ng-repeat="widget in vm.widgets">
-    <panel-widget flex widget="widget"></panel-widget>
-  </div>
-</div>
-<div layout="column" layout-align="end end">
-  <md-button class="md-fab" ui-sref="home.addwidget">
+<div layout="row" layout-wrap layout-margin layout-align="center start">
+  <md-progress-circular mode="indeterminate" ng-show="vm.loading" md-diameter="96"></md-progress-circular>
+
+  <panel-widget ng-repeat="widget in vm.widgets" widget="widget"></panel-widget>
+
+  <md-button class="md-fab md-fab-bottom-right" ui-sref="home.addwidget" aria-label="Add a widget">
     <i class="material-icons md-24">add</i>
   </md-button>
 </div>

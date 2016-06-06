@@ -11,15 +11,33 @@ function ProjectController($state, $scope, ProjectService, $mdDialog) {
 
   /* CALLABLE MEMBERS */
 
+  vm.projects = [];
+  vm.loading = false;
   vm.setCurrentProject = $scope.setCurrentProject;
-  vm.projects = $scope.currentUser ? ProjectService.project.query({populate: 'dashboards'}) : [];
 
 
   /* ACTIONS */
+
+  // reset project context when loading listing
   $scope.setCurrentProject(null);
+
+  // retrieve projects from server
+  getProjects();
+
 
   /* FUNCTIONS */
 
-
+  function getProjects() {
+    vm.loading = true;
+    $scope.currentUser && ProjectService.project.query({populate: 'dashboards'}, function (projects, headers) {
+        vm.projects = projects;
+        vm.loading = false;
+      },
+      function (error) {
+        console.log(error);
+        vm.projects = [];
+        vm.loading = false;
+      });
+  }
 }
 

@@ -1,10 +1,12 @@
 <div layout="row" layout-wrap layout-margin layout-align="center start">
+  <md-progress-circular mode="indeterminate" ng-show="vm.loading" md-diameter="96"></md-progress-circular>
+
   <project-card ng-repeat="project in vm.projects" project="project"
                 select="vm.setCurrentProject(project)"></project-card>
-</div>
-<div layout="column" layout-align="end end">
-  <md-button class="md-fab md-primary" ui-sref="home.create" aria-label="Create project">
+
+  <md-button class="md-fab md-primary md-fab-bottom-right" ui-sref="home.create" aria-label="Create project">
     <i class="material-icons md-24">add</i>
   </md-button>
 </div>
+
 
