@@ -12,7 +12,7 @@
     </md-button>
 
     <!--Top Project Selector -->
-    <md-menu layout="row" layout-align="start center" flex="20" md-position-mode="target-right target" md-offset="0 48">
+    <md-menu layout="row" layout-align="start center" flex-offset="5" md-offset="0 48">
       <md-button ng-click="$mdOpenMenu()" style="width:100%" class="md-primary">
         <span>{{currentProject.name || 'Select a project'}}</span>
         <i class="material-icons">arrow_drop_down</i>
@@ -26,7 +26,7 @@
     <!-- end Top Project Selector -->
 
     <!--  push project selector to the left -->
-    <div flex="50"></div>
+    <span flex></span>
 
     <!-- User profile menu -->
     <div layout="row" layout-align="start center">
@@ -56,72 +56,7 @@
     <!-- Left nav begin -->
     <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="leftnav"
                 class="md-whiteframe-z2 md-sidenav-left" md-theme="dark" md-swipe-left="vm.toggleLeftNav()">
-      <md-button ui-sref="home.projects" layout="row" layout-align="start center">
-        <i class="dash-widget-topbar-text material-icons">navigate_before</i>
-        <span>Projects</span>
-      </md-button>
-      <!--Project indicator -->
-      <div layout="column" ng-hide="currentProject==null">
-        <md-toolbar class="md-accent" layout="column">
-           <span layout layout-align="space-between center">
-             <span class="md-body-2" layout-padding>{{currentProject.name}}</span>
-             <md-button class="md-icon-button" aria-label="Edit project" ui-sref="home.editproject"
-                        ng-click="select(project)">
-               <i class="dash-widget-topbar-text material-icons">mode_edit</i>
-             </md-button>
-           </span>
-          <md-divider></md-divider>
-          <span class="md-body-1" layout-padding>{{currentProject.description}}</span>
-        </md-toolbar>
-
-      </div>
-      <md-divider></md-divider>
-      <!-- end Project indicator -->
-
-      <!-- Menu items -->
-      <div layout="column" ng-hide="currentProject==null">
-
-        <!-- Dashboard Button -->
-        <div layout="row">
-          <div class="leftnav-color-indent-item"></div>
-          <md-button layout="row" layout-align="start center">Dashboards</md-button>
-          <!-- add Dashboard -->
-          <span flex></span>
-          <md-button class="md-icon-button"><i class="material-icons">add</i></md-button>
-        </div>
-
-        <!-- separate buttons-->
-        <md-divider></md-divider>
-
-        <!-- sub dashboards 1/2 -->
-        <div layout="row">
-          <div class="leftnav-color-indent-item"></div>
-          <div class="leftnav-color-indent-sub"></div>
-          <md-button layout="row" layout-align="start center">Dashboard 1</md-button>
-        </div>
-        <!-- end sub dashboards -->
-
-        <!-- separate buttons-->
-        <md-divider></md-divider>
-
-        <!-- Module Button -->
-        <div layout="row">
-          <div class="leftnav-color-indent-item"></div>
-          <md-button>Modules</md-button>
-        </div>
-
-        <!-- separate buttons-->
-        <md-divider></md-divider>
-
-        <!-- Service Button -->
-        <div layout="row">
-          <div class="leftnav-color-indent-item"></div>
-          <md-button>Services</md-button>
-        </div>
-
-        <!-- separate buttons-->
-        <md-divider></md-divider>
-      </div>
+      <div ng-include="'app/views/partials/navigation.html'"></div>
     </md-sidenav>
     <!-- Left nav end -->
 

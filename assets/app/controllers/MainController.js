@@ -30,12 +30,11 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
 
   /* ACTIONS */
 
-  navService
-    .loadAllItems()
+  $scope.currentUser && loadProjects();
+  navService.loadAllItems()
     .then(function (menuItems) {
       vm.menuItems = [].concat(menuItems);
     });
-  loadProjects();
 
   /* FUNCTIONS */
   function selectProject(project) {

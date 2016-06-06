@@ -29,7 +29,8 @@ function ProjectController($state, $scope, ProjectService, $mdDialog) {
 
   function getProjects() {
     vm.loading = true;
-    $scope.currentUser && ProjectService.project.query({populate: 'dashboards'}, function (projects, headers) {
+    $scope.currentUser && ProjectService.project.query({populate: 'dashboards'},
+      function (projects) {
         vm.projects = projects;
         vm.loading = false;
       },
