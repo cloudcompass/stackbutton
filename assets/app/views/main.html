@@ -1,136 +1,85 @@
-<div layout="column" flex>
+<div flex-grow layout="column">
   <!-- Top bar begin -->
-  <md-toolbar layout="row" layout-align="space-between center">
-    <md-button layout="row" layout-align="start center" class="capitalize md-hue-3 md-raised md-cornered"
-               ui-sref="welcome" md-theme="grey" hide-xs>
-      <img class="sb-logo-detail sb-48px" ui-sref="welcome"/>
+  <md-toolbar layout="row" layout-align="space-between stretch">
+    <div ui-sref="home.projects" layout="row" layout-align="start center" class="capitalize logo-box" hide-xs>
+      <img class="sb-logo detail sb-48px">
       <h1> StackButton</h1>
-    </md-button>
+    </div>
 
-    <md-button hide show-xs ng-click="vm.toggleItemsList()" aria-label="Menu">
+    <!--Mobile only menu button-->
+    <md-button class="toolbar-button" hide-gt-xs ng-click="vm.toggleLeftNav()" aria-label="Open Menu">
       <i class="material-icons">menu</i>
     </md-button>
 
-    <md-menu md-offset="0 55">
-      <md-button class="toolbar-button" ng-click="$mdOpenMenu()" aria-label="Open menu">
-        <i class="material-icons">account_circle</i>
-        <!--<span hide-xs>Richard Feynman</span>-->
-        <span class="orig-case" hide-xs>{{ currentUser==null ? 'unknown' : currentUser.username }}</span>
+    <!--Top Project Selector -->
+    <md-menu layout="row" layout-align="start center" flex-offset="5" md-offset="0 48">
+      <md-button ng-click="$mdOpenMenu()" style="width:100%" class="md-primary">
+        <span>{{currentProject.name || 'Select a project'}}</span>
+        <i class="material-icons">arrow_drop_down</i>
       </md-button>
       <md-menu-content width="3">
-        <md-menu-item>
-          <md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button ng-click="vm.logOut()">Log out</md-button>
+        <md-menu-item ng-repeat="project in vm.projectList">
+          <md-button ui-sref="home.dashboard({dashboardId:project.dashboards[0].id})">{{project.name}}</md-button>
         </md-menu-item>
       </md-menu-content>
     </md-menu>
+    <!-- end Top Project Selector -->
+
+    <!--  push project selector to the left -->
+    <span flex></span>
+
+    <!-- User profile menu -->
+    <div layout="row" layout-align="start center">
+      <md-menu md-offset="0 48">
+        <md-button ng-click="$mdOpenMenu()" aria-label="Open menu" class="toolbar-button">
+          <span class="orig-case" hide-xs>{{ currentUser==null ? 'unknown' : currentUser.username }}</span>
+          <i class="material-icons">account_circle</i>
+        </md-button>
+        <md-menu-content width="3">
+          <md-menu-item>
+            <md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="logOut()">Log out</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </div>
+    <!-- End User profile menu -->
 
   </md-toolbar>
+  <!-- end Top bar  -->
 
-  <!-- Top bar end -->
 
   <div layout="row" flex>
+
     <!-- Left nav begin -->
-    <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="left" show hide="vm.title=='Projects'"
-                class="md-whiteframe-z2 md-sidenav-left" md-theme="dark">
-
-      <!--&lt;!&ndash; Static Menu items &ndash;&gt;-->
-      <!--<div ng-repeat-start="item in vm.menuItems[0].static" layout="column" layout-align="start stretch">-->
-      <!--<md-button layout="row" layout-align="space-between center" class="capitalize"-->
-      <!--ng-click="vm.selectItem(item)" ui-sref="{{item.sref}}">-->
-      <!--<span>-->
-      <!--<i hide-sm class="material-icons md-24">{{item.icon}}</i>-->
-      <!--{{item.name}}-->
-      <!--</span>-->
-      <!--</md-button>-->
-      <!--</div>-->
-      <!--<md-divider ng-repeat-end></md-divider>-->
-      <!--&lt;!&ndash; end Static Menu items &ndash;&gt;-->
-      <span layout-margin ui-sref="home.projects">
-          Project:
-        </span>
-      <div layout="column" layout-align="start start">
-
-        <md-select placeholder="Select a Project" ng-model="currentProject" md-on-open="vm.loadProjects()"
-                   style="min-width:100%;margin:0 0 2em 0">
-          <md-option ng-repeat="project in vm.projectList" ng-value="project" ng-click="vm.selectProject(project)">
-            {{project.name}}
-          </md-option>
-        </md-select>
-      </div>
-
-      <!-- Menu items -->
-      <div ng-hide="currentProject==null">
-        <div ng-repeat-start="item in vm.menuItems[0].server" layout="column" layout-align="start stretch">
-          <md-button layout="row" layout-align="space-between center" class="capitalize"
-                     ng-click="item.expanded=!item.expanded" ng-click="vm.selectItem(item)"
-                     ui-sref="{{item.sref}}">
-       <span>
-         <i hide-sm class="material-icons md-24">{{item.icon}}</i>
-         {{item.name}}
-       </span>
-       <span>
-         <i class="material-icons md-24" ng-show="item.expanded&&item.children">expand_less</i>
-         <i class="material-icons md-24" ng-hide="item.expanded||!item.children">expand_more</i>
-       </span>
-
-          </md-button>
-
-          <div layout="column" layout-align="start stretch"
-               ui-sref-active="md-warn"
-               ng-show="item.expanded">
-            <md-button ng-repeat="child in item.children" ui-sref="{{child.sref}}"
-                       class="capitalize" ng-click="vm.toggleItemsList()"
-                       flex-offset="20" layout="row" layout-align="start center">
-              {{child.name}}
-            </md-button>
-          </div>
-        </div>
-        <md-divider ng-repeat-end></md-divider>
-      </div>
-      <!-- end Menu items -->
+    <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="leftnav"
+                class="md-whiteframe-z2 md-sidenav-left" md-theme="dark" md-swipe-left="vm.toggleLeftNav()">
+      <div ng-include="'app/views/partials/navigation.html'"></div>
     </md-sidenav>
     <!-- Left nav end -->
 
+
     <!-- Content begin -->
-    <md-content flex class="md-padding page-content">
-      <div ui-view></div>
-    </md-content>
+    <div flex-grow layout="row" class="page-content" style="position:relative">
+      <!--Inject view-->
+      <div flex ng-class="{'hide-xs':vm.showActivities}" ui-view style="overflow:auto;"></div>
+      <!-- Drawer Button-->
+      <md-button class="toolbar-button md-raised md-primary md-no-ink page-content" aria-label="Open activity feed"
+                 style="position:absolute;right:-8px;z-index:10"
+                 md-swipe-left="vm.toggleActivityDrawer()" ng-click="vm.toggleActivityDrawer()">
+        <i class="material-icons">{{vm.showActivities==true ? 'keyboard_arrow_right':'notifications'}}</i>
+      </md-button>
+    </div>
     <!-- Content end -->
+
+    <!-- Right pop-out begin-->
+    <md-sidenav md-component-id="activitydrawer" md-is-locked-open="$mdMedia('gt-xs')&&vm.showActivities"
+                class="md-whiteframe-z2 md-sidenav-right" md-swipe-right="vm.toggleActivityDrawer()">
+      <div ng-include="'app/views/partials/activities.html'"/>
+    </md-sidenav>
+    <!-- Right pop-out end -->
+
   </div>
 </div>
-
-<!--&lt;!&ndash; Right pop-out begin&ndash;&gt;-->
-<!--<md-sidenav md-component-id="right" class="md-whiteframe-z2 md-sidenav-right">-->
-<!--<md-toolbar>-->
-<!--<md-toolbar class="md-warn" layout="row" layout-align="center center">-->
-<!--<img class="img-circle" ng-src="/images/feynman.jpg">-->
-<!--<md-menu md-offset="0 20">-->
-<!--<md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">-->
-<!--<span>Richard Feynman</span>-->
-<!--<i class="material-icons">keyboard_arrow_down</i>-->
-<!--</md-button>-->
-<!--<md-menu-content width="3">-->
-<!--<md-menu-item>-->
-<!--<md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button>-->
-<!--</md-menu-item>-->
-<!--<md-menu-item>-->
-<!--<md-button ng-click="vm.logOut()">Logout</md-button>-->
-<!--</md-menu-item>-->
-<!--</md-menu-content>-->
-<!--</md-menu>-->
-<!--</md-toolbar>-->
-<!--</md-toolbar>-->
-
-<!--<section>-->
-<!--<md-toolbar md-theme="grey" class="md-hue-1">-->
-<!--<div class="md-toolbar-tools">-->
-<!--<h3>Messages</h3>-->
-<!--</div>-->
-<!--</md-toolbar>-->
-<!--<div ng-include src="'app/views/partials/messages.html'"/>-->
-<!--</section>-->
-<!--</md-sidenav>-->
-<!--&lt;!&ndash; Right pop-out end &ndash;&gt;-->

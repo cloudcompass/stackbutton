@@ -4,22 +4,84 @@ var github = require('octonode');
 
 module.exports = {
 
-  getAccount: function (serviceID, cb) {
-    sails.log.debug('finding service:', serviceID);
-    Service.findOne({id: serviceID})
-      .exec(function (err, res) {
-        if (res) {
-          var client = github.client(res.token);
-          var ghme = client.me();
-          ghme.info(cb);
-        } else {
-          sails.log.error('could not retrieve account', err);
-        }
-      });
+  // used to populate friendly name before creation of a Service model instance
+  getAccount: function (service, cb) {
+    var client = github.client(service.token);
+    var ghme = client.me();
+    ghme.info(function (error, data) {
+      if (error != null) {
+        cb(null, error);
+      } else {
+        cb(data.login);
+      }
+    });
   },
 
+  // automates github webhook creation on creation of Module model instance
+  createWebhook: function (module, cb) {
+    if (!_.has(module, 'config.full_name')) return cb("Repository name not provided");
+
+    var serviceId = _.has(module.service, 'id') ? module.service.id : module.service;
+
+    Service.findOne({id: serviceId}).exec(function (err, service) {
+      if (err) return cb(err);
+      if (service == undefined) return cb('Invalid parent service');
+
+      sails.log.info('adding webhook', service.project, service.token);
+      var client = github.client(service.token);
+      var ghrepo = client.repo(module.config.full_name);
+      var evts;
+      switch (module.type) {
+        case 'repo':
+          evts = ["push", "create", "delete", "member"];
+          break;
+        case 'issues':
+          evts = ['issues'];
+          break;
+      }
+
+      ghrepo.hook({
+        name: "web",
+        active: true,
+        events: evts,
+        config: {
+          url: sails.config.url.hooks + "/payload/" + service.project,
+          content_type: "json"
+        }
+      }, cb);
+    });
+
+  },
+
+  // constructs Event model instance for PayloadController
+  createEvent: function (req, cb) {
+    sails.log.info('creating event', req.body);
+    var event = {};
+    event.platform = 'github';
+    event.event_type = req.headers['x-github-event'];
+    event.actor_name = req.body.sender.login;
+    event.target_name = req.body.repository.name;
+    event.target_url = req.body.repository.url;
+    event.project = req.param('projectId');
+
+    switch (event.event_type) {
+      case 'push':
+        event.source_url = req.body.compare;
+        event.event_action = 'pushed ' + '<a href="' + event.source_url + '" target="_blank">' + req.body.commits.length + ' ' + 'commits' + '</a> to';
+        break;
+      case 'issues':
+        event.source_url = req.body.issue.html_url;
+        event.event_action = req.body.action + ' an <a href="' + event.source_url + '" target="_blank">issue</a> on';
+        break;
+      case 'ping':
+        event.event_action = 'pinged from';
+        break;
+    }
+    return event;
+  },
+
+  // exposed to client in ServiceController
   getRepos: function (serviceID, cb) {
-    sails.log.debug('finding service:', serviceID);
     Service.findOne({id: serviceID})
       .exec(function (err, res) {
         if (res) {
@@ -32,17 +94,17 @@ module.exports = {
       });
   },
 
+  // exposed to client in VCSController
   getCommits: function (widgetId, cb) {
-    sails.log.debug('finding widget:', widgetId);
     Widget.findOne({id: widgetId}).populate('modules')
       .exec(function (err, widget) {
         if (widget) {
-          sails.log.debug('finding first module:', widget.modules);
+          sails.log.debug('finding first module:', widget.modules[0].id);
           Module.findOne({id: widget.modules[0].id}).populate('service')
             .exec(function (err, module) {
               if (module) {
                 var client = github.client(module.service.token);
-                var ghrepo = client.repo(module.config.repoFullName);
+                var ghrepo = client.repo(module.config.full_name);
                 ghrepo.commits(cb);
               } else {
                 sails.log.error('could not retrieve module', err);
@@ -53,40 +115,29 @@ module.exports = {
         }
       });
   },
-
-  //TODO convert to github wrapper
-  validateToken: function (token, cb) {
-    var options = {
-      hostname: 'api.github.com',
-      path: '/user',
-      method: 'GET',
-      headers: {
-        'Authorization': 'token ' + token,
-        'User-Agent': 'StackButton'
-      }
-    };
-    var data;
-    var request = https.request(options, function (response) {
-      var buffer = "", data;
-      response.on("data", function (chunk) {
-        buffer += chunk;
-      });
-      response.on("end", function (err) {
-        // finished transferring data
-        data = JSON.parse(buffer);
-        if (response.statusCode == 200) {
-          cb();
+  // exposed to client in VCSController
+  getIssues: function (widgetId, cb) {
+    sails.log.debug('finding widget:', widgetId);
+    Widget.findOne({id: widgetId}).populate('modules')
+      .exec(function (err, widget) {
+        if (widget) {
+          sails.log.debug('finding first module:', widget.modules);
+          Module.findOne({id: widget.modules[0].id}).populate('service')
+            .exec(function (err, module) {
+              if (module) {
+                var client = github.client(module.service.token);
+                var ghrepo = client.repo(module.config.full_name);
+                ghrepo.issues(cb);
+              } else {
+                sails.log.error('could not retrieve module', err);
+              }
+            });
         } else {
-          cb(new Error(data.message));
+          sails.log.error('could not retrieve widget', err);
         }
       });
-    });
-    request.on('error', function (err) {
-      sails.log.error('validateToken():', err);
-      cb(err)
-    });
-    request.end();
   }
+
 };
 /**
  * Created by tiffa on 2016-05-06.

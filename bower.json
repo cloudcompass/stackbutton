@@ -22,7 +22,9 @@
     "angular-touch": "^1.5.3",
     "angular-ui-router": "^0.2.18",
     "jquery": "^2.2.3",
-    "angular-resource": "^1.5.5"
+    "angular-resource": "^1.5.5",
+    "angular-sails": "^1.1.4",
+    "mdi": "^1.6.50"
   },
   "ignore": [
     "**/.*",

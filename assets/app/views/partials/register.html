@@ -1,80 +1,71 @@
-<div ng-controller="AuthController as vm" class="page-content"
-     flex="100" layout="column" layout-align="space-around center">
-  <md-card md-whiteframe="24">
-    <!--StackButton toolbar with button back to landing -->
-    <div>
-      <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
-        <div layout="row" layout-xs="column" layout-align="center center">
-          <img class="sb-logo sb-48px" ui-sref="welcome"/>
-          <h2 hide-xs>StackButton</h2>
-        </div>
-      </md-toolbar>
+<!--StackButton toolbar with button back to landing -->
+<div>
+  <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
+    <div layout="row" layout-align="center center">
+      <img class="sb-logo detail sb-48px" ui-sref="welcome"/>
+      <h2>StackButton</h2>
     </div>
-
-    <md-divider></md-divider>
-
-    <!-- Register form -->
-    <form name="registerForm">
-      <md-card-title>
-        <span class="md-headline">Register</span>
-      </md-card-title>
-
-      <md-card-content layout="column" layout-align="space-around center">
-        <md-card-content class="md-warn" ng-if="vm.reg.error">{{vm.reg.error}}</md-card-content>
-        <container>
-          <!-- Username box -->
-          <md-input-container>
-            <label for="userName">Username</label>
-            <input id="userName" type="text" name="userName" ng-model="vm.reg.user" required md-autofocus>
-            <div ng-messages="userForm.userName.$error">
-              <div ng-message="required">Username is required</div>
-            </div>
-          </md-input-container>
-
-          <!-- Email box -->
-          <md-input-container>
-            <label for="userEmail">Email</label>
-            <input id="userEmail" name="userEmail" type="email" ng-model="vm.reg.email" required>
-            <div ng-messages="userForm.userEmail.$error">
-              <div ng-message="required">Email is required</div>
-            </div>
-          </md-input-container>
-          </br>
-        </container>
-
-        <container>
-          <!-- Password box -->
-          <md-input-container>
-            <label for="userPass">Password</label>
-            <input id="userPass" name="userPass" type="password" ng-model="vm.reg.password" ng-required>
-            <div ng-messages="userForm.userPass.$error">
-              <div ng-message="required">Password is required</div>
-            </div>
-          </md-input-container>
-
-          <!-- Password verify box -->
-          <md-input-container>
-            <label for="userPassVerify">Verify Password</label>
-            <input id="userPassVerify" name="userPassVerify" type="password" ng-model="vm.reg.passwordVerify"
-                   ng-required>
-            <div ng-messages="userForm.userPassVerify.$error">
-              <div ng-message="required">Please verify your password.</div>
-            </div>
-          </md-input-container>
-        </container>
-        </br>
-      </md-card-content>
-
-      <!-- Register button in card -->
-      <md-card-actions layout="row" layout-align="space-between center">
-        <md-button ui-sref="account.login" class="button">Already have an account?</md-button>
-        <md-button class="md-raised md-cornered md-accent"
-                   ng-click="vm.register(vm.reg.user,vm.reg.email,vm.reg.password,vm.reg.passwordVerify)">Register
-        </md-button>
-      </md-card-actions>
-
-    </form>
-    </md-card-content>
-  </md-card>
+  </md-toolbar>
 </div>
 
+<md-divider></md-divider>
+
+<!-- Register form -->
+<form name="vm.userForm" ng-submit="vm.register(vm.reg.username,vm.reg.email,vm.reg.password,vm.reg.password2)">
+  <h1>
+    <span class="md-headline">Register</span>
+  </h1>
+
+  <div layout="row" layout-align="start center" layout-wrap>
+    <!-- Username box -->
+    <md-input-container flex="45" flex-xs="90">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" ng-model="vm.reg.username" required md-autofocus>
+      <div ng-messages="vm.userForm.username.$error">
+        <div ng-message="required">Username is required</div>
+        <div ng-message="Error.Passport.User.Exists">This username is already registered</div>
+      </div>
+    </md-input-container>
+
+    <!-- Email box -->
+    <md-input-container flex="45" flex-xs="90">
+      <label for="email">Email</label>
+      <input name="email" type="email" ng-model="vm.reg.email" required>
+      <div ng-messages="vm.userForm.email.$error">
+        <div ng-message="required">Email is required</div>
+        <div ng-message="Error.Passport.Email.Exists">This email is already registered</div>
+      </div>
+    </md-input-container>
+    <br>
+
+    <!-- Password box -->
+    <md-input-container flex="45" flex-xs="90">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" ng-model="vm.reg.password" required ng-minlength="8">
+      <div ng-messages="vm.userForm.password.$error">
+        <div ng-message="required">Password required</div>
+        <div ng-message="minlength,Error.Passport.Password.Short">Password is too short</div>
+      </div>
+    </md-input-container>
+
+    <!-- Password verify box -->
+    <md-input-container flex="45" flex-xs="90">
+      <label for="password2">Verify Password</label>
+      <input id="password2" name="password2" type="password" ng-model="vm.reg.password2" required>
+      <div ng-messages="vm.userForm.password2.$error">
+        <div ng-message="required">Please re-type your password</div>
+        <div ng-message="mismatch">Passwords do not match</div>
+      </div>
+    </md-input-container>
+    <br>
+  </div>
+
+  <!-- Register button in card -->
+  <div layout="row" layout-xs="column" layout-align="space-between center">
+    <md-button flex-order-xs="2" ui-sref="account.login" class="button">Already have an account?</md-button>
+    <button class="md-button md-raised md-cornered md-accent" ng-disabled="vm.userForm.$submitted" type="submit">
+      <md-progress-linear class="md-primary" ng-show="vm.userForm.$submitted"></md-progress-linear>
+      <span ng-hide="vm.userForm.$submitted">Register</span>
+    </button>
+  </div>
+</form>

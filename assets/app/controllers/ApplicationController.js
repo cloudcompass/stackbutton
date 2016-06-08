@@ -18,32 +18,29 @@ function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENT
   $scope.userRoles = USER_ROLES;
   $scope.currentUser = null;
   $scope.currentProject = null;
-  $scope.currentDashboard = null;
 
   $scope.setCurrentUser = setCurrentUser;
   $scope.setCurrentProject = setCurrentProject;
-  $scope.setCurrentDashboard = setCurrentDashboard;
+  $scope.logOut = logOut;
 
   /* FUNCTIONS */
 
+  function logOut() {
+    AuthService.logout();
+    SessionService.destroy();
+    setCurrentUser(null);
+  }
+
   function setCurrentUser(user) {
     $scope.currentUser = user;
-    if (user !== null) {
-      console.log('user set:', user);
-    }
+    user && console.log('user set:', user.username);
   }
 
   function setCurrentProject(project) {
     $scope.currentProject = project;
-    console.log('project set:', project);
-
+    project && console.log('project set:', project.name);
   }
 
-  function setCurrentDashboard(dashboard) {
-    $scope.currentDashboard = dashboard;
-    console.log('dashboard set:', dashboard);
-
-  }
 
   // Restore session from /user/me endpoint with optional callback function
   function restoreSession(callback) {
@@ -52,9 +49,7 @@ function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENT
         SessionService.create(null, user.username, 'admin');
         $scope.setCurrentUser(user);
       }
-      if (typeof callback !== 'undefined') {
-        callback();
-      }
+      callback && callback();
     });
   }
 
@@ -65,7 +60,7 @@ function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENT
       scope: $scope,
       preserveScope: true,
       template: '<md-dialog aria-label="Popup">' +
-      '  <md-dialog-content>' +
+      '  <md-dialog-content layout-padding>' +
       '     <span ng-controller="AuthController as vm" ng-include="\'app/views/' + template + '\'">' +
       '  </md-dialog-content>' +
       '</md-dialog>',

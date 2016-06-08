@@ -35,7 +35,7 @@ module.exports.policies = {
     'AuditPolicy',
     'OwnerPolicy',
     'PermissionPolicy',
-    'RolePolicy',
+    'SBRolePolicy',
     'CriteriaPolicy'
   ],
 
@@ -46,6 +46,20 @@ module.exports.policies = {
   UserController: {
     me: 'passport',
     create: true
+  },
+
+  VCSController: {
+    //TODO lock this down
+    getCommits: true
+  },
+  IssuesController: {
+    //TODO lock this down
+    getIssues: true
+  },
+
+  PayloadController: {
+    //TODO lock this down
+    addEvent: true
   }
   /***************************************************************************
   *                                                                          *

@@ -8,11 +8,12 @@ var sbapp = angular.module('sbapp', [
   'ui.router',
   'ngMaterial',
   'nvd3',
-  'ngResource'
+  'ngSails',
+  'ngMessages'
 ]);
 
 sbapp
-// Define application-wide constants
+// Define GLOBAL constants
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
     loginFailed: 'auth-login-failed',
@@ -21,7 +22,6 @@ sbapp
     notAuthenticated: 'auth-not-authenticated',
     notAuthorized: 'auth-not-authorized'
   })
-
   .constant('USER_ROLES', {
     all: '*',
     admin: 'admin',
@@ -29,11 +29,36 @@ sbapp
     guest: 'guest'
   })
 
+  .factory('AuthInterceptor',
+    function ($rootScope, $q, AUTH_EVENTS) {
+      return {
+        responseError: function (response) {
+          $rootScope.$broadcast({
+            401: AUTH_EVENTS.notAuthenticated,
+            403: AUTH_EVENTS.notAuthorized,
+            419: AUTH_EVENTS.sessionTimeout,
+            440: AUTH_EVENTS.sessionTimeout
+          }[response.status]);
+          return $q.reject(response);
+        }
+      };
+    }
+  )
 
-  .config(['USER_ROLES', '$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
-    function (USER_ROLES, $stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
+  .config(
+    function (USER_ROLES, $httpProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
+
+      // Broadcast events upon 4xx responses from server
+      $httpProvider.interceptors.push([
+        '$injector',
+        function ($injector) {
+          return $injector.get('AuthInterceptor');
+        }
+      ]);
+
       // Define UI states
       $stateProvider
+      // LANDING PAGE
         .state('welcome', {
           url: '/welcome',
           templateUrl: 'app/views/landing.html',
@@ -41,10 +66,9 @@ sbapp
             authorizedRoles: [USER_ROLES.all]
           }
         })
+        // REGISTRATION & LOGIN
         .state('account', {
           url: '',
-          controller: 'AuthController',
-          controllerAs: 'vm',
           templateUrl: 'app/views/grayback.html',
           abstract: true,
           data: {
@@ -53,6 +77,8 @@ sbapp
         })
         .state('account.login', {
           url: '/login',
+          controller: 'AuthController',
+          controllerAs: 'vm',
           templateUrl: 'app/views/partials/login.html',
           data: {
             authorizedRoles: [USER_ROLES.all]
@@ -67,6 +93,7 @@ sbapp
             authorizedRoles: [USER_ROLES.all]
           }
         })
+        // APP PARENT STATE
         .state('home', {
           url: '',
           templateUrl: 'app/views/main.html',
@@ -77,36 +104,7 @@ sbapp
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
-        .state('home.dashboard', {
-          url: '/dashboard',
-          controller: 'DashboardController',
-          controllerAs: 'vm',
-          templateUrl: 'app/views/dashboard.html',
-          data: {
-            title: 'Dashboard',
-            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-          }
-        })
-        .state('home.profile', {
-          url: '/profile',
-          templateUrl: 'app/views/profile.html',
-          controller: 'ProfileController',
-          controllerAs: 'vm',
-          data: {
-            title: 'Profile',
-            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-          }
-        })
-        .state('home.table', {
-          url: '/table',
-          controller: 'TableController',
-          controllerAs: 'vm',
-          templateUrl: 'app/views/table.html',
-          data: {
-            title: 'Table',
-            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-          }
-        })
+        // PROJECT DIRECTORY
         .state('home.projects', {
           url: '/projects',
           templateUrl: 'app/views/projects.html',
@@ -117,6 +115,7 @@ sbapp
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
+        // PROJECT CREATE
         .state('home.create', {
           url: '/create',
           templateUrl: 'app/views/createproject.html',
@@ -127,26 +126,18 @@ sbapp
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
-        .state('home.delete', {
-          url: '/delete',
-          templateUrl: 'app/views/deleteproject.html',
-          controller: 'MainController',
+        // PROJECT UPDATE
+        .state('home.editproject', {
+          url: '/editproject',
+          templateUrl: 'app/views/editproject.html',
+          controller: 'EditProjectController',
           controllerAs: 'vm',
           data: {
-            title: 'Delete Project',
+            title: 'Edit Project',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
-        .state('home.plugin', {
-          url: '/plugin',
-          templateUrl: 'app/views/pluginConfiguration.html',
-          controller: 'MainController',
-          controllerAs: 'vm',
-          data: {
-            title: 'Configure Plugins',
-            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-          }
-        })
+        // SERVICE+MODULE CREATE
         .state('home.addtool', {
           url: '/addtool',
           templateUrl: 'app/views/addATool.html',
@@ -156,27 +147,29 @@ sbapp
             title: 'Add a tool',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
-        })
-        .state('home.widgettest', {
-          url: '/widgettest',
-          templateUrl: 'app/views/widgetstest.html',
-          controller: '',
+        })// SERVICE CONFIG
+        .state('home.servicesconfig', {
+          url: '/servicesconfig',
+          templateUrl: 'app/views/servicesconfig.html',
+          controller: 'ServicesconfigController',
           controllerAs: 'vm',
           data: {
-            title: 'TEST',
+            title: 'Configure Services',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
-        .state('home.editproject', {
-          url: '/editproject',
-          templateUrl: 'app/views/editproject.html',
-          controller: 'EditProject',
+        // PROJECT DASHBOARD
+        .state('home.dashboard', {
+          url: '/dashboard/{dashboardId:.+}',
+          controller: 'DashboardController',
           controllerAs: 'vm',
+          templateUrl: 'app/views/dashboard.html',
           data: {
-            title: 'Edit Project',
+            title: 'Dashboard',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
+        // WIDGET CREATE
         .state('home.addwidget', {
           url: '/addwidget',
           templateUrl: 'app/views/addAWidget.html',
@@ -184,6 +177,28 @@ sbapp
           controllerAs: 'vm',
           data: {
             title: 'Add a Widget',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
+        })
+        // USER PROFILE
+        .state('home.profile', {
+          url: '/profile',
+          templateUrl: 'app/views/profile.html',
+          controller: 'ProfileController',
+          controllerAs: 'vm',
+          data: {
+            title: 'Profile',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
+        })
+        // TEAM CONFIG
+        .state('home.team', {
+          url: '/team',
+          templateUrl: 'app/views/teamconfig.html',
+          controller: 'TeamController',
+          controllerAs: 'vm',
+          data: {
+            title: 'Team',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
@@ -197,31 +212,26 @@ sbapp
         .theme('default')
         .primaryPalette('amber', {
           'default': '500',
-          'hue-1': 'A100',
+          'hue-1': '100',
           'hue-2': '300',
           'hue-3': '700'
         })
         .accentPalette('teal', {
-          'default': '600',
-          'hue-1': 'A100',
+          'default': '500',
+          'hue-1': '100',
           'hue-2': '300',
           'hue-3': '700'
         })
-        .warnPalette('defaultPrimary');
+        .warnPalette('warn');
 
       $mdThemingProvider.theme('dark', 'default')
-        .primaryPalette('defaultPrimary')
+        .primaryPalette('amber')
         .dark();
 
       $mdThemingProvider.theme('grey', 'default')
         .primaryPalette('grey');
 
-      $mdThemingProvider.theme('custom', 'default')
-        .primaryPalette('defaultPrimary', {
-          'hue-1': '50'
-        });
-
-      $mdThemingProvider.definePalette('defaultPrimary', {
+      $mdThemingProvider.definePalette('warn', {
         '50': '#FFFFFF',
         '100': 'rgb(255, 198, 197)',
         '200': '#E75753',
@@ -240,31 +250,6 @@ sbapp
 
       $mdIconProvider.icon('user', 'assets/images/user.svg', 64);
     }
-  ])
+  )
 
-  // Broadcast events upon 4xx responses from server
-  .config(function ($httpProvider) {
-    $httpProvider.interceptors.push([
-      '$injector',
-      function ($injector) {
-        return $injector.get('AuthInterceptor');
-      }
-    ]);
-  })
-  .factory('AuthInterceptor', [
-    '$rootScope', '$q', 'AUTH_EVENTS',
-    function ($rootScope, $q, AUTH_EVENTS) {
-      return {
-        responseError: function (response) {
-          $rootScope.$broadcast({
-            401: AUTH_EVENTS.notAuthenticated,
-            403: AUTH_EVENTS.notAuthorized,
-            419: AUTH_EVENTS.sessionTimeout,
-            440: AUTH_EVENTS.sessionTimeout
-          }[response.status]);
-          return $q.reject(response);
-        }
-      };
-    }
-  ])
 ;

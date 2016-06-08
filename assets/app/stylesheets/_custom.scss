@@ -2,19 +2,37 @@
 $main-bg-color: #ECECEC;
 $text-color: #7A7A7A;
 $text-color-nav: #aaaaaa;
-$accent-color: rgb(0, 150, 136);
-$warning-color: #FFFFFA;
+$accent-color: #009688;
+$warning-color: #f6f6f6;
+$widget-accent: #00796B;
+$widget-width: 250px;
 
 // VARIABLES
 $left-sidenav-width: 200px;
-$widget-height: 175px;
-$card-width: 300px;
+$right-sidenav-width: 250px;
+$proj-height: 150px;
+$proj-width: 200px;
 $font-weight-bold: 600;
 $font-size-large: 22px;
 
 // LAYOUT
+project-card {
+  min-height: $proj-height;
+  width: $proj-width;
+  word-break: break-word;
+}
+
 body {
   color: $text-color;
+
+}
+
+a {
+  color: $accent-color;
+}
+
+.white-background{
+  background-color: white;
 }
 
 .toolbar-button {
@@ -59,7 +77,7 @@ body {
   position: relative;
 
   &-content {
-    height: 100vh;
+    height: 100%;
   }
 }
 
@@ -74,13 +92,23 @@ body {
   top: 2px;
   right: 2px;
   background-color: $warning-color;
+
+  &-issues {
+
+    //width: 25px;
+    border-radius: 25%;
+    font-size: 12px;
+    background-color: $widget-accent;
+    color: white;
+  }
 }
+
 // dash-widget
 .dash-widget {
   background-color: white;
 
   &-topbar {
-    background-color: #0b97c4;
+    background-color: $widget-accent;
   }
 
   &-topbar-text {
@@ -92,34 +120,23 @@ body {
   }
 
   &-font {
-    color: #0b97c4;
-    font-size: medium;
+    color: $widget-accent;
   }
 
-  &-priority-color-normal {
-    color: #00A000;
-    max-width: 15px;
-  }
-
-  &-priority-color-important {
-    color: darkgoldenrod;
-    max-width: 15px;
-  }
-
-  &-priority-color-critial {
-    color: red;
-    max-width: 15px;
-  }
-
-  &-priority-color-other {
-    color: blueviolet;
-    max-width: 15px;
+  &-status {
+    border-style: solid;
+    border-width: thin;
+    border-radius: 10%;
+    border-color: teal;
+    color: teal;
   }
 
 }
 
 // panel-widget
 .panel-widget {
+  width: $widget-width;
+  min-height: 200px;
   background-color: white;
 
   &-toolbar {
@@ -141,13 +158,6 @@ body {
   opacity: 0;
 }
 
-.fixed-height-widget {
-  height: $widget-height;
-}
-
-.fixed-width {
-  width: $card-width;
-}
 
 // charts
 .donut-chart-title {
@@ -162,6 +172,13 @@ body {
 
 // OVERRIDES
 // angular material overrides
+
+.logo-box {
+  width: $left-sidenav-width;
+  background: white;
+  cursor: pointer;
+}
+
 md-radio-group {
   border: none;
 }
@@ -174,6 +191,12 @@ md-sidenav.md-locked-open.md-sidenav-left {
   width: $left-sidenav-width;
   min-width: $left-sidenav-width;
   max-width: $left-sidenav-width;
+}
+
+md-sidenav.md-locked-open.md-sidenav-right {
+  width: $right-sidenav-width;
+  min-width: $right-sidenav-width;
+  max-width: $right-sidenav-width;
 }
 
 md-sidenav {
@@ -248,7 +271,7 @@ md-backdrop.md-sidenav-backdrop {
   margin: auto 5px;
 }
 
-.sb-logo-detail {
+.sb-logo.detail {
   content: url("../images/stacky500p.png");
 }
 
@@ -256,8 +279,44 @@ md-backdrop.md-sidenav-backdrop {
   content: url("../images/Issues_widget.PNG");
 }
 
+.issue-label {
+  height: 3em;
+  width: .4em;
+
+  &-border {
+    border: 1px solid #dddddd;
+  }
+}
+
+.leftnav-color-indent {
+
+  &-item{
+    background-color: gray;
+    width: 5px;
+  }
+
+  &-sub {
+    background-color: lightgray;
+    width: 5px;
+  }
+
+}
+
+
 .commits-widget-detail {
   content: url("../images/Commits_widget.PNG");
+}
+
+.contributors-widget-detail {
+  content: url("../images/Contributors_widget.PNG");
+}
+
+.branches-widget-detail {
+  content: url("../images/Branches_widget.PNG");
+}
+
+.noWidgets {
+  content: url("../images/no widgets.jpg");
 }
 
 .sb-18px {
@@ -278,4 +337,32 @@ md-backdrop.md-sidenav-backdrop {
 .sb-48px {
   width: 48px;
   height: 48px;
+}
+
+.message-wrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 3em;
+  margin: 0;
+  font-size: large;
+}
+
+.message-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: medium;
+  width: 100%;
+  text-align: left;
+
+}
+
+.message-issues-wrap {
+  font-size: medium;
+  width: 100%;
+  text-align: left;
+}
+
+md-select-value {
+  color: $warning-color !important;
 }

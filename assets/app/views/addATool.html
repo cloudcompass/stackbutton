@@ -1,26 +1,103 @@
-<h1>Current page index: {{vm.currentPage}}/{{vm.pageCount}}</h1>
-<md-card>
-  <md-card-content>
+<div flex-grow layout="column" layout-align="center start">
+  <section class="md-whiteframe-2dp" flex="80" ng-show="vm.currentPage == 1" ng-init="vm.pageCount=3">
     <!-- Page 0 - Tool Choice -->
-    <div ng-show="vm.currentPage == 0">
-      Choose a service:
+    <h1>Choose a service:</h1>
 
-      <h4 ng-repeat-start="module in vm.modules">{{module.display}}</h4>
-      <div layout="row" layout-align="center start" layout-wrap>
-        <md-button layout="column" ng-repeat="tool in vm.tools[module.name]"
-                   ng-click="vm.selectTool(module.name, tool)">
-          {{tool.name}}
-          <img src={{tool.image}} style="max-height: 50px; max-width: 50px;">
-        </md-button>
-      </div>
+    <md-grid-list flex="50" md-cols-xs="1" md-cols="2" md-row-height-gt-md="1:1" md-row-height="2:2"
+                  md-gutter="12px" md-gutter-gt-sm="8px">
+      <md-grid-tile class="green">
+        456
+        <md-grid-tile-footer>
+          <h3>Source Control</h3>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+      <md-grid-tile class="yellow">
+        <md-grid-tile-footer>
+          <h3>Issue Tracking</h3>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+      <md-grid-tile class="blue">
+        <md-grid-tile-footer>
+          <h3>Wiki</h3>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+      <md-grid-tile class="green">
+        <md-grid-tile-footer>
+          <h3>Hosting</h3>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
 
-      <md-divider ng-repeat-end=""></md-divider>
+    <!--<h4 ng-repeat-start="module in vm.modules">{{module.display}}</h4>-->
+    <!--<div layout="row" layout-align="center start" layout-wrap>-->
+    <!--<md-button layout="column" ng-repeat="tool in vm.tools[module.name]"-->
+    <!--ng-click="vm.selectTool(module.name, tool)">-->
+    <!--{{tool.name}}-->
+    <!--<img src={{tool.image}} style="max-height: 50px; max-width: 50px;">-->
+    <!--</md-button>-->
+    <!--</div>-->
 
+    <!--<md-divider ng-repeat-end=""></md-divider>-->
+
+  </section>
+
+  <!--STEP 1-->
+  <div ng-show="vm.currentPage == 2" layout="column" layout-align="start center">
+
+    <!-- Show existing services -->
+
+    <md-button ng-repeat="service in vm.services" ng-click="vm.selectService(service)">
+      {{service.name}}
+    </md-button>
+
+    <div layout="row">
+      <!--Input for new token-->
+      <md-input-container>
+        <label>Personal token</label>
+        <input ng-Model="token" type="text">
+      </md-input-container>
+      <md-button class="md-fab" ng-click="vm.addService(vm.currentPlatform, token)"><i
+        class="material-icons">add</i>
+      </md-button>
     </div>
 
-    <!--Further pages injected here-->
-    <div ng-include="vm.templatePath"></div>
+    <!--Buttons-->
+    <div layout="row" layout-align="end center">
+      <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()">Back</md-button>
+      <md-button ng-show="vm.currentPage < vm.pageCount" class="md-raised"
+                 ng-click="vm.next()" ng-disabled="vm.currentServiceId==null">Next
+      </md-button>
+      <md-button ng-show="vm.currentPage == vm.pageCount" class="md-raised">Finish</md-button>
+    </div>
+    <!--Buttons end-->
+  </div>
+  <!--STEP 1 END-->
 
-  </md-card-content>
+  <!--STEP 2-->
+  <div ng-show="vm.currentPage == 3" layout="column" layout-align="start center">
 
-</md-card>
+    Choose a repository:
+    <md-button ng-repeat="repo in vm.repos" ng-click="vm.configureModule(repo, ['full_name', 'name'])"
+               ng-disabled="repo.permissions.admin==false">
+      {{repo.full_name}}
+    </md-button>
+
+    <!--Buttons-->
+    <div layout="row" layout-align="end center">
+      <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()">Back</md-button>
+      <md-button ng-show="vm.currentPage < vm.pageCount" class="md-raised"
+                 ng-click="vm.next()" ng-disabled="vm.currentModule.config.repoFullName==null">Next
+      </md-button>
+      <md-button ng-show="vm.currentPage+1 == vm.pageCount" ng-click="vm.addModule(vm.currentModule)"
+                 class="md-raised">
+        Finish
+      </md-button>
+    </div>
+    <!--Buttons end-->
+
+  </div>
+  <!--STEP 2 END-->
+
+
+  </md-whiteframe>
+</div>

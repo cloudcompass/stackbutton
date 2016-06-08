@@ -1,52 +1,55 @@
-<md-card md-whiteframe="24">
-  <!--StackButton toolbar with button back to landing -->
-  <div>
-    <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
-      <div layout="row" layout-xs="column" layout-align="center center">
-        <img class="sb-logo sb-48px" ui-sref="welcome"/>
-        <h2 hide-xs>StackButton</h2>
+<!--StackButton toolbar with button back to landing -->
+<div>
+  <md-toolbar class="md-hue-3" md-theme="grey" md-tall layout="row" layout-align="center center">
+    <div layout="row" layout-align="center center">
+      <img class="sb-logo detail sb-48px" ui-sref="welcome"/>
+      <h2>StackButton</h2>
+    </div>
+  </md-toolbar>
+</div>
+
+<md-divider></md-divider>
+
+<!-- Login form -->
+<form name="vm.loginForm" ng-submit="vm.authenticate(vm.login.user,vm.login.password)">
+  <h1>
+    <span class="md-headline">Login</span>
+  </h1>
+
+  <!-- Error message -->
+  <div class="md-warn" ng-if="vm.login.error">{{vm.login.error}}</div>
+
+  <div layout-xs="column" layout="row" layout-align="space-around center">
+
+    <!-- Username/email box -->
+    <md-input-container>
+      <label for="userName">Username</label>
+      <input id="userName" type="text" name="text" ng-model="vm.login.user" required md-autofocus>
+      <div ng-messages="vm.loginForm.userName.$error">
+        <div ng-message="required">Username is required</div>
       </div>
-    </md-toolbar>
+    </md-input-container>
+
+    <!-- Password box -->
+    <md-input-container>
+      <label for="userPass">Password</label>
+      <input id="userPass" name="userPass" type="password" ng-model="vm.login.password" required>
+      <div ng-messages="vm.loginForm.userPass.$error">
+        <div ng-message="required">Password is required</div>
+      </div>
+    </md-input-container>
+
   </div>
 
-  <md-divider></md-divider>
-
-  <!-- Login form -->
-  <form name="loginForm">
-    <md-card-title>
-      <span class="md-headline">Login</span>
-    </md-card-title>
-    <md-card-content class="md-warn" ng-if="vm.login.error">{{vm.login.error}}</md-card-content>
-    <md-card-content layout="row" layout-align="space-around center">
-
-      <md-input-container>
-        <label for="userName">Username</label>
-        <input id="userName" type="text" name="text" ng-model="vm.login.user" required md-autofocus>
-        <div ng-messages="loginForm.userName.$error">
-          <div ng-message="required">Username is required</div>
-        </div>
-      </md-input-container>
-      <!-- Password box -->
-      <md-input-container>
-        <label for="userPass">Password</label>
-        <input id="userPass" name="userPass" type="password" ng-model="vm.login.password" required>
-        <div ng-messages="loginForm.userPass.$error">
-          <div ng-message="required">Password is required</div>
-        </div>
-      </md-input-container>
-
-    </md-card-content>
-
-
-    <!-- Buttons-->
-    <md-card-actions layout="row" layout-align="space-between center">
-      <div>
-        <md-button ui-sref="account.register" class="button">No account?</md-button>
-        <md-button ui-sref="welcome" class="button">Forgot Password?</md-button>
-      </div>
-      <md-button ng-click="vm.authenticate(vm.login.user,vm.login.password)"
-                 class="md-raised md-cornered md-primary">Login
-      </md-button>
-    </md-card-actions>
-  </form>
-</md-card>
+  <!-- Buttons-->
+  <div layout-xs="column" layout="row" layout-align="space-between center">
+    <div flex-order-xs="2" >
+      <md-button ui-sref="account.register" class="button">No account?</md-button>
+      <md-button ui-sref="welcome" class="button">Forgot Password?</md-button>
+    </div>
+    <button class="md-button md-raised md-cornered md-accent" ng-disabled="vm.loginForm.$submitted" type="submit">
+      <md-progress-linear class="md-primary" ng-show="vm.loginForm.$submitted"></md-progress-linear>
+      <span ng-hide="vm.loginForm.$submitted">Login</span>
+    </button>
+  </div>
+</form>

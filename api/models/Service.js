@@ -7,16 +7,15 @@
 
 module.exports = {
   attributes: {
-    // name: {
-    //   type: "string",
-    //   required: true,
-    //   minLength: 2
-    // },
+    name: {
+      type: "string",
+    },
     platform: {
       type: 'string',
       required: true
     },
     token: {
+      // TODO lock down permissions on this attr to never serve to outside requests
       type: 'string',
       required: true
     },
@@ -30,16 +29,37 @@ module.exports = {
   },
 
   beforeCreate: [
-    function checkToken(service, next) {
-      sails.log.info('Service.beforeCreate.checkToken', service);
+
+    // TODO encrypt the token
+    function encrypt(service, next) {
+      // encrypt service.token
+      // service.token = new encrypted value
+      next();
+    },
+
+    // set name property to a friendly name
+    function getName(service, next) {
       switch (service.platform) {
         case 'github':
-          GithubService.validateToken(service.token, next);
+          GithubService.getAccount(service, function (name, error) {
+            if (error != null) {
+              sails.log.warn('could not retrieve name');
+              next(new Error(error.message));
+            } else {
+              sails.log.info('found github account', name);
+              service.name = name;
+              next();
+            }
+          });
           break;
+        default:
+          service.name = 'unknown platform';
+          break;
+
+        ///
       }
     }
   ]
-
 
 };
 

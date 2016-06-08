@@ -1,20 +1,20 @@
 sbapp.directive('projectCard', function () {
   return {
     restrict: 'E',
-    scope: {project: '=', prompt: '&', select: '&'},
+    scope: {project: '=', select: '&'},
     template: '' +
-    '<section class="md-whiteframe-z1 panel-widget fixed-height-widget fixed-width">' +
+    '<md-card>' +
     '  <md-toolbar class="md-accent" layout="row" layout-align="space-between center">' +
-    '    <md-button ng-click="select(project)" ui-sref="home.dashboard" layout="row" layout-align="start">' +
+    '    <md-button class="toolbar-button" ui-sref="home.dashboard({dashboardId:project.dashboards[0].id})">' +
     '      <span class="dash-widget-topbar-text capitalize">{{project.name}}</span>' +
     '    </md-button>' +
-    '    <md-button class="md-icon-button" md-theme="dark" aria-label="Edit project" ui-sref="home.editproject" ng-click="select(project)">' +
+    '    <md-button class="toolbar-button" aria-label="Edit project" ui-sref="home.editproject" ng-click="select(project)">' +
     '      <i class="dash-widget-topbar-text material-icons">mode_edit</i>' +
     '    </md-button>' +
     '  </md-toolbar>' +
-    '  <div layout-padding>' +
+    '  <p layout-padding>' +
     '    {{project.description}}' +
-    '  </div>' +
-    '</section>'
+    '  </p>' +
+    '</md-card>'
   };
 });

@@ -1,34 +1,36 @@
-<md-card layout="column" layout-align="center center">
-  <p class="md-headline"> Create Project </p>
+<md-content class="md-padding md-whiteframe-2dp" layout="column" layout-align="center center" layout-margin>
+  <p class="md-headline">Create Project</p>
   <!-- Create project form -->
-  <md-card-content>
-    <form name="projectForm" layout="row" layout-align="space-around center">
-      <!--Project name container and error message -->
-      <md-input-container>
-        <label>Project Name</label>
-        <input name="projectName" type="text" ng-model="vm.projectName">
-        <div ng-messages="projectForm.projectName.$error" required ng-show="projectForm.projectName.$dirty">
-          <div ng-message="required">This is required!</div>
-        </div>
-      </md-input-container>
+  <form name="projectForm" ng-submit="vm.addProject(vm.projectName, vm.projectDescription)">
 
-      <!-- Project description container and error message -->
-      <md-card-content>
-        <md-input-container>
-          <label>Description</label>
+    <!--Project name container and error message -->
+    <md-input-container>
+      <label>Project Name</label>
+      <input name="projectName" type="text" ng-model="vm.projectName" md-minlength="3" md-maxlength="30">
+      <div ng-messages="projectForm.projectName.$error" required ng-show="projectForm.projectName.$dirty">
+        <div ng-message="required">This is required!</div>
+      </div>
+    </md-input-container>
+
+    <!-- Project description container and error message -->
+
+    <md-input-container>
+      <label>Description</label>
           <textarea name="projectDescription" type="text" ng-model="vm.projectDescription" required
-                    md-maxlength="50"></textarea>
-          <div ng-messages="projectForm.projectDescription.$error" ng-show="projectForm.projectDescription.$dirty">
-            <div ng-message="required">This is required!</div>
-          </div>
-        </md-input-container>
-      </md-card-content>
-    </form>
-  </md-card-content>
+                    md-maxlength="100"></textarea>
+      <div ng-messages="projectForm.projectDescription.$error" ng-show="projectForm.projectDescription.$dirty">
+        <div ng-message="required">This is required!</div>
+      </div>
+    </md-input-container>
 
-  <!-- Actions-->
-  <md-card-actions layout="row" layout-align="end center">
-    <md-button class="md-warn" ui-sref="home.projects">Cancel</md-button>
-    <md-button class="md-primary" ng-click="vm.addProject(vm.projectName, vm.projectDescription)"> Create </md-button>
-  </md-card-actions>
-</md-card>
+    <!-- Actions-->
+    <div layout="row" layout-align="center start">
+      <button class="md-button md-raised" ui-sref="home.projects">Cancel</button>
+      <button class="md-button md-raised md-accent" ng-disabled="projectForm.$invalid || projectForm.$submitted"
+              type="submit">
+        <md-progress-linear class="md-accent" ng-show="projectForm.$submitted"></md-progress-linear>
+        <span ng-hide="projectForm.$submitted">Create</span>
+      </button>
+    </div>
+  </form>
+</md-content>

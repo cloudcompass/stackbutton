@@ -1,18 +1,23 @@
-<div ng-controller="RepositoryController as vm">
-<md-divider></md-divider>
-  <!-- scope for vm -->
+<div flex="grow" ng-controller="VCSController as vm">
+
   <div layout="row" layout-align="start center" ng-repeat="rep in vm.repository" >
-    <span class="md-title " layout-padding>{{rep.repository}}: {{rep.type}}</span>
-    <span class="md-bar2"></span>
+    <!-- Repository Name -->
+    <span class="dash-widget-font" layout-padding>{{rep.repository}}: {{rep.type}}</span>
   </div>
+
+  <!-- Content -->
   <div layout="row" layout-align="start center" ng-repeat="person in vm.contributors" >
-    <i class="material-icons md-48">account_circle</i>
-    <div layout-padding="">
-      <span class="md-title">{{person.name}}</span>
+    <!-- Account Icon -->
+    <img style="height: 4em; width: 4em;" src={{commit.author.avatar_url}}>
+
+    <div layout-padding class="dash-widget-text">
+      <!-- Account Name -->
+      <b >{{person.name}}</b>
+      <!-- Number of commits -->
       <div layout="column" layout-align="start start">
-        <span>Commits: {{person.amount}}</span>
+        <span class="dash-widget-text">Commits: {{person.amount}}</span>
       </div>
     </div>
+
   </div>
-  <!-- end of scope for vm -->
 </div>

@@ -3,58 +3,34 @@ sbapp.service('navService', ['$q', navService]);
 function navService($q) {
 
   var menuItems = {};
-  menuItems.static = [
+
+  
+  menuItems = [
     {
-      name: 'Projects',
+      name: 'Dashboards',
       icon: 'work',
-      sref: 'home.projects'
-
+      sref: '.',
+      children: []
+    },
+    {
+      name: 'Modules',
+      icon: 'work',
+      sref: 'home.projects',
+      children: []
+    },
+    {
+      name: 'Services',
+      icon: 'work',
+      sref: 'home.servicesconfig',
+      children: []
+    },
+    {
+      name: 'Team',
+      icon: 'work',
+      sref: 'home.team',
+      children: []
     }
-    // {
-    //   name: 'Account',
-    //   icon: 'people',
-    //   sref: 'home.profile'
-    // }
-  ];
 
-  menuItems.server = [
-    {
-      name: 'Repositories',
-      icon: 'device_hub',
-      sref: 'home.repos',
-      children: [
-        {name: 'GitHub', sref: '.repo.github'},
-        {name: 'BitBucket', sref: '.repo.bitbucket'}
-      ]
-    },
-    {
-      name: 'Ticketing',
-      icon: 'poll',
-      sref: '.',
-      children: [
-        {name: 'Taiga', sref: '.repo.taiga'},
-        {name: 'Jira', sref: '.repo.jira'}
-      ]
-    },
-    {
-      name: 'Hosting',
-      icon: 'cloud_queue',
-      sref: '.',
-      children: [
-        {name: 'AWS', sref: '.repo.aws'},
-        {name: 'Docker', sref: '.repo.docker'}
-      ]
-    },
-    {
-      name: 'Monitoring',
-      icon: 'multiline_chart',
-      sref: '.',
-      children: [
-        {name: 'Storage', sref: '.monitoring.storage'},
-        {name: 'Memory', sref: '.monitoring.memory'},
-        {name: 'Network', sref: '.monitoring.network'}
-      ]
-    }
   ];
 
   return {

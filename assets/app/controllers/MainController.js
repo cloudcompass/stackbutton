@@ -6,31 +6,32 @@ sbapp.controller('MainController', [
   '$state',
   '$scope',
   '$mdToast',
+  '$mdMedia',
   'AuthService',
   'SessionService',
   'ProjectService',
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $scope, $mdToast, AuthService, SessionService, ProjectService) {
+function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $scope, $mdToast, $mdMedia, AuthService, SessionService, ProjectService) {
   var vm = this;
 
   /* CALLABLE MEMBERS */
 
   vm.menuItems = [];
-  vm.selectItem = selectItem;
-  vm.toggleItemsList = toggleItemsList;
-  vm.showSimpleToast = showSimpleToast;
-  vm.toggleRightSidebar = toggleRightSidebar;
-  vm.logOut = logOut;
-  vm.loadProjects = loadProjects;
   vm.projectList = [];
+  vm.showActivities = false;
+  vm.loadProjects = loadProjects;
+  vm.selectItem = selectItem;
   vm.selectProject = selectProject;
+  vm.showSimpleToast = showSimpleToast;
+  vm.toggleActivityDrawer = toggleActivityDrawer;
+  vm.toggleLeftNav = toggleLeftNav;
 
   /* ACTIONS */
 
-  navService
-    .loadAllItems()
+  $scope.currentUser && loadProjects();
+  navService.loadAllItems()
     .then(function (menuItems) {
       vm.menuItems = [].concat(menuItems);
     });
@@ -42,21 +43,19 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   }
 
   function loadProjects() {
-    return ProjectService.project.query({owner: $scope.currentUser.id},
+    return ProjectService.project.query({populate: 'dashboards'},
       function (projects) {
         vm.projectList = projects;
       })
   }
 
-  function toggleRightSidebar() {
-    $mdSidenav('right').toggle();
+  function toggleActivityDrawer() {
+    vm.showActivities = !vm.showActivities;
+    $mdSidenav('activitydrawer').toggle();
   }
 
-  function toggleItemsList() {
-    var pending = $mdBottomSheet.hide() || $q.when(true);
-    pending.then(function () {
-      $mdSidenav('left').toggle();
-    });
+  function toggleLeftNav() {
+    $mdSidenav('leftnav').toggle();
   }
 
   function selectItem(item) {
@@ -72,12 +71,6 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
         .hideDelay(2000)
         .position('bottom right')
     );
-  }
-
-  function logOut() {
-    AuthService.logout();
-    SessionService.destroy();
-    $scope.setCurrentUser(null);
   }
 
 } // MainController end

@@ -29,7 +29,7 @@ function ProjectService($resource) {
     }
   });
 
-  projService.widget = $resource('/widget/:widgetid', {projid: '@id'}, {
+  projService.widget = $resource('/widget/:widgetid', {widgetid: '@id'}, {
     update: {
       method: 'PUT'
     }

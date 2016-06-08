@@ -1,10 +1,29 @@
-<div ng-controller="RepositoryController as vm">
-  <md-divider></md-divider>
-  <div layout="row" layout-align="start center" ng-repeat="branch in vm.branches" >
-    <i class="material-icons md-48">{{branch.type}}</i>
-    <div layout="column" layout-align="space-around start" layout-padding>
-      <span class="{{branch.current}}">{{branch.name}}: {{branch.activity}}</span>
-    </div>
+<div flex="grow" layout="column" layout-align="start stretch">
+
+  <div ng-controller="VCSController as vm">
+
+
+     <div  ng-repeat="branch in vm.branches" >
+
+        <!-- Individual rows -->
+        <div layout="row" layout-align="space-around center" class="{{branch.current}}">
+          <!-- Branch name -->
+          <span layout="row" layout-align="space-around center">{{branch.name}}</span>
+          <!-- Branch status -->
+          <p class="dash-widget-status">{{branch.activity}}</p>
+
+
+          <!-- Additional information
+          <div layout="column" layout-align="start start" >
+            <span class="dash-widget-text">{{branch.active}}</span>
+            <span>{{branch.ahead}}</span>
+            <span>{{branch.behind}}</span>
+          </div>
+          -->
+        </div>
+       <!-- divides the rows for better clarity -->
+       <md-divider></md-divider>
+      </div>
+
   </div>
-  <!-- end of scope for vm -->
 </div>

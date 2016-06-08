@@ -18,7 +18,6 @@ function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService, Se
   vm.login = {
     user: 'admin@example.com',
     password: 'admin1234',
-    error: ''
   };
 
 
@@ -42,15 +41,27 @@ function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService, Se
 
         },
         function () {
+          // reset register button
+          vm.loginForm.$submitted = false;
           vm.login.error = 'User and password combination is incorrect';
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         }
       );
   }
 
-  function register(username, email, password, passwordVerify) {
-    if (password != passwordVerify) {
-      vm.reg.error = 'Passwords do not match'
+  function register(username, email, password, password2) {
+    // reset all errors
+    for (var att in vm.userForm.$error) { // loop failed validator keys
+      if (vm.userForm.$error.hasOwnProperty(att)) {
+        errs = vm.userForm.$error[att]; // get errors for this key
+        for (i = 0; i < errs.length; i++) { // loop failed inputs
+          vm.userForm[errs[i].$name].$setValidity(att, true);
+        }
+      }
+    }
+
+    if (password != password2) {
+      vm.userForm.password2.$setValidity('mismatch', false);
     } else {
       AuthService.register(username, email, password)
         .then(
@@ -58,10 +69,16 @@ function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService, Se
             $state.go('account.login');
           },
           function (res) {
-            vm.reg.error = '';
+            // parse server errors
+            var fields = res.data.invalidAttributes;
             for (item in res.data.invalidAttributes) {
-              vm.reg.error += res.data.invalidAttributes[item][0].message + '\r\n';
+              for (i = 0; i < fields[item].length; i++) {
+                error = fields[item][i].message;
+                vm.userForm[item].$setValidity(error, false);
+              }
             }
+            // reset register button
+            vm.userForm.$submitted = false;
           }
         );
     }

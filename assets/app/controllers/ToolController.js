@@ -32,8 +32,8 @@ function ToolController($scope, ToolService, ProjectService) {
   vm.currentPlatform = null;
 
   //Used for page back/next and div displays on addATool.html
-  vm.currentPage = 0;
-  vm.pageCount = 0;
+  vm.currentPage = 1;
+  vm.pageCount = 3;
 
 
   /* ACTIONS */
@@ -64,8 +64,16 @@ function ToolController($scope, ToolService, ProjectService) {
     vm.currentPage++;
   }
 
-  function configureModule(key, value) {
-    vm.currentModule.config[key] = value.full_name;
+  // data = object to pull properties from
+  // properties = optional array of property names to extract (default: *)
+  function configureModule(data, properties) {
+    if (typeof properties == 'undefined') {
+      vm.currentModule.config = data;
+    } else {
+      for (var i = 0; i < properties.length; i++) {
+        vm.currentModule.config[properties[i]] = data[properties[i]];
+      }
+    }
     console.log(vm.currentModule);
   }
 
@@ -85,7 +93,7 @@ function ToolController($scope, ToolService, ProjectService) {
 
   function loadServices() {
     ProjectService.service.query({
-        project: $scope.currentProject,
+        project: $scope.currentProject.id,
         platform: vm.currentPlatform,
         owner: $scope.currentUser.id
       },
@@ -130,6 +138,10 @@ function ToolController($scope, ToolService, ProjectService) {
         function (module) {
           console.log('addModule() success:', module);
           vm.currentPage = 0;
+          defaultWidgets = {
+            repo: 'commits',
+            issues: 'issues'
+          };
 
           /////
           // TODO to be removed. This is to add a first widget to the default dashboard"
@@ -142,7 +154,7 @@ function ToolController($scope, ToolService, ProjectService) {
               console.log('found dashboard', dashRes);
               dashRes[0].widgets.push(
                 {
-                  template: 'commits',
+                  template: defaultWidgets[module.type],
                   modules: [module.id]
                 }
               );
@@ -174,7 +186,7 @@ function ToolController($scope, ToolService, ProjectService) {
     console.log('hello?');
     ToolService.loadServiceRepos.query({service: serviceId},
       function (repos) {
-        console.log("retrieved repos:", repos.length);
+        console.log("retrieved repos:", repos);
         vm.repos = repos;
       },
       function (err) {

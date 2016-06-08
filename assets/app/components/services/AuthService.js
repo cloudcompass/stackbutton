@@ -21,9 +21,9 @@ sbapp.factory('AuthService', [
 );
 
 function AuthService(USER_ROLES, SessionService, $http, $q, $state) {
+  var authService = {};
 
   /* CALLABLE MEMBERS */
-  var authService = {};
 
   authService.authenticate = authenticate;
   authService.isAuthenticated = isAuthenticated;
@@ -95,7 +95,7 @@ function AuthService(USER_ROLES, SessionService, $http, $q, $state) {
   }
 
   function isAuthorized(authorizedRoles) {
-    console.log('isAuthorized(): current session', SessionService);
+    //console.log('isAuthorized(): current session', SessionService);
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }

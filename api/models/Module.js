@@ -21,8 +21,21 @@ module.exports = {
       via: 'modules'
     },
     service: {
-      model: 'service'
+      model: 'service',
+      required: true
     }
+  },
+
+  beforeCreate: function (module, next) {
+    sails.log.info('Project.beforeCreate.createWebhook', module);
+    var serviceId = _.has(module.service, 'id') ? module.service.id : module.service;
+    Service.findOne({id: serviceId})
+      .exec(function (err, service) {
+        if (service.platform == 'github') {
+          GithubService.createWebhook(module, next);
+        }
+      });
   }
+
 };
 
