@@ -33,13 +33,14 @@
 
 <!-- Widget selector view -->
 <h3>Select Widget: </h3>
-<section class="md-whiteframe-z2 panel-widget">
+<section class="md-whiteframe-z2">
 
   <!-- Communication widget dropdown -->
   <div layout="column" layout-align="start stretch">
     <md-divider></md-divider>
     <md-button layout="row" layout-align="space-between center" ng-click="showcomm=!showcomm">
-      <span class="dash-widget-font"> Communication</span>
+      <span class="dash-widget-font">Communication</span>
+      <span ng-show="commsel">+1 selected</span>
       <i class="material-icons md-24">{{showcomm==true ?'expand_less':'expand_more'}}</i>
     </md-button>
     <md-divider></md-divider>
@@ -47,7 +48,7 @@
 
   <div layout="row" layout-align="space-around center" ng-show="showcomm" ng-repeat="tool in commwid" layout-padding>
     <div layout="column" layout-align="space-between start" layout-padding>
-      <md-checkbox ng-model="data.cb1"><h4>{{tool.text}}</h4></md-checkbox>
+      <md-checkbox ng-click="commsel=!commsel"><h4>{{tool.text}}</h4></md-checkbox>
       <img class="{{tool.pic}}">
     </div>
     <div layout="column" layout-align="space-between start" layout-padding>
@@ -105,5 +106,5 @@
 <!-- end of Widget selector view -->
 
 <div layout="row" layout-align="end end">
-  <md-button class="md-raised md-primary" ui-sref="home.projects">Save</md-button>
+  <md-button class="md-raised md-primary" ui-sref="home.dashboard({dashboardId:project.dashboards[0].id})">Save</md-button>
 </div>
