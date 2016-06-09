@@ -6,6 +6,7 @@ var sbapp = angular.module('sbapp', [
   'ngCookies',
   'ngSanitize',
   'ui.router',
+  'ct.ui.router.extras.previous',
   'ngMaterial',
   'nvd3',
   'ngSails',
@@ -117,7 +118,7 @@ sbapp
         })
         // PROJECT CREATE
         .state('home.create', {
-          url: '/create',
+          url: '/newproject',
           templateUrl: 'app/views/createproject.html',
           controller: 'CreateController',
           controllerAs: 'vm',
@@ -128,7 +129,7 @@ sbapp
         })
         // PROJECT UPDATE
         .state('home.editproject', {
-          url: '/editproject',
+          url: '/project/{projectId:.+}/edit',
           templateUrl: 'app/views/editproject.html',
           controller: 'EditProjectController',
           controllerAs: 'vm',
@@ -139,7 +140,7 @@ sbapp
         })
         // SERVICE+MODULE CREATE
         .state('home.addtool', {
-          url: '/addtool',
+          url: '/project/{projectId:.+}/addtool',
           templateUrl: 'app/views/addATool.html',
           controller: 'ToolController',
           controllerAs: 'vm',
@@ -149,7 +150,7 @@ sbapp
           }
         })// SERVICE CONFIG
         .state('home.servicesconfig', {
-          url: '/servicesconfig',
+          url: '/project/{projectId:.+}/services',
           templateUrl: 'app/views/servicesconfig.html',
           controller: 'ServicesconfigController',
           controllerAs: 'vm',
@@ -160,7 +161,7 @@ sbapp
         })
         // PROJECT DASHBOARD
         .state('home.dashboard', {
-          url: '/dashboard/{dashboardId:.+}',
+          url: '/project/{projectId:.+}/dashboard/{dashboardId:.*}',
           controller: 'DashboardController',
           controllerAs: 'vm',
           templateUrl: 'app/views/dashboard.html',
@@ -171,7 +172,7 @@ sbapp
         })
         // WIDGET CREATE
         .state('home.addwidget', {
-          url: '/addwidget',
+          url: '/project/{projectId:.+}/dashboard/{dashboardId:.+}/addwidget',
           templateUrl: 'app/views/addAWidget.html',
           controller: '',
           controllerAs: 'vm',
@@ -193,7 +194,7 @@ sbapp
         })
         // TEAM CONFIG
         .state('home.team', {
-          url: '/team',
+          url: '/project/{projectId:.+}/team',
           templateUrl: 'app/views/teamconfig.html',
           controller: 'TeamController',
           controllerAs: 'vm',

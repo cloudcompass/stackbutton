@@ -1,33 +1,26 @@
 sbapp.controller('MainController', [
   'navService',
   '$mdSidenav',
-  '$mdBottomSheet',
-  '$q',
   '$state',
   '$scope',
   '$mdToast',
-  '$mdMedia',
-  'AuthService',
-  'SessionService',
   'ProjectService',
   MainController
 ]);
 
-function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $scope, $mdToast, $mdMedia, AuthService, SessionService, ProjectService) {
+function MainController(navService, $mdSidenav, $state, $scope, $mdToast, ProjectService) {
   var vm = this;
 
   /* CALLABLE MEMBERS */
 
   vm.menuItems = [];
-  vm.projectList = [];
   vm.showActivities = false;
   vm.loadProjects = loadProjects;
-  vm.selectItem = selectItem;
   vm.selectProject = selectProject;
-  vm.showSimpleToast = showSimpleToast;
   vm.toggleActivityDrawer = toggleActivityDrawer;
   vm.toggleLeftNav = toggleLeftNav;
-
+  $scope.projects = [];
+  
   /* ACTIONS */
 
   $scope.currentUser && loadProjects();
@@ -45,7 +38,7 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
   function loadProjects() {
     return ProjectService.project.query({populate: 'dashboards'},
       function (projects) {
-        vm.projectList = projects;
+        $scope.projects = projects;
       })
   }
 
@@ -56,21 +49,6 @@ function MainController(navService, $mdSidenav, $mdBottomSheet, $q, $state, $sco
 
   function toggleLeftNav() {
     $mdSidenav('leftnav').toggle();
-  }
-
-  function selectItem(item) {
-    vm.title = item.name;
-    vm.toggleItemsList();
-    vm.showSimpleToast(vm.title);
-  }
-
-  function showSimpleToast(title) {
-    $mdToast.show(
-      $mdToast.simple()
-        .content(title)
-        .hideDelay(2000)
-        .position('bottom right')
-    );
   }
 
 } // MainController end

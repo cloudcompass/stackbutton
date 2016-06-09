@@ -1,6 +1,10 @@
 <md-content md-theme="dark" class="md-padding md-whiteframe-2dp" layout-margin>
+  <div ng-show="vm.loading" layout layout-align="center">
+    <md-progress-circular md-mode="indeterminate" md-diameter="96"></md-progress-circular>
+  </div>
+
   <form name="editproj" ng-disabled="editproj.$submitted" ng-submit="vm.updateProject(vm.name, vm.description)"
-        layout="column" layout-align="center">
+        layout="column" layout-align="center" ng-show="!vm.loading">
 
     <!-- Project Title -->
     <md-input-container>
@@ -20,7 +24,7 @@
       <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog(currentProject)">Delete Project</md-button>
 
       <span layout layout-align="end center">
-        <button class="md-button md-raised" ui-sref="home.projects">Back</button>
+        <button class="md-button md-raised" ng-click="vm.goBack()">Back</button>
         <button class="md-button md-accent md-raised" ng-disabled="editproj.$invalid || editproj.$submitted"
                 type="submit">
           <md-progress-linear ng-show="editproj.$submitted" class="md-accent"></md-progress-linear>

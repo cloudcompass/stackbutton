@@ -31,5 +31,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "ui-router-extras": "^0.1.2"
+  }
 }

@@ -13,6 +13,8 @@ function CreateController($state, $scope, ProjectService) {
   vm.error = null;
   vm.addProject = addProject;
 
+  /* ACTIONS */
+
 
   /* FUNCTIONS */
 
@@ -25,16 +27,13 @@ function CreateController($state, $scope, ProjectService) {
         description: description
       };
       ProjectService.project.save(newProj,
-        function (project, headers) {
-          //success callback
-          console.log('addProject() success:', project);
-          $scope.setCurrentProject(project);
-          $state.go('home.addtool');
+        function (project) {
+          $scope.projects.push(project);
+          $state.go('home.dashboard', {projectId: project.id});
         },
-        function (resp) {
+        function (error) {
           //error callback
-          console.log('addProject() error:', resp);
-          //TODO add error handling feedback
+          console.log('addProject() error:', error);
         }
       );
     }
