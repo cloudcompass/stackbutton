@@ -16,8 +16,8 @@ function AuthController(AUTH_EVENTS, $state, $scope, $rootScope, AuthService, Se
   vm.register = register;
   vm.reg = {};
   vm.login = {
-    user: 'admin@example.com',
-    password: 'admin1234',
+    user: '',
+    password: ''
   };
 
 
