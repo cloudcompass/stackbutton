@@ -60,7 +60,7 @@ function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENT
       scope: $scope,
       preserveScope: true,
       template: '<md-dialog aria-label="Popup">' +
-      '  <md-dialog-content>' +
+      '  <md-dialog-content layout-padding>' +
       '     <span ng-controller="AuthController as vm" ng-include="\'app/views/' + template + '\'">' +
       '  </md-dialog-content>' +
       '</md-dialog>',
