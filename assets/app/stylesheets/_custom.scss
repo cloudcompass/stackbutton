@@ -31,6 +31,11 @@ a {
   color: $accent-color;
 }
 
+md-grid-list md-grid-tile md-grid-tile-footer {
+  background: rgba(0, 0, 0, 0.38);
+  height: 2em;
+}
+
 .white-background{
   background-color: white;
 }

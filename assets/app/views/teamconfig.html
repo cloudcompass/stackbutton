@@ -1,39 +1,55 @@
-<div ng-controller="TeamController as ctrl" layout="column" ng-cloak>
-  <md-content class="md-padding autocomplete" layout="column">
+<md-content class="md-padding md-whiteframe-2dp" layout="column" layout-margin>
+  <h1 class="md-title">Your Team:</h1>
+
+  <!-- Add to team -->
+  <div class="md-padding" layout="row">
 
     <!-- Search bar -->
-    <h2>Add a team member:</h2>
-    <p>Use the Search bar below to search stackbutton for a user to add them to your team. You can select more than one use at a time.</p>
-    <md-contact-chips
-      ng-model="ctrl.asyncContacts"
-      md-contacts="ctrl.delayedQuerySearch($query)"
-      md-contact-name="name"
-      md-contact-image="image"
-      md-contact-email="email"
-      md-require-match="true"
-      md-highlight-flags="i"
-      filter-selected="ctrl.filterSelected"
-      placeholder="To">
+    <md-contact-chips flex="50" flex-xs="80"
+                      ng-model="vm.asyncContacts"
+                      md-contacts="vm.delayedQuerySearch($query)"
+                      md-contact-name="name"
+                      md-contact-image="image"
+                      md-contact-email="email"
+                      md-require-match="true"
+                      md-highlight-flags="i"
+                      placeholder="Add to contributors">
     </md-contact-chips>
 
-    <!--Team member list -->
-    <h2>Your Team:</h2>
-    <md-checkbox ng-model="editTeamSelected">Edit team members</md-checkbox>
+    <!-- Add button -->
+    <md-button ng-disabled="vm.loading||vm.asyncContacts.length==0" ng-click="vm.addToTeam(vm.asyncContacts)"
+               class="md-fab md-mini md-accent">
+      <i class="material-icons md-24">add</i>
+    </md-button>
 
-    <p>These are your current team members.</p>
+  </div>
+  <!-- Add to team end -->
 
-    <!-- Repeated contacts -->
-    <md-list class="fixedRows" flex>
-      <md-list-item class="md-2-line contact-item selected" ng-repeat="contact in ctrl.users">
-        <img ng-src="images/stacky500p.png" class="md-avatar"/>
-        <div class="md-list-item-text compact md-raised">
-          <h3>{{contact.username}}</h3>
-          <p>{{contact.email}}</p>
-          <md-button class="md-raised md-warn" ng-hide="!editTeamSelected">Remove</md-button>
-        </div>
+  <h2 class="md-subhead">Contributers:</h2>
+  <div>
 
-      </md-list-item>
-    </md-list>
-    <br>
-  </md-content>
+    <md-progress-linear md-mode="indeterminate" ng-show="vm.loading"></md-progress-linear>
+    <span ng-if="!vm.loading&&currentProject.contributors.length==0">This project has no contributors</span>
 </div>
+
+  <!--Team member list -->
+  <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="6" md-cols-gt-md="8" md-row-height="1:1" md-gutter="12px">
+
+    <!-- Repeated element begin-->
+    <md-grid-tile ng-repeat="contact in currentProject.contributors" class="md-whiteframe-5dp">
+      <div layout-fill layout="column" layout-align="space-between end">
+        <img ng-src="images/stacky500p.png" style="position:absolute;width:100%">
+        <md-button class="md-warn md-icon-button" ng-click="vm.removeFromTeam(contact)"
+                   style="position:relative;top:-.5em;right:-1em">
+          <i class="material-icons md-24">cancel</i>
+        </md-button>
+      </div>
+      <md-grid-tile-footer layout layout-align="center center">
+        <md-tooltip md-direction="right">{{contact.email}}</md-tooltip>
+        {{contact.username}}
+      </md-grid-tile-footer>
+    </md-grid-tile>
+    <!-- Repeated element end-->
+
+  </md-grid-list>
+</md-content>
