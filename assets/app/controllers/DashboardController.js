@@ -16,7 +16,7 @@ function DashboardController($stateParams, $scope, ProjectService) {
 
   /* ACTIONS */
 
-  $scope.setCurrentProject(null);
+  $scope.currentProject && ($scope.currentProject.id != $stateParams.projectId) && $scope.setCurrentProject(null);
   loadWidgets();
 
 

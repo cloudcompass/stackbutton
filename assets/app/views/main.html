@@ -66,7 +66,7 @@
     <!-- Content begin -->
     <div flex-grow layout="row" class="page-content" style="position:relative">
       <!--Inject view-->
-      <div flex ng-class="{'hide-xs':vm.showActivities}" ui-view style="overflow:auto;"></div>
+      <div flex layout-fill ng-class="{'hide-xs':vm.showActivities}" ui-view style="overflow:auto;"></div>
       <!-- Drawer Button-->
       <md-button class="toolbar-button md-raised md-primary md-no-ink page-content" aria-label="Open activity feed"
                  style="position:absolute;right:-8px;z-index:10"

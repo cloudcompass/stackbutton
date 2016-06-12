@@ -16,6 +16,7 @@ function TeamController($scope, $stateParams, ProjectService, $filter, $state, $
   /* CALLABLE MEMBERS */
 
   vm.asyncContacts = [];
+  vm.contributors = [];
   vm.filterSelected = true;
   vm.loading = false;
   vm.delayedQuerySearch = delayedQuerySearch;
@@ -25,11 +26,25 @@ function TeamController($scope, $stateParams, ProjectService, $filter, $state, $
 
   /* ACTIONS */
 
-  $scope.setCurrentProject(null);
+  $scope.currentProject && ($scope.currentProject.id != $stateParams.projectId) && $scope.setCurrentProject(null);
   loadContributors();
 
 
   /* FUNCTIONS */
+
+  function loadContributors() {
+    vm.loading = true;
+    ProjectService.project.get({id: $stateParams.projectId, populate: ['dashboards', 'contributors']},
+      function (project) {
+        $scope.setCurrentProject(project);
+        vm.contributors = project.contributors;
+        vm.loading = false;
+      },
+      function (error) {
+        console.log('Project error:', error);
+        vm.loading = false;
+      });
+  }
 
   function addToTeam(users) {
     // gather promises
@@ -67,18 +82,6 @@ function TeamController($scope, $stateParams, ProjectService, $filter, $state, $
       });
   }
 
-  function loadContributors() {
-    vm.loading = true;
-    ProjectService.project.get({id: $stateParams.projectId, populate: ['dashboards', 'contributors']},
-      function (project) {
-        $scope.setCurrentProject(project);
-        vm.loading = false;
-      },
-      function (error) {
-        console.log('Project error:', error);
-        vm.loading = false;
-      });
-  }
 
   // Search for contacts & debounce
   function querySearch(criteria) {

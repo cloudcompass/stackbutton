@@ -1,5 +1,5 @@
 <md-content class="md-padding md-whiteframe-2dp" layout="column" layout-margin>
-  <h1 class="md-title">Your Team:</h1>
+  <h1 class="md-title">Project Team</h1>
 
   <!-- Add to team -->
   <div class="md-padding" layout="row">
@@ -26,17 +26,23 @@
   <!-- Add to team end -->
 
   <h2 class="md-subhead">Contributers:</h2>
+
+  <!-- loading bar -->
   <div>
-
     <md-progress-linear md-mode="indeterminate" ng-show="vm.loading"></md-progress-linear>
-    <span ng-if="!vm.loading&&currentProject.contributors.length==0">This project has no contributors</span>
-</div>
+    <span ng-if="!vm.loading&&vm.contributors.length==0">This project has no contributors</span>
+  </div>
 
-  <!--Team member list -->
-  <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="6" md-cols-gt-md="8" md-row-height="1:1" md-gutter="12px">
+  <!--team grid -->
+  <md-grid-list md-cols-xs="2"
+                md-cols-sm="3"
+                md-cols-md="6"
+                md-cols-gt-md="8"
+                md-row-height="1:1"
+                md-gutter="12px">
 
     <!-- Repeated element begin-->
-    <md-grid-tile ng-repeat="contact in currentProject.contributors" class="md-whiteframe-5dp">
+    <md-grid-tile ng-repeat="contact in vm.contributors" class="md-whiteframe-5dp">
       <div layout-fill layout="column" layout-align="space-between end">
         <img ng-src="images/stacky500p.png" style="position:absolute;width:100%">
         <md-button class="md-warn md-icon-button" ng-click="vm.removeFromTeam(contact)"
@@ -52,4 +58,6 @@
     <!-- Repeated element end-->
 
   </md-grid-list>
+  <!--team grid end -->
+
 </md-content>

@@ -1,7 +1,7 @@
 <div layout="column" ng-hide="currentProject==null">
   <md-button ui-sref="home.projects" layout="row" layout-align="start center">
     <i class="dash-widget-topbar-text material-icons">navigate_before</i>
-    <span>Projects</span>
+    <span layout flex>Projects</span>
   </md-button>
 
   <!--Project indicator -->
@@ -27,9 +27,8 @@
   <!-- Dashboard Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button layout>Dashboards</md-button>
+    <md-button ng-disabled="true" flex layout>Dashboards:</md-button>
     <!-- add Dashboard -->
-    <span flex></span>
     <md-button class="md-icon-button"><i class="material-icons">add</i></md-button>
   </div>
 
@@ -40,7 +39,7 @@
   <div layout="row" ng-repeat="dashboard in currentProject.dashboards">
     <div class="leftnav-color-indent-item"></div>
     <div class="leftnav-color-indent-sub"></div>
-    <md-button layout="row" layout-align="start center"
+    <md-button flex layout
                ui-sref="home.dashboard({projectId:dashboard.project,dashboardId:dashboard.id})">{{dashboard.name}}
     </md-button>
   </div>
@@ -52,7 +51,7 @@
   <!-- Module Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button layout>Modules</md-button>
+    <md-button flex layout>Modules</md-button>
   </div>
 
   <!-- separate buttons-->
@@ -61,7 +60,7 @@
   <!-- Service Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button layout ui-sref="home.servicesconfig({projectId:currentProject.id})">Services</md-button>
+    <md-button flex layout ui-sref="home.servicesconfig({projectId:currentProject.id})">Services</md-button>
   </div>
 
   <!-- separate buttons-->
@@ -70,7 +69,7 @@
   <!-- Team Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button layout ui-sref="home.team({projectId:currentProject.id})">Team</md-button>
+    <md-button flex layout ui-sref="home.team({projectId:currentProject.id})">Team</md-button>
   </div>
 
   <!-- separate buttons-->
