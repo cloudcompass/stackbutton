@@ -23,6 +23,10 @@ module.exports = {
     dashboards: {
       collection: "dashboard",
       via: 'project'
+    },
+    modules: {
+      collection: 'module',
+      via: 'project'
     }
   },
 

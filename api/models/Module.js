@@ -25,7 +25,8 @@ module.exports = {
       required: true
     },
     project: {
-      model: "project"
+      model: "project",
+      required: true
     }
   },
 

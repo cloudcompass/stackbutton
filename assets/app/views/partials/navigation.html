@@ -4,7 +4,7 @@
     <span layout flex>Projects</span>
   </md-button>
   <!-- Service Button -->
-  <md-button flex layout ui-sref="home.servicesconfig">
+  <md-button flex layout ui-sref="home.services">
     <i class="material-icons">power</i>
     <span layout flex>Services</span>
   </md-button>
@@ -57,7 +57,7 @@
   <!-- Module Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button flex layout>Modules</md-button>
+    <md-button flex layout ui-sref="home.modules({projectId:currentProject.id})">Modules</md-button>
   </div>
 
   <!-- separate buttons-->

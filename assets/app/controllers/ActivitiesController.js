@@ -17,7 +17,7 @@ function ActivitiesController(activitiesService, $sails) {
   // listen for new events
   $sails.on("event", function (message) {
     if (message.verb == 'created') {
-      console.log(message.data);
+      // console.log(message.data);
       getEvents();
     }
   });
@@ -27,7 +27,7 @@ function ActivitiesController(activitiesService, $sails) {
       .loadAllItems().then(
       function (resp) {
         vm.activities = [].concat(resp.data);
-        console.log('activities', vm.activities);
+        // console.log('activities', vm.activities);
       });
   }
 }

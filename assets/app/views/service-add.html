@@ -1,0 +1,63 @@
+<md-content class="md-padding md-whiteframe-2dp" layout="column" layout-margin>
+
+  <h1 class="md-title">Add A Service</h1>
+
+  <md-divider></md-divider>
+
+  <!--STEP 1: Tool Choice-->
+  <section ng-show="vm.currentPage == 1" ng-init="vm.pageCount=2">
+
+    <!-- Tool grid -->
+    <md-grid-list md-cols-xs="1"
+                  md-cols-sm="3"
+                  md-cols-md="6"
+                  md-cols-gt-md="8"
+                  md-row-height="1:1"
+                  md-gutter="12px">
+
+      <!-- Repeated element begin-->
+      <md-grid-tile ng-repeat="tool in vm.tools" class="md-whiteframe-5dp">
+        <md-button layout-fill layout="column" layout-align="start center" ng-disabled="tool.disabled"
+                   ng-click="vm.selectTool(tool)">
+          <img ng-src="{{tool.image}}" style="max-height:100%;max-width:100%">
+        </md-button>
+        <md-grid-tile-footer layout layout-align="center center">
+          {{tool.disabled? 'coming soon': tool.name}}
+        </md-grid-tile-footer>
+      </md-grid-tile>
+      <!-- Repeated element end-->
+
+    </md-grid-list>
+    <!-- service grid end -->
+  </section>
+  <!--STEP 1 END-->
+
+  <!--STEP 2: Token-->
+  <section ng-show="vm.currentPage == 2" layout="column" layout-align="start center">
+
+    <div layout="row">
+      <!--Input for new token-->
+      <md-input-container>
+        <label>Personal token</label>
+        <input ng-Model="vm.service.token" type="text">
+      </md-input-container>
+      </md-button>
+    </div>
+
+    <!--Buttons-->
+    <div layout="row" layout-align="end center">
+      <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()" ng-disabled="vm.submitted">Back
+      </md-button>
+      <md-button class="md-raised md-accent"
+                 ng-click="vm.addService(vm.service)" ng-disabled="!vm.service.token || vm.submitted">
+        <md-progress-linear class="md-accent" ng-show="vm.submitted"></md-progress-linear>
+        <span ng-hide="vm.submitted">Create</span>
+      </md-button>
+
+    </div>
+    <!--Buttons end-->
+  </section>
+  <!--STEP 2 END-->
+
+  <div layout layout-align="end start" class="md-caption">{{vm.currentPage}}/{{vm.pageCount}}</div>
+</md-content>

@@ -138,24 +138,45 @@ sbapp
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
-        // SERVICE+MODULE CREATE
-        .state('home.addtool', {
-          url: '/project/{projectId:.+}/addtool',
-          templateUrl: 'app/views/addATool.html',
-          controller: 'ToolController',
+        // SERVICE CREATE
+        .state('home.addservice', {
+          url: '/addservice',
+          templateUrl: 'app/views/service-add.html',
+          controller: 'ServiceAddController',
           controllerAs: 'vm',
           data: {
-            title: 'Add a tool',
+            title: 'Add a service',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })// SERVICE CONFIG
-        .state('home.servicesconfig', {
+        .state('home.services', {
           url: '/services',
-          templateUrl: 'app/views/servicesconfig.html',
-          controller: 'ServicesconfigController',
+          templateUrl: 'app/views/services.html',
+          controller: 'ServicesController',
           controllerAs: 'vm',
           data: {
             title: 'Configure Services',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
+        })
+        // MODULE CREATE
+        .state('home.addmodule', {
+          url: '/project/{projectId:.+}/addmodule',
+          templateUrl: 'app/views/module-add.html',
+          controller: 'ModuleAddController',
+          controllerAs: 'vm',
+          data: {
+            title: 'Add a Module',
+            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+          }
+        })// MODULE CONFIG
+        .state('home.modules', {
+          url: '/project/{projectId:.+}/modules',
+          templateUrl: 'app/views/modules.html',
+          controller: 'ModuleController',
+          controllerAs: 'vm',
+          data: {
+            title: 'Configure Modules',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
         })
