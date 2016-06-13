@@ -1,100 +1,148 @@
 sbapp.controller('TeamController', [
   '$scope',
+  '$stateParams',
   'ProjectService',
-  '$timeout',
+  '$filter',
+  '$state',
   '$q',
-  '$log',
   TeamController
 ]);
 
-function TeamController($scope, ProjectService,$timeout, $q, $log ) {
+function TeamController($scope, $stateParams, ProjectService, $filter, $state, $q) {
   var vm = this;
-
-  //Temp user data to build search bar
-  vm.users = [
-    {
-      createdBy: '575118f30a121d4c1fabca18',
-      owner: '575118f30a121d4c1fabca18',
-      username: 'user1',
-      email: 'email@example.com',
-      image: 'images/stacky500p.png',
-      bio: 'The domestic cat[1][2] (Latin: Felis catus) or the feral cat[2][4] (Latin: Felis silvestris catus) is a small, ' +
-      'typically furry, carnivorous mammal. They are often called house cats when kept as indoor pets or simply cats when there ' +
-      'is no need to distinguish them from other felids and felines.[6] Cats are often valued by humans for companionship and ' +
-      'for their ability to hunt vermin. There are more than 70 cat breeds; different associations proclaim different numbers ' +
-      'according to their standards.',
-      model: '575118d43cc5068431eaffd9',
-      createdAt: '2016-06-03T05:43:15.808Z',
-      updatedAt: '2016-06-03T06:59:18.556Z',
-      id: '575118f30a121d4c1fabca18'
-    },
-    {
-      createdBy: '575118f30a121d4c1fabca18',
-      owner: '575118f30a121d4c1fabca18',
-      username: 'user2',
-      email: 'useremail@email.com',
-      image: 'images/stacky500p.png',
-      bio: 'The domestic cat[1][2] (Latin: Felis catus) or the feral cat[2][4] (Latin: Felis silvestris catus) is a small, ' +
-      'typically furry, carnivorous mammal. They are often called house cats when kept as indoor pets or simply cats when there ' +
-      'is no need to distinguish them from other felids and felines.[6] Cats are often valued by humans for companionship and ' +
-      'for their ability to hunt vermin. There are more than 70 cat breeds; different associations proclaim different numbers ' +
-      'according to their standards.',
-      model: '575118d43cc5068431eaffd9',
-      createdAt: '2016-06-03T05:43:15.808Z',
-      updatedAt: '2016-06-03T06:59:18.556Z',
-      id: '575118f30a121d4c1fabca18'
-    },
-    {
-      createdBy: '575118f30a121d4c1fabca18',
-      owner: '575118f30a121d4c1fabca18',
-      username: 'user3',
-      email: 'princess@mycat.de',
-      image: 'images/stacky500p.png',
-      bio: 'The domestic cat[1][2] (Latin: Felis catus) or the feral cat[2][4] (Latin: Felis silvestris catus) is a small, ' +
-      'typically furry, carnivorous mammal. They are often called house cats when kept as indoor pets or simply cats when there ' +
-      'is no need to distinguish them from other felids and felines.[6] Cats are often valued by humans for companionship and ' +
-      'for their ability to hunt vermin. There are more than 70 cat breeds; different associations proclaim different numbers ' +
-      'according to their standards.',
-      model: '575118d43cc5068431eaffd9',
-      createdAt: '2016-06-03T05:43:15.808Z',
-      updatedAt: '2016-06-03T06:59:18.556Z',
-      id: '575118f30a121d4c1fabca18'
-    }
-  ];
-
-  //SEARCH BAR
   var pendingSearch, cancelSearch = angular.noop;
   var cachedQuery, lastSearch;
-  vm.allContacts = loadContacts();
-  vm.contacts = [vm.allContacts[0]];
-  vm.asyncContacts = [];
-  vm.filterSelected = true;
-  vm.querySearch = querySearch;
-  vm.delayedQuerySearch = delayedQuerySearch;
 
-  //Search for contacts; use a random delay to simulate a remote call
-  function querySearch (criteria) {
-    cachedQuery = cachedQuery || criteria;
-    return cachedQuery ? vm.allContacts.filter(createFilterFor(cachedQuery)) : [];
+  /* CALLABLE MEMBERS */
+
+  vm.asyncContacts = [];
+  vm.contributors = [];
+  vm.filterSelected = true;
+  vm.loading = false;
+  vm.delayedQuerySearch = delayedQuerySearch;
+  vm.addToTeam = addToTeam;
+  vm.removeFromTeam = removeFromTeam;
+
+
+  /* ACTIONS */
+
+  $scope.currentProject && ($scope.currentProject.id != $stateParams.projectId) && $scope.setCurrentProject(null);
+  loadContributors();
+
+
+  /* FUNCTIONS */
+
+  function loadContributors() {
+    vm.loading = true;
+    ProjectService.project.get({id: $stateParams.projectId, populate: ['dashboards', 'contributors']},
+      function (project) {
+        $scope.setCurrentProject(project);
+        vm.contributors = project.contributors;
+        vm.loading = false;
+      },
+      function (error) {
+        console.log('Project error:', error);
+        vm.loading = false;
+      });
   }
 
-  // Async search for contacts
-  //Also debounce the queries; since the md-contact-chips does not support this
+  function addToTeam(users) {
+    // gather promises
+    var requests = [];
+    angular.forEach(users, function (user, key) {
+      this.push(ProjectService.team.save({project: $scope.currentProject.id, user: user.id}).$promise);
+    }, requests);
+
+    // send all
+    vm.loading = true;
+    $q.all(requests).then(
+      function (resp) {
+      },
+      function (error) {
+        console.log("addToTeam()", error);
+      }
+    ).finally(function () {
+      $state.reload();
+      vm.loading = false;
+    });
+  }
+
+  function removeFromTeam(user) {
+    vm.loading = true;
+    ProjectService.team.delete({}, {project: $scope.currentProject.id, user: user.id},
+      function (resp) {
+        $state.reload();
+        vm.loading = false;
+
+      },
+      function (error) {
+        console.log('removeFromTeam()', error);
+        vm.loading = false;
+
+      });
+  }
+
+
+  // Search for contacts & debounce
+  function querySearch(criteria) {
+    cachedQuery = cachedQuery || criteria;
+
+    // build list of users to exclude from autocomplete
+    var excludeIds = $scope.currentProject.contributors.map(function (c, index) {
+      return c.id;
+    });
+    excludeIds.push($scope.currentUser.id);
+    excludeIds.push($scope.currentProject.owner);
+    var query = {
+      id: {
+        "!": excludeIds
+      }
+    };
+    query = angular.toJson(query);
+
+    return ProjectService.user.query({where: query}).$promise.then(function (resp) {
+      refreshDebounce();
+      return cachedQuery ? $filter('filter')(loadContacts(resp), createFilterFor(cachedQuery)) : [];
+    });
+  }
+
+  // Async call for contacts
   function delayedQuerySearch(criteria) {
     cachedQuery = criteria;
-    if ( !pendingSearch || !debounceSearch() )  {
+    if (!pendingSearch || !debounceSearch()) {
       cancelSearch();
-      return pendingSearch = $q(function(resolve, reject) {
-        // Simulate async search... (after debouncing)
+      return pendingSearch = $q(function (resolve, reject) {
         cancelSearch = reject;
-        $timeout(function() {
-          resolve( vm.querySearch() );
-          refreshDebounce();
-        }, Math.random() * 500, true)
+        resolve(querySearch());
       });
     }
     return pendingSearch;
   }
+
+
+  // helper function to transform user array into usable format
+  function loadContacts(users) {
+    // console.log(users);
+    return users.map(function (c, index) {
+      var contact = {
+        id: c.id,
+        name: c.username,
+        email: c.email,
+        image: 'images/stacky500p.png'
+      };
+      contact.name && ( contact._lowername = contact.name.toLowerCase() );
+      return contact;
+    });
+  }
+
+  // Create case-insensitive filter for a query string
+  function createFilterFor(query) {
+    var lowercaseQuery = angular.lowercase(query);
+    return function filterFn(contact) {
+      return (contact._lowername && contact._lowername.indexOf(lowercaseQuery) != -1);
+    };
+  }
+
   function refreshDebounce() {
     lastSearch = 0;
     pendingSearch = null;
@@ -108,18 +156,4 @@ function TeamController($scope, ProjectService,$timeout, $q, $log ) {
     return ((now - lastSearch) < 300);
   }
 
-  //Create filter function for a query string
-  function createFilterFor(query) {
-    var lowercaseQuery = angular.lowercase(query);
-    return function filterFn(contact) {
-      return (contact._lowername.indexOf(lowercaseQuery) != -1);;
-    };
-  }
-
-  function loadContacts() {
-    for (user in vm.users){
-      var contact = user;
-    }
-    return contact;
-  }
 }

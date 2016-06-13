@@ -1,98 +1,45 @@
-<!--
+<md-content class="md-padding md-whiteframe-2dp" layout="column" layout-margin>
 
+  <h1 class="md-title">
+    Services
 
+    <!-- Add button -->
+    <md-button class="md-fab md-mini md-primary">
+      <i class="material-icons md-24">add</i>
+    </md-button>
+  </h1>
 
+  <!-- loading bar -->
+  <div>
+    <md-progress-linear md-mode="indeterminate" ng-show="vm.loading"></md-progress-linear>
+    <span ng-if="!vm.loading&&vm.services.length==0">This project has no services</span>
+  </div>
 
- The below md-card elements are repeated to show that the grid scales them acording to the number
- of items inside of each grid 'box' :)
+  <!-- service grid -->
+  <md-grid-list md-cols-xs="1"
+                md-cols-sm="2"
+                md-cols-md="4"
+                md-cols-gt-md="6"
+                md-row-height="1:1"
+                md-gutter="12px">
 
-
-    //TO BE HOOKED UP INTO NG-REPEAT OR SOMETHING  :) :) :)
-
--->
-<div layout-margin class="md-padding" layout-align="center center">
-  <md-grid-list
-    md-cols-xs="1"
-    md-cols-sm="2"
-    md-cols-md="4"
-    md-cols-gt-md="6"
-    md-row-height-gt-md="1:1"
-    md-row-height="2:2"
-    md-gutter="12px"
-    md-gutter-gt-sm="8px" >
-
-    <md-grid-tile class="green">
-      <!-- Title of grid element -->
-      <md-grid-tile-header>
-        <h3>Source Control</h3>
-      </md-grid-tile-header>
-
-      <!-- Content of grid element -->
-      <!-- Repeated for demonstration -->
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-
+    <!-- Repeated element begin-->
+    <md-grid-tile ng-repeat="service in vm.services" class="md-whiteframe-5dp">
+      <div layout-fill layout="column" layout-align="space-between end">
+        <img ng-src="images/stacky500p.png" style="position:absolute;width:100%">
+        <md-button class="md-warn md-icon-button" ng-click="vm.removeService(service)"
+                   style="position:relative;top:-.5em;right:-1em">
+          <i class="material-icons md-24">cancel</i>
+        </md-button>
+      </div>
+      <md-grid-tile-footer layout layout-align="center center">
+        <md-tooltip md-direction="right">{{contact.email}}</md-tooltip>
+        {{service.platform}}:{{service.name}}
+      </md-grid-tile-footer>
     </md-grid-tile>
-
-    <md-grid-tile class="green">
-      <!-- Title of grid element -->
-      <md-grid-tile-header>
-        <h3>Issue Tracking</h3>
-      </md-grid-tile-header>
-
-      <!-- Content of grid element -->
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-    </md-grid-tile>
-
-    <md-grid-tile class="green">
-      <!-- Title of grid element -->
-      <md-grid-tile-header>
-        <h3>Wiki</h3>
-      </md-grid-tile-header>
-
-      <!-- Content of grid element -->
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-    </md-grid-tile>
-
-    <md-grid-tile class="green">
-      <!-- Title of grid element -->
-      <md-grid-tile-header>
-        <h3>Hosting</h3>
-      </md-grid-tile-header>
-
-      <!-- Content of grid element -->
-      <md-card>
-        <img src="/images/stacky500p.png">
-      </md-card>
-    </md-grid-tile>
+    <!-- Repeated element end-->
 
   </md-grid-list>
-</div>
+  <!-- service grid end -->
+
+</md-content>
