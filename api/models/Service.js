@@ -15,16 +15,12 @@ module.exports = {
       required: true
     },
     token: {
-      // TODO lock down permissions on this attr to never serve to outside requests
       type: 'string',
       required: true
     },
     modules: {
       collection: 'module',
       via: 'service'
-    },
-    project: {
-      model: "project"
     }
   },
 

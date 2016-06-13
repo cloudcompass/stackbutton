@@ -2,14 +2,13 @@ sbapp.controller('EditProjectController', [
   '$scope',
   '$state',
   '$stateParams',
-  '$previousState',
   '$mdDialog',
   '$filter',
   'ProjectService',
   EditProjectController
 ]);
 
-function EditProjectController($scope, $state, $stateParams, $previousState, $mdDialog, $filter, ProjectService) {
+function EditProjectController($scope, $state, $stateParams, $mdDialog, $filter, ProjectService) {
   var vm = this;
 
   /* CALLABLE MEMBERS */
@@ -19,7 +18,6 @@ function EditProjectController($scope, $state, $stateParams, $previousState, $md
   vm.name = '';
   vm.description = '';
   vm.loading = false;
-  vm.goBack = $previousState.go;
 
 
   /* ACTIONS */
@@ -58,7 +56,7 @@ function EditProjectController($scope, $state, $stateParams, $previousState, $md
       },
       function (project) {
         //success callback
-        vm.goBack();
+        $scope.goBack();
       },
       function (error) {
         //error callback
@@ -78,7 +76,7 @@ function EditProjectController($scope, $state, $stateParams, $previousState, $md
       '<div layout="column" layout-align="center center" layout-padding style="max-width: 350px;">' +
       '   <span style="text-align:center;">Are you sure you want to permanently DELETE' +
       '   <h3 align="center">' + project.name + '</h3>' +
-      '   This action cannot be undone! Please type the name of the project to confirm.</span>' +
+      '   This action cannot be undone. Please type the name of the project to confirm.</span>' +
       '   <md-input-container>' +
       '     <label>Project Name</label>' +
       '     <input type="text" ng-model="confirmBox" required>' +
@@ -94,7 +92,7 @@ function EditProjectController($scope, $state, $stateParams, $previousState, $md
       controller: function DialogController($scope, $mdDialog) {
         $scope.delete = function (id) {
           $scope.submitted = true;
-          ProjectService.project.remove({projid: id},
+          ProjectService.project.remove({id: id},
             function (response) {
               //success callback
               $mdDialog.hide();

@@ -42,17 +42,17 @@
                 md-gutter="12px">
 
     <!-- Repeated element begin-->
-    <md-grid-tile ng-repeat="contact in vm.contributors" class="md-whiteframe-5dp">
+    <md-grid-tile ng-repeat="user in vm.contributors" class="md-whiteframe-5dp">
       <div layout-fill layout="column" layout-align="space-between end">
         <img ng-src="images/stacky500p.png" style="position:absolute;width:100%">
-        <md-button class="md-warn md-icon-button" ng-click="vm.removeFromTeam(contact)"
+        <md-button class="md-warn md-icon-button" ng-click="vm.showDeleteDialog(user)"
                    style="position:relative;top:-.5em;right:-1em">
           <i class="material-icons md-24">cancel</i>
         </md-button>
       </div>
       <md-grid-tile-footer layout layout-align="center center">
-        <md-tooltip md-direction="right">{{contact.email}}</md-tooltip>
-        {{contact.username}}
+        <md-tooltip md-direction="right">{{user.email}}</md-tooltip>
+        {{user.username}}
       </md-grid-tile-footer>
     </md-grid-tile>
     <!-- Repeated element end-->

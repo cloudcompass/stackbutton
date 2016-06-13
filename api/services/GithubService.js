@@ -55,7 +55,7 @@ module.exports = {
 
   // constructs Event model instance for PayloadController
   createEvent: function (req, cb) {
-    sails.log.info('creating event', req.body);
+    // sails.log.info('creating event', req.body);
     var event = {};
     event.platform = 'github';
     event.event_type = req.headers['x-github-event'];
@@ -99,7 +99,7 @@ module.exports = {
     Widget.findOne({id: widgetId}).populate('modules')
       .exec(function (err, widget) {
         if (widget) {
-          sails.log.debug('finding first module:', widget.modules[0].id);
+          // sails.log.debug('finding first module:', widget.modules[0].id);
           Module.findOne({id: widget.modules[0].id}).populate('service')
             .exec(function (err, module) {
               if (module) {
@@ -121,7 +121,7 @@ module.exports = {
     Widget.findOne({id: widgetId}).populate('modules')
       .exec(function (err, widget) {
         if (widget) {
-          sails.log.debug('finding first module:', widget.modules);
+          // sails.log.debug('finding first module:', widget.modules);
           Module.findOne({id: widget.modules[0].id}).populate('service')
             .exec(function (err, module) {
               if (module) {

@@ -28,9 +28,8 @@ function DashboardController($stateParams, $scope, ProjectService) {
     ProjectService.project.get({id: $stateParams.projectId, populate: 'dashboards'},
       function (project) {
         $scope.setCurrentProject(project);
-        console.log($stateParams.dashboardId, project.dashboards[0].id);
         var dash = $stateParams.dashboardId || project.dashboards[0].id;
-        ProjectService.dashboard.get({id: dash, populate: ['widgets', 'project']},
+        ProjectService.dashboard.get({id: dash, populate: 'widgets'},
           function (dashboard) {
             vm.widgets = dashboard.widgets;
             vm.loading = false;

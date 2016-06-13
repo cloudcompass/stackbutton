@@ -21,7 +21,7 @@ function IssuesController($sails, $scope, RepositoryService, ProjectService) {
   // listen for new events
   $sails.on("event", function (message) {
     if (message.verb == 'created') {
-      console.log(message.data);
+      // console.log(message.data);
       loadIssues($scope.$parent.$parent.widget.id);
     }
   });
@@ -45,7 +45,7 @@ function IssuesController($sails, $scope, RepositoryService, ProjectService) {
   function loadIssues(widgetId) {
     RepositoryService.getIssues.query({widget: widgetId},
       function (issues) {
-        console.log("retrieved issues:", issues);
+        // console.log("retrieved issues:", issues);
         vm.issues = issues;
       },
       function (err) {

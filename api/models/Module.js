@@ -23,6 +23,9 @@ module.exports = {
     service: {
       model: 'service',
       required: true
+    },
+    project: {
+      model: "project"
     }
   },
 

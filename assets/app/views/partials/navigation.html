@@ -1,9 +1,20 @@
-<div layout="column" ng-hide="currentProject==null">
+<div layout="column">
   <md-button ui-sref="home.projects" layout="row" layout-align="start center">
-    <i class="dash-widget-topbar-text material-icons">navigate_before</i>
+    <i class="material-icons">view_module</i>
     <span layout flex>Projects</span>
   </md-button>
+  <!-- Service Button -->
+  <md-button flex layout ui-sref="home.servicesconfig">
+    <i class="material-icons">power</i>
+    <span layout flex>Services</span>
+  </md-button>
 
+
+</div>
+
+
+<!-- Menu items -->
+<div layout="column" ng-hide="currentProject==null">
   <!--Project indicator -->
   <md-toolbar class="md-accent" layout="column">
     <span layout layout-align="space-between center">
@@ -16,13 +27,8 @@
     <md-divider></md-divider>
     <span class="md-body-1" layout-padding>{{currentProject.description}}</span>
   </md-toolbar>
-</div>
-
-<md-divider></md-divider>
-<!-- end Project indicator -->
-
-<!-- Menu items -->
-<div layout="column" ng-hide="currentProject==null">
+  <md-divider></md-divider>
+  <!-- end Project indicator -->
 
   <!-- Dashboard Button -->
   <div layout="row">
@@ -56,12 +62,6 @@
 
   <!-- separate buttons-->
   <md-divider></md-divider>
-
-  <!-- Service Button -->
-  <div layout="row">
-    <div class="leftnav-color-indent-item"></div>
-    <md-button flex layout ui-sref="home.servicesconfig({projectId:currentProject.id})">Services</md-button>
-  </div>
 
   <!-- separate buttons-->
   <md-divider></md-divider>

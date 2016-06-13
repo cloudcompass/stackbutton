@@ -150,7 +150,7 @@ sbapp
           }
         })// SERVICE CONFIG
         .state('home.servicesconfig', {
-          url: '/project/{projectId:.+}/services',
+          url: '/services',
           templateUrl: 'app/views/servicesconfig.html',
           controller: 'ServicesconfigController',
           controllerAs: 'vm',

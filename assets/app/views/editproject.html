@@ -24,7 +24,7 @@
       <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog(currentProject)">Delete Project</md-button>
 
       <span layout layout-align="end center">
-        <button class="md-button md-raised" ng-click="vm.goBack()">Back</button>
+        <button class="md-button md-raised" ng-click="goBack()">Back</button>
         <button class="md-button md-accent md-raised" ng-disabled="editproj.$invalid || editproj.$submitted"
                 type="submit">
           <md-progress-linear ng-show="editproj.$submitted" class="md-accent"></md-progress-linear>

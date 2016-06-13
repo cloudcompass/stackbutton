@@ -87,7 +87,12 @@ module.exports = {
           cb(allowedRecords);
         });
         break;
-      case 'service': // by project.owner/contributors
+      case 'service': // by owner
+        allowedRecords = _.filter(records, function (o) {
+          return o.owner == userId || (o.owner.id && o.owner.id == userId)
+        });
+        cb(allowedRecords);
+        break;
       case 'module': // by service.project.owner+contributors
         AuthService.getAuthorizedServices(userId, function (err, services) {
           allowedRecords = _.filter(records, function (o) {
