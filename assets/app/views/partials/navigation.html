@@ -1,22 +1,23 @@
-<md-button ui-sref="home.projects" layout="row" layout-align="start center">
-  <i class="dash-widget-topbar-text material-icons">navigate_before</i>
-  <span>Projects</span>
-</md-button>
-<!--Project indicator -->
 <div layout="column" ng-hide="currentProject==null">
+  <md-button ui-sref="home.projects" layout="row" layout-align="start center">
+    <i class="dash-widget-topbar-text material-icons">navigate_before</i>
+    <span layout flex>Projects</span>
+  </md-button>
+
+  <!--Project indicator -->
   <md-toolbar class="md-accent" layout="column">
-           <span layout layout-align="space-between center">
-             <span class="md-body-2" layout-padding>{{currentProject.name}}</span>
-             <md-button class="md-icon-button" aria-label="Edit project" ui-sref="home.editproject"
-                        ng-click="select(project)">
-               <i class="dash-widget-topbar-text material-icons">mode_edit</i>
-             </md-button>
-           </span>
+    <span layout layout-align="space-between center">
+      <span class="md-body-2" layout-padding>{{currentProject.name}}</span>
+      <md-button class="md-icon-button" aria-label="Edit project"
+                 ui-sref="home.editproject({projectId:currentProject.id})">
+        <i class="dash-widget-topbar-text material-icons">mode_edit</i>
+      </md-button>
+    </span>
     <md-divider></md-divider>
     <span class="md-body-1" layout-padding>{{currentProject.description}}</span>
   </md-toolbar>
-
 </div>
+
 <md-divider></md-divider>
 <!-- end Project indicator -->
 
@@ -26,9 +27,8 @@
   <!-- Dashboard Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button layout>Dashboards</md-button>
+    <md-button ng-disabled="true" flex layout>Dashboards:</md-button>
     <!-- add Dashboard -->
-    <span flex></span>
     <md-button class="md-icon-button"><i class="material-icons">add</i></md-button>
   </div>
 
@@ -39,8 +39,8 @@
   <div layout="row" ng-repeat="dashboard in currentProject.dashboards">
     <div class="leftnav-color-indent-item"></div>
     <div class="leftnav-color-indent-sub"></div>
-    <md-button layout="row" layout-align="start center"
-               ui-sref="home.dashboard({dashboardId:currentProject.dashboards[0].id})">{{dashboard.name}}
+    <md-button flex layout
+               ui-sref="home.dashboard({projectId:dashboard.project,dashboardId:dashboard.id})">{{dashboard.name}}
     </md-button>
   </div>
   <!-- end sub dashboards -->
@@ -51,7 +51,7 @@
   <!-- Module Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button layout>Modules</md-button>
+    <md-button flex layout>Modules</md-button>
   </div>
 
   <!-- separate buttons-->
@@ -60,7 +60,7 @@
   <!-- Service Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button layout ui-sref="home.servicesconfig">Services</md-button>
+    <md-button flex layout ui-sref="home.servicesconfig({projectId:currentProject.id})">Services</md-button>
   </div>
 
   <!-- separate buttons-->
@@ -69,7 +69,7 @@
   <!-- Team Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button layout ui-sref="home.team">Team</md-button>
+    <md-button flex layout ui-sref="home.team({projectId:currentProject.id})">Team</md-button>
   </div>
 
   <!-- separate buttons-->

@@ -5,10 +5,10 @@ sbapp.directive('projectCard', function () {
     template: '' +
     '<md-card>' +
     '  <md-toolbar class="md-accent" layout="row" layout-align="space-between center">' +
-    '    <md-button class="toolbar-button" ui-sref="home.dashboard({dashboardId:project.dashboards[0].id})">' +
+    '    <md-button class="toolbar-button" ui-sref="home.dashboard({projectId:project.id,dashboardId:project.dashboards[0].id})">' +
     '      <span class="dash-widget-topbar-text capitalize">{{project.name}}</span>' +
     '    </md-button>' +
-    '    <md-button class="toolbar-button" aria-label="Edit project" ui-sref="home.editproject" ng-click="select(project)">' +
+    '    <md-button class="toolbar-button" aria-label="Edit project" ui-sref="home.editproject({projectId:project.id})" ng-click="select(project)">' +
     '      <i class="dash-widget-topbar-text material-icons">mode_edit</i>' +
     '    </md-button>' +
     '  </md-toolbar>' +

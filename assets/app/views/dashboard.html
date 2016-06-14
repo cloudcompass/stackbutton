@@ -1,12 +1,13 @@
 <div layout="row" layout-wrap layout-margin layout-align="center start">
-  <md-progress-circular mode="indeterminate" ng-show="vm.loading" md-diameter="96"></md-progress-circular>
+  <md-progress-circular md-mode="indeterminate" ng-show="vm.loading" md-diameter="96"></md-progress-circular>
 
 
 
   <panel-widget ng-repeat="widget in vm.widgets" widget="widget"></panel-widget>
 
   <!-- Show image if no widgets are on dashboard -->
-  <img ng-if="!vm.loading&&vm.widgets.length==0" class="noWidgets">
+
+  <span ng-if="!vm.loading&&vm.widgets.length==0">This dashboard has no widgets</span>
 
 
   <md-button class="md-fab md-fab-bottom-right" ui-sref="home.addwidget" aria-label="Add a widget">

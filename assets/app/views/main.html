@@ -18,8 +18,10 @@
         <i class="material-icons">arrow_drop_down</i>
       </md-button>
       <md-menu-content width="3">
-        <md-menu-item ng-repeat="project in vm.projectList">
-          <md-button ui-sref="home.dashboard({dashboardId:project.dashboards[0].id})">{{project.name}}</md-button>
+        <md-menu-item ng-repeat="project in projects">
+          <md-button ui-sref="home.dashboard({projectId:project.id,dashboardId:project.dashboards[0].id})">
+            {{project.name}}
+          </md-button>
         </md-menu-item>
       </md-menu-content>
     </md-menu>
@@ -54,7 +56,7 @@
   <div layout="row" flex>
 
     <!-- Left nav begin -->
-    <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" md-component-id="leftnav"
+    <md-sidenav md-is-locked-open="$mdMedia('gt-xs') && currentProject" md-component-id="leftnav"
                 class="md-whiteframe-z2 md-sidenav-left" md-theme="dark" md-swipe-left="vm.toggleLeftNav()">
       <div ng-include="'app/views/partials/navigation.html'"></div>
     </md-sidenav>
@@ -64,7 +66,7 @@
     <!-- Content begin -->
     <div flex-grow layout="row" class="page-content" style="position:relative">
       <!--Inject view-->
-      <div flex ng-class="{'hide-xs':vm.showActivities}" ui-view style="overflow:auto;"></div>
+      <div flex layout-fill ng-class="{'hide-xs':vm.showActivities}" ui-view style="overflow:auto;"></div>
       <!-- Drawer Button-->
       <md-button class="toolbar-button md-raised md-primary md-no-ink page-content" aria-label="Open activity feed"
                  style="position:absolute;right:-8px;z-index:10"

@@ -1,26 +1,72 @@
 sbapp.controller('EditProjectController', [
   '$scope',
   '$state',
+  '$stateParams',
+  '$previousState',
   '$mdDialog',
+  '$filter',
   'ProjectService',
   EditProjectController
 ]);
 
-function EditProjectController($scope, $state, $mdDialog, ProjectService) {
+function EditProjectController($scope, $state, $stateParams, $previousState, $mdDialog, $filter, ProjectService) {
   var vm = this;
 
   /* CALLABLE MEMBERS */
 
   vm.updateProject = updateProject;
   vm.showDeleteDialog = showDeleteDialog;
+  vm.name = '';
+  vm.description = '';
+  vm.loading = false;
+  vm.goBack = $previousState.go;
+
 
   /* ACTIONS */
-  vm.name = $scope.currentProject.name;
-  vm.description = $scope.currentProject.description;
+
+  getProjectInfo();
 
   /* FUNCTIONS */
 
-  //DELETE PROJECT DIALOG
+  function getProjectInfo() {
+    vm.loading = true;
+    ProjectService.project.get({id: $stateParams.projectId},
+      function (project) {
+        //success callback
+        $scope.setCurrentProject(project);
+        vm.name = $scope.currentProject.name;
+        vm.description = $scope.currentProject.description;
+        vm.loading = false;
+      },
+      function (error) {
+        //error callback
+        console.log('Project error:', error);
+        vm.loading = false;
+      });
+  }
+
+
+  //UPDATE PROJECT DESCRIPTION
+  function updateProject(newName, newDescription) {
+    //Call update functionality from ProjectService.
+    ProjectService.project.update(
+      //Data to insert
+      {
+        id: $stateParams.projectId,
+        name: newName,
+        description: newDescription
+      },
+      function (project) {
+        //success callback
+        vm.goBack();
+      },
+      function (error) {
+        //error callback
+        console.log("Update error:", error);
+      }
+    );
+  }
+
   function showDeleteDialog(project) {
     console.log("Delete Function Called");
     $mdDialog.show({
@@ -50,7 +96,7 @@ function EditProjectController($scope, $state, $mdDialog, ProjectService) {
           $scope.submitted = true;
           ProjectService.project.remove({projid: id},
             function (response) {
-              //success
+              //success callback
               $mdDialog.hide();
             },
             function (error) {
@@ -64,37 +110,21 @@ function EditProjectController($scope, $state, $mdDialog, ProjectService) {
         }
       }
     }).then(function () {
+      // remove entry from project selector
+      var obj = $filter('filter')($scope.projects, function (proj, index) {
+        return proj.id == $stateParams.projectId;
+      })[0];
+      var idx = $scope.projects.indexOf(obj);
+      $scope.projects.splice(idx, 1);
+      // redirect
       $state.go('home.projects');
     }).finally(function () {
-      // clean form & redirect
+      // clean form
       $scope.confirmBox = null;
       $scope.submitted = false;
     });
   }
 
-  //UPDATE PROJECT DESCRIPTION
-  function updateProject(newName, newDescription) {
-    //Call update functionality from ProjectService.
-    ProjectService.project.update(
-      //Data to insert
-      {
-        id: $scope.currentProject.id,
-        name: newName,
-        description: newDescription
-      },
-
-      //Function called if successful
-      function (project) {
-        //console.log("Update Successful.", project);
-        $state.go('home.projects');
-      },
-
-      //Function called if failed
-      function (error) {
-        console.log("Update Failed!", error);
-      }
-    );
-  }
 
 
 //Don't touch this guy, hes a nice little fella' and we don't want to hurt him or break this controller by deleting him.

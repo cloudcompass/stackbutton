@@ -43,11 +43,14 @@ var jsFilesToInject = [
   'bower_components/d3/d3.min.js',
   'bower_components/nvd3/build/nv.d3.min.js',
   'bower_components/angular-nvd3/dist/angular-nvd3.min.js',
-  '/bower_components/angular-resource/angular-resource.min.js',
+  'bower_components/angular-resource/angular-resource.min.js',
   'bower_components/angular-sanitize/angular-sanitize.min.js',
   'bower_components/angular-messages/angular-messages.min.js',
   'bower_components/angular-material/angular-material.min.js',
   'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+  'bower_components/ui-router-extras/release/modular/ct-ui-router-extras.core.min.js',
+  'bower_components/ui-router-extras/release/modular/ct-ui-router-extras.transition.min.js',
+  'bower_components/ui-router-extras/release/modular/ct-ui-router-extras.previous.min.js',
   'bower_components/angular-sails/dist/angular-sails.min.js',
 
   // All of the rest of your client-side js files

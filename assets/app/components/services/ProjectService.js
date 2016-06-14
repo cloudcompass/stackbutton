@@ -7,11 +7,18 @@ function ProjectService($resource) {
 
   var projService = {};
 
+  projService.user = $resource('/user/:userid', {userid: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
+
   projService.project = $resource('/project/:projid', {projid: '@id'}, {
     update: {
       method: 'PUT'
     }
   });
+  projService.team = $resource('/project/:projid/contributors/:userid', {projid: '@project', userid: '@user'});
 
   projService.dashboard = $resource('/dashboard/:dashboardid', {dashboardid: '@id'}, {
     update: {
