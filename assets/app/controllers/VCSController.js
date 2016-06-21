@@ -84,9 +84,9 @@ function VCSController($scope, RepositoryService, ProjectService) {
   /* FUNCTIONS */
 
   function loadName(widgetId) {
-    ProjectService.widget.get({widgetid: widgetId, populate: 'modules'},
+    ProjectService.widget.get({widgetid: widgetId, populate: 'module'},
       function (widget) {
-        vm.repoName = widget.modules[0].config.full_name;
+        vm.repoName = widget.module.config.full_name;
       },
       function (err) {
         console.log("error:", err);

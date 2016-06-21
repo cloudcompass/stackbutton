@@ -27,10 +27,9 @@ module.exports = {
       if (err) return cb(err);
       if (service == undefined) return cb('Invalid parent service');
 
-      sails.log.info('adding webhook', service.project, service.token);
       var client = github.client(service.token);
       var ghrepo = client.repo(module.config.full_name);
-      var evts;
+      var evts = [];
       switch (module.type) {
         case 'repo':
           evts = ["push", "create", "delete", "member"];
@@ -40,12 +39,14 @@ module.exports = {
           break;
       }
 
+      sails.log.info('adding webhook', module.project, service.token, module.config.full_name, evts);
+      // sails.log.info(ghrepo.collaborators(cb));
       ghrepo.hook({
         name: "web",
         active: true,
         events: evts,
         config: {
-          url: sails.config.url.hooks + "/payload/" + service.project,
+          url: sails.config.url.hooks + "/payload/" + module.project,
           content_type: "json"
         }
       }, cb);
@@ -96,11 +97,11 @@ module.exports = {
 
   // exposed to client in VCSController
   getCommits: function (widgetId, cb) {
-    Widget.findOne({id: widgetId}).populate('modules')
+    Widget.findOne({id: widgetId}).populate('module')
       .exec(function (err, widget) {
         if (widget) {
           // sails.log.debug('finding first module:', widget.modules[0].id);
-          Module.findOne({id: widget.modules[0].id}).populate('service')
+          Module.findOne({id: widget.module.id}).populate('service')
             .exec(function (err, module) {
               if (module) {
                 var client = github.client(module.service.token);
@@ -118,11 +119,11 @@ module.exports = {
   // exposed to client in VCSController
   getIssues: function (widgetId, cb) {
     sails.log.debug('finding widget:', widgetId);
-    Widget.findOne({id: widgetId}).populate('modules')
+    Widget.findOne({id: widgetId}).populate('module')
       .exec(function (err, widget) {
         if (widget) {
           // sails.log.debug('finding first module:', widget.modules);
-          Module.findOne({id: widget.modules[0].id}).populate('service')
+          Module.findOne({id: widget.module.id}).populate('service')
             .exec(function (err, module) {
               if (module) {
                 var client = github.client(module.service.token);

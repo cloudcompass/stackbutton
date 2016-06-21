@@ -8,8 +8,7 @@
 module.exports = {
   attributes: {
     name: {
-      type: "string",
-      required: true
+      type: "string"
     },
     platform: {
       type: 'string',

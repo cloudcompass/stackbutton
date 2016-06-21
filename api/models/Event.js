@@ -34,7 +34,8 @@ module.exports = {
       type: "string"
     },
     project: {
-      model: "project"
+      model: "project",
+      required: true
     }
 
   }

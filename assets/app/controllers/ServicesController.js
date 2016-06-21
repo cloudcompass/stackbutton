@@ -39,8 +39,6 @@ function ServicesController($scope, $state, $mdDialog, ProjectService) {
 
   function showDeleteDialog(service) {
     $mdDialog.show({
-      scope: $scope,
-      preserveScope: true,
       clickOutsideToClose: true,
       escapeToClose: true,
       template: '' +
@@ -51,34 +49,33 @@ function ServicesController($scope, $state, $mdDialog, ProjectService) {
       '     <span class="md-body-2">' + service.name + '</span>?' +
       '   </div>' +
       '   <span layout="row" layout-xs="column" layout-align="center center">' +
-      '     <md-button class="md-warn md-raised" ng-disabled="submitted" ng-click="delete(\'' + service.id + '\')">' +
-      '       <md-progress-linear ng-show="submitted" class="md-warn"></md-progress-linear>' +
-      '       <span ng-hide="submitted">Delete</span>' +
-      '     </md-button>' +
-      '     <md-button class="md-raised md-primary" ng-click="cancelDialog()" ng-disabled="submitted">Cancel</md-button>' +
+      '     <md-button class="md-warn md-raised" ng-click="delete()">Delete</md-button>' +
+      '     <md-button class="md-raised md-primary" ng-click="cancelDialog()">Cancel</md-button>' +
       '   </span>' +
       '</div>',
       controller: function DialogController($scope, $mdDialog) {
-        $scope.delete = function (id) {
-          $scope.submitted = true;
-          ProjectService.service.remove({id: id},
-            function (response) {
-              //success callback
-              $mdDialog.hide();
-            },
-            function (error) {
-              //stay here it didn't work
-              $scope.submitted = false;
-              console.log("delete error:", error);
-            });
+        $scope.delete = function () {
+          $mdDialog.hide(service.id);
         };
         $scope.cancelDialog = function () {
           $mdDialog.cancel();
         }
       }
-    }).then(function () {
-      // redirect
-      $state.reload();
+    }).then(function (servid) {
+      vm.loading = true;
+      ProjectService.service.remove({id: servid},
+        function (response) {
+          //success callback
+          // redirect
+          $state.reload();
+        },
+        function (error) {
+          //stay here it didn't work
+          $scope.submitted = false;
+          console.log("delete error:", error);
+        });
+    }).finally(function () {
+      vm.loading = false;
     });
   }
 
