@@ -11,30 +11,46 @@ module.exports = {
     type: {
       type: "string",
       required: true,
-      minLength: 2
+      enum: ['repo', 'issues', 'wiki']
     },
     config: {
       type: "json"
     },
     widgets: {
       collection: 'widget',
-      via: 'modules'
+      via: 'module'
     },
     service: {
       model: 'service',
+      required: true
+    },
+    project: {
+      model: "project",
       required: true
     }
   },
 
   beforeCreate: function (module, next) {
+    var admin = module.config.permissions.admin;
+    module.config = _.pick(module.config, ['full_name']);
     sails.log.info('Project.beforeCreate.createWebhook', module);
     var serviceId = _.has(module.service, 'id') ? module.service.id : module.service;
     Service.findOne({id: serviceId})
       .exec(function (err, service) {
         if (service.platform == 'github') {
-          GithubService.createWebhook(module, next);
+          if (admin) {
+            GithubService.createWebhook(module, next);
+          } else {
+            next();
+          }
         }
       });
+  },
+
+  afterDestroy: function (destroyedRecords, cb) {
+    // Destroy any child whose teacher has an ID of one of the
+    // deleted teacher models
+    Widget.destroy({module: _.pluck(destroyedRecords, 'id')}).exec(cb);
   }
 
 };

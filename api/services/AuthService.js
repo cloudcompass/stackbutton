@@ -78,25 +78,30 @@ module.exports = {
     var allowedRecords = [];
     switch (modelIdentity) {
       case 'project': // by owner+contributors
+      case 'module': // by project.owner+contributors
       case 'event': // by project.owner/contributors
         AuthService.getAuthorizedProjects(userId, function (err, projects) {
           allowedRecords = _.filter(records, function (o) {
             if (modelIdentity == 'project') return _.includes(projects, o.id);
-            return _.includes(projects, o.project) || _.includes(projects, o.project.id);
+            return _.includes(projects, o.project) || (o.project && _.includes(projects, o.project.id));
           });
           cb(allowedRecords);
         });
         break;
-      case 'service': // by project.owner/contributors
-      case 'module': // by service.project.owner+contributors
-        AuthService.getAuthorizedServices(userId, function (err, services) {
-          allowedRecords = _.filter(records, function (o) {
-            if (modelIdentity == 'service') return _.includes(services, o.id);
-            return _.includes(services, o.service) || _.includes(services, o.service.id);
-          });
-          cb(allowedRecords);
+      case 'service': // by owner
+        allowedRecords = _.filter(records, function (o) {
+          return o.owner == userId || (o.owner.id && o.owner.id == userId)
         });
+        cb(allowedRecords);
         break;
+      // case 'module': // by service.project.owner+contributors
+      //   AuthService.getAuthorizedServices(userId, function (err, services) {
+      //     allowedRecords = _.filter(records, function (o) {
+      //       return _.includes(services, o.service) || _.includes(services, o.service.id);
+      //     });
+      //     cb(allowedRecords);
+      //   });
+      //   break;
       case 'dashboard': // by owner, public+project.owner/contributors
       case 'widget': // by dashboard.owner, public+dashboard.project.owner/contributors
         AuthService.getAuthorizedDashboards(userId, function (err, dashboards) {

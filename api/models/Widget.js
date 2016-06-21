@@ -14,11 +14,12 @@ module.exports = {
       minLength: 2
     },
     dashboard: {
-      model: 'dashboard'
+      model: 'dashboard',
+      required: true
     },
-    modules: {
-      collection: 'module',
-      via: 'widgets'
+    module: {
+      model: 'module',
+      required: true
     }
   }
 };

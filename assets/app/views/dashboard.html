@@ -10,7 +10,9 @@
   <span ng-if="!vm.loading&&vm.widgets.length==0">This dashboard has no widgets</span>
 
 
-  <md-button class="md-fab md-fab-bottom-right" ui-sref="home.addwidget" aria-label="Add a widget">
+  <md-button class="md-fab md-fab-bottom-right"
+             ui-sref="home.addwidget({project:currentProject.id,dashboard:vm.currentDashboard})"
+             aria-label="Add a widget">
     <i class="material-icons md-24">add</i>
   </md-button>
 </div>

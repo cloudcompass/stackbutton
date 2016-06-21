@@ -12,11 +12,12 @@ function DashboardController($stateParams, $scope, ProjectService) {
 
   vm.widgets = [];
   vm.loading = false;
+  vm.currentDashboard = $stateParams.dashboard;
 
 
   /* ACTIONS */
 
-  $scope.currentProject && ($scope.currentProject.id != $stateParams.projectId) && $scope.setCurrentProject(null);
+  $scope.currentProject && ($scope.currentProject.id != $stateParams.project) && $scope.setCurrentProject(null);
   loadWidgets();
 
 
@@ -25,12 +26,11 @@ function DashboardController($stateParams, $scope, ProjectService) {
   function loadWidgets() {
     vm.loading = true;
 
-    ProjectService.project.get({id: $stateParams.projectId, populate: 'dashboards'},
+    ProjectService.project.get({id: $stateParams.project, populate: 'dashboards'},
       function (project) {
         $scope.setCurrentProject(project);
-        console.log($stateParams.dashboardId, project.dashboards[0].id);
-        var dash = $stateParams.dashboardId || project.dashboards[0].id;
-        ProjectService.dashboard.get({id: dash, populate: ['widgets', 'project']},
+        var dash = $stateParams.dashboard || project.dashboards[0].id;
+        ProjectService.dashboard.get({id: dash, populate: 'widgets'},
           function (dashboard) {
             vm.widgets = dashboard.widgets;
             vm.loading = false;

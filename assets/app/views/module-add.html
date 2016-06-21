@@ -1,0 +1,110 @@
+<md-content class="md-padding md-whiteframe-2dp" layout="column" layout-margin>
+
+  <h1 class="md-title">Add A Module</h1>
+
+  <md-divider></md-divider>
+
+  <!--STEP 1: Tool Choice-->
+  <section ng-show="vm.currentPage == 1" ng-init="vm.pageCount=3" layout="column">
+
+    <!-- Module type grid -->
+    <md-grid-list md-cols-xs="1"
+                  md-cols-sm="3"
+                  md-cols-gt-sm="6"
+                  md-row-height="1:1"
+                  md-gutter="12px">
+
+      <!-- Repeated element begin-->
+      <md-grid-tile ng-repeat="modtype in vm.modtypes" class="md-whiteframe-5dp">
+        <md-button layout-fill ng-click="vm.module.type=modtype.name" aria-label="Module type: {{modtype}}">
+          <img ng-src="images/stacky500p.png" style="width:100%">
+        </md-button>
+        <md-grid-tile-footer layout layout-align="center center">
+          {{modtype.display}}
+        </md-grid-tile-footer>
+      </md-grid-tile>
+      <!-- Repeated element end-->
+
+    </md-grid-list>
+    <!-- service grid end -->
+
+    <!--Buttons-->
+    <div layout="row" layout-align="center" layout-margin>
+      <md-button class="md-raised" ng-click="goBack()">Back</md-button>
+      <md-button class="md-raised md-accent" ng-click="vm.next()" ng-disabled="!vm.module.type">Next</md-button>
+    </div>
+  </section>
+  <!--STEP 1 END-->
+
+  <!--STEP 2: Service Choice-->
+  <section ng-show="vm.currentPage == 2">
+    <!-- loading bar -->
+    <div layout layout-align="center center">
+      <md-progress-circular md-mode="indeterminate" ng-show="vm.loading"></md-progress-circular>
+      <span ng-if="!vm.loading&&vm.services.length==0">No services</span>
+      <a ui-sref="home.addservice">Add one</a>
+
+    </div>
+
+    <!-- service grid -->
+    <md-grid-list md-cols-xs="1"
+                  md-cols-sm="3"
+                  md-cols-gt-sm="6"
+                  md-row-height="1:1"
+                  md-gutter="12px">
+
+      <!-- Repeated element begin-->
+      <md-grid-tile ng-repeat="service in vm.services | filter: vm.filterService" class="md-whiteframe-5dp">
+        <md-button layout-fill ng-click="vm.selectService(service)"
+                   aria-label="Service: {{service.platform}}:{{service.name}}">
+          <img ng-src="images/stacky500p.png" style="width:100%">
+        </md-button>
+        <md-grid-tile-footer layout layout-align="center center">
+          {{service.platform}}:{{service.name}}
+        </md-grid-tile-footer>
+      </md-grid-tile>
+      <!-- Repeated element end-->
+
+    </md-grid-list>
+    <!-- service grid end -->
+  </section>
+  <!--STEP 1 END-->
+
+  <!--STEP 2: Repo-->
+  <section ng-show="vm.currentPage == 3" layout="column" layout-align="start center">
+
+    <div>
+      <md-progress-circular md-mode="indeterminate" ng-show="vm.loading"></md-progress-circular>
+      <span ng-if="!vm.loading&&vm.repos.length==0">This account has no repositories</span>
+    </div>
+
+    <!--Repo list-->
+    <div layout="column">
+      <div ng-repeat="repo in vm.repos">
+        <md-button ng-click="vm.configureModule(repo)">
+          {{repo.full_name}}
+          <md-tooltip>{{repo.description}}</md-tooltip>
+        </md-button>
+        <span ng-if="!repo.permissions.admin">
+          <i class="material-icons">warning</i>
+          <md-tooltip>You do not have administrator rights to this repository. This module will not post to the activity feed.</md-tooltip>
+        </span>
+      </div>
+    </div>
+
+    <!--Buttons-->
+    <div layout="row" layout-align="end center">
+      <md-button class="md-raised" ng-click="vm.back()" ng-disabled="vm.submitted">Back</md-button>
+      <md-button class="md-raised md-accent"
+                 ng-click="vm.addModule(vm.module)" ng-disabled="!vm.module.config || vm.submitted">
+        <md-progress-linear md-mode="indeterminate" class="md-accent" ng-show="vm.submitted"></md-progress-linear>
+        <span ng-hide="vm.submitted">Finish</span>
+      </md-button>
+
+    </div>
+    <!--Buttons end-->
+  </section>
+  <!--STEP 2 END-->
+
+  <div layout layout-align="end start" class="md-caption">{{vm.currentPage}}/{{vm.pageCount}}</div>
+</md-content>

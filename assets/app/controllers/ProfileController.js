@@ -1,21 +1,71 @@
 sbapp.controller('ProfileController', [
+  '$scope',
+  '$state',
+  'ProjectService',
   ProfileController
 ]);
 
-function ProfileController() {
+function ProfileController($scope, $state, ProjectService) {
   var vm = this;
 
+  /* CALLABLE MEMBERS */
+
+  vm.getUserInfo = getUserInfo;
+  vm.updateUser = updateUser;
+
+  vm.loading = false;
   vm.user = {
-    title: 'Admin',
-    email: 'contact@flatlogic.com',
+    id: $scope.currentUser.id,
+    email: '',
+    username: '',
     firstName: '',
     lastName: '',
-    company: 'FlatLogic Inc.',
-    address: 'Fabritsiusa str, 4',
-    city: 'Minsk',
-    state: '',
-    biography: 'We are young and ambitious full service design and technology company. ' +
-    'Our focus is JavaScript development and User Interface design.',
-    postalCode: '220007'
+    bio: ''
   };
+
+  /* ACTIONS */
+  getUserInfo();
+
+  /* FUNCTIONS */
+
+
+  function getUserInfo() {
+    vm.loading = true;
+    ProjectService.user.get({id: vm.user.id},
+      function (user) {
+        //success callback
+        vm.user.email = user.email;
+        vm.user.username = user.username;
+        vm.user.first_name = user.first_name;
+        vm.user.last_name = user.last_name;
+        vm.user.bio = user.bio;
+        vm.loading = false;
+      },
+      function (error) {
+        //error callback
+        console.log('user error:', error);
+        vm.loading = false;
+      });
+  }
+
+
+//UPDATE PROJECT DESCRIPTION
+  function updateUser(user) {
+    //Call update functionality from ProjectService.
+    ProjectService.user.update(
+      //Data to insert
+      user,
+      function (user) {
+        //success callback
+        $state.reload();
+      },
+      function (error) {
+        //error callback
+        console.log("Update error:", error);
+      }
+    );
+  }
+
+
 }
+
