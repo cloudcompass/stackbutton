@@ -1,29 +1,40 @@
 <md-content md-theme="dark" class="md-padding md-whiteframe-2dp" layout="column" layout-margin>
   <md-input-container>
     <label>Username</label>
-    <input ng-model="currentUser.username">
+    <input ng-model="vm.user.username">
   </md-input-container>
   <md-input-container>
     <label>Email</label>
-    <input ng-model="currentUser.email" type="email">
+    <input ng-model="vm.user.email" type="email">
   </md-input-container>
 </md-content>
 <md-content class="md-padding md-whiteframe-2dp" layout="column" layout-margin>
-  <form name="userForm">
+  <form name="userForm" ng-submit="vm.updateUser(vm.user)" ng-show="!vm.loading">
     <div layout layout-sm="column">
       <md-input-container flex>
         <label>First Name</label>
-        <input ng-model="vm.user.firstName">
+        <input ng-model="vm.user.first_name">
       </md-input-container>
       <md-input-container flex>
         <label>Last Name</label>
-        <input ng-model="vm.user.lastName">
+        <input ng-model="vm.user.last_name">
       </md-input-container>
     </div>
     <md-input-container flex>
       <label>About us</label>
-            <textarea ng-model="vm.user.biography" columns="1"
+            <textarea ng-model="vm.user.bio" columns="1"
                       md-maxlength="150"></textarea>
     </md-input-container>
+
+
+    <!-- Page controls/buttons -->
+    <div layout="row" layout-align="end center" layout-xs="column">
+      <button class="md-button md-raised" ng-click="goBack()">Back</button>
+      <button class="md-button md-accent md-raised" ng-disabled="userForm.$invalid || userForm.$submitted"
+              type="submit">
+        <md-progress-linear ng-show="userForm.$submitted" class="md-accent"></md-progress-linear>
+        <span ng-hide="userForm.$submitted">Save</span>
+      </button>
+    </div>
   </form>
 </md-content>

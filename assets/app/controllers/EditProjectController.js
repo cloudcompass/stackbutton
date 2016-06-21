@@ -56,8 +56,11 @@ function EditProjectController($scope, $state, $stateParams, $mdDialog, $filter,
         description: newDescription
       },
       function (project) {
-        //success callback
-        $scope.goBack();
+        //success callbackvar currState = $state.current;
+        var currState = $state.current;
+        $scope.goBack().then(function () {
+          if ($state.current == currState) $state.go('home.projects');
+        });
       },
       function (error) {
         //error callback

@@ -3,7 +3,7 @@
     <md-progress-circular md-mode="indeterminate" md-diameter="96"></md-progress-circular>
   </div>
 
-  <form name="editproj" ng-disabled="editproj.$submitted" ng-submit="vm.updateProject(vm.name, vm.description)"
+  <form name="editproj" ng-submit="vm.updateProject(vm.name, vm.description)"
         layout="column" layout-align="center" ng-show="!vm.loading">
 
     <!-- Project Title -->
@@ -30,7 +30,8 @@
         <button class="md-button md-raised" ng-click="goBack()">Back</button>
         <button class="md-button md-accent md-raised" ng-disabled="editproj.$invalid || editproj.$submitted"
                 type="submit">
-          <md-progress-linear ng-show="editproj.$submitted" class="md-accent"></md-progress-linear>
+          <md-progress-linear md-mode="indeterminate" ng-show="editproj.$submitted"
+                              class="md-accent"></md-progress-linear>
           <span ng-hide="editproj.$submitted">Save</span>
         </button>
       </span>

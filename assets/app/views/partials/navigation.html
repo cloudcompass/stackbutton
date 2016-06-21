@@ -17,9 +17,10 @@
 <div layout="column" ng-hide="currentProject==null">
   <!--Project indicator -->
   <md-toolbar class="md-accent" layout="column">
-    <span layout layout-align="space-between center">
+    <span layout>
       <span class="md-body-2" layout-padding>{{currentProject.name}}</span>
-      <md-button class="md-icon-button" aria-label="Edit project"
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="Edit project" ng-if="currentProject.owner==currentUser.id"
                  ui-sref="home.editproject({project:currentProject.id})">
         <i class="dash-widget-topbar-text material-icons">mode_edit</i>
       </md-button>
@@ -35,7 +36,7 @@
     <div class="leftnav-color-indent-item"></div>
     <md-button ng-disabled="true" flex layout>Dashboards:</md-button>
     <!-- add Dashboard -->
-    <md-button class="md-icon-button"><i class="material-icons">add</i></md-button>
+    <md-button class="md-icon-button" ng-click="vm.addDashboard()"><i class="material-icons">add</i></md-button>
   </div>
 
   <!-- separate buttons-->

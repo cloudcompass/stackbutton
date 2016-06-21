@@ -2,7 +2,7 @@
   <md-progress-circular md-mode="indeterminate" ng-show="vm.loading" md-diameter="96"></md-progress-circular>
   <span ng-if="!vm.loading&&vm.projects.length==0">You have no projects</span>
 
-  <project-card ng-repeat="project in vm.projects" project="project"></project-card>
+  <project-card ng-repeat="project in vm.projects" project="project" userid="currentUser.id"></project-card>
 
   <md-button class="md-fab md-primary md-fab-bottom-right" ui-sref="home.create" aria-label="Create project">
     <i class="material-icons md-24">add</i>
