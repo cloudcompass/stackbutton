@@ -27,12 +27,14 @@ function ToolService($resource, $q) {
       {
         name: 'github',
         image: 'https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png',
-        modules: ['repo', 'issues', 'wiki']
+        modules: ['repo', 'issues', 'wiki'],
+        disabled: false
       },
       {
         name: 'bitbucket',
         image: 'https://worldvectorlogo.com/logos/bitbucket.svg',
-        modules: ['repo']
+        modules: ['repo'],
+        disabled: true
       }
     ];
 

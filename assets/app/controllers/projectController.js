@@ -1,12 +1,10 @@
 sbapp.controller('ProjectController', [
-  '$state',
   '$scope',
   'ProjectService',
-  '$mdDialog',
   ProjectController
 ]);
 
-function ProjectController($state, $scope, ProjectService, $mdDialog) {
+function ProjectController($scope, ProjectService) {
   var vm = this;
 
   /* CALLABLE MEMBERS */

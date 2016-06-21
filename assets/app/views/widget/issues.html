@@ -1,0 +1,37 @@
+<div flex="grow" layout="column" layout-align="start stretch" ng-controller="IssuesController as vm">
+
+  <!--Display reponame-->
+  <div class="md-caption" layout-margin layout="row" layout-align="center center">{{vm.repoName}}</div>
+
+  <!-- open button -->
+  <div class="dash-widget-font" layout="row">
+    <span layout-padding>{{vm.issues.length}} Open:</span>
+  </div>
+
+  <!-- Open Issue message -->
+  <div layout="row" layout-align="space-between center" ng-repeat="issue in vm.issues">
+    <!-- label bars -->
+    <div layout="row" class="issue-label-border">
+      <div class="issue-label" style="background-color:#{{label.color}}" ng-repeat="label in issue.labels">
+        <md-tooltip>{{label.name}}</md-tooltip>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div layout-padding class="message-issues-wrap">#{{issue.number}} {{issue.body}}</div>
+
+    <!-- icon -->
+    <md-menu>
+      <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
+        <i class="material-icons">format_align_justify</i>
+      </md-button>
+      <!-- pop out menu -->
+      <md-menu-content>
+        <md-menu-item>
+          <md-button ng-click="doSomething()">Goto</md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+
+</div>

@@ -8,23 +8,19 @@
 module.exports = {
   attributes: {
     name: {
-      type: "string",
+      type: "string"
     },
     platform: {
       type: 'string',
       required: true
     },
     token: {
-      // TODO lock down permissions on this attr to never serve to outside requests
       type: 'string',
       required: true
     },
     modules: {
       collection: 'module',
       via: 'service'
-    },
-    project: {
-      model: "project"
     }
   },
 
@@ -59,7 +55,13 @@ module.exports = {
         ///
       }
     }
-  ]
+  ],
+
+  afterDestroy: function (destroyedRecords, cb) {
+    // Destroy any child whose teacher has an ID of one of the 
+    // deleted teacher models
+    Module.destroy({service: _.pluck(destroyedRecords, 'id')}).exec(cb);
+  }
 
 };
 

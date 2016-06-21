@@ -1,5 +1,6 @@
 /* Top-level controller -- all other scopes inherit from this one */
 sbapp.controller('ApplicationController', [
+  '$previousState',
   '$resource',
   '$state',
   '$scope',
@@ -12,7 +13,7 @@ sbapp.controller('ApplicationController', [
   ApplicationController
 ]);
 
-function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialog, AuthService, SessionService, $rootScope) {
+function ApplicationController($previousState, $resource, $state, $scope, USER_ROLES, AUTH_EVENTS, $mdDialog, AuthService, SessionService, $rootScope) {
   /* CALLABLE MEMBERS */
 
   $scope.userRoles = USER_ROLES;
@@ -22,6 +23,7 @@ function ApplicationController($resource, $state, $scope, USER_ROLES, AUTH_EVENT
   $scope.setCurrentUser = setCurrentUser;
   $scope.setCurrentProject = setCurrentProject;
   $scope.logOut = logOut;
+  $scope.goBack = $previousState.go;
 
   /* FUNCTIONS */
 
