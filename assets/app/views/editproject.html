@@ -21,7 +21,10 @@
     <!-- Page controls/buttons -->
     <div layout="row" layout-align="space-between center" layout-xs="column">
       <!-- Delete button (Separate from page controls)-->
-      <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog(currentProject)">Delete Project</md-button>
+      <md-button class="md-raised md-warn" ng-click="vm.showDeleteDialog(currentProject)">
+        <md-progress-linear ng-show="vm.deleting" class="md-warn"></md-progress-linear>
+        <span ng-hide="vm.deleting">Delete Project</span>
+      </md-button>
 
       <span layout layout-align="end center">
         <button class="md-button md-raised" ng-click="goBack()">Back</button>

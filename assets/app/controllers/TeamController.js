@@ -28,7 +28,7 @@ function TeamController($scope, $stateParams, ProjectService, $filter, $state, $
 
   /* ACTIONS */
 
-  $scope.currentProject && ($scope.currentProject.id != $stateParams.projectId) && $scope.setCurrentProject(null);
+  $scope.currentProject && ($scope.currentProject.id != $stateParams.project) && $scope.setCurrentProject(null);
   loadContributors();
 
 
@@ -36,7 +36,7 @@ function TeamController($scope, $stateParams, ProjectService, $filter, $state, $
 
   function loadContributors() {
     vm.loading = true;
-    ProjectService.project.get({id: $stateParams.projectId, populate: ['dashboards', 'contributors']},
+    ProjectService.project.get({id: $stateParams.project, populate: ['dashboards', 'contributors']},
       function (project) {
         $scope.setCurrentProject(project);
         vm.contributors = project.contributors;

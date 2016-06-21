@@ -19,7 +19,7 @@
       </md-button>
       <md-menu-content width="3">
         <md-menu-item ng-repeat="project in projects">
-          <md-button ui-sref="home.dashboard({projectId:project.id,dashboardId:project.dashboards[0].id})">
+          <md-button ui-sref="home.dashboard({project:project.id,dashboard:project.dashboards[0].id})">
             {{project.name}}
           </md-button>
         </md-menu-item>

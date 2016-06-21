@@ -20,7 +20,7 @@
     <span layout layout-align="space-between center">
       <span class="md-body-2" layout-padding>{{currentProject.name}}</span>
       <md-button class="md-icon-button" aria-label="Edit project"
-                 ui-sref="home.editproject({projectId:currentProject.id})">
+                 ui-sref="home.editproject({project:currentProject.id})">
         <i class="dash-widget-topbar-text material-icons">mode_edit</i>
       </md-button>
     </span>
@@ -46,7 +46,7 @@
     <div class="leftnav-color-indent-item"></div>
     <div class="leftnav-color-indent-sub"></div>
     <md-button flex layout
-               ui-sref="home.dashboard({projectId:dashboard.project,dashboardId:dashboard.id})">{{dashboard.name}}
+               ui-sref="home.dashboard({project:dashboard.project,dashboard:dashboard.id})">{{dashboard.name}}
     </md-button>
   </div>
   <!-- end sub dashboards -->
@@ -57,7 +57,7 @@
   <!-- Module Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button flex layout ui-sref="home.modules({projectId:currentProject.id})">Modules</md-button>
+    <md-button flex layout ui-sref="home.modules({project:currentProject.id})">Modules</md-button>
   </div>
 
   <!-- separate buttons-->
@@ -69,7 +69,7 @@
   <!-- Team Button -->
   <div layout="row">
     <div class="leftnav-color-indent-item"></div>
-    <md-button flex layout ui-sref="home.team({projectId:currentProject.id})">Team</md-button>
+    <md-button flex layout ui-sref="home.team({project:currentProject.id})">Team</md-button>
   </div>
 
   <!-- separate buttons-->

@@ -29,7 +29,7 @@ function CreateController($state, $scope, ProjectService) {
       ProjectService.project.save(newProj,
         function (project) {
           $scope.projects.push(project);
-          $state.go('home.dashboard', {projectId: project.id});
+          $state.go('home.dashboard', {project: project.id});
         },
         function (error) {
           //error callback

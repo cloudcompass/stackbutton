@@ -129,7 +129,7 @@ sbapp
         })
         // PROJECT UPDATE
         .state('home.editproject', {
-          url: '/project/{projectId:.+}/edit',
+          url: '/project/{project:.+}/edit',
           templateUrl: 'app/views/editproject.html',
           controller: 'EditProjectController',
           controllerAs: 'vm',
@@ -161,7 +161,7 @@ sbapp
         })
         // MODULE CREATE
         .state('home.addmodule', {
-          url: '/project/{projectId:.+}/addmodule',
+          url: '/project/{project:.+}/addmodule',
           templateUrl: 'app/views/module-add.html',
           controller: 'ModuleAddController',
           controllerAs: 'vm',
@@ -169,9 +169,10 @@ sbapp
             title: 'Add a Module',
             authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
           }
-        })// MODULE CONFIG
+        })
+        // MODULE CONFIG
         .state('home.modules', {
-          url: '/project/{projectId:.+}/modules',
+          url: '/project/{project:.+}/modules',
           templateUrl: 'app/views/modules.html',
           controller: 'ModuleController',
           controllerAs: 'vm',
@@ -182,7 +183,7 @@ sbapp
         })
         // PROJECT DASHBOARD
         .state('home.dashboard', {
-          url: '/project/{projectId:.+}/dashboard/{dashboardId:.*}',
+          url: '/project/{project:.+}/dashboard/{dashboard:.*}',
           controller: 'DashboardController',
           controllerAs: 'vm',
           templateUrl: 'app/views/dashboard.html',
@@ -193,9 +194,9 @@ sbapp
         })
         // WIDGET CREATE
         .state('home.addwidget', {
-          url: '/project/{projectId:.+}/dashboard/{dashboardId:.+}/addwidget',
+          url: '/project/{project:.+}//addwidget/{dashboard:[a-zA-Z0-9]+}',
           templateUrl: 'app/views/addAWidget.html',
-          controller: '',
+          controller: 'WidgetAddController',
           controllerAs: 'vm',
           data: {
             title: 'Add a Widget',
@@ -215,7 +216,7 @@ sbapp
         })
         // TEAM CONFIG
         .state('home.team', {
-          url: '/project/{projectId:.+}/team',
+          url: '/project/{project:.+}/team',
           templateUrl: 'app/views/teamconfig.html',
           controller: 'TeamController',
           controllerAs: 'vm',

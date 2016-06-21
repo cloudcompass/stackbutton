@@ -10,8 +10,7 @@
     <!-- Tool grid -->
     <md-grid-list md-cols-xs="1"
                   md-cols-sm="3"
-                  md-cols-md="6"
-                  md-cols-gt-md="8"
+                  md-cols-gt-md="6"
                   md-row-height="1:1"
                   md-gutter="12px">
 
@@ -35,17 +34,15 @@
   <!--STEP 2: Token-->
   <section ng-show="vm.currentPage == 2" layout="column" layout-align="start center">
 
-    <div layout="row">
       <!--Input for new token-->
       <md-input-container>
         <label>Personal token</label>
         <input ng-Model="vm.service.token" type="text">
       </md-input-container>
       </md-button>
-    </div>
 
     <!--Buttons-->
-    <div layout="row" layout-align="end center">
+    <div layout="row">
       <md-button ng-show="vm.currentPage > 0" class="md-raised" ng-click="vm.back()" ng-disabled="vm.submitted">Back
       </md-button>
       <md-button class="md-raised md-accent"
@@ -53,11 +50,10 @@
         <md-progress-linear class="md-accent" ng-show="vm.submitted"></md-progress-linear>
         <span ng-hide="vm.submitted">Create</span>
       </md-button>
-
     </div>
     <!--Buttons end-->
   </section>
   <!--STEP 2 END-->
 
-  <div layout layout-align="end start" class="md-caption">{{vm.currentPage}}/{{vm.pageCount}}</div>
+  <div layout layout-align="end" class="md-caption">{{vm.currentPage}}/{{vm.pageCount}}</div>
 </md-content>
