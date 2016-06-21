@@ -1,12 +1,13 @@
 sbapp.controller('ModuleAddController', [
   '$scope',
+  '$state',
   '$stateParams',
   'ToolService',
   'ProjectService',
   ModuleAddController
 ]);
 
-function ModuleAddController($scope, $stateParams, ToolService, ProjectService) {
+function ModuleAddController($scope, $state, $stateParams, ToolService, ProjectService) {
   var vm = this;
 
   /* CALLABLE MEMBERS */
@@ -95,10 +96,8 @@ function ModuleAddController($scope, $stateParams, ToolService, ProjectService) 
   function loadRepos(serviceId) {
     vm.loading = true;
     vm.repos = [];
-    console.log('hello?');
     ToolService.loadServiceRepos.query({service: serviceId},
       function (repos) {
-        console.log("retrieved repos:", repos);
         vm.repos = repos;
         vm.loading = false;
       },
@@ -129,32 +128,11 @@ function ModuleAddController($scope, $stateParams, ToolService, ProjectService) 
       ProjectService.module.save(newModule,
         //success callback
         function (module) {
-          console.log('addModule() success:', module);
-          // TODO to be removed. This is to add a first widget to the default dashboard"
-          ProjectService.dashboard.query({
-              project: $scope.currentProject.id,
-              populate: 'widgets'
-            },
-            function (dashboards) {
-              var widget = {
-                template: defaultWidgets[module.type],
-                dashboard: dashboards[0].id,
-                module: module.id
-              };
-              ProjectService.widget.save(widget, function (res) {
-                  // console.log('saved widget:', res);
-                  $scope.goBack();
-                },
-                function (err) {
-                  console.log('could not save widget:', err);
-                });
-            },
-            function (err) {
-              console.log('error:', err);
-            }
-          );
-          /////
-
+          // console.log('addModule() success:', module);
+          var currState = $state.current;
+          $scope.goBack().then(function () {
+            if ($state.current == currState) $state.go('home.modules', {project: $stateParams.project});
+          });
         },
         //error callback
         function (err) {

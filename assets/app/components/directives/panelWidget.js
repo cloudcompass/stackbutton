@@ -11,8 +11,7 @@ sbapp.directive('panelWidget', function () {
     '</md-card>',
     controller: function ($scope) {
       var vm = this;
-      // TODO extend this to allow for other directories
-      vm.templateUrl = 'app/views/widget/repo/' + $scope.widget.template + '.html';
+      vm.templateUrl = 'app/views/widget/' + $scope.widget.template + '.html';
       //console.log('file:', vm.templateUrl);
     },
     controllerAs: 'vm'

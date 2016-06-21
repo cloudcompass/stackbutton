@@ -55,7 +55,13 @@ module.exports = {
         ///
       }
     }
-  ]
+  ],
+
+  afterDestroy: function (destroyedRecords, cb) {
+    // Destroy any child whose teacher has an ID of one of the 
+    // deleted teacher models
+    Module.destroy({service: _.pluck(destroyedRecords, 'id')}).exec(cb);
+  }
 
 };
 

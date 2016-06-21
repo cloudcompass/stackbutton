@@ -63,8 +63,10 @@ function ServiceAddController($scope, $state, ToolService, ProjectService) {
           vm.submitted = false;
           console.log('addService() success:', service);
           var currState = $state.current;
-          $scope.goBack();
-          if ($state.current = currState) $state.go('home.services');
+          $scope.goBack().then(function () {
+            if ($state.current == currState) $state.go('home.services');
+          });
+
         },
         //error callback
         function (err) {

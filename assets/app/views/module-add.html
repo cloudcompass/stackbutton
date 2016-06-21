@@ -42,6 +42,8 @@
     <div layout layout-align="center center">
       <md-progress-circular md-mode="indeterminate" ng-show="vm.loading"></md-progress-circular>
       <span ng-if="!vm.loading&&vm.services.length==0">No services</span>
+      <a ui-sref="home.addservice">Add one</a>
+
     </div>
 
     <!-- service grid -->

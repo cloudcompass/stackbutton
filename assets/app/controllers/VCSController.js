@@ -74,13 +74,15 @@ function VCSController($scope, RepositoryService, ProjectService) {
 
     }
   ];
+  vm.demo = null;
 
   /* ACTIONS */
 
-  loadCommits($scope.$parent.$parent.widget.id);
-  loadName($scope.$parent.$parent.widget.id);
-
-
+  vm.demo = $scope.$parent.$parent.$parent.vm.demo;
+  vm.demo && loadSamples();
+  vm.demo || loadCommits($scope.$parent.$parent.widget.id);
+  vm.demo || loadName($scope.$parent.$parent.widget.id);
+  
   /* FUNCTIONS */
 
   function loadName(widgetId) {
@@ -104,6 +106,20 @@ function VCSController($scope, RepositoryService, ProjectService) {
         console.log("error:", err);
       }
     );
+  }
+
+  function loadSamples() {
+    vm.repoName = 'repository/name';
+    vm.commits = [{
+      author: {avatar_url: 'images/stacky500p.png', login: 'Commit Author'},
+      commit: {committer: {date: new Date()}, message: 'Commit message'}
+    }];
+    vm.issues = [{
+      number: 46,
+      body: "An issue",
+      labels: [{name: 'label name', color: 'F24F5E'}]
+    }];
+
   }
 
 }

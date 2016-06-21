@@ -194,7 +194,7 @@ sbapp
         })
         // WIDGET CREATE
         .state('home.addwidget', {
-          url: '/project/{project:.+}//addwidget/{dashboard:[a-zA-Z0-9]+}',
+          url: '/project/{project:.+}/addwidget/{dashboard:.+}',
           templateUrl: 'app/views/addAWidget.html',
           controller: 'WidgetAddController',
           controllerAs: 'vm',

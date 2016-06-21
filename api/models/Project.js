@@ -52,5 +52,13 @@ module.exports = {
           });
         });
     }
-  ]
+  ],
+
+  afterDestroy: function (destroyedRecords, cb) {
+    // Destroy any child whose teacher has an ID of one of the 
+    // deleted teacher models
+    Dashboard.destroy({project: _.pluck(destroyedRecords, 'id')}).exec(cb);
+    Module.destroy({project: _.pluck(destroyedRecords, 'id')}).exec(cb);
+    Event.destroy({project: _.pluck(destroyedRecords, 'id')}).exec(cb);
+  }
 };
