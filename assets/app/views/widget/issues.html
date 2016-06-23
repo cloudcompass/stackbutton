@@ -1,15 +1,32 @@
-<div flex="grow" layout="column" layout-align="start stretch" ng-controller="IssuesController as vm">
+<div flex="grow" layout="column" layout-align="start stretch" ng-controller="IssuesController as vm"
+     ng-init="vm.currentItem=0">
 
-  <!--Display reponame-->
-  <div class="md-caption" layout-margin layout="row" layout-align="center center">{{vm.repoName}}</div>
-
-  <!-- open button -->
-  <div class="dash-widget-font" layout="row">
-    <span layout-padding>{{vm.issues.length}} Open:</span>
+  <!-- Loading indicator-->
+  <div ng-if="vm.issues.length==0" flex="grow" layout="column" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
   </div>
 
+  <div layout="row" layout-align="space-between center" ng-if="vm.issues.length>0">
+    <md-button class="material-icons md-icon-button" ng-disabled="vm.currentItem==0"
+               ng-click="vm.currentItem = vm.currentItem-1">chevron_left
+    </md-button>
+
+    <!--Display reponame-->
+    <div class="md-caption" layout-margin layout="row" layout-align="center center">{{vm.repoName}}</div>
+
+    <md-button class="material-icons md-icon-button" ng-disabled="vm.currentItem==vm.issues.length-1"
+               ng-click="vm.currentItem=vm.currentItem+1">chevron_right
+    </md-button>
+  </div>
+
+  <!-- open count -->
+  <!--todo maybe make this a badge in the widget header-->
+  <!--<div class="dash-widget-font" layout="row">-->
+    <!--<span layout-padding>{{vm.issues.length}} Open:</span>-->
+  <!--</div>-->
+
   <!-- Open Issue message -->
-  <div layout="row" layout-align="space-between center" ng-repeat="issue in vm.issues">
+  <div layout="row" layout-align="space-between center" ng-repeat="issue in vm.issues" ng-show="$index==vm.currentItem">
     <!-- label bars -->
     <div layout="row" class="issue-label-border">
       <div class="issue-label" style="background-color:#{{label.color}}" ng-repeat="label in issue.labels">
@@ -20,18 +37,20 @@
     <!-- Message -->
     <div layout-padding class="message-issues-wrap">#{{issue.number}} {{issue.body}}</div>
 
-    <!-- icon -->
-    <md-menu>
-      <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">
-        <i class="material-icons">format_align_justify</i>
-      </md-button>
-      <!-- pop out menu -->
-      <md-menu-content>
-        <md-menu-item>
-          <md-button ng-click="doSomething()">Goto</md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
+    <!--Action menu disabled for now-->
+    <!--todo think about whether we want this for an reason.  More likely, we just want to click the issue title
+    and go to the issue in the tracker -->
+    <!--<md-menu>-->
+      <!--<md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Open issue menu">-->
+        <!--<i class="material-icons">format_align_justify</i>-->
+      <!--</md-button>-->
+      <!--&lt;!&ndash; pop out menu &ndash;&gt;-->
+      <!--<md-menu-content>-->
+        <!--<md-menu-item>-->
+          <!--<md-button ng-click="doSomething()">Goto</md-button>-->
+        <!--</md-menu-item>-->
+      <!--</md-menu-content>-->
+    <!--</md-menu>-->
   </div>
 
 </div>

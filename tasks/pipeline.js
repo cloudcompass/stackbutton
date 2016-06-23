@@ -36,6 +36,7 @@ var jsFilesToInject = [
   'js/dependencies/**/*.js',
   'bower_components/jquery/dist/jquery.min.js',
   'bower_components/angular/angular.min.js',
+  'bower_components/angular-resource/angular-resource.min.js',
   'bower_components/angular-animate/angular-animate.min.js',
   'bower_components/angular-cookies/angular-cookies.min.js',
   'bower_components/angular-aria/angular-aria.min.js',
