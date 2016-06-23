@@ -6,6 +6,8 @@
 
   <!--STEP 1: Tool Choice-->
   <section ng-show="vm.currentPage == 1" ng-init="vm.pageCount=2">
+    <h2 class="md-subhead">Select a tool:</h2>
+
 
     <!-- Tool grid -->
     <md-grid-list md-cols-xs="1"
@@ -34,10 +36,11 @@
 
   <!--STEP 2: Token-->
   <section ng-show="vm.currentPage == 2" layout="column" layout-align="start center">
+    <h2 class="md-subhead">Enter your authorization token:</h2>
 
       <!--Input for new token-->
       <md-input-container>
-        <label>Personal token</label>
+        <label>Token</label>
         <input ng-Model="vm.service.token" type="text">
       </md-input-container>
       </md-button>

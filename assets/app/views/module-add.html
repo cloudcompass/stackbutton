@@ -6,6 +6,7 @@
 
   <!--STEP 1: Tool Choice-->
   <section ng-show="vm.currentPage == 1" ng-init="vm.pageCount=3" layout="column">
+    <h2 class="md-subhead">Select a module type:</h2>
 
     <!-- Module type grid -->
     <md-grid-list md-cols-xs="1"
@@ -38,6 +39,8 @@
 
   <!--STEP 2: Service Choice-->
   <section ng-show="vm.currentPage == 2">
+    <h2 class="md-subhead">Select a service:</h2>
+
     <!-- loading bar -->
     <div layout layout-align="center center">
       <md-progress-circular md-mode="indeterminate" ng-show="vm.loading"></md-progress-circular>
@@ -72,6 +75,8 @@
 
   <!--STEP 2: Repo-->
   <section ng-show="vm.currentPage == 3" layout="column" layout-align="start center">
+    <h2 class="md-subhead">Configuration :</h2>
+
 
     <div>
       <md-progress-circular md-mode="indeterminate" ng-show="vm.loading"></md-progress-circular>

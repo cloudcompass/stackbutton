@@ -6,6 +6,7 @@
 
   <!--STEP 1: Widget Choice-->
   <section ng-show="vm.currentPage == 1" ng-init="vm.pageCount=3">
+    <h2 class="md-subhead">Select a widget:</h2>
 
     <span
       layout="row" layout-wrap layout-margin layout-align="center start"
@@ -30,6 +31,9 @@
 
   <!--STEP 2: Module Choice-->
   <section ng-show="vm.currentPage == 2">
+
+    <h2 class="md-subhead">Select a module:</h2>
+
     <!-- loading bar -->
     <div layout layout-align="center center">
       <md-progress-circular md-mode="indeterminate" ng-show="vm.loading"></md-progress-circular>
