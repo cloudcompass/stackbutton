@@ -31,7 +31,7 @@
         <b>By:
           <span class="dash-widget-font">{{commit.author ? commit.author.login : commit.commit.committer.name}}</span>
         </b>
-        <span class="md-caption">{{commit.commit.commiter.date | date : "M/dd/yyyy',' h:mma"}}</span>
+        <span class="md-caption">{{commit.commit.author.date | date : "M/dd/yyyy',' h:mma"}}</span>
       </span>
     </div>
 
