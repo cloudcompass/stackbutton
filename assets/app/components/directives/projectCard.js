@@ -9,8 +9,10 @@ sbapp.directive('projectCard', function () {
     '      <span class="dash-widget-topbar-text capitalize">{{project.name}}</span>' +
     '    </md-button>' +
     '    <span flex></span>' +
-    '    <md-button ng-if="project.owner==userid" class="toolbar-button" aria-label="Edit project" ui-sref="home.editproject({project:project.id})">' +
-    '      <i class="dash-widget-topbar-text material-icons">mode_edit</i>' +
+    '    <md-button ng-disabled="project.owner!=userid" class="toolbar-button" aria-label="Edit project" ui-sref="home.editproject({project:project.id})">' +
+    '      <i ng-class="{\'dash-widget-topbar-text\': project.owner==userid , \'dash-widget-topbar-text-disabled\': project.owner!=userid}"' +
+    '          class="material-icons">mode_edit</i>' +
+    '      <md-tooltip ng-if="project.owner!=userid">You are not the owner of this project</md-tooltip>' +
     '    </md-button>' +
     '  </md-toolbar>' +
     '  <p layout-padding>' +

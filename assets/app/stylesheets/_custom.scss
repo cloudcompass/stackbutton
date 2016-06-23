@@ -120,6 +120,10 @@ md-grid-list md-grid-tile md-grid-tile-footer {
     color: $warning-color;
   }
 
+  &-topbar-text-disabled {
+    color: $text-color-nav;
+  }
+
   &-text {
     color: dimgray;
   }
