@@ -27,6 +27,26 @@ module.exports = {
     project: {
       model: "project",
       required: true
+    },
+
+    //todo icon is a client-side concern and should be refactored.
+    getIcon: function() {
+      console.log("Looking up icon for", this);
+      //<i class="material-icons">face</i>
+      var iconMap = {
+        'repo': 'archive',
+        'issues':'bug report' ,
+        'wiki': 'description'
+      };
+
+      return iconMap[this.type];
+    },
+
+    // Override the default toJSON method so the derived icon is included
+    toJSON: function() {
+      var obj = this.toObject();
+      obj.icon = this.getIcon();
+      return obj;
     }
   },
 
@@ -48,8 +68,6 @@ module.exports = {
   },
 
   afterDestroy: function (destroyedRecords, cb) {
-    // Destroy any child whose teacher has an ID of one of the
-    // deleted teacher models
     Widget.destroy({module: _.pluck(destroyedRecords, 'id')}).exec(cb);
   }
 

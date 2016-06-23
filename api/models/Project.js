@@ -55,10 +55,15 @@ module.exports = {
   ],
 
   afterDestroy: function (destroyedRecords, cb) {
-    // Destroy any child whose teacher has an ID of one of the 
-    // deleted teacher models
-    Dashboard.destroy({project: _.pluck(destroyedRecords, 'id')}).exec(cb);
-    Module.destroy({project: _.pluck(destroyedRecords, 'id')}).exec(cb);
-    Event.destroy({project: _.pluck(destroyedRecords, 'id')}).exec(cb);
+    var promises = Promise.all([
+      Dashboard.destroy({project: _.pluck(destroyedRecords, 'id')}),
+      Module.destroy({project: _.pluck(destroyedRecords, 'id')}),
+      Event.destroy({project: _.pluck(destroyedRecords, 'id')})
+    ]);
+
+    promises.then(function (resp) {
+      cb();
+    })
+
   }
 };

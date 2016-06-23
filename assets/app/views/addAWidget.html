@@ -6,6 +6,7 @@
 
   <!--STEP 1: Widget Choice-->
   <section ng-show="vm.currentPage == 1" ng-init="vm.pageCount=3">
+    <h2 class="md-subhead">Select a widget:</h2>
 
     <span
       layout="row" layout-wrap layout-margin layout-align="center start"
@@ -30,28 +31,32 @@
 
   <!--STEP 2: Module Choice-->
   <section ng-show="vm.currentPage == 2">
+
+    <h2 class="md-subhead">Select a module:</h2>
+
     <!-- loading bar -->
-    <div layout layout-align="center center">
+    <div layout="column" layout-align="center center">
       <md-progress-circular md-mode="indeterminate" ng-show="vm.loading"></md-progress-circular>
-      <span ng-if="!vm.loading&&vm.modules.length==0">No modules.</span>
+      <p ng-if="!vm.loading&&vm.modules.length==0">No modules.</p>
       <a ui-sref="home.addmodule({project:currentProject.id})">Add one</a>
     </div>
 
     <!-- service grid -->
     <md-grid-list md-cols-xs="1"
-                  md-cols-sm="3"
-                  md-cols-gt-sm="6"
+                  md-cols-sm="2"
+                  md-cols-md="4"
+                  md-cols-gt-md="6"
                   md-row-height="1:1"
                   md-gutter="12px">
 
       <!-- Repeated element begin-->
       <md-grid-tile ng-repeat="module in vm.modules | filter: vm.filterModules" class="md-whiteframe-5dp">
         <md-button layout-fill ng-click="vm.selectModule(module)"
-                   aria-label="Service: {{module.type}}:{{module.config.full_name}}">
-          <img ng-src="images/stacky500p.png" style="width:100%">
+                   aria-label="Service: {{module.config.full_name}}">
+          <img ng-src="images/modules/{{module.type}}.png" style="width:100%">
         </md-button>
         <md-grid-tile-footer layout layout-align="center center">
-          {{module.type}}:{{module.config.full_name}}
+          {{module.config.full_name}}
         </md-grid-tile-footer>
       </md-grid-tile>
       <!-- Repeated element end-->

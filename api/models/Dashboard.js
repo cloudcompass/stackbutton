@@ -27,8 +27,6 @@ module.exports = {
   },
 
   afterDestroy: function (destroyedRecords, cb) {
-    // Destroy any child whose teacher has an ID of one of the
-    // deleted teacher models
     Widget.destroy({dashboard: _.pluck(destroyedRecords, 'id')}).exec(cb);
   }
 };

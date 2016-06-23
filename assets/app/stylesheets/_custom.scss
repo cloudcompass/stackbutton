@@ -120,6 +120,10 @@ md-grid-list md-grid-tile md-grid-tile-footer {
     color: $warning-color;
   }
 
+  &-topbar-text-disabled {
+    color: $text-color-nav;
+  }
+
   &-text {
     color: dimgray;
   }
@@ -368,6 +372,6 @@ md-backdrop.md-sidenav-backdrop {
   text-align: left;
 }
 
-md-select-value {
+.md-select-value {
   color: $warning-color !important;
 }

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "angular": "^1.5.4",
+    "angular-resource": "^1.5.4",
     "angular-animate": "^1.5.3",
     "angular-cookies": "^1.5.3",
     "angular-material": "^1.0.7",
@@ -23,7 +24,8 @@
     "jquery": "^2.2.3",
     "angular-resource": "^1.5.5",
     "angular-sails": "^1.1.4",
-    "mdi": "^1.6.50"
+    "mdi": "^1.6.50",
+    "ui-router-extras": "^0.1.2"
   },
   "ignore": [
     "**/.*",
@@ -33,6 +35,5 @@
     "tests"
   ],
   "devDependencies": {
-    "ui-router-extras": "^0.1.2"
   }
 }

@@ -10,10 +10,10 @@ function ToolService($resource, $q) {
   ToolService.loadTools = loadTools;
   ToolService.loadServiceRepos = $resource('/service/getRepos');
   ToolService.modules = [
-    {name: 'repo', display: 'Source Control'},
-    {name: 'issues', display: 'Issue Tracking'},
-    {name: 'wiki', display: 'Wiki'},
-    {name: 'chat', display: 'Messaging'}
+    {name: 'repo', display: 'Source Control', image: 'images/modules/repo.png'},
+    {name: 'issues', display: 'Issue Tracking', image: 'images/modules/issues.png'},
+    {name: 'wiki', display: 'Wiki', image: 'images/modules/wiki.png'},
+    {name: 'chat', display: 'Messaging', image: 'images/modules/chat.png'}
   ];
 
   return ToolService;
@@ -26,13 +26,13 @@ function ToolService($resource, $q) {
     var tools = [
       {
         name: 'github',
-        image: 'https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png',
+        image: 'images/github.png',
         modules: ['repo', 'issues', 'wiki'],
         disabled: false
       },
       {
         name: 'bitbucket',
-        image: 'https://worldvectorlogo.com/logos/bitbucket.svg',
+        image: 'images/bitbucket.png',
         modules: ['repo'],
         disabled: true
       }
