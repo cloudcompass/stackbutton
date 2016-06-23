@@ -5,7 +5,7 @@ sbapp.directive('projectCard', function () {
     template: '' +
     '<md-card>' +
     '  <md-toolbar class="md-accent" layout="row" layout-align="start center">' +
-    '    <md-button ng-disabled="!userid || project.owner!=userid" class="toolbar-button" ui-sref="home.dashboard({project:project.id,dashboard:project.dashboards[0].id})">' +
+    '    <md-button ng-disabled="userid==null || project.owner!=userid" class="toolbar-button" ui-sref="home.dashboard({project:project.id,dashboard:project.dashboards[0].id})">' +
     '      <span class="dash-widget-topbar-text capitalize">{{project.name}}</span>' +
     '    </md-button>' +
     '    <span flex></span>' +

@@ -38,7 +38,7 @@
     <div layout-margin layout="column" class="message-issues-wrap">
       <a class="dash-widget-font" href="{{issue.html_url}}" target="_blank"><b>#{{issue.number}} {{issue.title}}</b></a>
       <div class="md-caption">Opened: {{issue.created_at | date : "M/dd/yyyy',' h:mma"}}</div>
-      <pre class="dash-widget-font md-body-1">{{issue.body || 'no description'}}</pre>
+      <pre class="dash-widget-font md-body-1" style="white-space:pre-wrap;word-break:break-word;margin:0 0 1em 0;">{{issue.body || 'no description'}}</pre>
     </div>
 
     <!--Action menu disabled for now-->
