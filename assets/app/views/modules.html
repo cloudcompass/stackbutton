@@ -17,15 +17,16 @@
 
   <!-- service grid -->
   <md-grid-list md-cols-xs="1"
-                md-cols-sm="3"
-                md-cols-gt-sm="6"
+                md-cols-sm="2"
+                md-cols-md="4"
+                md-cols-gt-md="6"
                 md-row-height="1:1"
                 md-gutter="12px">
 
     <!-- Repeated element begin-->
     <md-grid-tile ng-repeat="module in vm.modules" class="md-whiteframe-5dp">
       <div layout-fill layout="column" layout-align="space-between end">
-        <img ng-src="images/stacky500p.png" style="position:absolute;width:100%">
+        <img ng-src="images/modules/{{module.type}}.png" style="position:absolute;width:100%">
         <md-button class="md-warn md-icon-button" ng-click="vm.showDeleteDialog(module)"
                    style="position:relative;top:-.5em;right:-1em">
           <i class="material-icons md-24">cancel</i>

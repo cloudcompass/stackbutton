@@ -18,7 +18,7 @@
       <!-- Repeated element begin-->
       <md-grid-tile ng-repeat="modtype in vm.modtypes" class="md-whiteframe-5dp">
         <md-button layout-fill ng-click="vm.module.type=modtype.name" aria-label="Module type: {{modtype}}">
-          <img ng-src="images/stacky500p.png" style="width:100%">
+          <img ng-src="{{modtype.image}}" style="width:100%">
         </md-button>
         <md-grid-tile-footer layout layout-align="center center">
           {{modtype.display}}
@@ -42,17 +42,18 @@
     <h2 class="md-subhead">Select a service:</h2>
 
     <!-- loading bar -->
-    <div layout layout-align="center center">
+    <div layout="column" layout-align="center center">
       <md-progress-circular md-mode="indeterminate" ng-show="vm.loading"></md-progress-circular>
-      <span ng-if="!vm.loading&&vm.services.length==0">No services</span>
+      <p ng-if="!vm.loading&&vm.services.length==0">No services</p>
       <a ui-sref="home.addservice">Add one</a>
 
     </div>
 
     <!-- service grid -->
     <md-grid-list md-cols-xs="1"
-                  md-cols-sm="3"
-                  md-cols-gt-sm="6"
+                  md-cols-sm="2"
+                  md-cols-md="4"
+                  md-cols-gt-md="6"
                   md-row-height="1:1"
                   md-gutter="12px">
 
@@ -60,10 +61,10 @@
       <md-grid-tile ng-repeat="service in vm.services | filter: vm.filterService" class="md-whiteframe-5dp">
         <md-button layout-fill ng-click="vm.selectService(service)"
                    aria-label="Service: {{service.platform}}:{{service.name}}">
-          <img ng-src="images/stacky500p.png" style="width:100%">
+          <img ng-src="images/{{service.platform}}.png" style="width:100%">
         </md-button>
         <md-grid-tile-footer layout layout-align="center center">
-          {{service.platform}}:{{service.name}}
+          {{service.name}}
         </md-grid-tile-footer>
       </md-grid-tile>
       <!-- Repeated element end-->
