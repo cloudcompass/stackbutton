@@ -1,3 +1,5 @@
+# borrowed from http://stackoverflow.com/questions/151677/tool-for-adding-license-headers-to-source-files
+
 # updates the copyright information for all .cs files
 # usage: call recursive_traversal, with the following parameters
 # parent directory, old copyright text content, new copyright text content
