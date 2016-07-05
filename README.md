@@ -1,5 +1,6 @@
 # stackbutton
-A friendly - but powerful - provisioning tool for DevOps tool chains and application infrastructure.
+
+A friendly - but powerful - provisioning and monitoring tool for DevOps tool chains and application infrastructure.
 
 # Getting Started
 
@@ -8,6 +9,7 @@ A friendly - but powerful - provisioning tool for DevOps tool chains and applica
   3. Install [ruby](https://www.ruby-lang.org/en/).
   4. Clone this repo via ```git clone https://github.com/sheaphillips/stackbutton.git```
   5. Add the following to config/local.js
+
   ```javascript
   module.exports.url = {
     hooks: 'http://your-url-here.com'
@@ -66,6 +68,35 @@ A friendly - but powerful - provisioning tool for DevOps tool chains and applica
   ```
 
   4. Replace 'blah' in the block above with a value appropriate for your database.
+
+### Contributing
+
+Please see our [Contributing Guide](CONTRIBUTING.md).
+
+### Trademarks
+
+The names StackButton, Stacky, and the StackButton logo are trademarks of Cloud Compass, Inc. and may only be used as described in section 6 of the [License](LICENSE.md).
+
+### License
+
+```
+Copyright 2016, Cloud Compass, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+```
+
+
 
 
 
