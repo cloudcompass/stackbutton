@@ -1,5 +1,7 @@
 # stackbutton
 
+![stacky][stacky_logo]
+
 A friendly - but powerful - provisioning and monitoring tool for DevOps tool chains and application infrastructure.
 
 # Getting Started
@@ -95,6 +97,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ```
+
+[stacky_logo]:https://github.com/sheaphillips/stackbutton/blob/master/assets/images/stacky500p.png
 
 
 
