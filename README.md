@@ -77,7 +77,7 @@ Please see our [Contributing Guide](CONTRIBUTING.md).
 
 ### Trademarks
 
-The names StackButton, Stacky, and the StackButton logo are trademarks of Cloud Compass, Inc. and may only be used as described in section 6 of the [License](LICENSE.md).
+The names StackButton, Stacky, and the StackButton logo are trademarks of Cloud Compass, Inc. and may only be used as described in section 6 of the [License](LICENSE).
 
 ### License
 
