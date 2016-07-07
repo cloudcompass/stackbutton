@@ -1,0 +1,23 @@
+<div flex="grow" ng-controller="VCSController as vm">
+
+  <div layout="row" layout-align="start center" ng-repeat="rep in vm.repository" >
+    <!-- Repository Name -->
+    <span class="dash-widget-font" layout-padding>{{rep.repository}}: {{rep.type}}</span>
+  </div>
+
+  <!-- Content -->
+  <div layout="row" layout-align="start center" ng-repeat="person in vm.contributors" >
+    <!-- Account Icon -->
+    <img style="height: 4em; width: 4em;" src={{commit.author.avatar_url}}>
+
+    <div layout-padding class="dash-widget-text">
+      <!-- Account Name -->
+      <b >{{person.name}}</b>
+      <!-- Number of commits -->
+      <div layout="column" layout-align="start start">
+        <span class="dash-widget-text">Commits: {{person.amount}}</span>
+      </div>
+    </div>
+
+  </div>
+</div>

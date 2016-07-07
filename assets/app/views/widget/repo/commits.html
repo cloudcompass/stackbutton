@@ -1,0 +1,45 @@
+<div flex="grow" layout="column" layout-align="start stretch" ng-controller="VCSController as vm"
+     ng-init="vm.currentCommit=0">
+
+  <!-- Loading indicator-->
+  <div ng-if="vm.commits.length==0" flex="grow" layout="column" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <!-- Arrow Buttons -->
+  <div layout="row" layout-align="space-between center" ng-if="vm.commits.length>0">
+    <md-button class="material-icons md-icon-button" ng-disabled="vm.currentCommit==0"
+               ng-click="vm.currentCommit = vm.currentCommit-1">chevron_left
+    </md-button>
+
+    <!--Display reponame between arrows-->
+    <span class="md-caption">{{vm.repoName}}</span>
+
+    <md-button class="material-icons md-icon-button" ng-disabled="vm.currentCommit==vm.commits.length-1"
+               ng-click="vm.currentCommit=vm.currentCommit+1">chevron_right
+    </md-button>
+  </div>
+
+
+  <div ng-repeat="commit in vm.commits" ng-show="$index==vm.currentCommit"
+       layout="column" layout-align="start start">
+
+    <!-- Author/avatar section -->
+    <div layout layout-padding>
+      <img style="height: 3em; width: 3em;" ng-src="{{commit.author.avatar_url}}">
+      <span layout="column" layout-align="start start">
+        <b>By:
+          <span class="dash-widget-font">{{commit.author? commit.author.login : commit.commit.committer.name}}</span>
+        </b>
+        <span class="md-caption">{{commit.commit.commiter.date | date : "M/dd/yyyy',' h:mma"}}</span>
+      </span>
+    </div>
+
+    <!-- Commit message -->
+    <pre layout-padding class="dash-widget-font md-body-1"
+         style="white-space:pre-wrap;word-break:break-word;margin:0 0 1em 0;">{{commit.commit.message}}</pre>
+
+  </div>
+
+
+</div>
