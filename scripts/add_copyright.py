@@ -37,7 +37,7 @@ def recursive_traversal(dir,  oldcopyright, copyright):
         if (os.path.isdir(fullfn)):
             recursive_traversal(fullfn, oldcopyright, copyright)
         else:
-            if (fullfn.endswith(".html")):
+            if (fullfn.endswith(".ejs")):
                 update_source(fullfn, oldcopyright, copyright)
 
 
