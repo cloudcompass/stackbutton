@@ -95,13 +95,9 @@ RUN npm install
 RUN bower install --allow-root
 ADD . .
 
-RUN adduser -S stackbutton
-
-RUN chown -R stackbutton:0 . && chmod -R 770 .
+RUN adduser --system stackbutton && chown -R stackbutton:0 . && chmod -R 770 .
 
 USER stackbutton
-
-RUN
 
 CMD ["sails","lift","--models.migrate=create", "--verbose"]
 # CMD ["sails","lift"]
