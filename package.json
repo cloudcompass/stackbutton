@@ -14,7 +14,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "postinstall": "bower install"
+    "postinstall": "npm install bower -g && bower install"
   },
   "dependencies": {
     "ejs": "2.3.4",
