@@ -34,9 +34,9 @@ limitations under the License.
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'bower_components/angular-material/angular-material.css',
-  'bower_components/nvd3/build/nv.d3.css',
-  'bower_components/mdi/css/materialdesignicons.min.css',
+  'node_modules/angular-material/angular-material.css',
+  'node_modules/nvd3/build/nv.d3.css',
+  'node_modules/mdi/css/materialdesignicons.min.css',
   'styles/**/*.css'
 ];
 
@@ -46,29 +46,28 @@ var cssFilesToInject = [
 var jsFilesToInject = [
 
   // Load sails.io before everything else
-  // 'js/dependencies/sails.io.js',
-  'bower_components/sails.io.js/dist/sails.io.js',
+  'node_modules/socket.io-client/socket.io.js',
+  'node_modules/sails.io.js/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
-  'bower_components/jquery/dist/jquery.min.js',
-  'bower_components/angular/angular.min.js',
-  'bower_components/angular-resource/angular-resource.min.js',
-  'bower_components/angular-animate/angular-animate.min.js',
-  'bower_components/angular-cookies/angular-cookies.min.js',
-  'bower_components/angular-aria/angular-aria.min.js',
-  'bower_components/d3/d3.min.js',
-  'bower_components/nvd3/build/nv.d3.min.js',
-  'bower_components/angular-nvd3/dist/angular-nvd3.min.js',
-  'bower_components/angular-resource/angular-resource.min.js',
-  'bower_components/angular-sanitize/angular-sanitize.min.js',
-  'bower_components/angular-messages/angular-messages.min.js',
-  'bower_components/angular-material/angular-material.min.js',
-  'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-  'bower_components/ui-router-extras/release/modular/ct-ui-router-extras.core.min.js',
-  'bower_components/ui-router-extras/release/modular/ct-ui-router-extras.transition.min.js',
-  'bower_components/ui-router-extras/release/modular/ct-ui-router-extras.previous.min.js',
-  'bower_components/angular-sails/dist/angular-sails.min.js',
+  'node_modules/jquery/dist/jquery.min.js',
+  'node_modules/angular/angular.min.js',
+  'node_modules/angular-resource/angular-resource.min.js',
+  'node_modules/angular-animate/angular-animate.min.js',
+  'node_modules/angular-cookies/angular-cookies.min.js',
+  'node_modules/angular-aria/angular-aria.min.js',
+  'node_modules/d3/d3.min.js',
+  'node_modules/nvd3/build/nv.d3.min.js',
+  'node_modules/angular-nvd3/dist/angular-nvd3.min.js',
+  'node_modules/angular-sanitize/angular-sanitize.min.js',
+  'node_modules/angular-messages/angular-messages.min.js',
+  'node_modules/angular-material/angular-material.min.js',
+  'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+  'node_modules/ui-router-extras/release/modular/ct-ui-router-extras.core.min.js',
+  'node_modules/ui-router-extras/release/modular/ct-ui-router-extras.transition.min.js',
+  'node_modules/ui-router-extras/release/modular/ct-ui-router-extras.previous.min.js',
+  'node_modules/angular-sails/dist/angular-sails.min.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
