@@ -25,7 +25,7 @@ limitations under the License.
  * for matching multiple files.)
  *
  * For more information see:
- *   https://github.com/balderdashy/sails-docs/blob/master/anatomy/myApp/tasks/pipeline.js.md
+ *   ../
  */
 
 
@@ -48,7 +48,6 @@ var jsFilesToInject = [
   // Load sails.io before everything else
   'node_modules/socket.io-client/socket.io.js',
   'node_modules/sails.io.js/sails.io.js',
-
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
   'node_modules/jquery/dist/jquery.min.js',
@@ -106,5 +105,8 @@ module.exports.jsFilesToInject = jsFilesToInject.map(function (jsPath) {
 module.exports.templateFilesToInject = templateFilesToInject.map(function (tplPath) {
   return require('path').join('assets/', tplPath);
 });
+
+module.exports.jsFilesToCopy = jsFilesToInject;
+module.exports.cssFilesToCopy = cssFilesToInject;
 
 

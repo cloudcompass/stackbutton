@@ -1,0 +1,10 @@
+node_modules/
+.git/
+.tmp/
+.sass-cache/
+www/
+
+.dockerignore
+Dockerfile
+
+.gitignore

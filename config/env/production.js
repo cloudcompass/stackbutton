@@ -29,6 +29,11 @@ limitations under the License.
 
 module.exports = {
 
+  hookTimeout: 120000, // 2 mins
+
+  models: {
+    migrate: 'safe'
+  }
   /***************************************************************************
    * Set the default database connection for models in the production        *
    * environment (see config/connections.js and config/models.js )           *

@@ -36,6 +36,9 @@ limitations under the License.
  *   https://github.com/gruntjs/grunt-contrib-copy
  *
  */
+
+var pipeline = require('../pipeline');
+
 module.exports = function(grunt) {
 
   grunt.config.set('copy', {
@@ -45,7 +48,28 @@ module.exports = function(grunt) {
         cwd: './assets',
         src: ['**/*.!(coffee|less|scss|sass)'],
         dest: '.tmp/public'
-      }]
+      },
+        {
+          expand: true,
+          cwd: '.',
+          src: pipeline.jsFilesToCopy,
+          dest: '.tmp/public'
+        },
+        {
+          expand: true,
+          cwd: '.',
+          src: pipeline.cssFilesToCopy,
+          dest: '.tmp/public'
+        },
+        {
+          expand: true,
+          flatten: true,
+          cwd: './assets',
+          src: ['styles/iconfont/**/*'],
+          dest: '.tmp/public/min'
+        }
+
+      ]
     },
     build: {
       files: [{
