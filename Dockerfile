@@ -16,6 +16,6 @@ VOLUME ["/app/api", "/app/assets", "/app/config", "app/tasks", "app/views"]
 
 EXPOSE 1337
 
-ENV sails_hooks__grunt=false NODE_ENV=production
+ENV sails_hooks__grunt=false NODE_ENV=production SB_WEBHOOK_BASE_URL=http://www.stackbutton.com
 
 CMD ["node","app.js"]

@@ -85,7 +85,7 @@ module.exports = {
         active: true,
         events: evts,
         config: {
-          url: sails.config.url.hooks + "/payload/" + module.project,
+          url: process.env.SB_WEBHOOK_BASE_URL || sails.config.url.hooks + "/payload/" + module.project,
           content_type: "json"
         }
       }, cb);

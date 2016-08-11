@@ -2,6 +2,8 @@ stackbutton:
   image: cloudcompass/stackbutton
   ports:
     - "80:1337"
+  environment:
+    SB_WEBHOOK_BASE_URL: "http://preview.stackbutton.com"
   links:
     - mongo:mongo
 mongo:
