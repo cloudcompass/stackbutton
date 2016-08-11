@@ -78,14 +78,16 @@ module.exports = {
           break;
       }
 
-      sails.log.info('adding webhook', module.project, service.token, module.config.full_name, evts);
-      // sails.log.info(ghrepo.collaborators(cb));
+      var webhookURL = (process.env.SB_WEBHOOK_BASE_URL || sails.config.url.hooks ) + "/payload/" + module.project;
+
+      sails.log.info('adding webhook', module.config.full_name, webhookURL, evts);
+
       ghrepo.hook({
         name: "web",
         active: true,
         events: evts,
         config: {
-          url: process.env.SB_WEBHOOK_BASE_URL || sails.config.url.hooks + "/payload/" + module.project,
+          url: webhookURL,
           content_type: "json"
         }
       }, cb);
