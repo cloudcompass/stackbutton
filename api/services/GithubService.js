@@ -1,23 +1,45 @@
 /**
 
-Copyright 2016, Cloud Compass Computing, Inc.
+ Copyright 2016, Cloud Compass Computing, Inc.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+ http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
 
-*/
+ */
 var https = require('https');
 var github = require('octonode');
+var url = require('url');
+var querystring = require('querystring');
 
+function parse_link_header(header) {
+  if (header.length === 0) {
+    throw new Error("input must not be of zero length");
+  }
+
+  // Split parts by comma
+  var parts = header.split(',');
+  var links = {};
+  // Parse each part into a named link
+  for (var i = 0; i < parts.length; i++) {
+    var section = parts[i].split(';');
+    if (section.length !== 2) {
+      throw new Error("section could not be split on ';'");
+    }
+    var url = section[0].replace(/<(.*)>/, '$1').trim();
+    var name = section[1].replace(/rel="(.*)"/, '$1').trim();
+    links[name] = url;
+  }
+  return links;
+}
 
 module.exports = {
 
@@ -100,12 +122,43 @@ module.exports = {
 
   // exposed to client in ServiceController
   getRepos: function (serviceID, cb) {
+
+    var issues = [];
+    var client = github.client();
+
+    var pager = function (err, data, headers) {
+      if (data) {
+        issues = issues.concat(data);
+      }
+
+      if (headers.link) {
+        var linkHeaders = parse_link_header(headers.link);
+        if (linkHeaders && linkHeaders.next) {
+          //parse out next page from link header format like https://api.github.com/user/repos?page=50&per_page=100
+          var nextPageNumber = querystring.parse(url.parse(linkHeaders.next).query).page;
+
+          getRepoPage(client, nextPageNumber, pager)
+        } else {
+          sails.log.debug("Returning repos to caller...");
+          cb(err, issues, headers);
+        }
+      }
+    };
+
+    function getRepoPage(client, page, pager) {
+      sails.log.debug("Retrieving repo page ", page);
+      var ghme = client.me();
+      ghme.repos({
+        page: page,
+        per_page: 100
+      }, pager);
+    }
+
     Service.findOne({id: serviceID})
-      .exec(function (err, res) {
-        if (res) {
-          var client = github.client(res.token);
-          var ghme = client.me();
-          ghme.repos(cb);
+      .exec(function (err, service) {
+        if (service) {
+          client = github.client(service.token);
+          getRepoPage(client, 1, pager);
         } else {
           sails.log.error('could not retrieve repos', err);
         }

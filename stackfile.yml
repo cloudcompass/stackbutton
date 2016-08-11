@@ -1,7 +1,7 @@
 stackbutton:
-  image: swcurran/noderubysails
+  image: cloudcompass/stackbutton
   ports:
-    - "8080:1337"
+    - "80:1337"
   links:
     - mongo:mongo
 mongo:
