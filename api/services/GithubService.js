@@ -128,6 +128,15 @@ module.exports = {
     var issues = [];
     var client = github.client();
 
+    var getDataPage = function (client, nextPage, pager) {
+      sails.log.debug("Retrieving repo page ", nextPage);
+      var ghme = client.me();
+      ghme.repos({
+        page: nextPage,
+        per_page: 100
+      }, pager);
+    };
+
     var pager = function (err, data, headers) {
       if (data) {
         issues = issues.concat(data);
@@ -139,7 +148,7 @@ module.exports = {
           //parse out next page from link header format like https://api.github.com/user/repos?page=50&per_page=100
           var nextPageNumber = querystring.parse(url.parse(linkHeaders.next).query).page;
 
-          getRepoPage(client, nextPageNumber, pager)
+          getDataPage(client, nextPageNumber, pager)
         } else {
           sails.log.debug("Returning repos to caller...");
           cb(err, issues, headers);
@@ -147,20 +156,28 @@ module.exports = {
       }
     };
 
-    function getRepoPage(client, page, pager) {
-      sails.log.debug("Retrieving repo page ", page);
-      var ghme = client.me();
-      ghme.repos({
-        page: page,
-        per_page: 100
-      }, pager);
-    }
+    //attempt at currying
+    var aggregate = function(howMany, cb) {
+      var callCount = 0;
+      var issues = [];
+      return function (err, data, headers) {
+        callCount++;
+        if (!err) {
+          if (data) {
+            issues = issues.concat(data);
+          }
+        }
+        if (callCount == howMany) {
+          cb(err,issues, headers);
+        }
+      }
+    };
 
     Service.findOne({id: serviceID})
       .exec(function (err, service) {
         if (service) {
           client = github.client(service.token);
-          getRepoPage(client, 1, pager);
+          getDataPage(client, 1, pager);
         } else {
           sails.log.error('could not retrieve repos', err);
         }
@@ -175,10 +192,39 @@ module.exports = {
           // sails.log.debug('finding first module:', widget.modules[0].id);
           Module.findOne({id: widget.module.id}).populate('service')
             .exec(function (err, module) {
+              //todo handle multi-repo modules, and implement paging
               if (module) {
+
+                //coerce config into array for preliminary support of multi-repo modules
+                var moduleConfig = _.isArray(module.config) ? module.config : module.config != undefined && module.config != null ? [module.config] : [];
+
                 var client = github.client(module.service.token);
-                var ghrepo = client.repo(module.config.full_name);
-                ghrepo.commits(cb);
+
+                var commits = [];
+
+                //eww
+                var callCount = 0;
+
+                var aggregate = function (err, data, headers) {
+                  callCount++;
+                  if (!err) {
+                    if (data) {
+                      commits = commits.concat(data);
+                    }
+                  }
+                  if (callCount == moduleConfig.length) {
+                    cb(err,commits, headers);
+                  }
+                };
+
+                //initial multi-repo module support
+                _.each(moduleConfig, function (config) {
+                    var ghrepo = client.repo(config.full_name);
+                    //todo implement paging using same pattern as with getRepos or mapreduce, or determine a new promise style
+                    // currently, this is just getting the first page for each repo
+                    ghrepo.commits(aggregate);
+                  }
+                );
               } else {
                 sails.log.error('could not retrieve module', err);
               }
@@ -194,13 +240,40 @@ module.exports = {
     Widget.findOne({id: widgetId}).populate('module')
       .exec(function (err, widget) {
         if (widget) {
-          // sails.log.debug('finding first module:', widget.modules);
           Module.findOne({id: widget.module.id}).populate('service')
             .exec(function (err, module) {
               if (module) {
+
+                //coerce config into array for preliminary support of multi-repo modules
+                var moduleConfig = _.isArray(module.config) ? module.config : module.config != undefined && module.config != null ? [module.config] : [];
+
                 var client = github.client(module.service.token);
-                var ghrepo = client.repo(module.config.full_name);
-                ghrepo.issues(cb);
+
+                var issues = [];
+
+                //eww
+                var callCount = 0;
+
+                var aggregate = function (err, data, headers) {
+                  callCount++;
+                  if (!err) {
+                    if (data) {
+                      issues = issues.concat(data);
+                    }
+                  }
+                  if (callCount == moduleConfig.length) {
+                    cb(err,issues, headers);
+                  }
+                };
+
+                //initial multi-repo module support
+                _.each(moduleConfig, function (config) {
+                    var ghrepo = client.repo(config.full_name);
+                    //todo implement paging using same pattern as with getRepos or mapreduce, or determine a new promise style
+                    // currently, this is just getting the first page for each repo
+                    ghrepo.issues(aggregate);
+                  }
+                );
               } else {
                 sails.log.error('could not retrieve module', err);
               }

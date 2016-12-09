@@ -46,11 +46,15 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
   localDiskDb: {
-    adapter: 'sails-disk'
-  },
+    adapter: 'sails-disk'},
 
   stackbuttonMongo: {
-    adapter: 'sails-mongo'
+    adapter: 'sails-mongo',
+    host: process.env.MONGODB_SERVICE_HOST || 'localhost',
+    port: process.env.MONGODB_SERVICE_PORT || 27017 ,
+    user: process.env.MONGODB_USER || '',
+    password: process.env.MONGODB_PASSWORD || '',
+    database: process.env.MONGODB_DATABASE || 'stackbutton'
   }
 
   /***************************************************************************
