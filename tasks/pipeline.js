@@ -46,7 +46,7 @@ var cssFilesToInject = [
 var jsFilesToInject = [
 
   // Load sails.io before everything else
-  'node_modules/socket.io-client/socket.io.js',
+  'node_modules/socket.io-client/dist/socket.io.js',
   'node_modules/sails.io.js/sails.io.js',
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
@@ -108,5 +108,3 @@ module.exports.templateFilesToInject = templateFilesToInject.map(function (tplPa
 
 module.exports.jsFilesToCopy = jsFilesToInject;
 module.exports.cssFilesToCopy = cssFilesToInject;
-
-
