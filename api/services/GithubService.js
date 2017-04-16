@@ -1,19 +1,14 @@
 /**
-
  Copyright 2016, Cloud Compass Computing, Inc.
-
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
-
  http://www.apache.org/licenses/LICENSE-2.0
-
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
-
  */
 var https = require('https');
 var github = require('octonode');
@@ -78,7 +73,7 @@ module.exports = {
           break;
       }
 
-      var webhookURL = (process.env.SB_WEBHOOK_BASE_URL || sails.config.url.hooks ) + "/payload/" + module.project;
+      var webhookURL = (process.env.SB_WEBHOOK_BASE_URL || sails.config.url.hooks) + "/payload/" + module.project;
 
       sails.log.info('adding webhook', module.config.full_name, webhookURL, evts);
 
@@ -124,11 +119,16 @@ module.exports = {
 
   // exposed to client in ServiceController
   getRepos: function (serviceID, cb) {
-
     var issues = [];
     var client = github.client();
 
     var pager = function (err, data, headers) {
+      // TODO: If the github access token is revoked, this crashes due to a undefined header (I believe)
+      // Info is captured through err as "invalid credentials", handle this appropriately
+      if (err) {
+        sails.log.debug(err);
+      }
+
       if (data) {
         issues = issues.concat(data);
       }
@@ -136,15 +136,15 @@ module.exports = {
       if (headers.link) {
         var linkHeaders = parse_link_header(headers.link);
         if (linkHeaders && linkHeaders.next) {
-          //parse out next page from link header format like https://api.github.com/user/repos?page=50&per_page=100
+          // Parse the next page from the link header and retrieve the next repo page
+          // Format is like: https://api.github.com/user/repos?page=50&per_page=100
           var nextPageNumber = querystring.parse(url.parse(linkHeaders.next).query).page;
-
           getRepoPage(client, nextPageNumber, pager)
-        } else {
-          sails.log.debug("Returning repos to caller...");
-          cb(err, issues, headers);
         }
       }
+
+      // Return the repos using the provided callback
+      cb(err, issues, headers);
     };
 
     function getRepoPage(client, page, pager) {
@@ -194,7 +194,7 @@ module.exports = {
     Widget.findOne({id: widgetId}).populate('module')
       .exec(function (err, widget) {
         if (widget) {
-          // sails.log.debug('finding first module:', widget.modules);
+          sails.log.debug('finding first module:', widget.modules);
           Module.findOne({id: widget.module.id}).populate('service')
             .exec(function (err, module) {
               if (module) {
