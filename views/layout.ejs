@@ -46,7 +46,11 @@ limitations under the License.
   -->
 
   <!--STYLES-->
-  <link rel="stylesheet" href="/min/production.min.css">
+  <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
+  <link rel="stylesheet" href="/node_modules/nvd3/build/nv.d3.css">
+  <link rel="stylesheet" href="/node_modules/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/styles/iconfont/material-icons.css">
+  <link rel="stylesheet" href="/styles/importer.css">
   <!--STYLES END-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 </head>
@@ -105,7 +109,54 @@ limitations under the License.
 -->
 
 <!--SCRIPTS-->
-<script src="/min/production.min.js"></script>
+<script src="/node_modules/socket.io-client/socket.io.js"></script>
+<script src="/node_modules/sails.io.js/sails.io.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/angular/angular.min.js"></script>
+<script src="/node_modules/angular-resource/angular-resource.min.js"></script>
+<script src="/node_modules/angular-animate/angular-animate.min.js"></script>
+<script src="/node_modules/angular-cookies/angular-cookies.min.js"></script>
+<script src="/node_modules/angular-aria/angular-aria.min.js"></script>
+<script src="/node_modules/d3/d3.min.js"></script>
+<script src="/node_modules/nvd3/build/nv.d3.min.js"></script>
+<script src="/node_modules/angular-nvd3/dist/angular-nvd3.min.js"></script>
+<script src="/node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="/node_modules/angular-messages/angular-messages.min.js"></script>
+<script src="/node_modules/angular-material/angular-material.min.js"></script>
+<script src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/node_modules/ui-router-extras/release/modular/ct-ui-router-extras.core.min.js"></script>
+<script src="/node_modules/ui-router-extras/release/modular/ct-ui-router-extras.transition.min.js"></script>
+<script src="/node_modules/ui-router-extras/release/modular/ct-ui-router-extras.previous.min.js"></script>
+<script src="/node_modules/angular-sails/dist/angular-sails.min.js"></script>
+<script src="/app/app.js"></script>
+<script src="/app/components/directives/activityGroup.js"></script>
+<script src="/app/components/directives/panelWidget.js"></script>
+<script src="/app/components/directives/projectCard.js"></script>
+<script src="/app/components/services/ActivitiesService.js"></script>
+<script src="/app/components/services/AuthService.js"></script>
+<script src="/app/components/services/NavService.js"></script>
+<script src="/app/components/services/ProjectService.js"></script>
+<script src="/app/components/services/RepositoryService.js"></script>
+<script src="/app/components/services/ToolService.js"></script>
+<script src="/app/controllers/ActivitiesController.js"></script>
+<script src="/app/controllers/ApplicationController.js"></script>
+<script src="/app/controllers/AuthController.js"></script>
+<script src="/app/controllers/CreateController.js"></script>
+<script src="/app/controllers/DashboardController.js"></script>
+<script src="/app/controllers/EditProjectController.js"></script>
+<script src="/app/controllers/IssuesController.js"></script>
+<script src="/app/controllers/MainController.js"></script>
+<script src="/app/controllers/ModuleAddController.js"></script>
+<script src="/app/controllers/ModuleController.js"></script>
+<script src="/app/controllers/ProfileController.js"></script>
+<script src="/app/controllers/ServiceAddController.js"></script>
+<script src="/app/controllers/ServicesController.js"></script>
+<script src="/app/controllers/ServicesconfigController.js"></script>
+<script src="/app/controllers/TeamController.js"></script>
+<script src="/app/controllers/ToolController.js"></script>
+<script src="/app/controllers/VCSController.js"></script>
+<script src="/app/controllers/WidgetAddController.js"></script>
+<script src="/app/controllers/projectController.js"></script>
 <!--SCRIPTS END-->
 </body>
 </html>

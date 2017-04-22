@@ -1,0 +1,78 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "ng2"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/patternfly/dist/css/patternfly.min.css",
+        "../node_modules/patternfly/dist/css/patternfly-additions.min.css",
+        "styles.css"
+      ],
+      "scripts": [
+        "../node_modules/patternfly/node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/patternfly/node_modules/c3/c3.min.js",
+        "../node_modules/patternfly/node_modules/d3/d3.min.js",
+        "../node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js",
+        "../node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js",
+        "../node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js",
+        "../node_modules/patternfly/dist/js/patternfly.min.js",
+        "../node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js",
+        "../node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
+        "../node_modules/patternfly/node_modules/moment/min/moment.min.js",
+        "../node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
+        "../node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
+        "../node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js",
+        "../node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js",
+        "../node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js",
+        "../node_modules/patternfly/node_modules/google-code-prettify/bin/prettify.min.js",
+        "../node_modules/patternfly/node_modules/jquery-match-height/jquery.matchHeight-min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}
