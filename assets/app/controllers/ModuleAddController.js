@@ -128,8 +128,15 @@ function ModuleAddController($scope, $state, $stateParams, ToolService, ProjectS
   // data = object to pull properties from
   // properties = optional array of property names to extract (default: *)
   function configureModule(data) {
-    vm.module.config = data;
-    console.log(vm.module);
+    if (!vm.module.config || vm.module.config == undefined || vm.module.config == null) {
+      vm.module.config = [];
+
+    }
+
+    console.log("adding ", data, vm.module);
+    vm.module.config = vm.module.config.concat(data);
+
+    console.log("...to module ", vm.module);
   }
 
   function addModule(newModule) {

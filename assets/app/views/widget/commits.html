@@ -45,6 +45,9 @@ limitations under the License.
     <div layout layout-padding>
       <img style="height: 3em; width: 3em;" ng-src="{{commit.author.avatar_url}}">
       <span layout="column" layout-align="start start">
+        <b>
+          Commit <a href="{{commit.html_url}}">{{commit.sha | limitTo : 8}}</a>
+        </b>
         <b>By:
           <span class="dash-widget-font">{{commit.author ? commit.author.login : commit.commit.committer.name}}</span>
         </b>

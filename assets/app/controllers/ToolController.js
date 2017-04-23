@@ -84,6 +84,7 @@ function ToolController($scope, ToolService, ProjectService) {
   // data = object to pull properties from
   // properties = optional array of property names to extract (default: *)
   function configureModule(data, properties) {
+    console.log("configModule:",data,properties);
     if (typeof properties == 'undefined') {
       vm.currentModule.config = data;
     } else {
