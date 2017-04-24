@@ -6,11 +6,11 @@ A friendly - but powerful - provisioning and monitoring tool for DevOps tool cha
 
 # Getting Started
 
-  1. Install [nodejs](http://nodejs.org) version 4.4.3LTS.
-  2. Install [sails](http://sailsjs.org/get-started).  Do *not* run the ```sails new...``` command.
-  3. Install [ruby](https://www.ruby-lang.org/en/).
-  4. Clone this repo via ```git clone https://github.com/sheaphillips/stackbutton.git```
-  5. Add the following to config/local.js
+  1. Install [nodejs](http://nodejs.org)
+  2. Install [sails](http://sailsjs.org/get-started)  
+  3. Install [ruby](https://www.ruby-lang.org/en/) for using Sass.
+  4. Clone the stackbutton repo to your local disk
+  5. Optionally add the following to sails's local configuration for config/local.js
 
   ```javascript
   module.exports.url = {
@@ -20,18 +20,19 @@ A friendly - but powerful - provisioning and monitoring tool for DevOps tool cha
 
   6. From the command line, in the location you cloned the repo into:
 
-  ```shell
-  npm install grunt bower -g
-  npm install
+ ```shell
+  npm install -g @angular/cli
   gem install sass
-  sails lift
+  cd ng2
+  npm install
+  ng serve
   ```
 
-  The above command should run the app and you will be able to view it at <http://localhost:1337> in your favourite browser.
+  The above command should run the NG Live Development Server on <http://localhost:4200>
 
   To enable mongo:
 
-  1. Ensure you have the mongo sails adapter by running ```npm install```
+  1. Ensure you have the mongo sails adapter by running ```npm install in the stackbutton directory```
   2. Create a file config/local.js. *Do not add this to git*
   3. Add the following block to your new local.js file:
 
