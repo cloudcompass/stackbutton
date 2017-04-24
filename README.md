@@ -4,7 +4,7 @@
 
 A friendly - but powerful - provisioning and monitoring tool for DevOps tool chains and application infrastructure.
 
-# Getting Started
+# Getting Started Development
 
   1. Install [nodejs](http://nodejs.org)
   2. Install [sails](http://sailsjs.org/get-started)  
@@ -32,7 +32,7 @@ A friendly - but powerful - provisioning and monitoring tool for DevOps tool cha
 
   To enable mongo:
 
-  1. Ensure you have the mongo sails adapter by running ```npm install in the stackbutton directory```
+  1. Ensure you have the mongo sails adapter by running `npm install` in the stackbutton directory
   2. Create a file config/local.js. *Do not add this to git*
   3. Add the following block to your new local.js file:
 
