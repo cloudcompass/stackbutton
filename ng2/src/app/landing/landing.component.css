@@ -1,0 +1,56 @@
+body,
+html {
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.i {
+  font-style: italic;
+}
+
+.top {
+  height: 68vh;
+  width: 100%;
+  color: white;
+  text-align: center;
+  background: bottom -20px left -10px/280% no-repeat url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="148.32mm" width="560.24mm" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1985.1198 525.53019"><defs><linearGradient id="a"><stop stop-color="%23fff" offset="0"/><stop stop-color="%23fff" stop-opacity="0" offset="1"/></linearGradient><linearGradient id="b" y2="1252.4" xlink:href="%23a" gradientUnits="userSpaceOnUse" x2="937.3" gradientTransform="translate(7.495 -806.68)" y1="832.54" x1="937.3"/><linearGradient id="c" y2="860.65" xlink:href="%23a" gradientUnits="userSpaceOnUse" x2="288.08" gradientTransform="translate(718.15 -332.46)" y1="460.14" x1="248.67"/></defs><path d="M1.495 523.68l6-78 140-76 174 36 244-140 198 102 238-108 274 14 249.44-96.992 218.56 72.992 240-246v520" fill-rule="evenodd" stroke="%23fff" stroke-width="3" fill="url(%23b)"/><g fill="%23fff"><circle cx="147.5" cy="369.68" r="12"/><circle cy="405.68" cx="321.5" r="12"/><circle cx="565.5" cy="265.68" r="12"/><circle cy="367.68" cx="763.5" r="12"/><circle cx="1001.5" cy="259.68" r="12"/><circle cy="273.68" cx="1275.5" r="12"/><circle cx="1524.9" cy="176.69" r="12"/><circle cy="249.68" cx="1743.5" r="12"/></g><path d="M1275.5 273.68l-8.485 250m716.49-176.99l-240-97.005-476.49 274-503.51-156-348 156-94-118" stroke="url(%23c)" stroke-width="3" fill="none"/></svg>'), -webkit-linear-gradient(top, #45b0a0, #7bdacc);
+  background: bottom -20px left -10px/280% no-repeat url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="148.32mm" width="560.24mm" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1985.1198 525.53019"><defs><linearGradient id="a"><stop stop-color="%23fff" offset="0"/><stop stop-color="%23fff" stop-opacity="0" offset="1"/></linearGradient><linearGradient id="b" y2="1252.4" xlink:href="%23a" gradientUnits="userSpaceOnUse" x2="937.3" gradientTransform="translate(7.495 -806.68)" y1="832.54" x1="937.3"/><linearGradient id="c" y2="860.65" xlink:href="%23a" gradientUnits="userSpaceOnUse" x2="288.08" gradientTransform="translate(718.15 -332.46)" y1="460.14" x1="248.67"/></defs><path d="M1.495 523.68l6-78 140-76 174 36 244-140 198 102 238-108 274 14 249.44-96.992 218.56 72.992 240-246v520" fill-rule="evenodd" stroke="%23fff" stroke-width="3" fill="url(%23b)"/><g fill="%23fff"><circle cx="147.5" cy="369.68" r="12"/><circle cy="405.68" cx="321.5" r="12"/><circle cx="565.5" cy="265.68" r="12"/><circle cy="367.68" cx="763.5" r="12"/><circle cx="1001.5" cy="259.68" r="12"/><circle cy="273.68" cx="1275.5" r="12"/><circle cx="1524.9" cy="176.69" r="12"/><circle cy="249.68" cx="1743.5" r="12"/></g><path d="M1275.5 273.68l-8.485 250m716.49-176.99l-240-97.005-476.49 274-503.51-156-348 156-94-118" stroke="url(%23c)" stroke-width="3" fill="none"/></svg>'), linear-gradient(to bottom, #45b0a0, #7bdacc);
+}
+
+@media (min-width: 520px) {
+  .top {
+    background-size: 200%;
+  }
+}
+
+@media (min-width: 800px) {
+  .top {
+    background-size: 110%;
+  }
+}
+
+@media (max-height: 500px) {
+  .top {
+    background-position: bottom -80px left -10px, 0 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .top {
+    background-position: bottom -6vw left -10px, 0 0;
+  }
+}
+
+a.button {
+  display: inline-block;
+  border-radius: 2em !important;
+}
+
+a.button:hover {
+  background: -webkit-linear-gradient(left, #03c0c0, #03c8b2);
+  background: linear-gradient(to right, #03c0c0, #03c8b2);
+}
+
+div.reduce {
+  width: 75vw;
+}
