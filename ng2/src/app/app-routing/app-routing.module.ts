@@ -1,16 +1,18 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from '../landing/landing.component';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../registration/registration.component';
 import { AuthGuard } from '../_guards/auth.guard';
+import { LandingComponent } from '../landing/landing.component';
+import { LoginComponent } from '../login/login.component';
+import { RegistrationComponent } from '../registration/registration.component';
+import { DashboardComponent } from "../dashboard/dashboard.component";
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: LandingComponent },
+  { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegistrationComponent },
 
-  // otherwise redirect to home
+  // Otherwise redirect to landing
   { path: '**', redirectTo: '' }
 ];
 

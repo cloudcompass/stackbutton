@@ -1,25 +1,18 @@
-<html>
-<nav class="navbar navbar-pf-vertical">
-  <div class="navbar-header">
-    <a href="/" class="navbar-brand">
-      <img class="navbar-brand-icon" src="../assets/logo-alt.svg" alt="" height="40px"/><img class="navbar-brand-name" src="../assets/brand-alt.svg" height="40px" alt="PatternFly Enterprise Application" />
-    </a>
 
-  </div>
-
-</nav><!-- /navbar -->
-
-<div class="col-md-6 col-md-offset-3">
-  <h1>Hi {{currentUser.firstName}}!</h1>
-  <p>You're logged in with Angular 2!!</p>
-  <h3>All registered users:</h3>
+<div>
+  <p>Landing Page!</p>
+  <p>Let's talk about StackButton using PatternFly and graphics.</p>
+  <p>Offer "Log In" and "Registration" buttons if not logged in, otherwise offer a "go to dashboard link"?</p>
+  <button class="btn btn-primary" [routerLink]="['/login']">Login</button>
+  <button class="btn btn-primary" [routerLink]="['/register']">Register</button>
+  <button class="btn btn-primary" [routerLink]="['/dashboard']">Dashboard</button>
+  <p>To do...</p>
   <ul>
-    <li *ngFor="let user of users">
-      {{user.username}} ({{user.firstName}} {{user.lastName}})
-      - <a (click)="deleteUser(user.id)">Delete</a>
-    </li>
+    <li>Have the login page redirect to dashboard on successful login</li>
+    <li>Have the logout button logout appropriately instead of handing it off the the login page to do</li>
+    <li>Add a user information page to see and edit info</li>
+    <li>Patternfly it up</li>
+    <li>Fake backend needs to get replaces with mongo</li>
+    <li>Dashboard menu items</li>
   </ul>
-  <p><a [routerLink]="['/login']">Logout</a></p>
 </div>
-
-</html>

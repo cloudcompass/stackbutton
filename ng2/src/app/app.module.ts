@@ -16,9 +16,10 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
-import { HomeComponent } from './landing/landing.component';
+import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './registration/registration.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { DashboardComponent } from "./dashboard/dashboard.component";
 
 @NgModule({
   imports: [
@@ -30,9 +31,10 @@ import { RegisterComponent } from './registration/registration.component';
   declarations: [
     AppComponent,
     AlertComponent,
-    HomeComponent,
+    LandingComponent,
     LoginComponent,
-    RegisterComponent
+    RegistrationComponent,
+    DashboardComponent
   ],
   providers: [
     AuthGuard,

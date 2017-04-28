@@ -9,7 +9,7 @@ import { UserService } from '../_services/user.service';
   templateUrl: 'registration.component.html'
 })
 
-export class RegisterComponent {
+export class RegistrationComponent {
   model: any = {};
   loading = false;
 
