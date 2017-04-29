@@ -1,31 +1,84 @@
-<div class="col-md-6 col-md-offset-3">
-  <h2>Register</h2>
-  <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="firstName">First Name</label>
-      <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
-      <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
-      <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
-      <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
-    </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-    </div>
-    <div class="form-group">
-      <button [disabled]="loading" class="btn btn-primary">Register</button>
-      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-      <a [routerLink]="['/login']" class="btn btn-link">Login</a>
-      <a [routerLink]="['/landing']" class="btn btn-link">Cancel</a>
-    </div>
-  </form>
-</div>
+<div class="login-pf">
+  <div class="container" style="background:black">
+    <div class="row">
+      <div class="col-sm-7 col-md-6 col-lg-5 login">
+        <h2>Register</h2>
+        <form name="form" class="form-horizontal" role="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+
+          <!-- First Name Input -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label class="col-sm-2 col-md-2 control-label">First Name</label>
+            <div class="col-sm-10 col-md-10">
+              <input type="text" class="form-control" name="firstName" placeholder="" tabindex="1" [(ngModel)]="model.firstName" #firstName="ngModel" required />
+
+              <!-- TODO: This moves the element (or whatever) around when the error is displayed and removed. Stop it or make it all on one line -->
+              <p *ngIf="f.submitted && !firstName.valid" class="help-block">First name is required</p>
+              <p *ngIf="!f.submitted || firstName.valid"></p>
+            </div>
+          </div>
+
+          <!-- Last Name Input -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label class="col-sm-2 col-md-2 control-label">Last Name</label>
+            <div class="col-sm-10 col-md-10">
+              <input type="text" class="form-control" name="lastName" placeholder="" tabindex="1" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+
+              <!-- TODO: This moves the element (or whatever) around when the error is displayed and removed. Stop it or make it all on one line -->
+              <p *ngIf="f.submitted && !lastName.valid" class="help-block">Last name is required</p>
+              <p *ngIf="!f.submitted || lastName.valid"></p>
+            </div>
+          </div>
+
+          <!-- Username Input -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label class="col-sm-2 col-md-2 control-label">Username</label>
+            <div class="col-sm-10 col-md-10">
+              <input type="text" class="form-control" name="username" placeholder="" tabindex="1" [(ngModel)]="model.username" #username="ngModel" required />
+
+              <!-- TODO: This moves the element (or whatever) around when the error is displayed and removed. Stop it or make it all on one line -->
+              <p *ngIf="f.submitted && !username.valid" class="help-block">Username is required</p>
+              <p *ngIf="!f.submitted || username.valid"></p>
+            </div>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label class="col-sm-2 col-md-2 control-label">Password</label>
+            <div class="col-sm-10 col-md-10">
+              <input type="password" class="form-control" name="password" placeholder="" tabindex="2" [(ngModel)]="model.password" #password="ngModel" required />
+
+              <!-- TODO: This moves the element (or whatever) around when the error is displayed and removed. Stop it or make it all on one line -->
+              <p *ngIf="f.submitted && !password.valid" class="help-block">Password is required</p>
+              <p *ngIf="!f.submitted || password.valid"></p>
+            </div>
+          </div>
+
+          <!-- Buttons etc. -->
+          <div class="form-group">
+            <div class="col-xs-8 col-sm-offset-2 col-sm-6 col-md-offset-2 col-md-6">
+              <!-- This currently exists to keep the spacing consistent with login page -->
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 submit">
+              <button type="submit" class="btn btn-primary btn-lg" tabindex="4" [disabled]="loading">Register</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+          </div>
+
+        </form>
+      </div><!-- End login -->
+
+      <div class="col-sm-5 col-md-6 col-lg-7 details">
+        <p>
+          <strong>Welcome to StackButton!</strong><br>
+          This is, again, placeholder text that will likely be removed.
+        </p>
+        <!-- TODO: Find an appropriate place for the login and cancel buttons  -->
+        <div>
+          <a [routerLink]="['/login']" class="btn btn-link">Login</a>
+          <a [routerLink]="['/landing']" class="btn btn-link">Cancel</a>
+        </div>
+      </div><!-- End details -->
+    </div><!-- End row -->
+  </div><!-- End container -->
+</div><!-- End login-pf -->
+
