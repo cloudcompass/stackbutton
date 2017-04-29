@@ -20,6 +20,9 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from "./dashboard/dashboard.component";
+import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
+import { VerticalNavigationComponent } from './vertical-navigation/vertical-navigation.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   imports: [
@@ -34,7 +37,10 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
     LandingComponent,
     LoginComponent,
     RegistrationComponent,
-    DashboardComponent
+    DashboardComponent,
+    HorizontalNavigationComponent,
+    VerticalNavigationComponent,
+    LoginPageComponent,
   ],
   providers: [
     AuthGuard,

@@ -1,0 +1,165 @@
+
+
+<!--
+<script src="components/c3/c3.min.js"></script>
+<script src="components/d3/d3.min.js"></script>
+<script src="components/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+-->
+
+<nav class="navbar navbar-pf-vertical">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="/" class="navbar-brand">
+      <img class="navbar-brand-icon" src="../../assets/logo-alt.svg" height= "40px" alt=""/>
+      <img class="navbar-brand-name" src="../../assets/brand-alt.svg" height= "40px" alt="PatternFly Enterprise Application" />
+    </a>
+  </div>
+  <nav class="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-right navbar-iconic">
+      <li class="dropdown">
+        <a class="dropdown-toggle nav-item-iconic" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span title="Notifications" class="fa pficon-flag"></span>
+          <span class="badge">2</span>
+        </a>
+        <div class="dropdown-menu infotip bottom-right">
+          <div class="arrow"></div>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="i pficon pficon-info"></span> Modified Datasources ExampleDS
+            </li>
+            <li class="list-group-item">
+              <span class="i pficon pficon-info"></span> Error: System Failure
+            </li>
+          </ul>
+          <div class="footer">
+            <a>Clear Messages</a>
+          </div>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle nav-item-iconic" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span title="Help" class="fa pficon-help"></span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#">Help</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle nav-item-iconic" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span title="Username" class="fa pficon-user"></span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li><a href="#">Preferences</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav> <!--/.navbar-->
+
+
+<div class="nav-pf-vertical nav-pf-vertical-with-sub-menus">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-dashboard" data-toggle="tooltip" title="Dashboard"></span>
+        <span class="list-group-item-value">Dashboard</span>
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-shield" data-toggle="tooltip" title="Dolor"></span>
+        <span class="list-group-item-value">Dolor</span>
+
+      </a>
+    </li>
+    <li class="list-group-item active " data-target="#ipsum-secondary">
+      <a>
+        <span class="fa fa-space-shuttle" data-toggle="tooltip" title="Ipsum"></span>
+        <span class="list-group-item-value">Ipsum</span>
+      </a>
+
+    </li>
+    <li class="list-group-item " data-target="#amet-secondary">
+      <a>
+        <span class="fa fa-paper-plane" data-toggle="tooltip" title="Amet"></span>
+        <span class="list-group-item-value">Amet</span>
+      </a>
+
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-graduation-cap" data-toggle="tooltip" title="Adipscing"></span>
+        <span class="list-group-item-value">Adipscing</span>
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-gamepad" data-toggle="tooltip" title="Lorem"></span>
+        <span class="list-group-item-value">Lorem</span>
+      </a>
+    </li>
+
+    <li class="list-group-item secondary-nav-item-pf mobile-nav-item-pf visible-xs-block" data-target="#amet-secondary">
+      <a>
+        <span class="pficon pficon-user" data-toggle="tooltip" title="" data-original-title="User"></span>
+        <span class="list-group-item-value">User</span>
+      </a>
+      <div id="user-secondary" class="nav-pf-secondary-nav">
+        <div class="nav-item-pf-header">
+          <a class="secondary-collapse-toggle-pf" data-toggle="collapse-secondary-nav"></a>
+          <span>User</span>
+        </div>
+
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a>
+              <span class="list-group-item-value">Preferences</span>
+            </a>
+          </li>
+
+          <li class="list-group-item">
+            <a>
+              <span class="list-group-item-value">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="list-group-item secondary-nav-item-pf mobile-nav-item-pf visible-xs-block" data-target="#amet-secondary">
+      <a>
+        <span class="pficon pficon-help" data-toggle="tooltip" title="" data-original-title="Amet"></span>
+        <span class="list-group-item-value">Help</span>
+      </a>
+      <div id="help-secondary" class="nav-pf-secondary-nav">
+        <div class="nav-item-pf-header">
+          <a class="secondary-collapse-toggle-pf" data-toggle="collapse-secondary-nav"></a>
+          <span>Help</span>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a>
+              <span class="list-group-item-value">Help</span>
+            </a>
+          </li>
+          <li class="list-group-item">
+            <a>
+              <span class="list-group-item-value">About</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+  </ul>
+
+</div>
