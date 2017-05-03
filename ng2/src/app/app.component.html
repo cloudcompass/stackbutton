@@ -1,9 +1,12 @@
-<div class="layout-pf layout-pf-fixed">
 
-<script src="components/c3/c3.min.js"></script>
-<script src="components/d3/d3.min.js"></script>
-<script src="components/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+<html class="layout-pf layout-pf-fixed">
+<head>
+  <!--<script src="../../node_modules/patternfly/dist/less/dependencies/c3/c3.min.js"></script>-->
+  <!--<script src="../../node_modules/patternfly/dist/less/dependencies/d3/d3.min.js"></script>-->
+  <!--<script src="../../node_modules/components/jquery-match-height/dist/jquery.matchHeight-min.js"></script>-->
+</head>
 
+<body>
 <nav class="navbar navbar-pf-vertical">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle">
@@ -13,7 +16,8 @@
       <span class="icon-bar"></span>
     </button>
     <a href="/" class="navbar-brand">
-      <img class="navbar-brand-icon" src="../assets/logo-alt.svg" alt="" height="40px"/><img class="navbar-brand-name" src="../assets/brand-alt.svg" height="40px" alt="PatternFly Enterprise Application" />
+      <img class="navbar-brand-icon" src="../assets/logo-alt.svg" height="45px" alt="StackButton Logo"/>
+      <img class="navbar-brand-name" src="../assets/brand-alt.svg" height="40px" alt="StackButton" />
     </a>
   </div>
   <nav class="collapse navbar-collapse">
@@ -423,7 +427,7 @@
               <h3 class="card-pf-subtitle">CPU</h3>
               <p class="card-pf-utilization-details">
                 <span class="card-pf-utilization-card-details-count">50</span>
-            <span class="card-pf-utilization-card-details-description">
+                <span class="card-pf-utilization-card-details-description">
               <span class="card-pf-utilization-card-details-line-1">Available</span>
               <span class="card-pf-utilization-card-details-line-2">of 1000 MHz</span>
             </span>
@@ -476,7 +480,7 @@
               <h3 class="card-pf-subtitle">Memory</h3>
               <p class="card-pf-utilization-details">
                 <span class="card-pf-utilization-card-details-count">256</span>
-            <span class="card-pf-utilization-card-details-description">
+                <span class="card-pf-utilization-card-details-description">
               <span class="card-pf-utilization-card-details-line-1">Available</span>
               <span class="card-pf-utilization-card-details-line-2">of 432 GB</span>
             </span>
@@ -529,7 +533,7 @@
               <h3 class="card-pf-subtitle">Network</h3>
               <p class="card-pf-utilization-details">
                 <span class="card-pf-utilization-card-details-count">200</span>
-            <span class="card-pf-utilization-card-details-description">
+                <span class="card-pf-utilization-card-details-description">
               <span class="card-pf-utilization-card-details-line-1">Available</span>
               <span class="card-pf-utilization-card-details-line-2">of 1300 Gbps</span>
             </span>
@@ -593,7 +597,7 @@
         <div class="card-pf-body">
           <p class="card-pf-utilization-details">
             <span class="card-pf-utilization-card-details-count">200</span>
-        <span class="card-pf-utilization-card-details-description">
+            <span class="card-pf-utilization-card-details-description">
           <span class="card-pf-utilization-card-details-line-1">Available</span>
           <span class="card-pf-utilization-card-details-line-2">of 1300 Gbps</span>
         </span>
@@ -784,18 +788,20 @@
     </div>
   </div><!-- /row -->
 
-</div>
-<script>
-  $(document).ready(function() {
-    // matchHeight the contents of each .card-pf and then the .card-pf itself
-    $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
-    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
-    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();
-    $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
 
-    // Initialize the vertical navigation
-    $().setupVerticalNavigation(true);
-  });
-</script>
 
+  <!--<script>-->
+    <!--$(document).ready(function() {-->
+      <!--// matchHeight the contents of each .card-pf and then the .card-pf itself-->
+      <!--$(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();-->
+      <!--$(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();-->
+      <!--$(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();-->
+      <!--$(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();-->
+
+      <!--// Initialize the vertical navigation-->
+      <!--$().setupVerticalNavigation(true);-->
+    <!--});-->
+  <!--</script>-->
 </div>
+</body>
+</html>
