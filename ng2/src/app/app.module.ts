@@ -25,6 +25,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { EmptystateComponent } from './emptystate/emptystate.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
+import { UtilizationBarComponent } from './utilization-bar/utilization-bar.component';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { TrendCardComponent } from './trend-card/trend-card.component';
     EmptystateComponent,
     StatusBoardComponent,
     TrendCardComponent,
+    UtilizationBarComponent,
   ],
   providers: [
     AuthGuard,
