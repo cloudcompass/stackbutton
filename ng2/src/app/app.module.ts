@@ -1,6 +1,6 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // used to create fake backend
@@ -21,9 +21,10 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
-import { VerticalNavigationComponent } from './vertical-navigation/vertical-navigation.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { EmptystateComponent } from './emptystate/emptystate.component';
+import { StatusBoardComponent } from './status-board/status-board.component';
+import { TrendCardComponent } from './trend-card/trend-card.component';
 
 @NgModule({
   imports: [
@@ -40,9 +41,10 @@ import { EmptystateComponent } from './emptystate/emptystate.component';
     RegistrationComponent,
     DashboardComponent,
     HorizontalNavigationComponent,
-    VerticalNavigationComponent,
     LoginPageComponent,
     EmptystateComponent,
+    StatusBoardComponent,
+    TrendCardComponent,
   ],
   providers: [
     AuthGuard,

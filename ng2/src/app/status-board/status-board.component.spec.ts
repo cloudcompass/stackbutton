@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerticalNavigationComponent } from './vertical-navigation.component';
+import { StatusBoardComponent } from './status-board.component';
 
-describe('VerticalNavigationComponent', () => {
-  let component: VerticalNavigationComponent;
-  let fixture: ComponentFixture<VerticalNavigationComponent>;
+describe('StatusBoardComponent', () => {
+  let component: StatusBoardComponent;
+  let fixture: ComponentFixture<StatusBoardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VerticalNavigationComponent ]
+      declarations: [ StatusBoardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VerticalNavigationComponent);
+    fixture = TestBed.createComponent(StatusBoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
