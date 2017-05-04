@@ -23,6 +23,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
 import { VerticalNavigationComponent } from './vertical-navigation/vertical-navigation.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { EmptystateComponent } from './emptystate/emptystate.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     HorizontalNavigationComponent,
     VerticalNavigationComponent,
     LoginPageComponent,
+    EmptystateComponent,
   ],
   providers: [
     AuthGuard,
