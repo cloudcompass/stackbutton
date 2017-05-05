@@ -42,9 +42,11 @@ import { UtilizationBarComponent } from './utilization-bar/utilization-bar.compo
     DashboardComponent,
     HorizontalNavigationComponent,
     EmptystateComponent,
-    StatusBoardComponent,
     TrendCardComponent,
     UtilizationBarComponent,
+
+    // Temp Components
+    StatusBoardComponent,
   ],
   providers: [
     AuthGuard,
