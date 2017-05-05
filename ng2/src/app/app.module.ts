@@ -21,7 +21,6 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
-import { LoginPageComponent } from './login-page/login-page.component';
 import { EmptystateComponent } from './emptystate/emptystate.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
@@ -42,7 +41,6 @@ import { UtilizationBarComponent } from './utilization-bar/utilization-bar.compo
     RegistrationComponent,
     DashboardComponent,
     HorizontalNavigationComponent,
-    LoginPageComponent,
     EmptystateComponent,
     StatusBoardComponent,
     TrendCardComponent,
