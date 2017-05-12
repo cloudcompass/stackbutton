@@ -17,6 +17,7 @@
         <a href="#">Status</a>
       </li>
       <li class="dropdown">
+        <!--TODO: Fix this dropdown. For some reason the js to manage it is not working.-->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <span class="pficon pficon-user"></span> Brian Johnson <b class="caret"></b>
         </a>
@@ -57,16 +58,16 @@
     </ul>
     <ul class="nav navbar-nav navbar-primary">
       <li [routerLinkActive]="['active']">
-        <a [routerLink]="['/status-board']">Status Board</a>
+        <a [routerLink]="['/dashboard']">Dashboard</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/list-view">List View</a>
+        <a routerLink="/listview">List View</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/empty-state">Empty State</a>
+        <a routerLink="/emptystate">Empty State</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/tab-view">Tab View</a>
+        <a routerLink="/tabview">Tab View</a>
       </li>
     </ul>
   </div>
