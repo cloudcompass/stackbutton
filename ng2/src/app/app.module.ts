@@ -29,6 +29,7 @@ import { UtilizationBarComponent } from './utilization-bar/utilization-bar.compo
 import { ListViewComponent} from './list-view/list-view.component';
 
 import * as $ from 'jquery';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import * as $ from 'jquery';
     UtilizationBarComponent,
     ListViewComponent,
     StatusBoardComponent,
+    ToolbarComponent,
   ],
   providers: [
     AuthGuard,
