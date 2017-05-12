@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -25,6 +25,9 @@ import { EmptystateComponent } from './emptystate/emptystate.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
 import { UtilizationBarComponent } from './utilization-bar/utilization-bar.component';
+import { ListViewComponent} from './list-view/list-view.component';
+
+import * as $ from 'jquery';
 
 @NgModule({
   imports: [
@@ -44,8 +47,7 @@ import { UtilizationBarComponent } from './utilization-bar/utilization-bar.compo
     EmptystateComponent,
     TrendCardComponent,
     UtilizationBarComponent,
-
-    // Temp Components
+    ListViewComponent,
     StatusBoardComponent,
   ],
   providers: [
@@ -59,7 +61,9 @@ import { UtilizationBarComponent } from './utilization-bar/utilization-bar.compo
     MockBackend,
     BaseRequestOptions
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // for patternfly workaround
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 
 export class AppModule { }
