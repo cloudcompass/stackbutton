@@ -7,6 +7,8 @@ import { RegistrationComponent } from '../registration/registration.component';
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 import { StatusBoardComponent } from '../status-board/status-board.component';
 import { ListViewComponent} from '../list-view/list-view.component';
+import { EmptyStateComponent } from '../empty-state/empty-state.component';
+import { TabViewComponent} from '../tab-view/tab-view.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -29,14 +31,13 @@ const appRoutes: Routes = [
   },
 
   {
-    // TODO
     path: 'empty-state',
-    component: ListViewComponent
+    component: EmptyStateComponent
   },
   {
     // TODO
     path: 'tab-view',
-    component: ListViewComponent
+    component: TabViewComponent
   },
   // Otherwise redirect to landing
   { path: '**',

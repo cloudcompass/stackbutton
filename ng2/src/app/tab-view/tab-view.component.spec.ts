@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmptystateComponent } from './emptystate.component';
+import { TabViewComponent } from './tab-view.component';
 
-describe('EmptystateComponent', () => {
-  let component: EmptystateComponent;
-  let fixture: ComponentFixture<EmptystateComponent>;
+describe('TabViewComponent', () => {
+  let component: TabViewComponent;
+  let fixture: ComponentFixture<TabViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmptystateComponent ]
+      declarations: [ TabViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmptystateComponent);
+    fixture = TestBed.createComponent(TabViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

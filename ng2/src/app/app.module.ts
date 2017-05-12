@@ -22,14 +22,14 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
-import { EmptystateComponent } from './emptystate/emptystate.component';
+import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
 import { UtilizationBarComponent } from './utilization-bar/utilization-bar.component';
 import { ListViewComponent} from './list-view/list-view.component';
 
-import * as $ from 'jquery';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { TabViewComponent } from './tab-view/tab-view.component';
 
 
 @NgModule({
@@ -47,12 +47,13 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     RegistrationComponent,
     DashboardComponent,
     HorizontalNavigationComponent,
-    EmptystateComponent,
+    EmptyStateComponent,
     TrendCardComponent,
     UtilizationBarComponent,
     ListViewComponent,
     StatusBoardComponent,
     ToolbarComponent,
+    TabViewComponent,
   ],
   providers: [
     AuthGuard,
