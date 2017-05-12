@@ -15,6 +15,7 @@ import { AlertComponent } from './_directives/alert.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
+// TODO: ensure all of these are still used
 import { UserService } from './_services/user.service';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
@@ -28,6 +29,7 @@ import { UtilizationBarComponent } from './utilization-bar/utilization-bar.compo
 import { ListViewComponent} from './list-view/list-view.component';
 
 import * as $ from 'jquery';
+
 
 @NgModule({
   imports: [
