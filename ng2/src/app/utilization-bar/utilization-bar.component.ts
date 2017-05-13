@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as c3 from 'c3';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-utilization-bar',

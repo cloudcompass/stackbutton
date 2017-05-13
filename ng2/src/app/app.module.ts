@@ -30,6 +30,8 @@ import { ListViewComponent} from './list-view/list-view.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
 
+import * as $ from 'jquery';
+
 
 @NgModule({
   imports: [
