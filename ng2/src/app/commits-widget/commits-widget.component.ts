@@ -7,24 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommitWidgetComponent implements OnInit {
 
+  private repoName: string;
+
+  private commits;
+  private currentCommit;
   private commitsCount: number;
   private commitIndex: number; // Tracker for commit currently shown
-  private repoName: string;
-  private commitAuthors: string[];
-  private commitDates: string[];
-  private commitMessages: string[];
 
   constructor() {
-    // Sample Data
-    this.repoName = "Sample Repo";
-    this.commitsCount = 5;
+    this.commitsCount = 0;
     this.commitIndex = 0;
-    this.commitAuthors = ['Alan Ackman', 'Bob Bobman', 'Cynthia Cool', 'Dodger Dodge', 'Evan Evanson'];
-    this.commitDates = ['01/01/1991', '02/02/1992', '03/03/1993', '04/04/1994', '05/05/1995'];
-    this.commitMessages = ['Initial Commit','Fixed Stuff','Added new feature','Removed unused imports','Apparently those imports were used'];
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.loadSampleData();
+  }
 
   ngAfterViewInit() {
     this.updateCommitInfo();
@@ -62,8 +59,134 @@ export class CommitWidgetComponent implements OnInit {
    * Update the commit HTML display elements with the currently selected commit
    */
   updateCommitInfo() {
-    document.getElementById('commitAuthor').innerText = this.commitAuthors[this.commitIndex];
-    document.getElementById('commitDate').innerText = this.commitDates[this.commitIndex];
-    document.getElementById('commitMessage').innerText = this.commitMessages[this.commitIndex];
+    console.log("update commit info");
+
+    this.currentCommit = this.commits[this.commitIndex].commit;
+
+    console.log("Current commit: " + this.currentCommit.message);
+    console.log("Current author: " + this.currentCommit.author.name);
+    console.log("Current commiter: " + this.currentCommit.committer.name);
+
+    document.getElementById('commitAuthor').innerText = this.currentCommit.committer.name;
+    document.getElementById('commitDate').innerText = this.currentCommit.committer.date;
+    document.getElementById('commitMessage').innerText = this.currentCommit.message;
+    document.getElementById('commitSha').innerText = this.currentCommit.sha;
+  }
+
+  /**
+   * Populate commit widget with sample data
+   */
+  loadSampleData() {
+    console.log("Loading sample commit data");
+
+    this.repoName = "Sample Repo";
+    this.commitsCount = 5;
+    this.commitIndex = 0;
+
+    this.commits = [
+      // First sample commit
+      {
+        commit: {
+          author: {
+            name: "Alfred Alfredo",
+            date: "2001-01-01T16:00:49Z"
+          },
+          committer: {
+            name: "Alfred Alfredo",
+            date: "2001-01-01T16:00:49Z"
+          },
+          message: "Fixed all the bugs",
+          comment_count: 0,
+          // Temp
+          sha: "f6cad4b"
+        },
+        author: {
+          login: "octocat",
+          id: 1,
+          avatar_url: "https://github.com/images/error/octocat_happy.gif"
+        },
+        committer: {
+          login: "octocat",
+          id: 1,
+          avatar_url: "https://github.com/images/error/octocat_happy.gif"
+        },
+        stats: {
+          additions: 11,
+          deletions: 1,
+          total: 12
+        },
+      },
+      // Second sample commit
+      {
+        commit: {
+          author: {
+            name: "Bart Blimpson",
+            date: "2002-02-02T16:00:49Z"
+          },
+          committer: {
+            name: "Bart Blimpson",
+            date: "2002-02-02T16:00:49Z"
+          },
+          message: "Introduced more bugs",
+          comment_count: 5,
+          // Temp
+          sha: "e4cxd7y"
+        },
+        author: {
+          login: "octocat",
+          id: 1,
+          avatar_url: "https://github.com/images/error/octocat_happy.gif"
+        },
+        committer: {
+          login: "octocat",
+          id: 1,
+          avatar_url: "https://github.com/images/error/octocat_happy.gif"
+        },
+        stats: {
+          additions: 22,
+          deletions: 2,
+          total: 24
+        },
+      },
+      // Third sample commit
+      {
+        commit: {
+          author: {
+            name: "Cheryl Cornwall",
+            date: "2003-03-03T16:00:49Z"
+          },
+          committer: {
+            name: "Cheryl Cornwall",
+            date: "2003-03-03T16:00:49Z"
+          },
+          message: "All work and no play makes Jack a dull boy " +
+          "All work and no play makes Jack a dull boy " +
+          "All work and no play makes Jack a dull boy " +
+          "All work and no play makes Jack a dull boy " +
+          "All work and no play makes Jack a dull boy " +
+          "All work and no play makes Jack a dull boy ",
+          comment_count: 0,
+          // Temp
+          sha: "a2yvc2c"
+        },
+        author: {
+          login: "octocat",
+          id: 1,
+          avatar_url: "https://github.com/images/error/octocat_happy.gif"
+        },
+        committer: {
+          login: "octocat",
+          id: 1,
+          avatar_url: "https://github.com/images/error/octocat_happy.gif"
+        },
+        stats: {
+          additions: 33,
+          deletions: 3,
+          total: 36
+        },
+      }
+    ];
+
+    this.commitsCount = this.commits.length;
   }
 }

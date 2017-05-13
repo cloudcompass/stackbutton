@@ -12,8 +12,8 @@ export class IssuesWidgetComponent implements OnInit {
   private issuesCount: number;
   private repoName: string;
 
-  private currentIssue;
   private issues;
+  private currentIssue;
 
   private issueFilterValues: string[];
 
