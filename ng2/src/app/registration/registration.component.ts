@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService } from '../_services/alert.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -15,20 +14,19 @@ export class RegistrationComponent {
 
   constructor(
     private router: Router,
-    private userService: UserService,
-    private alertService: AlertService) { }
+    private userService: UserService) { }
 
   register() {
     this.loading = true;
     this.userService.create(this.model)
       .subscribe(
         data => {
-          // set success message and pass true paramater to persist the message after redirecting to the login page
-          this.alertService.success('Registration successful', true);
+          // Registration successful, navigate to login
           this.router.navigate(['/login']);
         },
         error => {
-          this.alertService.error(error);
+          // TODO: Display an error to the user
+          console.log(error);
           this.loading = false;
         });
   }

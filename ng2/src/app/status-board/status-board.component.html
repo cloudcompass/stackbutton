@@ -1,19 +1,14 @@
-<!-- Insert the navbar for the dashboard -->
-<app-horizontal-navigation></app-horizontal-navigation>
-
 <!-- The Dashboard body -->
-<div class="cards-pf" >
-  <div class="container-fluid container-cards-pf" style="margin-top: 0px;">
-    <div class="row row-cards-pf">
+<body>
+  <div class="cards-pf" >
+    <div class="container-fluid container-cards-pf" style="margin-top: 0px;">
+      <div class="row row-cards-pf">
 
-      <!--
-      For each row there should be three widgets or something like that. when laying out the for loops for this area it should be considered that there are 12 columns in the large grid.
-      -->
+        <!-- <app-utilization-bar></app-utilization-bar> -->
+        <app-commit-widget></app-commit-widget>
+        <app-issues-widget></app-issues-widget>
 
-      <app-commit-widget></app-commit-widget>
-      <app-issues-widget></app-issues-widget>
-
-
+      </div>
     </div><!-- /container -->
   </div>
-
+</body>

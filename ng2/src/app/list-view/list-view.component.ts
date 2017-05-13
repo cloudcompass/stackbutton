@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-view.component.css']
 })
 export class ListViewComponent implements OnInit {
+  private divRepeat: number[]; // Temp: For repeating list-group-item
 
-  constructor() { }
+  constructor() {
+    this.divRepeat = [0,1,2,3,4,5]; // Temp: For repeating list-group-item
+  }
 
   ngOnInit() {
     $('input[type="checkbox"]').change(function (e) {
