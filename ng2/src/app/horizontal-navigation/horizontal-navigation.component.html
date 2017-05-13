@@ -1,4 +1,6 @@
 <nav class="navbar navbar-default navbar-pf" role="navigation">
+
+  <!-- navbar header -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
@@ -10,8 +12,12 @@
       <img class="navbar-brand-icon" src="../../assets/logo-alt.svg" height= "45px" alt="StackButton Logo"
            style="float: left; padding-right: 10px;"/>
       <img class="navbar-brand-name" src="../../assets/brand-alt.svg" height= "40px" alt="StackButton" style="float: left;" />    </a>
-  </div>
+  </div><!-- /header -->
+
+  <!-- navbar body -->
   <div class="navbar-collapse navbar-collapse-1 collapse" aria-expanded="false" style="height: 0px;">
+
+    <!-- Status and User -->
     <ul class="nav navbar-nav navbar-utility">
       <li>
         <a href="#">Status</a>
@@ -54,21 +60,23 @@
             <a href="#">One more separated link</a>
           </li>
         </ul>
-      </li>
-    </ul>
+      </li><!-- /dropdown -->
+    </ul><!-- /status & user -->
+
+    <!-- Main navbar links to components -->
     <ul class="nav navbar-nav navbar-primary">
       <li [routerLinkActive]="['active']">
-        <a [routerLink]="['/dashboard']">Dashboard</a>
+        <a routerLink="['/dashboard']">Dashboard</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/listview">List View</a>
+        <a routerLink="/list-view">List View</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/emptystate">Empty State</a>
+        <a routerLink="/empty-state">Empty State</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/tabview">Tab View</a>
+        <a routerLink="/tab-view">Tab View</a>
       </li>
-    </ul>
-  </div>
+    </ul><!-- /navbar links -->
+  </div><!-- /navbar body -->
 </nav>
