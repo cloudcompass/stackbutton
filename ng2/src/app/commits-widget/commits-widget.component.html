@@ -1,0 +1,51 @@
+
+<div class="col-xs-6 col-sm-4 col-md-4">
+
+  <div class="card-pf">
+
+    <div class="card-pf-heading">
+      <h2 class="card-pf-title" id="repoTitle">
+        Commits
+      </h2>
+    </div><!-- End Card Header -->
+
+    <div class="card-pf-body">
+      <!-- Arrow Buttons and Repo Name -->
+      <div style="display:flex; justify-content: space-between">
+        <button [disabled]="isLeftBtnDisabled()" type="button" class="btn btn-default" (click)="onLeftClick()">
+          <
+        </button>
+
+        <span>{{repoName ? repoName : "Null Name"}}</span>
+
+        <button [disabled]="isRightBtnDisabled()" type="button" class="btn btn-default" (click)="onRightClick()">
+          >
+        </button>
+      </div>
+
+      <!-- Commit Body -->
+      <div>
+        <!-- Author, avatar, and date -->
+        <div style="display:flex; padding-top: 1em;">
+          <img id="repoImg" style="height: 5em; width: 5em;" src="../../assets/logo-alt.svg">
+          <div>
+            <span id="commitValue">
+              Commit #
+            </span>
+            <br>
+            <b>By:
+              <span id="commitAuthor" style="color:dodgerblue">Joey Joe Joe</span>
+            </b>
+            <p id="commitDate">11/22/2016</p>
+          </div>
+        </div>
+
+        <!-- Commit Message -->
+        <div id="commitMessage">
+          Here's a commit message
+        </div>
+
+      </div><!-- End Commit Body -->
+    </div><!-- End Card Body -->
+  </div><!-- End Card -->
+</div>

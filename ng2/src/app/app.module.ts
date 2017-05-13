@@ -25,6 +25,8 @@ import { EmptystateComponent } from './emptystate/emptystate.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
 import { UtilizationBarComponent } from './utilization-bar/utilization-bar.component';
+import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
+import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
 
 @NgModule({
   imports: [
@@ -47,6 +49,10 @@ import { UtilizationBarComponent } from './utilization-bar/utilization-bar.compo
 
     // Temp Components
     StatusBoardComponent,
+
+    CommitWidgetComponent,
+
+    IssuesWidgetComponent,
   ],
   providers: [
     AuthGuard,

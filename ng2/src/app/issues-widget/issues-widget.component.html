@@ -1,0 +1,54 @@
+
+<div class="col-xs-6 col-sm-4 col-md-4">
+  <div class="card-pf">
+
+    <div class="card-pf-heading">
+      <div class="dropdown card-pf-time-frame-filter">
+        <button id="dropdownFilterName" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          Filter<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li *ngFor="let value of issueFilterValues" (click)="dropdownFilterSelect(value)"><a>{{value}}</a></li>
+        </ul>
+      </div>
+      <h2 class="card-pf-title" id="repoTitle">
+        Issues
+      </h2>
+    </div><!-- End Card Header -->
+
+
+    <div class="card-pf-body">
+      <!-- Arrow Buttons and Repo Name -->
+      <div style="display:flex; justify-content: space-between">
+        <button [disabled]="isLeftBtnDisabled()" type="button" class="btn btn-default" (click)="onLeftClick()">
+          <
+        </button>
+
+        <span class="md-caption">{{repoName ? repoName : "Repo Name"}}</span>
+
+        <button [disabled]="isRightBtnDisabled()" type="button" class="btn btn-default" (click)="onRightClick()">
+          >
+        </button>
+      </div>
+
+      <!-- Issues Body -->
+      <div>
+        <!-- Label Bar(s) and Issue Number/Title -->
+        <div  style="display:flex; padding-top: 1em;">
+          <div id="issueLabel" style="height: 3em; width: 0.4em; background-color:red">
+            <!-- Tooltip of issue label name -->
+          </div>
+          <div id="issueTitle" style="padding-top: 0.75em; padding-left: 0.5em;">
+            #42 - All bugs all the time
+          </div>
+        </div>
+
+        <!-- Issue Message -->
+        <div id="issueMessage" style="padding-top: 1em;">
+          Issue Message Here
+        </div>
+
+      </div><!-- End Issues Body -->
+    </div><!-- End Card Body -->
+  </div><!-- End Card -->
+</div>
