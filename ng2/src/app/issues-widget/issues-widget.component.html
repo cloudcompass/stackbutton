@@ -3,6 +3,14 @@
   <div class="card-pf">
 
     <div class="card-pf-heading">
+      <!-- Temp Filter Buttons -->
+      <button (click)="dropdownFilterSelect('All')">All</button>
+      <button (click)="dropdownFilterSelect('Bug')">Bugs</button>
+      <button (click)="dropdownFilterSelect('Help Wanted')">Help Wanted</button>
+      <button (click)="dropdownFilterSelect('Won\'t Fix')">Won't Fix</button>
+
+      <!-- Dropdown Menu that used to work -->
+      <!--
       <div class="dropdown card-pf-time-frame-filter">
         <button id="dropdownFilterName" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           Filter<span class="caret"></span>
@@ -11,6 +19,7 @@
           <li *ngFor="let value of issueFilterValues" (click)="dropdownFilterSelect(value)"><a>{{value}}</a></li>
         </ul>
       </div>
+      -->
       <h2 class="card-pf-title" id="repoTitle">
         Issues
       </h2>

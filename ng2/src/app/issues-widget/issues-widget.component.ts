@@ -14,6 +14,7 @@ export class IssuesWidgetComponent implements OnInit {
 
   private issues;
   private currentIssue;
+  private filteredIssues;
 
   private issueFilterValues: string[];
 
@@ -32,16 +33,16 @@ export class IssuesWidgetComponent implements OnInit {
       "help wanted":"green",
       "invalid":"beige",
       "question":"purple",
-      "Wontfix":"white"
+      "wontfix":"white"
     };
     this.issueFilterValues = [
       "All",
-      "Bugs",
-      "Duplicates",
-      "Enhancements",
+      "Bug",
+      "Duplicate",
+      "Enhancement",
       "Help Wanted",
       "Invalid",
-      "Questions",
+      "Question",
       "Won't Fix"
     ];
 
@@ -86,7 +87,7 @@ export class IssuesWidgetComponent implements OnInit {
    * Update the issue HTML display elements with the currently selected issue
    */
   updateIssueInfo() {
-    this.currentIssue = this.issues[this.issueIndex];
+    this.currentIssue = this.filteredIssues[this.issueIndex];
 
     document.getElementById('issueLabel').style.background = this.githubIssueColors[this.currentIssue.issueLabel];
     document.getElementById('issueTitle').innerText = this.currentIssue.issueNumber + " Issue Title";
@@ -105,9 +106,39 @@ export class IssuesWidgetComponent implements OnInit {
     // Ensure that filerVal exists within the defined filter array
     if (this.issueFilterValues.indexOf(filterVal) > -1) {
       // Update the dropdownFilterName text
-      document.getElementById('dropdownFilterName').innerHTML = filterVal + '<span class="caret">';
+
+      // TODO: Re-add this once drop-down menu works again
+      // document.getElementById('dropdownFilterName').innerHTML = filterVal + '<span class="caret">';
 
       // TODO: Actually filter issues based on selection
+
+      this.filteredIssues = [];
+      this.issueIndex = 0;
+
+      if (filterVal == "All") {
+        this.filteredIssues = this.issues;
+        this.issuesCount = this.filteredIssues.length;
+        this.updateIssueInfo();
+      }
+      else {
+        for (let issue of this.issues) {
+          if (issue.issueLabel == filterVal.toLowerCase()) {
+            console.log("Found filtered issue");
+            this.filteredIssues.push(issue);
+            console.log(this.filteredIssues);
+          }
+        }
+        if (this.filteredIssues.length > 0) {
+          this.issuesCount = this.filteredIssues.length;
+          this.updateIssueInfo();
+        }
+        else {
+          this.issuesCount = 0;
+          document.getElementById('issueLabel').style.background = "white";
+          document.getElementById('issueTitle').innerText =  "No Issues Found!";
+          document.getElementById('issueMessage').innerText = "";
+        }
+      }
     }
   }
 
@@ -141,8 +172,21 @@ export class IssuesWidgetComponent implements OnInit {
         issueBody: "Description of an enhancement",
         issueLabel: "enhancement"
         // issueLabels: [{name: 'label name', color:'F24F5E'}]
+      },
+      {
+        issueNumber: 43,
+        issueBody: "Description of another bug!",
+        issueLabel: "bug"
+        // issueLabels: [{name: 'label name', color:'F24F5E'}]
+      },
+      {
+        issueNumber: 44,
+        issueBody: "Persistent bug!",
+        issueLabel: "bug"
+        // issueLabels: [{name: 'label name', color:'F24F5E'}]
       }
     ]
+    this.filteredIssues = this.issues;
     this.issuesCount = this.issues.length;
   }
 }
