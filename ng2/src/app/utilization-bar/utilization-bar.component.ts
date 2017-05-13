@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as c3 from 'c3';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-utilization-bar',
@@ -165,6 +166,7 @@ constructor() {
     };
     const chart6 = c3.generate(sparklineChartConfig);
   }
+
 
   matchHeight() {
     // matchHeight the contents of each .card-pf and then the .card-pf itself
