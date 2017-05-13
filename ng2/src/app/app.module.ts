@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -15,16 +15,22 @@ import { AlertComponent } from './_directives/alert.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
+
+// TODO: ensure all of these are still used
 import { UserService } from './_services/user.service';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
-import { EmptystateComponent } from './emptystate/emptystate.component';
+import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
 import { UtilizationBarComponent } from './utilization-bar/utilization-bar.component';
+
+import { ListViewComponent} from './list-view/list-view.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { TabViewComponent } from './tab-view/tab-view.component';
 import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
 import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
 
@@ -43,15 +49,14 @@ import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
     RegistrationComponent,
     DashboardComponent,
     HorizontalNavigationComponent,
-    EmptystateComponent,
+    EmptyStateComponent,
     TrendCardComponent,
     UtilizationBarComponent,
-
-    // Temp Components
+    ListViewComponent,
     StatusBoardComponent,
-
+    ToolbarComponent,
+    TabViewComponent,
     CommitWidgetComponent,
-
     IssuesWidgetComponent,
   ],
   providers: [
@@ -65,7 +70,9 @@ import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
     MockBackend,
     BaseRequestOptions
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // for patternfly workaround
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 
 export class AppModule { }

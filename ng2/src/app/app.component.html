@@ -1,18 +1,8 @@
-<!-- main app container -->
-
-
-<!--This view is for an empty version of SB-->
-<!--<app-horizontal-navigation></app-horizontal-navigation>-->
-<!--<app-emptystate></app-emptystate>-->
-
-
-<!--This view is to represent the application viewing the dashboard.-->
-<!--<app-horizontal-navigation></app-horizontal-navigation>-->
-<!--<app-dashboard></app-dashboard>-->
+<!--Navigation is at the top of every page unless the user is redirected to the login page.-->
+<app-horizontal-navigation></app-horizontal-navigation>
 
 <!--The status board is the place for all the cards. I didn't call it dashboard because the prototype is less obstructed.-->
+<!-- TODO: This is not a router outlet because it is easier to test components directly change for deployment-->
 <!--<app-status-board></app-status-board>-->
 
-
-<!-- To be active when page routing is wanted -->
 <router-outlet></router-outlet>
