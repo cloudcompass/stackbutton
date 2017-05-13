@@ -32,6 +32,8 @@ import { TabViewComponent } from './tab-view/tab-view.component';
 import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
 import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
 
+import * as $ from 'jquery';
+
 @NgModule({
   imports: [
     BrowserModule,
