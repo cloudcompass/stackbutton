@@ -31,6 +31,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
 import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
 import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
+import { GithubService } from './_services/github.service';
 
 import * as $ from 'jquery';
 
@@ -66,7 +67,10 @@ import * as $ from 'jquery';
     // Used to create fake backend, to be removed
     fakeBackendProvider,
     MockBackend,
-    BaseRequestOptions
+    BaseRequestOptions,
+
+    // Testing
+    GithubService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
