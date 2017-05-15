@@ -170,7 +170,7 @@ export class IssuesWidgetComponent implements OnInit {
           this.issuesCount = 0;
           this.issueLabelColor = "white";
           this.issueTitle = "No Issues Found!";
-          this.issueMessage = "";
+          this.issueMessage = " ";
         }
       }
     }
