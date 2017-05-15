@@ -184,7 +184,7 @@ export class IssuesWidgetComponent implements OnInit {
     this.repoName = "Sample Repo";
 
     // Clear then repopulate issues
-    // TODO: getCommitsSlowly is temporary for testing, to be replaced with getCommits
+    // TODO: getIssuesSlowly is temporary for testing, to be replaced with getIssues
     this.githubService.getIssuesSlowly()
       .then(issues => {
         console.log("Github commits fetch success");

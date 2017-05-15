@@ -38,15 +38,15 @@
             </b>
             <br>
             <b>By:
-              <span style="color:dodgerblue">{{commitAuthor}}</span>
+              <span style="color:dodgerblue">{{commitAuthor ? commitAuthor : "Author Name"}}</span>
             </b>
-            <p id="commitDate">{{commitDate}}</p>
+            <p id="commitDate">{{commitDate ? commitDate : "Invalid Date"}}</p>
           </div>
         </div>
 
         <!-- Commit Message -->
         <div *ngIf="!loadingCommits" id="commitMessage">
-          {{commitMessage}}
+          {{commitMessage ? commitDate : "Commit Message"}}
         </div>
 
       </div><!-- End Commit Body -->

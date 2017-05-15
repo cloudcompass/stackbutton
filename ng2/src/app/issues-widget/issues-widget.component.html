@@ -51,13 +51,13 @@
             <!-- Tooltip of issue label name -->
           </div>
           <div *ngIf="!loadingIssues" style="padding-top: 0.75em; padding-left: 0.5em;">
-            {{issueTitle}}
+            {{issueTitle ? issueTitle : "Issue Title"}}
           </div>
         </div>
 
         <!-- Issue Message -->
         <div *ngIf="!loadingIssues" style="padding-top: 1em;">
-          {{issueMessage}}
+          {{issueMessage ? issueMessage : "Issue Message"}}
         </div>
       </div><!-- End Issues Body -->
     </div><!-- End Card Body -->
