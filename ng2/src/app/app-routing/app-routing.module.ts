@@ -20,7 +20,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'empty-state', component: EmptyStateComponent},
   { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] }, // Temporary
+  { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
 
   // TODO
   { path: 'tab-view', component: TabViewComponent},
