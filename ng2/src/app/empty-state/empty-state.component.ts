@@ -10,7 +10,9 @@ export class EmptyStateComponent implements OnInit {
 
   @ViewChild('pfTooltip') pfTooltip: ElementRef;
 
-  tooltipText = 'Opens the Status Board';
+  // TODO: this tooltip doesn't work. It may be missing a required library or dependency. IDK.
+  tooltipText = '';
+
 
   constructor(private _router: Router) { }
 
