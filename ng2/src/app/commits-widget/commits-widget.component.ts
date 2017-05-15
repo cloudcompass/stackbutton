@@ -20,6 +20,12 @@ export class CommitWidgetComponent implements OnInit {
   private commitsCount: number;
   private commitIndex: number; // Tracker for commit currently shown
 
+  private commitAuthor: string;
+  private commitDate: string;
+  private commitMessage: string;
+  private commitSha: string; // Temp?
+  private avatarUrl: string;
+
   constructor(private githubService: GithubService) {
     this.commits = [];
     this.commitsCount = 0;
@@ -28,6 +34,12 @@ export class CommitWidgetComponent implements OnInit {
     this.loadingCommits = true;
     this.leftButtonDisabled = true;
     this.rightButtonDisabled = true;
+
+    this.commitAuthor = "Author";
+    this.commitDate = "01/01/2001";
+    this.commitMessage = "Message";
+    this.commitSha = "1a2b3c4d";
+    // this.avatarUrl = "";
   }
 
   ngOnInit() {
@@ -73,13 +85,15 @@ export class CommitWidgetComponent implements OnInit {
     // Grab the current commit
     this.currentCommit = this.commits[this.commitIndex].commit;
 
-    // Update HTML elements with the commit information
-    document.getElementById('commitAuthor').innerText = this.currentCommit.committer.name;
-    document.getElementById('commitMessage').innerText = this.currentCommit.message;
-    document.getElementById('commitSha').innerText = this.currentCommit.sha;
+    // Update the commit information
+    this.commitAuthor = this.currentCommit.committer.name;
+    this.commitMessage = this.currentCommit.message;
+    this.commitSha = this.currentCommit.sha;
 
     let commitDate = new Date(this.currentCommit.committer.date);
-    document.getElementById('commitDate').innerText = commitDate.toLocaleString();
+    this.commitDate = commitDate.toLocaleString();
+
+    // this.avatarUrl = this.currentCommit.committer.avatar_url;
   }
 
   /**
@@ -105,6 +119,7 @@ export class CommitWidgetComponent implements OnInit {
         this.loadingCommits = false;
         this.commitIndex = 0;
         this.commitsCount = this.commits.length;
+
         // Enable the right button if there's more than one commit
         if (this.commitsCount > 0) this.rightButtonDisabled = false;
 

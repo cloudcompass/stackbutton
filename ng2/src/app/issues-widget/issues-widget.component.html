@@ -25,17 +25,16 @@
       </h2>
     </div><!-- End Card Header -->
 
-
     <div class="card-pf-body">
       <!-- Arrow Buttons and Repo Name -->
       <div style="display:flex; justify-content: space-between">
-        <button [disabled]="isLeftBtnDisabled()" type="button" class="btn btn-default" (click)="onLeftClick()">
+        <button [disabled]="leftButtonDisabled" type="button" class="btn btn-default" (click)="onLeftClick()">
           <
         </button>
 
         <span class="md-caption">{{repoName ? repoName : "Repo Name"}}</span>
 
-        <button [disabled]="isRightBtnDisabled()" type="button" class="btn btn-default" (click)="onRightClick()">
+        <button [disabled]="rightButtonDisabled" type="button" class="btn btn-default" (click)="onRightClick()">
           >
         </button>
       </div>
@@ -43,20 +42,23 @@
       <!-- Issues Body -->
       <div>
         <!-- Label Bar(s) and Issue Number/Title -->
-        <div  style="display:flex; padding-top: 1em;">
-          <div id="issueLabel" style="height: 3em; width: 0.4em; background-color:red">
+        <!-- Display a loading icon while getting issues, then display issue content -->
+        <div *ngIf="loadingIssues" style="display: flex; justify-content: center;">
+          <img style="align-items: center; height: 3em; width: 3em; align-self: center;" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+        <div *ngIf="!loadingIssues" style="display:flex; padding-top: 1em;">
+          <div id="issueLabel" style="height: 3em; width: 0.4em;" [style.background]="issueLabelColor">
             <!-- Tooltip of issue label name -->
           </div>
-          <div id="issueTitle" style="padding-top: 0.75em; padding-left: 0.5em;">
-            #42 - All bugs all the time
+          <div *ngIf="!loadingIssues" style="padding-top: 0.75em; padding-left: 0.5em;">
+            {{issueTitle}}
           </div>
         </div>
 
         <!-- Issue Message -->
-        <div id="issueMessage" style="padding-top: 1em;">
-          Issue Message Here
+        <div *ngIf="!loadingIssues" style="padding-top: 1em;">
+          {{issueMessage}}
         </div>
-
       </div><!-- End Issues Body -->
     </div><!-- End Card Body -->
   </div><!-- End Card -->

@@ -9,11 +9,11 @@ export const GITHUBCOMMITS : GithubCommit[] = [
     commit: {
       author: {
         name: "Alfred Alfredo",
-        date: "2001-01-01T17:11:50Z"
+        date: "2001-01-01T16:00:49Z"
       },
       committer: {
         name: "Alfred Alfredo",
-        date: "2001-01-01T17:11:50Z"
+        date: "2001-01-01T17:11:42Z"
       },
       message: "Fixed all the bugs",
       comment_count: 0,
@@ -73,11 +73,11 @@ export const GITHUBCOMMITS : GithubCommit[] = [
     commit: {
       author: {
         name: "Cheryl Cornwall",
-        date: "2003-03-03T09:15:00Z"
+        date: "2003-03-03T16:00:49Z"
       },
       committer: {
         name: "Cheryl Cornwall",
-        date: "2003-03-03T09:15:00Z"
+        date: "2003-03-03T16:00:49Z"
       },
       message: "All work and no play makes Jack a dull boy " +
       "All work and no play makes Jack a dull boy " +

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GithubService } from '../_services/github.service';
+
 @Component({
   selector: 'app-issues-widget',
   templateUrl: './issues-widget.component.html',
@@ -8,22 +10,44 @@ import { Component, OnInit } from '@angular/core';
 export class IssuesWidgetComponent implements OnInit {
 
 
-  private issueIndex: number;
-  private issuesCount: number;
+
   private repoName: string;
+
+  private loadingIssues: boolean;
+  private rightButtonDisabled: boolean;
+  private leftButtonDisabled: boolean;
 
   private issues;
   private currentIssue;
   private filteredIssues;
+  private issueIndex: number;
+  private issuesCount: number;
 
   private issueFilterValues: string[];
 
   private githubIssueColors: {[id: string]: string};
 
+  private issueLabelColor: string;
+  private issueTitle: string;
+  private issueMessage: string;
 
-  constructor() {
+
+
+  constructor(private githubService: GithubService) {
+    this.repoName = "Sample Repo";
+
+    this.issues = [];
+    this.filteredIssues = [];
     this.issuesCount = 0;
     this.issueIndex = 0;
+
+    this.loadingIssues = true;
+    this.leftButtonDisabled = true;
+    this.rightButtonDisabled = true;
+
+    this.issueLabelColor = "white";
+    this.issueTitle = "Issue Title";
+    this.issueMessage = "Default Message";
 
     // TODO: Move these to appropriate classes
     this.githubIssueColors = {
@@ -48,39 +72,40 @@ export class IssuesWidgetComponent implements OnInit {
 
   }
 
-  ngOnInit() { }
-
-  ngAfterViewInit() {
+  ngOnInit() {
     this.loadSampleData();
-    this.updateIssueInfo();
   }
 
+  ngAfterViewInit() { }
+
   /**
-   * Increment the issueIndex if possible, then update the displayed issue information
+   * Increment the commitIndex if possible, then update buttons and the displayed commit information
    */
   onRightClick() {
     if (this.issueIndex < this.issuesCount) {
       this.issueIndex++;
+
+      // Update button capabilities
+      if (this.issueIndex == this.issuesCount - 1) this.rightButtonDisabled = true;
+      if (this.issueIndex > 0) this.leftButtonDisabled = false;
+
       this.updateIssueInfo();
     }
   }
 
   /**
-   * Decrement the issueIndex if possible, then update the displayed issue information
+   * Decrement the commitIndex if possible, then update buttons and the displayed commit information
    */
   onLeftClick() {
     if (this.issueIndex > 0) {
       this.issueIndex--;
+
+      // Update button capabilities
+      if (this.issueIndex < this.issuesCount) this.rightButtonDisabled = false;
+      if (this.issueIndex == 0) this.leftButtonDisabled = true;
+
       this.updateIssueInfo();
     }
-  }
-
-  isLeftBtnDisabled() {
-    return this.issueIndex <= 0;
-  }
-
-  isRightBtnDisabled() {
-    return this.issueIndex >= this.issuesCount - 1;
   }
 
   /**
@@ -89,19 +114,21 @@ export class IssuesWidgetComponent implements OnInit {
   updateIssueInfo() {
     this.currentIssue = this.filteredIssues[this.issueIndex];
 
-    document.getElementById('issueLabel').style.background = this.githubIssueColors[this.currentIssue.issueLabel];
-    document.getElementById('issueTitle').innerText = this.currentIssue.issueNumber + " Issue Title";
-    document.getElementById('issueMessage').innerText = this.currentIssue.issueBody;
+    this.issueLabelColor = this.githubIssueColors[this.currentIssue.issueLabel];
+    this.issueTitle = "#" + this.currentIssue.issueNumber + " Issue Title";
+    this.issueMessage = this.currentIssue.issueBody;
   }
 
   /**
    * Filter existing issues according to the supplied value
    *
-   *
    * @param filterVal The filter to apply
    */
   dropdownFilterSelect(filterVal: string) {
-    console.log(filterVal);
+    console.log("Filter: " + filterVal);
+
+    // Disable buttons
+    this.leftButtonDisabled = this.rightButtonDisabled = true;
 
     // Ensure that filerVal exists within the defined filter array
     if (this.issueFilterValues.indexOf(filterVal) > -1) {
@@ -110,17 +137,20 @@ export class IssuesWidgetComponent implements OnInit {
       // TODO: Re-add this once drop-down menu works again
       // document.getElementById('dropdownFilterName').innerHTML = filterVal + '<span class="caret">';
 
-      // TODO: Actually filter issues based on selection
-
+      // Clear then repopulate filteredIssues
       this.filteredIssues = [];
       this.issueIndex = 0;
 
+      // If all is supplied, set filteredIssues to all issues
       if (filterVal == "All") {
+        this.issueIndex = 0;
         this.filteredIssues = this.issues;
         this.issuesCount = this.filteredIssues.length;
+        if (this.issuesCount > 1) this.rightButtonDisabled = false;
         this.updateIssueInfo();
       }
       else {
+        // Iterate issues, compare their issueLabel with the supplied value, and build filteredIssues
         for (let issue of this.issues) {
           if (issue.issueLabel == filterVal.toLowerCase()) {
             console.log("Found filtered issue");
@@ -128,15 +158,19 @@ export class IssuesWidgetComponent implements OnInit {
             console.log(this.filteredIssues);
           }
         }
+
+        // If filtered issues were found, display them, otherwise display "none found"
         if (this.filteredIssues.length > 0) {
+          this.issueIndex = 0;
           this.issuesCount = this.filteredIssues.length;
+          if (this.issuesCount > 1) this.rightButtonDisabled = false;
           this.updateIssueInfo();
         }
         else {
           this.issuesCount = 0;
-          document.getElementById('issueLabel').style.background = "white";
-          document.getElementById('issueTitle').innerText =  "No Issues Found!";
-          document.getElementById('issueMessage').innerText = "";
+          this.issueLabelColor = "white";
+          this.issueTitle = "No Issues Found!";
+          this.issueMessage = "";
         }
       }
     }
@@ -148,45 +182,30 @@ export class IssuesWidgetComponent implements OnInit {
   loadSampleData() {
     // Sample Data
     this.repoName = "Sample Repo";
-    this.issues = [
-      {
-        issueNumber: 42,
-        issueBody: "Description of a bug!",
-        issueLabel: "bug"
-        // issueLabels: [{name: 'label name', color:'F24F5E'}]
-      },
-      {
-        issueNumber: 51,
-        issueBody: "Description of a question",
-        issueLabel: "question"
-        // issueLabels: [{name: 'label name', color:'F24F5E'}]
-      },
-      {
-        issueNumber: 60,
-        issueBody: "Description of a help wanted",
-        issueLabel: "help wanted"
-        // issueLabels: [{name: 'label name', color:'F24F5E'}]
-      },
-      {
-        issueNumber: 69,
-        issueBody: "Description of an enhancement",
-        issueLabel: "enhancement"
-        // issueLabels: [{name: 'label name', color:'F24F5E'}]
-      },
-      {
-        issueNumber: 43,
-        issueBody: "Description of another bug!",
-        issueLabel: "bug"
-        // issueLabels: [{name: 'label name', color:'F24F5E'}]
-      },
-      {
-        issueNumber: 44,
-        issueBody: "Persistent bug!",
-        issueLabel: "bug"
-        // issueLabels: [{name: 'label name', color:'F24F5E'}]
-      }
-    ]
-    this.filteredIssues = this.issues;
-    this.issuesCount = this.issues.length;
+
+    // Clear then repopulate issues
+    // TODO: getCommitsSlowly is temporary for testing, to be replaced with getCommits
+    this.githubService.getIssuesSlowly()
+      .then(issues => {
+        console.log("Github commits fetch success");
+
+        // Default filteredIssues to all issues
+        this.issues = issues;
+        this.filteredIssues = this.issues;
+
+        // Setup some vars TODO: Move this to appropriate spot
+        this.loadingIssues = false;
+        this.issueIndex = 0;
+        this.issuesCount = this.issues.length;
+
+        // Enable the right button if there's more than one commit
+        if (this.issuesCount > 0) this.rightButtonDisabled = false;
+
+        this.updateIssueInfo();
+      })
+      .catch(error => {
+        console.error("Error fetching github commits: " + error);
+        // TODO: Display en error of sorts to the user
+      });
   }
 }

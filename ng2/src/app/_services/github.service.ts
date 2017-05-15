@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { GithubCommit } from '../_models/GithubCommit';
+import { GithubIssue } from '../_models/githubIssue';
+
 import { GITHUBCOMMITS } from '../sample-github-commits';
+import { GITHUBISSUES } from '../sample-github-issues';
 
 @Injectable()
 export class GithubService {
@@ -15,6 +18,16 @@ export class GithubService {
   getCommitsSample(): GithubCommit[] {
     return GITHUBCOMMITS;
   }
+
+  getIssues(): Promise<GithubIssue[]> {
+    return Promise.resolve(GITHUBISSUES);
+  }
+
+  getIssuesSample(): GithubIssue[] {
+    return GITHUBISSUES;
+  }
+
+
 
   /**
    * Temporary function for testing
@@ -32,6 +45,25 @@ export class GithubService {
    * @returns {Promise<never>}
    */
   getCommitsFail() :Promise<GithubCommit[]> {
+    return Promise.reject("Cannot connect to network");
+  }
+
+  /**
+   * Temporary function for testing
+   * @returns {Promise<T>}
+   */
+  getIssuesSlowly(): Promise<GithubIssue[]> {
+    return new Promise(resolve => {
+      // Simulate server latency with 4 second delay
+      setTimeout(() => resolve(GITHUBISSUES), 4000);
+    });
+  }
+
+  /**
+   * Temporary function for testing
+   * @returns {Promise<never>}
+   */
+  getIssuesFail() :Promise<GithubIssue[]> {
     return Promise.reject("Cannot connect to network");
   }
 
