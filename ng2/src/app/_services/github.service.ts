@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { GithubCommit } from '../_models/GithubCommit';
+import { GithubCommit } from '../_models/githubCommit';
 import { GithubIssue } from '../_models/githubIssue';
 
 import { GITHUBCOMMITS } from '../sample-github-commits';
@@ -44,8 +44,8 @@ export class GithubService {
    * Temporary function for testing
    * @returns {Promise<never>}
    */
-  getCommitsFail() :Promise<GithubCommit[]> {
-    return Promise.reject("Cannot connect to network");
+  getCommitsFail(): Promise<GithubCommit[]> {
+    return Promise.reject('Cannot connect to network');
   }
 
   /**
@@ -63,8 +63,8 @@ export class GithubService {
    * Temporary function for testing
    * @returns {Promise<never>}
    */
-  getIssuesFail() :Promise<GithubIssue[]> {
-    return Promise.reject("Cannot connect to network");
+  getIssuesFail(): Promise<GithubIssue[]> {
+    return Promise.reject('Cannot connect to network');
   }
 
 }
