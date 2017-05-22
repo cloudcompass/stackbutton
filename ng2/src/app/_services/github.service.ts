@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 import { GithubCommit } from '../_models/githubCommit';
+
 import { GithubIssue } from '../_models/githubIssue';
+import { GITHUBISSUES } from '../sample-data/sample-github-issues';
+
 import { GithubUser } from '../_models/githubUser';
 
 import { GITHUBCOMMITS } from '../sample-data/sample-github-commits';
-import { GITHUBISSUES } from '../sample-data/sample-github-issues';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';

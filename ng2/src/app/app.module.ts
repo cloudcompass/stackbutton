@@ -35,6 +35,7 @@ import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
 // Services
 import { GithubService } from './_services/github.service';
 import { GithubUserService } from './_services/github-user.service';
+import { GithubIssuesService } from './_services/github-issues.service';
 
 import * as $ from 'jquery';
 
@@ -72,9 +73,10 @@ import * as $ from 'jquery';
     MockBackend,
     BaseRequestOptions,
 
-    // Testing
+    // Github Services
     GithubService,
-    GithubUserService
+    GithubUserService,
+    GithubIssuesService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -31,7 +31,11 @@ githubUserService.getUser('Username').subscribe(
 @Injectable()
 export class GithubUserService {
 
-  constructor(private http: Http) { }
+  private githubUserUrl: string;
+
+  constructor(private http: Http) {
+    this.githubUserUrl = 'https://api.github.com/users/';
+  }
 
   /**
    * Get a GithubUser from GitHub using the supplied username
@@ -44,7 +48,7 @@ export class GithubUserService {
       return Observable.throw('Invalid Github username supplied: ' + username);
     }
 
-    return this.http.get('https://api.github.com/users/' + username)
+    return this.http.get(this.githubUserUrl + username)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Github Server Error'));
   }
@@ -61,7 +65,7 @@ export class GithubUserService {
   /**
    * For testing: get local sample githubUser, with a 2 second delay
    *
-   * @returns {any} Sample githubUser
+   * @returns {any} Sample GithubUser
    */
   getUserSampleSlowly(): Observable<GithubUser> {
     return Observable.of(GITHUBUSER).delay(2000);
