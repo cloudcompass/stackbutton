@@ -31,7 +31,10 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
 import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
 import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
+
+// Services
 import { GithubService } from './_services/github.service';
+import { GithubUserService } from './_services/github-user.service';
 
 import * as $ from 'jquery';
 
@@ -70,7 +73,8 @@ import * as $ from 'jquery';
     BaseRequestOptions,
 
     // Testing
-    GithubService
+    GithubService,
+    GithubUserService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

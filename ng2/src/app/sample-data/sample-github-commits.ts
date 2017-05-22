@@ -1,7 +1,7 @@
 /**
  * Created by Garmonz on 2017-05-14.
  */
-import { GithubCommit } from './_models/githubCommit';
+import { GithubCommit } from '../_models/githubCommit';
 
 export const GITHUBCOMMITS: GithubCommit[] = [
   // First sample commit
