@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -31,10 +31,39 @@ import { GITHUBISSUES } from '../sample-data/sample-github-issues';
 @Injectable()
 export class GithubIssuesService {
 
-  constructor(private http: Http) { }
+  private githubIssuesUrl: string;
+
+  constructor(private http: Http) {
+    console.log('git issues constr');
+
+    this.githubIssuesUrl = 'https://api.github.com/repos/C3ICapstone/stackbutton/issues';
+
+    this.getIssues().subscribe(
+      res => {
+        console.log('got issues: ' + res.length);
+        console.log(JSON.stringify(res));
+        console.log(res[0].body);
+      },
+      error => {
+        console.log('got issues error');
+        console.log(error);
+      }
+    );
+  }
 
   getIssues(): Observable<GithubIssue[]> {
-    return;
+
+    /*
+    const authToken = '';
+    const headers = new Headers({ 'Accept': 'application/json' });
+    headers.append('Authorization', 'token ' + authToken);
+    console.log(headers);
+    const options = new RequestOptions({headers: headers});
+    */
+
+    return this.http.get(this.githubIssuesUrl)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Github Server Error'));
   }
 
   /**

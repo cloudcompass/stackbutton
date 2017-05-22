@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -49,6 +49,17 @@ export class GithubUserService {
     }
 
     return this.http.get(this.githubUserUrl + username)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Github Server Error'));
+  }
+
+  getPrivateUser(): Observable<GithubUser> {
+    const authToken = '';
+    const headers = new Headers({ 'Accept': 'application/json' });
+    headers.append('Authorization', 'token ' + authToken);
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.get('https://api.github.com/user', options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Github Server Error'));
   }
