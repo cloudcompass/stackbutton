@@ -38,8 +38,6 @@ export class GithubIssuesService {
   private githubAPIUrl: string;
 
   constructor(private http: Http) {
-    console.log('git issues constr');
-
     this.githubAPIUrl = 'https://api.github.com/';
   }
 

@@ -29,14 +29,6 @@ export class GithubService {
     return GITHUBCOMMITS;
   }
 
-  getIssues(): Promise<GithubIssue[]> {
-    return Promise.resolve(GITHUBISSUES);
-  }
-
-  getIssuesSample(): GithubIssue[] {
-    return GITHUBISSUES;
-  }
-
   /**
    * Temporary function for testing
    * @returns {Promise<T>}

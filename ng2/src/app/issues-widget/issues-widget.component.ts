@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GithubService } from '../_services/github.service';
+import { GithubIssuesService } from '../_services/github-issues.service';
 
 @Component({
   selector: 'app-issues-widget',
@@ -8,7 +8,6 @@ import { GithubService } from '../_services/github.service';
   styleUrls: ['./issues-widget.component.css']
 })
 export class IssuesWidgetComponent implements OnInit {
-
 
   private loadingIssues: boolean;
   private rightButtonDisabled: boolean;
@@ -21,6 +20,7 @@ export class IssuesWidgetComponent implements OnInit {
   private issueIndex: number;
   private issuesCount: number;
 
+  private issueFilterName: string;
   private issueFilterValues: string[];
 
   private githubIssueColors: {[id: string]: string};
@@ -29,7 +29,7 @@ export class IssuesWidgetComponent implements OnInit {
   private issueTitle: string;
   private issueMessage: string;
 
-  constructor(private githubService: GithubService) {
+  constructor(private githubIssuesService: GithubIssuesService) {
     this.repoName = 'Sample Repo';
 
     this.issues = [];
@@ -44,6 +44,7 @@ export class IssuesWidgetComponent implements OnInit {
     this.issueLabelColor = 'white';
     this.issueTitle = 'Issue Title';
     this.issueMessage = 'Default Message';
+    this.issueFilterName = 'All';
 
     // TODO: Move these to appropriate classes
     this.githubIssueColors = {
@@ -65,7 +66,6 @@ export class IssuesWidgetComponent implements OnInit {
       'Question',
       'Won\'t Fix'
     ];
-
   }
 
   ngOnInit() {
@@ -111,7 +111,7 @@ export class IssuesWidgetComponent implements OnInit {
     this.currentIssue = this.filteredIssues[this.issueIndex];
 
     this.issueLabelColor = this.githubIssueColors[this.currentIssue.issueLabel];
-    this.issueTitle = '#' + this.currentIssue.number + ' Issue Title';
+    this.issueTitle = '#' + this.currentIssue.number + ' ' + this.currentIssue.title;
     this.issueMessage = this.currentIssue.body;
   }
 
@@ -136,6 +136,7 @@ export class IssuesWidgetComponent implements OnInit {
       // Clear then repopulate filteredIssues
       this.filteredIssues = [];
       this.issueIndex = 0;
+      this.issueFilterName = filterVal;
 
       // If all is supplied, set filteredIssues to all issues
       if (filterVal === 'All') {
@@ -149,7 +150,6 @@ export class IssuesWidgetComponent implements OnInit {
         // Iterate issues, compare their issueLabel with the supplied value, and build filteredIssues
         for (const issue of this.issues) {
           if (issue.issueLabel === filterVal.toLowerCase()) {
-            console.log('Found filtered issue');
             this.filteredIssues.push(issue);
             console.log(this.filteredIssues);
           }
@@ -159,7 +159,10 @@ export class IssuesWidgetComponent implements OnInit {
         if (this.filteredIssues.length > 0) {
           this.issueIndex = 0;
           this.issuesCount = this.filteredIssues.length;
+
+          // If there's more than one issue, enable the right button
           if (this.issuesCount > 1) this.rightButtonDisabled = false;
+
           this.updateIssueInfo();
         }
         else {
@@ -181,9 +184,9 @@ export class IssuesWidgetComponent implements OnInit {
 
     // Clear then repopulate issues
     // TODO: getIssuesSlowly is temporary for testing, to be replaced with getIssues
-    this.githubService.getIssuesSlowly()
-      .then(issues => {
-        console.log('Github commits fetch success');
+    this.githubIssuesService.getIssuesSampleSlowly().subscribe(
+      issues => {
+        console.log('Github issues fetch success');
 
         // Default filteredIssues to all issues
         this.issues = issues;
@@ -198,8 +201,8 @@ export class IssuesWidgetComponent implements OnInit {
         if (this.issuesCount > 0) this.rightButtonDisabled = false;
 
         this.updateIssueInfo();
-      })
-      .catch(error => {
+      },
+      error => {
         console.error('Error fetching github commits: ' + error);
         // TODO: Display en error of sorts to the user
       });
