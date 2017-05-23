@@ -21,7 +21,7 @@ export class DefaultPageComponent implements OnInit {
       // If the logged in user is new, send them to the getting-started page, otherwise go to the dashboard
       // TODO: isNewUser shouldn't be null
       if (this.currentUser.isNewUser === true || this.currentUser.isNewUser == null) {
-        
+
         // TODO: isNewUser should be set to false only when the user completes or skips the getting-started intro
         this.currentUser.isNewUser = false;
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
