@@ -21,6 +21,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
+import { GettingStartedComponent } from './getting-started/getting-started.component';
+import { DefaultPageComponent } from './default-page/default-page.component';
 
 // Actual components
 import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
@@ -63,6 +65,8 @@ import * as $ from 'jquery';
     TabViewComponent,
     CommitWidgetComponent,
     IssuesWidgetComponent,
+    GettingStartedComponent,
+    DefaultPageComponent,
   ],
   providers: [
     AuthGuard,
