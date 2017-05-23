@@ -34,6 +34,7 @@ import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
 import { GithubService } from './_services/github.service';
 
 import * as $ from 'jquery';
+import { SplashPageComponent } from './splash-page/splash-page.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import * as $ from 'jquery';
     TabViewComponent,
     CommitWidgetComponent,
     IssuesWidgetComponent,
+    SplashPageComponent,
   ],
   providers: [
     AuthGuard,
