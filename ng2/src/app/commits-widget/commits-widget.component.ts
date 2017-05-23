@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GithubService } from '../_services/github.service';
+import { GithubCommitsService } from '../_services/github-commits.service';
 
 @Component({
   selector: 'app-commit-widget',
@@ -26,7 +27,7 @@ export class CommitWidgetComponent implements OnInit {
   private commitSha: string; // Temp?
   private avatarUrl: string;
 
-  constructor(private githubService: GithubService) {
+  constructor(private githubCommitsService: GithubCommitsService) {
     this.commits = [];
     this.commitsCount = 0;
     this.commitIndex = 0;
@@ -35,10 +36,10 @@ export class CommitWidgetComponent implements OnInit {
     this.leftButtonDisabled = true;
     this.rightButtonDisabled = true;
 
-    this.commitAuthor = "Author";
-    this.commitDate = "01/01/2001";
-    this.commitMessage = "Message";
-    this.commitSha = "1a2b3c4d";
+    this.commitAuthor = 'Author';
+    this.commitDate = '01/01/2001';
+    this.commitMessage = 'Message';
+    this.commitSha = '1a2b3c4d';
     // this.avatarUrl = "";
   }
 
@@ -72,7 +73,7 @@ export class CommitWidgetComponent implements OnInit {
 
       // Update button capabilities
       if (this.commitIndex < this.commitsCount) this.rightButtonDisabled = false;
-      if (this.commitIndex == 0) this.leftButtonDisabled = true;
+      if (this.commitIndex === 0) this.leftButtonDisabled = true;
 
       this.updateCommitInfo();
     }
@@ -90,7 +91,7 @@ export class CommitWidgetComponent implements OnInit {
     this.commitMessage = this.currentCommit.message;
     this.commitSha = this.currentCommit.sha;
 
-    let commitDate = new Date(this.currentCommit.committer.date);
+    const commitDate = new Date(this.currentCommit.committer.date);
     this.commitDate = commitDate.toLocaleString();
 
     // this.avatarUrl = this.currentCommit.committer.avatar_url;
@@ -100,19 +101,19 @@ export class CommitWidgetComponent implements OnInit {
    * Populate commit widget with sample data
    */
   loadSampleData() {
-    console.log("Loading sample commit data");
+    console.log('Loading sample commit data');
 
     this.loadingCommits = true;
 
-    this.repoName = "Sample Repo";
+    this.repoName = 'Sample Repo';
 
     // Clear then repopulate commits
     this.commits = [];
 
     // TODO: getCommitsSlowly is temporary for testing, to be replaced with getCommits
-    this.githubService.getCommitsSlowly()
-      .then(commits => {
-        console.log("Github commits fetch success");
+    this.githubCommitsService.getCommitsSampleSlowly().subscribe(
+      commits => {
+        console.log('Github commits fetch success');
         this.commits = commits;
 
         // Setup some vars TODO: Move this to appropriate spot
@@ -124,9 +125,9 @@ export class CommitWidgetComponent implements OnInit {
         if (this.commitsCount > 0) this.rightButtonDisabled = false;
 
         this.updateCommitInfo();
-      })
-      .catch(error => {
-        console.error("Error fetching github commits: " + error);
+      },
+      error => {
+        console.error('Error fetching github commits: ' + error);
         // TODO: Display en error of sorts to the user
       });
   }

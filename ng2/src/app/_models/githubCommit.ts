@@ -2,7 +2,10 @@
  * Created by Garmonz on 2017-05-14.
  */
 export class GithubCommit {
-  commit : {
+  url: string;
+  sha: string;
+  html_url: string;
+  commit: {
     author: {
       name: string;
       date: string;
@@ -13,8 +16,6 @@ export class GithubCommit {
     };
     message: string;
     comment_count: number;
-    // temp
-    sha: string;
   };
   author: {
     login: string;
@@ -30,5 +31,5 @@ export class GithubCommit {
     additions: number;
     deletions: number;
     total: number;
-  }
+  };
 }

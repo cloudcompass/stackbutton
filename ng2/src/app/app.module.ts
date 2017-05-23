@@ -77,7 +77,8 @@ import * as $ from 'jquery';
     // Github Services
     GithubService,
     GithubUserService,
-    GithubIssuesService
+    GithubIssuesService,
+    GithubCommitsService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
