@@ -65,7 +65,7 @@ export class GithubUserService {
    */
   getUserPrivate(): Observable<GithubUser> {
     // Setup headers for authorized user get request
-    const authToken = '0e425ddfe838c88a0d473b0d07291cdad8ceb4d9'; // TODO - use getLocal('auth_token') to get the token
+    const authToken = ''; // TODO - use getLocal('auth_token') to get the token
     const headers = new Headers({ 'Accept': 'application/json' });
     headers.append('Authorization', 'token ' + authToken);
     const options = new RequestOptions({headers: headers});
