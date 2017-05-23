@@ -14,7 +14,7 @@ import { GITHUBUSER } from '../sample-data/sample-github-user';
 /*
 Example usage:
 
-githubUserService.getUser('Username').subscribe(
+githubUserService.getUserPublic('Username').subscribe(
   gitUser => {
     this.ghUser = gitUser;
     console.log(this.ghUser);
@@ -31,35 +31,50 @@ githubUserService.getUser('Username').subscribe(
 @Injectable()
 export class GithubUserService {
 
-  private githubUserUrl: string;
+  private githubAPIUrl: string;
 
   constructor(private http: Http) {
-    this.githubUserUrl = 'https://api.github.com/users/';
+    this.githubAPIUrl = 'https://api.github.com/';
   }
 
   /**
-   * Get a GithubUser from GitHub using the supplied username
+   * Get public GithubUser information using the supplied username
    *
    * @param username  The Github username to get
    * @returns {Observable<R|T>} A GitHubUser, if found
    */
-  getUser(username: string): Observable<GithubUser> {
+  getUserPublic(username: string): Observable<GithubUser> {
+    // Ensure param validity
     if (username == null || username === '') {
       return Observable.throw('Invalid Github username supplied: ' + username);
     }
 
-    return this.http.get(this.githubUserUrl + username)
+    // Build the get url based on supplied params, then make and return the request
+    const getUrl = this.githubAPIUrl + 'users/' + username;
+    console.log('getUserPublic getUrl: ' + getUrl);
+
+    return this.http.get(getUrl)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Github Server Error'));
   }
 
-  getPrivateUser(): Observable<GithubUser> {
-    const authToken = '';
+  /**
+   * Use the local Github OAUTH token to attempt to retrieve information of the authenticated user
+   *
+   * @returns {Observable<R|T>} A GitHubUser, if found
+   */
+  getUserPrivate(): Observable<GithubUser> {
+    // Setup headers for authorized user get request
+    const authToken = '0e425ddfe838c88a0d473b0d07291cdad8ceb4d9'; // TODO - use getLocal('auth_token') to get the token
     const headers = new Headers({ 'Accept': 'application/json' });
     headers.append('Authorization', 'token ' + authToken);
     const options = new RequestOptions({headers: headers});
 
-    return this.http.get('https://api.github.com/user', options)
+    // Build the get url based on supplied params, then make and return the request
+    const getUrl = 'https://api.github.com/user';
+    console.log('getUserPrivate getUrl: ' + getUrl);
+
+    return this.http.get(getUrl, options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Github Server Error'));
   }
