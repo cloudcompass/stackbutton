@@ -35,6 +35,7 @@ import { GithubService } from './_services/github.service';
 
 import * as $ from 'jquery';
 import { SplashPageComponent } from './splash-page/splash-page.component';
+import { DownloadComponent } from './download/download.component';
 
 @NgModule({
   imports: [
@@ -60,6 +61,7 @@ import { SplashPageComponent } from './splash-page/splash-page.component';
     CommitWidgetComponent,
     IssuesWidgetComponent,
     SplashPageComponent,
+    DownloadComponent,
   ],
   providers: [
     AuthGuard,

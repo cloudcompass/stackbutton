@@ -9,6 +9,7 @@ import { StatusBoardComponent } from '../status-board/status-board.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { ListViewComponent } from '../list-view/list-view.component';
 import { TabViewComponent } from '../tab-view/tab-view.component';
+import {DownloadComponent} from '../download/download.component';
 
 const appRoutes: Routes = [
   // Default page. TODO: Replace with page that simply checks for login token and directs from there
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'empty-state', component: EmptyStateComponent},
   { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
+  { path: 'download', component: DownloadComponent},
 
   // TODO
   { path: 'tab-view', component: TabViewComponent},
