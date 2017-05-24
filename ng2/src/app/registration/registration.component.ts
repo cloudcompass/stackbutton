@@ -5,6 +5,7 @@ import { UserService } from '../_services/user.service';
 
 @Component({
   moduleId: module.id,
+  selector: 'app-registration-page',
   templateUrl: 'registration.component.html'
 })
 

@@ -7,9 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SplashPageComponent implements OnInit {
 
-  constructor() { }
+  private showSplash: boolean;
+  private showLogin: boolean;
+  private showRegistration: boolean;
+  constructor() {
+    this.showSplash = true;
+    this.showLogin = false;
+    this.showRegistration = false;
+  }
 
   ngOnInit() {
   }
 
+
+  loginClick() {
+    this.showSplash = false;
+    this.showLogin = true;
+    this.showRegistration = false;
+  }
+
+  registrationClick() {
+    this.showSplash = false;
+    this.showLogin = false;
+    this.showRegistration = true;
+  }
 }
