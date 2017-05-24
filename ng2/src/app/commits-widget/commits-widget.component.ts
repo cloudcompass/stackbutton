@@ -57,7 +57,7 @@ export class CommitWidgetComponent implements OnInit {
       this.commitIndex++;
 
       // Update button capabilities
-      if (this.commitIndex == this.commitsCount - 1) this.rightButtonDisabled = true;
+      if (this.commitIndex === this.commitsCount - 1) this.rightButtonDisabled = true;
       if (this.commitIndex > 0) this.leftButtonDisabled = false;
 
       this.updateCommitInfo();
