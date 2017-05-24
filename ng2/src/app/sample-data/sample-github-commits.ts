@@ -1,11 +1,14 @@
 /**
  * Created by Garmonz on 2017-05-14.
  */
-import { GithubCommit } from './_models/githubCommit';
+import { GithubCommit } from '../_models/githubCommit';
 
 export const GITHUBCOMMITS: GithubCommit[] = [
   // First sample commit
   {
+    url: '',
+    sha: 'f6cad4b',
+    html_url: '',
     commit: {
       author: {
         name: 'Alfred Alfredo',
@@ -16,9 +19,7 @@ export const GITHUBCOMMITS: GithubCommit[] = [
         date: '2001-01-01T17:11:42Z'
       },
       message: 'Fixed all the bugs',
-      comment_count: 0,
-      // Temp
-      sha: 'f6cad4b'
+      comment_count: 0
     },
     author: {
       login: 'octocat',
@@ -38,6 +39,9 @@ export const GITHUBCOMMITS: GithubCommit[] = [
   },
   // Second sample commit
   {
+    url: '',
+    sha: 'e4cxd7y',
+    html_url: '',
     commit: {
       author: {
         name: 'Bart Blimpson',
@@ -48,9 +52,7 @@ export const GITHUBCOMMITS: GithubCommit[] = [
         date: '2002-02-02T16:00:49Z'
       },
       message: 'Introduced more bugs',
-      comment_count: 5,
-      // Temp
-      sha: 'e4cxd7y'
+      comment_count: 5
     },
     author: {
       login: 'octocat',
@@ -70,6 +72,9 @@ export const GITHUBCOMMITS: GithubCommit[] = [
   },
   // Third sample commit
   {
+    url: '',
+    sha: 'a2yvc2c',
+    html_url: '',
     commit: {
       author: {
         name: 'Cheryl Cornwall',
@@ -85,9 +90,7 @@ export const GITHUBCOMMITS: GithubCommit[] = [
       'All work and no play makes Jack a dull boy ' +
       'All work and no play makes Jack a dull boy ' +
       'All work and no play makes Jack a dull boy ',
-      comment_count: 0,
-      // Temp
-      sha: 'a2yvc2c'
+      comment_count: 0
     },
     author: {
       login: 'octocat',

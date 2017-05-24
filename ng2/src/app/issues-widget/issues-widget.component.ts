@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GithubService } from '../_services/github.service';
+import { GithubIssuesService } from '../_services/github-issues.service';
 
 @Component({
   selector: 'app-issues-widget',
@@ -9,20 +9,18 @@ import { GithubService } from '../_services/github.service';
 })
 export class IssuesWidgetComponent implements OnInit {
 
-
-
-  private repoName: string;
-
   private loadingIssues: boolean;
   private rightButtonDisabled: boolean;
   private leftButtonDisabled: boolean;
 
+  private repoName: string;
   private issues;
   private currentIssue;
   private filteredIssues;
   private issueIndex: number;
   private issuesCount: number;
 
+  private issueFilterName: string;
   private issueFilterValues: string[];
 
   private githubIssueColors: {[id: string]: string};
@@ -31,10 +29,8 @@ export class IssuesWidgetComponent implements OnInit {
   private issueTitle: string;
   private issueMessage: string;
 
-
-
-  constructor(private githubService: GithubService) {
-    this.repoName = "Sample Repo";
+  constructor(private githubIssuesService: GithubIssuesService) {
+    this.repoName = 'Sample Repo';
 
     this.issues = [];
     this.filteredIssues = [];
@@ -45,31 +41,31 @@ export class IssuesWidgetComponent implements OnInit {
     this.leftButtonDisabled = true;
     this.rightButtonDisabled = true;
 
-    this.issueLabelColor = "white";
-    this.issueTitle = "Issue Title";
-    this.issueMessage = "Default Message";
+    this.issueLabelColor = 'white';
+    this.issueTitle = 'Issue Title';
+    this.issueMessage = 'Default Message';
+    this.issueFilterName = 'All';
 
     // TODO: Move these to appropriate classes
     this.githubIssueColors = {
-      "bug":"red",
-      "duplicate":"grey",
-      "enhancement":"lightskyblue",
-      "help wanted":"green",
-      "invalid":"beige",
-      "question":"purple",
-      "wontfix":"white"
+      'bug': 'red',
+      'duplicate': 'grey',
+      'enhancement': 'lightskyblue',
+      'help wanted': 'green',
+      'invalid': 'beige',
+      'question': 'purple',
+      'wontfix': 'white'
     };
     this.issueFilterValues = [
-      "All",
-      "Bug",
-      "Duplicate",
-      "Enhancement",
-      "Help Wanted",
-      "Invalid",
-      "Question",
-      "Won't Fix"
+      'All',
+      'Bug',
+      'Duplicate',
+      'Enhancement',
+      'Help Wanted',
+      'Invalid',
+      'Question',
+      'Won\'t Fix'
     ];
-
   }
 
   ngOnInit() {
@@ -86,7 +82,7 @@ export class IssuesWidgetComponent implements OnInit {
       this.issueIndex++;
 
       // Update button capabilities
-      if (this.issueIndex == this.issuesCount - 1) this.rightButtonDisabled = true;
+      if (this.issueIndex === this.issuesCount - 1) this.rightButtonDisabled = true;
       if (this.issueIndex > 0) this.leftButtonDisabled = false;
 
       this.updateIssueInfo();
@@ -102,7 +98,7 @@ export class IssuesWidgetComponent implements OnInit {
 
       // Update button capabilities
       if (this.issueIndex < this.issuesCount) this.rightButtonDisabled = false;
-      if (this.issueIndex == 0) this.leftButtonDisabled = true;
+      if (this.issueIndex === 0) this.leftButtonDisabled = true;
 
       this.updateIssueInfo();
     }
@@ -115,8 +111,8 @@ export class IssuesWidgetComponent implements OnInit {
     this.currentIssue = this.filteredIssues[this.issueIndex];
 
     this.issueLabelColor = this.githubIssueColors[this.currentIssue.issueLabel];
-    this.issueTitle = "#" + this.currentIssue.issueNumber + " Issue Title";
-    this.issueMessage = this.currentIssue.issueBody;
+    this.issueTitle = '#' + this.currentIssue.number + ' ' + this.currentIssue.title;
+    this.issueMessage = this.currentIssue.body;
   }
 
   /**
@@ -125,7 +121,7 @@ export class IssuesWidgetComponent implements OnInit {
    * @param filterVal The filter to apply
    */
   dropdownFilterSelect(filterVal: string) {
-    console.log("Filter: " + filterVal);
+    console.log('Filter: ' + filterVal);
 
     // Disable buttons
     this.leftButtonDisabled = this.rightButtonDisabled = true;
@@ -140,9 +136,10 @@ export class IssuesWidgetComponent implements OnInit {
       // Clear then repopulate filteredIssues
       this.filteredIssues = [];
       this.issueIndex = 0;
+      this.issueFilterName = filterVal;
 
       // If all is supplied, set filteredIssues to all issues
-      if (filterVal == "All") {
+      if (filterVal === 'All') {
         this.issueIndex = 0;
         this.filteredIssues = this.issues;
         this.issuesCount = this.filteredIssues.length;
@@ -151,9 +148,8 @@ export class IssuesWidgetComponent implements OnInit {
       }
       else {
         // Iterate issues, compare their issueLabel with the supplied value, and build filteredIssues
-        for (let issue of this.issues) {
-          if (issue.issueLabel == filterVal.toLowerCase()) {
-            console.log("Found filtered issue");
+        for (const issue of this.issues) {
+          if (issue.issueLabel === filterVal.toLowerCase()) {
             this.filteredIssues.push(issue);
             console.log(this.filteredIssues);
           }
@@ -163,14 +159,17 @@ export class IssuesWidgetComponent implements OnInit {
         if (this.filteredIssues.length > 0) {
           this.issueIndex = 0;
           this.issuesCount = this.filteredIssues.length;
+
+          // If there's more than one issue, enable the right button
           if (this.issuesCount > 1) this.rightButtonDisabled = false;
+
           this.updateIssueInfo();
         }
         else {
           this.issuesCount = 0;
-          this.issueLabelColor = "white";
-          this.issueTitle = "No Issues Found!";
-          this.issueMessage = " ";
+          this.issueLabelColor = 'white';
+          this.issueTitle = 'No Issues Found!';
+          this.issueMessage = ' ';
         }
       }
     }
@@ -181,13 +180,13 @@ export class IssuesWidgetComponent implements OnInit {
    */
   loadSampleData() {
     // Sample Data
-    this.repoName = "Sample Repo";
+    this.repoName = 'Sample Repo';
 
     // Clear then repopulate issues
     // TODO: getIssuesSlowly is temporary for testing, to be replaced with getIssues
-    this.githubService.getIssuesSlowly()
-      .then(issues => {
-        console.log("Github commits fetch success");
+    this.githubIssuesService.getIssuesSampleSlowly().subscribe(
+      issues => {
+        console.log('Github issues fetch success');
 
         // Default filteredIssues to all issues
         this.issues = issues;
@@ -202,9 +201,9 @@ export class IssuesWidgetComponent implements OnInit {
         if (this.issuesCount > 0) this.rightButtonDisabled = false;
 
         this.updateIssueInfo();
-      })
-      .catch(error => {
-        console.error("Error fetching github commits: " + error);
+      },
+      error => {
+        console.error('Error fetching github commits: ' + error);
         // TODO: Display en error of sorts to the user
       });
   }

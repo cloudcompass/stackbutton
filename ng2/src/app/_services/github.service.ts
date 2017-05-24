@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
 import { GithubCommit } from '../_models/githubCommit';
-import { GithubIssue } from '../_models/githubIssue';
 
-import { GITHUBCOMMITS } from '../sample-github-commits';
-import { GITHUBISSUES } from '../sample-github-issues';
+import { GithubIssue } from '../_models/githubIssue';
+import { GITHUBISSUES } from '../sample-data/sample-github-issues';
+
+import { GithubUser } from '../_models/githubUser';
+
+import { GITHUBCOMMITS } from '../sample-data/sample-github-commits';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class GithubService {
 
-  constructor() { }
+  ghUser: GithubUser;
+
+  constructor(private http: Http) { }
 
   getCommits(): Promise<GithubCommit[]> {
     return Promise.resolve(GITHUBCOMMITS);
@@ -18,16 +28,6 @@ export class GithubService {
   getCommitsSample(): GithubCommit[] {
     return GITHUBCOMMITS;
   }
-
-  getIssues(): Promise<GithubIssue[]> {
-    return Promise.resolve(GITHUBISSUES);
-  }
-
-  getIssuesSample(): GithubIssue[] {
-    return GITHUBISSUES;
-  }
-
-
 
   /**
    * Temporary function for testing

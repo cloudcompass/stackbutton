@@ -21,6 +21,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
+import { GettingStartedComponent } from './getting-started/getting-started.component';
+import { DefaultPageComponent } from './default-page/default-page.component';
 
 // Actual components
 import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
@@ -31,7 +33,12 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
 import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
 import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
+
+// Services
 import { GithubService } from './_services/github.service';
+import { GithubUserService } from './_services/github-user.service';
+import { GithubIssuesService } from './_services/github-issues.service';
+import { GithubCommitsService } from './_services/github-commits.service';
 
 import * as $ from 'jquery';
 import { SplashPageComponent } from './splash-page/splash-page.component';
@@ -62,6 +69,8 @@ import { DownloadComponent } from './download/download.component';
     IssuesWidgetComponent,
     SplashPageComponent,
     DownloadComponent,
+    GettingStartedComponent,
+    DefaultPageComponent,
   ],
   providers: [
     AuthGuard,
@@ -73,8 +82,11 @@ import { DownloadComponent } from './download/download.component';
     MockBackend,
     BaseRequestOptions,
 
-    // Testing
-    GithubService
+    // Github Services
+    GithubService,
+    GithubUserService,
+    GithubIssuesService,
+    GithubCommitsService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
