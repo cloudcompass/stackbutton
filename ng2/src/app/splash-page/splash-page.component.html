@@ -1,41 +1,51 @@
-<div class=" " style="background: url('../assets/jumbotron.jpg') no-repeat fixed top center; ">
+<div class=" " style="background: #000000 url('../assets/jumbotron.jpg') no-repeat fixed top center; ">
 
-<nav class="navbar navbar-default navbar-pf" role="navigation" style="background: none;">
+  <nav class="navbar navbar-default navbar-pf" role="navigation" style="background: none; border:none;">
 
-  <!-- navbar header -->
-  <div class="navbar-header" style="float: left;">
-    <a class="navbar-brand" href="#">
-      <img class="navbar-brand-icon" src="../../assets/logo-alt.svg" height= "45px" alt="StackButton Logo"
-           style="float: left; padding-right: 10px;"/>
-      <img class="navbar-brand-name" src="../../assets/brand-alt.svg" height= "40px" alt="StackButton" style="float: left;" />
-    </a>
-  </div><!-- /header -->
+    <!-- navbar header -->
+    <div class="navbar-header" style="background: none; border:none;">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img class="navbar-brand-icon" src="../../assets/logo-alt.svg" height= "45px" alt="StackButton Logo"
+             style="float: left; padding-right: 10px;"/>
+        <h1 class="navbar-brand-name" style="float: left; margin-top: 10px;">stackbutton</h1>
+      </a>
+    </div><!-- /header -->
 
-  <!-- navbar body -->
-    <div class="navbar-collapse navbar-collapse-pf-site collapse">
-      <ul id="menu-primary" class="nav navbar-nav navbar-right">
-        <li>
-          <a href="/download/">GitHub</a>
+    <!-- navbar body -->
+    <div class="navbar-collapse navbar-collapse-1 collapse" aria-expanded="false" style="height: 0px;">
+
+      <!-- Main navbar links to components -->
+      <ul class="nav navbar-nav navbar-primary navbar-utility">
+
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]="['/dashboard']">Download</a>
         </li>
-        <li>
-          <a href="/login/">Login</a>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]="['/status-board']">Register</a>
         </li>
-        <li>
-          <a href="/register/">Register</a>
+        <li [routerLinkActive]="['active']">
+          <a routerLink="/list-view">Login</a>
         </li>
-      </ul>
-  </div>
-</nav>
-  <div class="jumbotron" style="height: 600px; background: none;" >
-    <div class="container-fluid">
-      <div class="splash">
-        <div class="content" class="layout-align-center">
-          <img src="../assets/logo-alt.svg" alt="StackButton logo"  width="320px" style="visibility: visible; animation-name: fadeInDown;">
-        </div>
+      </ul><!-- /navbar links -->
+    </div><!-- /navbar body -->
+  </nav>
+    <div class="jumbotron" style="height: auto; background: none;" >
+      <div class="container-fluid">
+
+        <img class="center-block" src="../assets/logo-alt.svg" alt="StackButton logo"  width="320px" >
+        <h1 class="text-center" style="color:#ffffff;">stackbutton</h1>
       </div>
-    </div>
   </div>
-
+</div>
+<div class="container-fluid">
+  <h2>What is StackButton?</h2>
+  <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
 
 </div>
 <!--<app-login></app-login>-->
