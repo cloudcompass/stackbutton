@@ -15,7 +15,7 @@ export class DefaultPageComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     if (this.currentUser == null) {
-      this.router.navigate(['/landing']);
+      this.router.navigate(['/']);
     }
     else {
       // If the logged in user is new, send them to the getting-started page, otherwise go to the dashboard
@@ -26,9 +26,9 @@ export class DefaultPageComponent implements OnInit {
         this.currentUser.isNewUser = false;
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
 
-        this.router.navigate(['/getting-started']);
+        this.router.navigate(['/empty-state']);
       }
-      else this.router.navigate(['/dashboard']);
+      else this.router.navigate(['/status-board']);
     }
 
   }
