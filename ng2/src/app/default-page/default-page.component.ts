@@ -15,7 +15,7 @@ export class DefaultPageComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     if (this.currentUser == null) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/landing']);
     }
     else {
       // If the logged in user is new, send them to the getting-started page, otherwise go to the dashboard

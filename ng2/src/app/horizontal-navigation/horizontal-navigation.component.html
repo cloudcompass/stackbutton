@@ -21,6 +21,7 @@
     <!-- Status and User -->
     <ul class="nav navbar-nav navbar-utility">
       <li>
+        <!--TODO This is an alert component and it should turn red and be a link if the freshness of a data source goes away. -->
         <a href="#">Status</a>
       </li>
       <li class="dropdown">
@@ -29,10 +30,8 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a [routerLink]="['/login']">Logout</a>
-          </li>
-          <li>
-            <a href="#">Another link</a>
+            <!--This page allows a user to edit their profile-->
+            <a href="#">User Profile</a>
           </li>
           <li class="divider"></li>
           <li class="dropdown-submenu">
@@ -43,21 +42,24 @@
                 {{user.username}} ({{user.firstName}} {{user.lastName}})
                 - <a (click)="deleteUser(user.id)">Delete User</a>
               </li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li>
-                <a href="#">Separated link</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a href="#">One more separated link</a>
-              </li>
+              <!--<li class="divider"></li>-->
+              <!--<li class="dropdown-header">Nav header</li>-->
+              <!--<li>-->
+                <!--<a href="#">Separated link</a>-->
+              <!--</li>-->
+              <!--<li class="divider"></li>-->
+              <!--<li>-->
+                <!--<a href="#">One more separated link</a>-->
+              <!--</li>-->
             </ul>
           </li>
           <li class="divider"></li>
           <li>
-            <a href="#">One more separated link</a>
+            <a [routerLink]="['/login']">Logout</a>
           </li>
+          <!--<li>-->
+            <!--<a href="#">One more separated link</a>-->
+          <!--</li>-->
         </ul>
       </li><!-- /dropdown -->
     </ul><!-- /status & user -->

@@ -11,20 +11,18 @@ import { ListViewComponent } from '../list-view/list-view.component';
 import { TabViewComponent } from '../tab-view/tab-view.component';
 import {DownloadComponent} from '../download/download.component';
 import { DefaultPageComponent } from '../default-page/default-page.component';
+import { SplashPageComponent } from '../splash-page/splash-page.component';
 
 const appRoutes: Routes = [
   // Default page. TODO: Replace with page that simply checks for login token and directs from there
   { path: '', component: DefaultPageComponent },
 
   // Application pages
-  { path: 'landing', component: LandingComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegistrationComponent },
+  { path: 'landing', component: SplashPageComponent},
+
   { path: 'empty-state', component: EmptyStateComponent, canActivate: [AuthGuard]},
   { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
-  { path: 'download', component: DownloadComponent},
-
   // TODO
   { path: 'tab-view', component: TabViewComponent},
   { path: 'list-view', component: ListViewComponent },
