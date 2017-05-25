@@ -10,7 +10,6 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { ListViewComponent } from '../list-view/list-view.component';
 import { TabViewComponent } from '../tab-view/tab-view.component';
 import {DownloadComponent} from '../download/download.component';
-import { GettingStartedComponent } from '../getting-started/getting-started.component';
 import { DefaultPageComponent } from '../default-page/default-page.component';
 
 const appRoutes: Routes = [
@@ -21,11 +20,10 @@ const appRoutes: Routes = [
   { path: 'landing', component: LandingComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'empty-state', component: EmptyStateComponent},
+  { path: 'empty-state', component: EmptyStateComponent, canActivate: [AuthGuard]},
   { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
   { path: 'download', component: DownloadComponent},
-  { path: 'getting-started' , component: GettingStartedComponent, canActivate: [AuthGuard] },
 
   // TODO
   { path: 'tab-view', component: TabViewComponent},
