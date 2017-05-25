@@ -24,7 +24,7 @@
       <ul class="nav navbar-nav navbar-primary navbar-utility">
 
         <li [routerLinkActive]="['active']">
-          <a [routerLink]="['/download']">Download</a>
+          <a (click)="downloadClick()">Download</a>
         </li>
         <li (click)="registrationClick()">
           <a>Register</a></li>
@@ -45,6 +45,9 @@
     </div>
     <div *ngIf="showRegistration">
       <app-registration-page></app-registration-page>
+    </div>
+    <div *ngIf="showDownload">
+      <app-download></app-download>
     </div>
   </div>
 

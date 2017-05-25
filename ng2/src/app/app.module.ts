@@ -42,7 +42,6 @@ import { GithubCommitsService } from './_services/github-commits.service';
 import * as $ from 'jquery';
 import { SplashPageComponent } from './splash-page/splash-page.component';
 import { DownloadComponent } from './download/download.component';
-import { LogoLoginRegisterComponent } from './logo-login-register/logo-login-register.component';
 
 @NgModule({
   imports: [
@@ -70,7 +69,6 @@ import { LogoLoginRegisterComponent } from './logo-login-register/logo-login-reg
     SplashPageComponent,
     DownloadComponent,
     DefaultPageComponent,
-    LogoLoginRegisterComponent,
   ],
   providers: [
     AuthGuard,
