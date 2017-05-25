@@ -25,7 +25,7 @@
       </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <span class="pficon pficon-user"></span> Brian Johnson <b class="caret"></b>
+          <span class="pficon pficon-user"></span> {{currentUser.firstName}} {{currentUser.lastName}} <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li>
@@ -38,11 +38,10 @@
           <li class="dropdown-submenu">
             <a tabindex="-1" href="#">More options</a>
             <ul class="dropdown-menu">
-              <li>
-                <a href="#">Link</a>
-              </li>
-              <li>
-                <a href="#">Another link</a>
+
+              <li *ngFor="let user of users">
+                {{user.username}} ({{user.firstName}} {{user.lastName}})
+                - <a (click)="deleteUser(user.id)">Delete User</a>
               </li>
               <li class="divider"></li>
               <li class="dropdown-header">Nav header</li>
@@ -65,9 +64,6 @@
 
     <!-- Main navbar links to components -->
     <ul class="nav navbar-nav navbar-primary">
-      <li [routerLinkActive]="['active']">
-        <a [routerLink]="['/dashboard']">Dashboard</a>
-      </li>
       <li [routerLinkActive]="['active']">
         <a [routerLink]="['/status-board']">Status Board</a>
       </li>
