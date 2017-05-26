@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { GithubIssuesService } from '../_services/github-issues.service';
 
 @Component({
-  selector: 'app-issues-widget',
-  templateUrl: './issues-widget.component.html',
-  styleUrls: ['./issues-widget.component.css']
+  selector: 'app-issues-card',
+  templateUrl: './issues-card.component.html',
+  styleUrls: ['./issues-card.component.css']
 })
-export class IssuesWidgetComponent implements OnInit {
+export class IssuesCardComponent implements OnInit {
 
   private loadingIssues: boolean;
   private rightButtonDisabled: boolean;

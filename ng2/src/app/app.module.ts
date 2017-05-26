@@ -31,7 +31,7 @@ import { ListViewComponent} from './list-view/list-view.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
 import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
-import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
+import { IssuesCardComponent } from './issues-card/issues-card.component';
 
 // Services
 import { GithubService } from './_services/github.service';
@@ -65,7 +65,7 @@ import { DownloadComponent } from './download/download.component';
     ToolbarComponent,
     TabViewComponent,
     CommitWidgetComponent,
-    IssuesWidgetComponent,
+    IssuesCardComponent,
     SplashPageComponent,
     DownloadComponent,
     DefaultPageComponent,
