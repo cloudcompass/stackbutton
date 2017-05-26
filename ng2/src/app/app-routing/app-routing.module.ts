@@ -15,13 +15,21 @@ import { InternalPageComponent } from '../internal-page/internal-page.component'
 
 const appRoutes: Routes = [
   // Default page. TODO: Replace with page that simply checks for login token and directs from there
-  { path: '', component: DefaultPageComponent },
-
-  // TODO: This doesn't work when there is a children area. I'm using the vertical format so I can comment out parts of a directive.
+  { path: '', component: SplashPageComponent },
+  { path: '**', redirectTo: '' },
+  { path: 'download',
+    component: DownloadComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'splash-page',
     component: SplashPageComponent,
     children: [
+      {
+        path: 'download',
+        component: DownloadComponent,
+        outlet: 'splash'
+      },
       {
         path: 'login',
         component: LoginComponent,
@@ -32,11 +40,6 @@ const appRoutes: Routes = [
         component: RegistrationComponent,
         outlet: 'splash'
       },
-      {
-        path: 'download',
-        component: DownloadComponent,
-        outlet: 'splash'
-      }
     ]
   },
   {
@@ -55,7 +58,6 @@ const appRoutes: Routes = [
   // { path: 'list-view', component: ListViewComponent },
 
   // Redirect invalid paths to default page
-  { path: '**', redirectTo: '' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

@@ -35,17 +35,19 @@
         <!--<li [routerLinkActive]="['active']">-->
           <!--<a [routerLink]="['/status-board']">Status Board</a>-->
         <!--</li>-->
-        <!--
-        <li [routerLink]="['active']">
-          <a [routerLink]="['internal-page']">internal-page</a>
+
+
+        <li>
+          <!--<a [routerLink]="['Download']">Download</a>-->
+          <a [routerLink]="[{ outlet: { 'splash': ['download'] }}]">Download</a>
+
         </li>
-        -->
 
-        <li (click)="internalPageClick()"><a>Internal Page</a></li>
 
-        <li (click)="loginClick()"><a>Login</a></li>
-        <li (click)="registrationClick()"><a>Register</a></li>
-        <li (click)="downloadClick()"><a>Download</a></li>
+
+        <!--<li (click)="loginClick()"><a>Login</a></li>-->
+        <!--<li (click)="registrationClick()"><a>Register</a></li>-->
+        <!--<li (click)="downloadClick()"><a>Download</a></li>-->
       </ul><!-- /navbar links -->
     </div><!-- /navbar body -->
   </nav>
