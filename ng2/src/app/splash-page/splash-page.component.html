@@ -31,12 +31,17 @@
         <!--<li (click)="loginClick()"><a>Login</a></li>-->
         <!--TODO Clean this mess up-->
 
-        <li [routerLinkActive]="['active']">
-          <a (click)="downloadClick()">Download</a>
+        <!--reference material-->
+        <!--<li [routerLinkActive]="['active']">-->
+          <!--<a [routerLink]="['/status-board']">Status Board</a>-->
+        <!--</li>-->
+        <li [routerLink]="['active']">
+          <a [routerLink]="['internal-page']">internal-page</a>
         </li>
-        <li (click)="registrationClick()">
-          <a>Register</a></li>
-        <li (click)="loginClick()"><a>Login</a></li>
+
+        <li [routerLink]="['active']">
+          <a [routerLink]="[{ outlets: { jumbotron: ['login'] } }]">Login</a>
+        </li>
       </ul><!-- /navbar links -->
     </div><!-- /navbar body -->
   </nav>

@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from '../_guards/auth.guard'; // For preventing un-authorized access to pages
-import { LandingComponent } from '../landing/landing.component';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -16,20 +15,30 @@ import { InternalPageComponent } from '../internal-page/internal-page.component'
 
 const appRoutes: Routes = [
   // Default page. TODO: Replace with page that simply checks for login token and directs from there
-  { path: '', component: SplashPageComponent },
+  { path: '', component: SplashPageComponent, pathMatch: 'full' },
 
 
-  { path: 'splash-page', component: SplashPageComponent },
-  { path: 'internal-page', component: InternalPageComponent },
+  // TODO: This doesn't work when there is a children area. I'm using the vertical format so I can comment out parts of a directive.
+  { path: 'splash-page',
+    component: SplashPageComponent,
+    // children: [
+    //   { path: 'login',
+    //     component: LoginComponent,
+    //     outlet: 'jumbotron',
+    //   },
+    // ]
+  },
+  { path: 'internal-page',
+    component: InternalPageComponent
+  },
 
-
+  // { path: 'login', component: LoginComponent, outlet: 'jumbotron'},
   // // Application pages
   // { path: 'landing', component: SplashPageComponent},
   //
   // { path: 'empty-state', component: EmptyStateComponent, canActivate: [AuthGuard]},
   // { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
   // { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
-  // // TODO
   // { path: 'tab-view', component: TabViewComponent},
   // { path: 'list-view', component: ListViewComponent },
 
