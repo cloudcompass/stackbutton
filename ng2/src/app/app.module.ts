@@ -26,7 +26,7 @@ import { DefaultPageComponent } from './default-page/default-page.component';
 // Actual components
 import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
-import { UtilizationBarComponent } from './utilization-bar/utilization-bar.component';
+import { UtilizationCardComponent } from './utilization-card/utilization-card.component';
 import { ListViewComponent} from './list-view/list-view.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
@@ -59,7 +59,7 @@ import { DownloadComponent } from './download/download.component';
     HorizontalNavigationComponent,
     EmptyStateComponent,
     TrendCardComponent,
-    UtilizationBarComponent,
+    UtilizationCardComponent,
     ListViewComponent,
     StatusBoardComponent,
     ToolbarComponent,
