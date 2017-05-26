@@ -5,10 +5,10 @@ import { GithubCommitsService } from '../_services/github-commits.service';
 
 @Component({
   selector: 'app-commit-widget',
-  templateUrl: './commits-widget.component.html',
-  styleUrls: ['./commits-widget.component.css']
+  templateUrl: './commits-card.component.html',
+  styleUrls: ['./commits-card.component.css']
 })
-export class CommitWidgetComponent implements OnInit {
+export class CommitCardComponent implements OnInit {
 
   private repoName: string;
 

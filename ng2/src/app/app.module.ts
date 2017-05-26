@@ -30,7 +30,7 @@ import { UtilizationBarComponent } from './utilization-bar/utilization-bar.compo
 import { ListViewComponent} from './list-view/list-view.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
-import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
+import { CommitCardComponent } from './commits-card/commits-card.component';
 import { IssuesCardComponent } from './issues-card/issues-card.component';
 
 // Services
@@ -64,7 +64,7 @@ import { DownloadComponent } from './download/download.component';
     StatusBoardComponent,
     ToolbarComponent,
     TabViewComponent,
-    CommitWidgetComponent,
+    CommitCardComponent,
     IssuesCardComponent,
     SplashPageComponent,
     DownloadComponent,

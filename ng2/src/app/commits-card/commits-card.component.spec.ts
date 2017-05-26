@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommitWidgetComponent } from './commits-widget.component';
+import { CommitCardComponent } from './commits-card.component';
 
-describe('CommitWidgetComponent', () => {
-  let component: CommitWidgetComponent;
-  let fixture: ComponentFixture<CommitWidgetComponent>;
+describe('CommitCardComponent', () => {
+  let component: CommitCardComponent;
+  let fixture: ComponentFixture<CommitCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CommitWidgetComponent ]
+      declarations: [ CommitCardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CommitWidgetComponent);
+    fixture = TestBed.createComponent(CommitCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
