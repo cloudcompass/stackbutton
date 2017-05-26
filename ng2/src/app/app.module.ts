@@ -28,7 +28,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
 import { UtilizationCardComponent } from './utilization-card/utilization-card.component';
 import { ListViewComponent} from './list-view/list-view.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
 import { CommitCardComponent } from './commits-card/commits-card.component';
 import { IssuesCardComponent } from './issues-card/issues-card.component';
@@ -42,6 +41,7 @@ import { GithubCommitsService } from './_services/github-commits.service';
 import * as $ from 'jquery';
 import { SplashPageComponent } from './splash-page/splash-page.component';
 import { DownloadComponent } from './download/download.component';
+import { InternalPageComponent } from './internal-page/internal-page.component';
 
 @NgModule({
   imports: [
@@ -62,13 +62,13 @@ import { DownloadComponent } from './download/download.component';
     UtilizationCardComponent,
     ListViewComponent,
     StatusBoardComponent,
-    ToolbarComponent,
     TabViewComponent,
     CommitCardComponent,
     IssuesCardComponent,
     SplashPageComponent,
     DownloadComponent,
     DefaultPageComponent,
+    InternalPageComponent,
   ],
   providers: [
     AuthGuard,

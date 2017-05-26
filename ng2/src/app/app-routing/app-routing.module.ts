@@ -12,20 +12,26 @@ import { TabViewComponent } from '../tab-view/tab-view.component';
 import {DownloadComponent} from '../download/download.component';
 import { DefaultPageComponent } from '../default-page/default-page.component';
 import { SplashPageComponent } from '../splash-page/splash-page.component';
+import { InternalPageComponent } from '../internal-page/internal-page.component';
 
 const appRoutes: Routes = [
   // Default page. TODO: Replace with page that simply checks for login token and directs from there
-  { path: '', component: DefaultPageComponent },
+  { path: '', component: SplashPageComponent },
 
-  // Application pages
-  { path: 'landing', component: SplashPageComponent},
 
-  { path: 'empty-state', component: EmptyStateComponent, canActivate: [AuthGuard]},
-  { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
-  // TODO
-  { path: 'tab-view', component: TabViewComponent},
-  { path: 'list-view', component: ListViewComponent },
+  { path: 'splash-page', component: SplashPageComponent },
+  { path: 'internal-page', component: InternalPageComponent },
+
+
+  // // Application pages
+  // { path: 'landing', component: SplashPageComponent},
+  //
+  // { path: 'empty-state', component: EmptyStateComponent, canActivate: [AuthGuard]},
+  // { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
+  // { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
+  // // TODO
+  // { path: 'tab-view', component: TabViewComponent},
+  // { path: 'list-view', component: ListViewComponent },
 
   // Redirect invalid paths to default page
   { path: '**', redirectTo: '' }
