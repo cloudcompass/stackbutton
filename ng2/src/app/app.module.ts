@@ -24,7 +24,7 @@ import { StatusBoardComponent } from './status-board/status-board.component';
 import { DefaultPageComponent } from './default-page/default-page.component';
 
 // Actual components
-import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
 import { UtilizationCardComponent } from './utilization-card/utilization-card.component';
 import { ListViewComponent} from './list-view/list-view.component';
@@ -56,7 +56,7 @@ import { DownloadComponent } from './download/download.component';
     LoginComponent,
     RegistrationComponent,
     DashboardComponent,
-    HorizontalNavigationComponent,
+    NavigationComponent,
     EmptyStateComponent,
     TrendCardComponent,
     UtilizationCardComponent,

@@ -4,11 +4,11 @@ import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
 
 @Component({
-  selector: 'app-horizontal-navigation',
-  templateUrl: './horizontal-navigation.component.html',
-  styleUrls: ['./horizontal-navigation.component.css']
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.css']
 })
-export class HorizontalNavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit {
   currentUser: User;
   users: User[] = [];
 
