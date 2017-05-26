@@ -15,20 +15,32 @@ import { InternalPageComponent } from '../internal-page/internal-page.component'
 
 const appRoutes: Routes = [
   // Default page. TODO: Replace with page that simply checks for login token and directs from there
-  { path: '', component: SplashPageComponent, pathMatch: 'full' },
-
+  { path: '', component: DefaultPageComponent },
 
   // TODO: This doesn't work when there is a children area. I'm using the vertical format so I can comment out parts of a directive.
-  { path: 'splash-page',
+  {
+    path: 'splash-page',
     component: SplashPageComponent,
-    // children: [
-    //   { path: 'login',
-    //     component: LoginComponent,
-    //     outlet: 'jumbotron',
-    //   },
-    // ]
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent,
+        outlet: 'splash'
+      },
+      {
+        path: 'registration',
+        component: RegistrationComponent,
+        outlet: 'splash'
+      },
+      {
+        path: 'download',
+        component: DownloadComponent,
+        outlet: 'splash'
+      }
+    ]
   },
-  { path: 'internal-page',
+  {
+    path: 'internal-page',
     component: InternalPageComponent
   },
 
