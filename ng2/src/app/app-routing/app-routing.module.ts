@@ -12,6 +12,7 @@ import { TabViewComponent } from '../tab-view/tab-view.component';
 import {DownloadComponent} from '../download/download.component';
 import { DefaultPageComponent } from '../default-page/default-page.component';
 import { SplashPageComponent } from '../splash-page/splash-page.component';
+import { FormPageComponent } from '../form-page/form-page.component';
 
 const appRoutes: Routes = [
   // Default page. TODO: Replace with page that simply checks for login token and directs from there
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
   // TODO
   { path: 'tab-view', component: TabViewComponent},
   { path: 'list-view', component: ListViewComponent },
+  { path: 'form-page', component: FormPageComponent},
 
   // Redirect invalid paths to default page
   { path: '**', redirectTo: '' }
