@@ -12,6 +12,9 @@ import { DefaultPageComponent } from '../default-page/default-page.component';
 import { SplashPageComponent } from '../splash-page/splash-page.component';
 import { InternalPageComponent } from '../internal-page/internal-page.component';
 import { SplashTitleCardComponent } from '../splash-title-card/splash-title-card.component';
+import { ProfilePageComponent } from '../profile-page/profile-page.component';
+import { DataSourceAddComponent } from '../data-source-add/data-source-add.component';
+import { DataSourceManageComponent } from '../data-source-manage/data-source-manage.component';
 
 const appRoutes: Routes = [
   { path: '', component: DefaultPageComponent },
@@ -65,26 +68,26 @@ const appRoutes: Routes = [
         component: EmptyStateComponent,
         outlet: 'internal'
       },
-      {
-        path: 'tab-view',
-        component: TabViewComponent,
-        outlet: 'internal'
-      },
-      {
-        path: 'list-view',
-        component: ListViewComponent,
-        outlet: 'internal'
-      },
+      // {
+      //   path: 'tab-view',
+      //   component: TabViewComponent,
+      //   outlet: 'internal'
+      // },
+      // {
+      //   path: 'list-view',
+      //   component: ListViewComponent,
+      //   outlet: 'internal'
+      // },
       // TODO: Add profile and management
-      /*
+
       {
-        path: 'data-source-management',
+        path: 'data-source-manage',
         component: DataSourceManageComponent,
         outlet: 'internal'
       },
       {
        path: 'data-source-add',
-       component: DataSourceEditorComponent,
+       component: DataSourceAddComponent,
        outlet: 'internal'
        },
       {
@@ -92,7 +95,7 @@ const appRoutes: Routes = [
         component: ProfilePageComponent,
         outlet: 'internal'
       }
-      */
+
     ]
   },
 

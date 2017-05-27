@@ -57,14 +57,20 @@
         <a [routerLink]="[{outlets: { internal: ['status-board']}}]">Status Board</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a [routerLink]="[{outlets: { internal: ['list-view']}}]">List View</a>
+        <a [routerLink]="[{outlets: { internal: ['data-source-manage']}}]">Manage Sources</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a [routerLink]="[{outlets: { internal: ['empty-state']}}]">Empty State</a>
+        <a [routerLink]="[{outlets: { internal: ['data-source-add']}}]">Add Source</a>
       </li>
-      <li [routerLinkActive]="['active']">
-        <a [routerLink]="[{outlets: { internal: ['tab-view']}}]">Tab View</a>
-      </li>
+      <!--<li [routerLinkActive]="['active']">-->
+        <!--<a [routerLink]="[{outlets: { internal: ['list-view']}}]">List View</a>-->
+      <!--</li>-->
+      <!--<li [routerLinkActive]="['active']">-->
+        <!--<a [routerLink]="[{outlets: { internal: ['empty-state']}}]">Empty State</a>-->
+      <!--</li>-->
+      <!--<li [routerLinkActive]="['active']">-->
+        <!--<a [routerLink]="[{outlets: { internal: ['tab-view']}}]">Tab View</a>-->
+      <!--</li>-->
     </ul><!-- /navbar links -->
   </div><!-- /navbar body -->
 </nav>
