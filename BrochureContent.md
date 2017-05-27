@@ -6,6 +6,9 @@ Bison in robot whale submarine
 - further description of the project inside
 - contact info
 
+## Project description
+
+Stackbutton is a tool DevOps use to monitor team resources. The application lives in docker, deployed to OpenShift, and it collects data from 
 
 Team BamDev is revamping Stackbutton for Cloud Compass Computing Inc. Cloud Compass helps organizations transition to cloud based technology solutions. StackButton is a business intelligence project that lets a dev-ops monitor their existing cloud platform. The vision for StackButton is an easy-to-use containerdeployed central monitoring system.
 
