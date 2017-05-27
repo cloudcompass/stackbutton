@@ -14,13 +14,8 @@ import { InternalPageComponent } from '../internal-page/internal-page.component'
 import { SplashTitleCardComponent } from '../splash-title-card/splash-title-card.component';
 
 const appRoutes: Routes = [
-  // Default page. TODO: Replace with page that simply checks for login token and directs from there
-  { path: '', component: SplashPageComponent },
-  { path: '**', redirectTo: '' },
-  { path: 'download',
-    component: DownloadComponent,
-    pathMatch: 'full'
-  },
+  { path: '', component: DefaultPageComponent },
+
   {
     path: 'splash-page',
     component: SplashPageComponent,
@@ -38,6 +33,11 @@ const appRoutes: Routes = [
       {
         path: 'registration',
         component: RegistrationComponent,
+        outlet: 'splash'
+      },
+      {
+        path: 'download',
+        component: DownloadComponent,
         outlet: 'splash'
       },
     ]
@@ -91,17 +91,8 @@ const appRoutes: Routes = [
     ]
   },
 
-  // { path: 'login', component: LoginComponent, outlet: 'jumbotron'},
-  // // Application pages
-  // { path: 'landing', component: SplashPageComponent},
-  //
-  // { path: 'empty-state', component: EmptyStateComponent, canActivate: [AuthGuard]},
-  // { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
-  // { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
-  // { path: 'tab-view', component: TabViewComponent},
-  // { path: 'list-view', component: ListViewComponent },
-
-  // Redirect invalid paths to default page
+// Redirect invalid paths to default page
+  { path: '**', redirectTo: '' },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
