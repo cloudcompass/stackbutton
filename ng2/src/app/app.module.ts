@@ -44,6 +44,7 @@ import { SplashTitleCardComponent } from './splash-title-card/splash-title-card.
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { DataSourceEditorComponent } from './data-source-editor/data-source-editor.component';
 import { DataSourceManageComponent } from './data-source-manage/data-source-manage.component';
+import { DataSourceAddComponent } from './data-source-add/data-source-add.component';
 
 @NgModule({
   imports: [
@@ -73,6 +74,7 @@ import { DataSourceManageComponent } from './data-source-manage/data-source-mana
     ProfilePageComponent,
     DataSourceEditorComponent,
     DataSourceManageComponent,
+    DataSourceAddComponent,
   ],
   providers: [
     AuthGuard,
