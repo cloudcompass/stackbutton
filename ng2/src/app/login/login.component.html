@@ -55,8 +55,8 @@
 
         <!-- TODO: Find an appropriate place for the register and cancel buttons  -->
         <div>
-          <a [routerLink]="['/register']" class="btn btn-link">Register</a>
-          <a [routerLink]="['/landing']" class="btn btn-link">Cancel</a>
+          <a [routerLink]="['/splash-page', {outlets: { splash: ['registration']}}]" class="btn btn-link">Register</a>
+          <a [routerLink]="['/splash-page']" class="btn btn-link">Cancel</a>
         </div>
       </div>
     </div><!-- End row -->

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-
+import { Router } from '@angular/router';
+import { SplashTitleCardComponent } from '../splash-title-card/splash-title-card.component';
 
 @Component({
   selector: 'app-splash-page',
@@ -9,30 +9,10 @@ import {Router} from "@angular/router";
 })
 export class SplashPageComponent implements OnInit {
 
-  private showTitle: boolean;
-  constructor(private router: Router) {
-    this.showTitle = true;
-  }
+  constructor(private router: Router) { }
 
-  ngOnInit() { }
-
-  // Temporary
-  internalPageClick() {
-    this.router.navigate(['/internal-page']);
-  }
-
-  loginClick() {
-    this.showTitle = false;
-    this.router.navigate(['splash-page', {outlets: {'splash': 'login'}}]);
-  }
-
-  registrationClick() {
-    this.showTitle = false;
-    this.router.navigate(['splash-page', {outlets: {'splash': 'registration'}}]);
-  }
-
-  downloadClick() {
-    this.showTitle = false;
-    this.router.navigate(['splash-page', {outlets: {'splash': 'download'}}]);
+  ngOnInit() {
+    // Default to showing the splash-title-card component
+    this.router.navigate([{outlets: {splash: ['SplashTitleCardComponent']}}]);
   }
 }

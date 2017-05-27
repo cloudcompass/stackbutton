@@ -42,6 +42,7 @@ import * as $ from 'jquery';
 import { SplashPageComponent } from './splash-page/splash-page.component';
 import { DownloadComponent } from './download/download.component';
 import { InternalPageComponent } from './internal-page/internal-page.component';
+import { SplashTitleCardComponent } from './splash-title-card/splash-title-card.component';
 
 @NgModule({
   imports: [
@@ -69,6 +70,7 @@ import { InternalPageComponent } from './internal-page/internal-page.component';
     DownloadComponent,
     DefaultPageComponent,
     InternalPageComponent,
+    SplashTitleCardComponent,
   ],
   providers: [
     AuthGuard,

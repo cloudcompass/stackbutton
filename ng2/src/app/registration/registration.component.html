@@ -75,8 +75,8 @@
         </p>
         <!-- TODO: Find an appropriate place for the login and cancel buttons  -->
         <div>
-          <a [routerLink]="['/login']" class="btn btn-link">Login</a>
-          <a [routerLink]="['/landing']" class="btn btn-link">Cancel</a>
+          <a [routerLink]="['/splash-page', {outlets: { splash: ['login']}}]" class="btn btn-link">Login</a>
+          <a [routerLink]="['/splash-page']" class="btn btn-link">Cancel</a>
         </div>
       </div>
     </div><!-- End row -->
