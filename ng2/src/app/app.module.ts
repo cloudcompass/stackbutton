@@ -43,6 +43,12 @@ import { SplashPageComponent } from './splash-page/splash-page.component';
 import { DownloadComponent } from './download/download.component';
 import { InternalPageComponent } from './internal-page/internal-page.component';
 import { SplashTitleCardComponent } from './splash-title-card/splash-title-card.component';
+import { ServiceManagementComponentComponent } from './service-management-component/service-management-component.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ServiceManagementComponent } from './service-management/service-management.component';
+import { DataSourceManagementComponent } from './data-source-management/data-source-management.component';
+import { DataSourceAddComponent } from './data-source-add/data-source-add.component';
+import { DataSourceManageComponent } from './data-source-manage/data-source-manage.component';
 
 @NgModule({
   imports: [
@@ -71,6 +77,12 @@ import { SplashTitleCardComponent } from './splash-title-card/splash-title-card.
     DefaultPageComponent,
     InternalPageComponent,
     SplashTitleCardComponent,
+    ServiceManagementComponentComponent,
+    ProfilePageComponent,
+    ServiceManagementComponent,
+    DataSourceManagementComponent,
+    DataSourceAddComponent,
+    DataSourceManageComponent,
   ],
   providers: [
     AuthGuard,

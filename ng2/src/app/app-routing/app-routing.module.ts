@@ -78,10 +78,15 @@ const appRoutes: Routes = [
       // TODO: Add profile and management
       /*
       {
-        path: 'service-management',
-        component: ServiceManagementComponent,
+        path: 'data-source-management',
+        component: DataSourceManageComponent,
         outlet: 'internal'
       },
+      {
+       path: 'data-source-add',
+       component: DataSourceAddComponent,
+       outlet: 'internal'
+       },
       {
         path: 'profile-page',
         component: ProfilePageComponent,

@@ -30,7 +30,6 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <!--This page allows a user to edit their profile-->
             <a href="#">User Profile</a>
           </li>
           <li class="divider"></li>
@@ -42,24 +41,12 @@
                 {{user.username}} ({{user.firstName}} {{user.lastName}})
                 - <a (click)="deleteUser(user.id)">Delete User</a>
               </li>
-              <!--<li class="divider"></li>-->
-              <!--<li class="dropdown-header">Nav header</li>-->
-              <!--<li>-->
-                <!--<a href="#">Separated link</a>-->
-              <!--</li>-->
-              <!--<li class="divider"></li>-->
-              <!--<li>-->
-                <!--<a href="#">One more separated link</a>-->
-              <!--</li>-->
             </ul>
           </li>
           <li class="divider"></li>
           <li>
             <a (click)="logoutClick()">Logout</a>
           </li>
-          <!--<li>-->
-            <!--<a href="#">One more separated link</a>-->
-          <!--</li>-->
         </ul>
       </li><!-- /dropdown -->
     </ul><!-- /status & user -->
