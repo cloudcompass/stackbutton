@@ -84,7 +84,7 @@ const appRoutes: Routes = [
       },
       {
        path: 'data-source-add',
-       component: DataSourceAddComponent,
+       component: DataSourceEditorComponent,
        outlet: 'internal'
        },
       {
