@@ -18,7 +18,7 @@ export class DefaultPageComponent implements OnInit {
       this.router.navigate(['/splash-page']);
     }
     else {
-      this.router.navigate(['/internal-page']);
+      this.router.navigate(['/internal-page', {outlets: { internal: ['status-board']}}]);
       /*
       // If the logged in user is new, send them to the getting-started page, otherwise go to the dashboard
       // TODO: isNewUser shouldn't be null

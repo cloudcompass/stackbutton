@@ -49,6 +49,14 @@ const appRoutes: Routes = [
     component: InternalPageComponent,
     canActivate: [AuthGuard],
     children: [
+      /*
+      TODO: Figure out appropriate routing for just straight-up /internal-page. Status-board should be default.
+      {
+        path: '',
+        redirectTo: 'status-board',
+        pathMatch: 'full'
+      }
+      */
       {
         path: 'status-board',
         component: StatusBoardComponent,

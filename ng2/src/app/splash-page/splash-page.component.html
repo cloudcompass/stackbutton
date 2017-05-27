@@ -24,7 +24,7 @@
       <ul class="nav navbar-nav navbar-primary navbar-utility">
 
         <li>
-          <a [routerLink]="['/internal-page']">Internal Page</a>
+          <a [routerLink]="['/internal-page', {outlets: { internal: ['status-board']}}]">Internal Page</a>
         </li>
         <li>
           <a [routerLink]="[{outlets: { splash: ['login']}}]">Login</a>

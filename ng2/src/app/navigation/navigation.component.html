@@ -67,16 +67,16 @@
     <!-- Main navbar links to components -->
     <ul class="nav navbar-nav navbar-primary">
       <li [routerLinkActive]="['active']">
-        <a [routerLink]="['/status-board']">Status Board</a>
+        <a [routerLink]="[{outlets: { internal: ['status-board']}}]">Status Board</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/list-view">List View</a>
+        <a [routerLink]="[{outlets: { internal: ['list-view']}}]">List View</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/empty-state">Empty State</a>
+        <a [routerLink]="[{outlets: { internal: ['empty-state']}}]">Empty State</a>
       </li>
       <li [routerLinkActive]="['active']">
-        <a routerLink="/tab-view">Tab View</a>
+        <a [routerLink]="[{outlets: { internal: ['tab-view']}}]">Tab View</a>
       </li>
     </ul><!-- /navbar links -->
   </div><!-- /navbar body -->

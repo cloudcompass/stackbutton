@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SplashTitleCardComponent } from '../splash-title-card/splash-title-card.component';
 
 @Component({
   selector: 'app-splash-page',
@@ -9,10 +7,9 @@ import { SplashTitleCardComponent } from '../splash-title-card/splash-title-card
 })
 export class SplashPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
     // Default to showing the splash-title-card component
-    this.router.navigate([{outlets: {splash: ['SplashTitleCardComponent']}}]);
   }
 }
