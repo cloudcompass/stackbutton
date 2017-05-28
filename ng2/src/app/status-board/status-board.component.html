@@ -1,20 +1,14 @@
-<app-horizontal-navigation></app-horizontal-navigation>
 <!-- The Status-Board body -->
-<body>
-  <div class="cards-pf" >
-    <div class="container-fluid container-cards-pf" >
-      <div class="row row-cards-pf">
+<div class="cards-pf" >
+  <div class="container-fluid container-cards-pf" >
+    <div class="row row-cards-pf">
+      <app-commit-widget></app-commit-widget>
+      <app-issues-card></app-issues-card>
 
-        <!-- <app-utilization-bar></app-utilization-bar> -->
-        <app-commit-widget></app-commit-widget>
-        <app-issues-widget></app-issues-widget>
+    </div>
+    <div class="row row-cards-pf">
+      <app-utilization-card></app-utilization-card>
+    </div>
 
-      </div>
-      <div class="row row-cards-pf">
-        <app-utilization-bar></app-utilization-bar>
-      </div>
-
-    </div><!-- /container -->
-  </div>
-</body>
-
+  </div><!-- /container -->
+</div>

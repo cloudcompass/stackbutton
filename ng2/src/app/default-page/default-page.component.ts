@@ -15,9 +15,11 @@ export class DefaultPageComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     if (this.currentUser == null) {
-      this.router.navigate(['/landing']);
+      this.router.navigate(['/splash-page']);
     }
     else {
+      this.router.navigate(['/internal-page', {outlets: { internal: ['status-board']}}]);
+      /*
       // If the logged in user is new, send them to the getting-started page, otherwise go to the dashboard
       // TODO: isNewUser shouldn't be null
       if (this.currentUser.isNewUser === true || this.currentUser.isNewUser == null) {
@@ -29,6 +31,7 @@ export class DefaultPageComponent implements OnInit {
         this.router.navigate(['/empty-state']);
       }
       else this.router.navigate(['/status-board']);
+      */
     }
 
   }

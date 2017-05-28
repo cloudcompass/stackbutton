@@ -1,0 +1,48 @@
+<div class="col-xs-12 col-sm-6 col-lg-6">
+  <div class="card-pf">
+    <div class="card-pf-heading">
+      <h2 class="card-pf-title" id="repoTitle">
+        Commits
+      </h2>
+    </div><!-- End Card Header -->
+    <div class="card-pf-body">
+      <!-- Arrow Buttons and Repo Name -->
+      <div style="display:flex; justify-content: space-between">
+        <button [disabled]="leftButtonDisabled" type="button" class="btn btn-default" (click)="onLeftClick()">
+          <
+        </button>
+        <span>{{repoName ? repoName : "Null Name"}}</span>
+        <button [disabled]="rightButtonDisabled" type="button" class="btn btn-default" (click)="onRightClick()">
+          >
+        </button>
+      </div>
+
+      <!-- Commit Body -->
+      <div>
+        <!-- Author, avatar, and date -->
+        <!-- Display a loading icon while loading commits, otherwise display commit content -->
+        <div *ngIf="loadingCommits" style="display: flex; justify-content: center;">
+          <img style="height: 5em; width: 5em; align-self: center;" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+        <div *ngIf="!loadingCommits" style="display:flex; padding-top: 1em;">
+          <img style="height: 5em; width: 5em;" src="../../assets/logo-alt.svg"> <!-- TODO: replace src path with {{avatarUrl}} -->
+          <div>
+            <b>Commit:
+              <span>{{commitSha}}</span>
+            </b>
+            <br>
+            <b>By:
+              <span style="color:dodgerblue">{{commitAuthor ? commitAuthor : "Author Name"}}</span>
+            </b>
+            <p id="commitDate">{{commitDate ? commitDate : "Invalid Date"}}</p>
+          </div>
+        </div>
+
+        <!-- Commit Message -->
+        <div *ngIf="!loadingCommits" id="commitMessage">
+          {{commitMessage ? commitMessage : "Commit Message"}}
+        </div>
+      </div><!-- End Commit Body -->
+    </div><!-- End Card Body -->
+  </div><!-- End Card -->
+</div>

@@ -15,23 +15,20 @@ import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 
 // "Single Page" components
-import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { StatusBoardComponent } from './status-board/status-board.component';
 import { DefaultPageComponent } from './default-page/default-page.component';
 
 // Actual components
-import { HorizontalNavigationComponent } from './horizontal-navigation/horizontal-navigation.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { TrendCardComponent } from './trend-card/trend-card.component';
-import { UtilizationBarComponent } from './utilization-bar/utilization-bar.component';
+import { UtilizationCardComponent } from './utilization-card/utilization-card.component';
 import { ListViewComponent} from './list-view/list-view.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
-import { CommitWidgetComponent } from './commits-widget/commits-widget.component';
-import { IssuesWidgetComponent } from './issues-widget/issues-widget.component';
+import { CommitCardComponent } from './commits-card/commits-card.component';
+import { IssuesCardComponent } from './issues-card/issues-card.component';
 
 // Services
 import { GithubService } from './_services/github.service';
@@ -42,7 +39,16 @@ import { GithubCommitsService } from './_services/github-commits.service';
 import * as $ from 'jquery';
 import { SplashPageComponent } from './splash-page/splash-page.component';
 import { DownloadComponent } from './download/download.component';
+<<<<<<< HEAD
 import { FormPageComponent } from './form-page/form-page.component';
+=======
+import { InternalPageComponent } from './internal-page/internal-page.component';
+import { SplashTitleCardComponent } from './splash-title-card/splash-title-card.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { DataSourceEditorComponent } from './data-source-editor/data-source-editor.component';
+import { DataSourceManageComponent } from './data-source-manage/data-source-manage.component';
+import { DataSourceAddComponent } from './data-source-add/data-source-add.component';
+>>>>>>> 31182cfc0a7abaa586dec4c2ca8a4639206716dc
 
 @NgModule({
   imports: [
@@ -53,24 +59,30 @@ import { FormPageComponent } from './form-page/form-page.component';
   ],
   declarations: [
     AppComponent,
-    LandingComponent,
     LoginComponent,
     RegistrationComponent,
-    DashboardComponent,
-    HorizontalNavigationComponent,
+    NavigationComponent,
     EmptyStateComponent,
     TrendCardComponent,
-    UtilizationBarComponent,
+    UtilizationCardComponent,
     ListViewComponent,
     StatusBoardComponent,
-    ToolbarComponent,
     TabViewComponent,
-    CommitWidgetComponent,
-    IssuesWidgetComponent,
+    CommitCardComponent,
+    IssuesCardComponent,
     SplashPageComponent,
     DownloadComponent,
     DefaultPageComponent,
+<<<<<<< HEAD
     FormPageComponent,
+=======
+    InternalPageComponent,
+    SplashTitleCardComponent,
+    ProfilePageComponent,
+    DataSourceEditorComponent,
+    DataSourceManageComponent,
+    DataSourceAddComponent,
+>>>>>>> 31182cfc0a7abaa586dec4c2ca8a4639206716dc
   ],
   providers: [
     AuthGuard,

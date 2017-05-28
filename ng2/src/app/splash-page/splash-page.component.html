@@ -23,32 +23,21 @@
       <!-- Main navbar links to components -->
       <ul class="nav navbar-nav navbar-primary navbar-utility">
 
-        <li [routerLinkActive]="['active']">
-          <a (click)="downloadClick()">Download</a>
+        <li>
+          <a [routerLink]="[{outlets: { splash: ['login']}}]">Login</a>
         </li>
-        <li (click)="registrationClick()">
-          <a>Register</a></li>
-        <li (click)="loginClick()"><a>Login</a></li>
+        <li>
+          <a [routerLink]="[{outlets: { splash: ['registration']}}]">Register</a>
+        </li>
+        <li>
+          <a [routerLink]="[{outlets: { splash: ['download']}}]">Download</a>
+        </li>
       </ul><!-- /navbar links -->
     </div><!-- /navbar body -->
   </nav>
 
-
   <div class="jumbotron" style="height: auto; background: none;" >
-    <div *ngIf="showSplash" class="container-fluid">
-      <img class="center-block" src="../assets/logo-alt.svg" alt="StackButton logo"  width="320px" >
-      <h1 class="text-center" style="color:#ffffff;">stackbutton</h1>
-      <h3 class="text-center" style="color:#ffffff;">See the potential of your cloud development resources.</h3>
-    </div>
-    <div *ngIf="showLogin">
-      <app-login-page></app-login-page>
-    </div>
-    <div *ngIf="showRegistration">
-      <app-registration-page></app-registration-page>
-    </div>
-    <div *ngIf="showDownload">
-      <app-download></app-download>
-    </div>
+    <router-outlet name="splash"></router-outlet>
   </div>
 
 </div>
@@ -56,5 +45,3 @@
   <h2>What is StackButton?</h2>
   <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
 </div>
-<!--<app-login></app-login>-->
-<!--<app-registration></app-registration>-->
