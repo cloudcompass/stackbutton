@@ -39,16 +39,12 @@ import { GithubCommitsService } from './_services/github-commits.service';
 import * as $ from 'jquery';
 import { SplashPageComponent } from './splash-page/splash-page.component';
 import { DownloadComponent } from './download/download.component';
-<<<<<<< HEAD
-import { FormPageComponent } from './form-page/form-page.component';
-=======
 import { InternalPageComponent } from './internal-page/internal-page.component';
 import { SplashTitleCardComponent } from './splash-title-card/splash-title-card.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { DataSourceEditorComponent } from './data-source-editor/data-source-editor.component';
 import { DataSourceManageComponent } from './data-source-manage/data-source-manage.component';
 import { DataSourceAddComponent } from './data-source-add/data-source-add.component';
->>>>>>> 31182cfc0a7abaa586dec4c2ca8a4639206716dc
 
 @NgModule({
   imports: [
@@ -73,16 +69,12 @@ import { DataSourceAddComponent } from './data-source-add/data-source-add.compon
     SplashPageComponent,
     DownloadComponent,
     DefaultPageComponent,
-<<<<<<< HEAD
-    FormPageComponent,
-=======
     InternalPageComponent,
     SplashTitleCardComponent,
     ProfilePageComponent,
     DataSourceEditorComponent,
     DataSourceManageComponent,
     DataSourceAddComponent,
->>>>>>> 31182cfc0a7abaa586dec4c2ca8a4639206716dc
   ],
   providers: [
     AuthGuard,

@@ -10,15 +10,11 @@ import { TabViewComponent } from '../tab-view/tab-view.component';
 import { DownloadComponent } from '../download/download.component';
 import { DefaultPageComponent } from '../default-page/default-page.component';
 import { SplashPageComponent } from '../splash-page/splash-page.component';
-<<<<<<< HEAD
-import { FormPageComponent } from '../form-page/form-page.component';
-=======
 import { InternalPageComponent } from '../internal-page/internal-page.component';
 import { SplashTitleCardComponent } from '../splash-title-card/splash-title-card.component';
 import { ProfilePageComponent } from '../profile-page/profile-page.component';
 import { DataSourceAddComponent } from '../data-source-add/data-source-add.component';
 import { DataSourceManageComponent } from '../data-source-manage/data-source-manage.component';
->>>>>>> 31182cfc0a7abaa586dec4c2ca8a4639206716dc
 
 const appRoutes: Routes = [
   { path: '', component: DefaultPageComponent },
@@ -84,33 +80,16 @@ const appRoutes: Routes = [
       // },
       // TODO: Add profile and management
 
-<<<<<<< HEAD
   { path: 'empty-state', component: EmptyStateComponent, canActivate: [AuthGuard]},
-  { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
+//  { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
   // TODO
   { path: 'tab-view', component: TabViewComponent},
   { path: 'list-view', component: ListViewComponent },
-  { path: 'form-page', component: FormPageComponent},
-=======
-      {
-        path: 'data-source-manage',
-        component: DataSourceManageComponent,
-        outlet: 'internal'
-      },
-      {
-       path: 'data-source-add',
-       component: DataSourceAddComponent,
-       outlet: 'internal'
-       },
-      {
-        path: 'profile-page',
-        component: ProfilePageComponent,
-        outlet: 'internal'
-      }
->>>>>>> 31182cfc0a7abaa586dec4c2ca8a4639206716dc
-
-    ]
+  { path: 'data-source-manage', component: DataSourceManageComponent, outlet: 'internal'},
+  { path: 'data-source-add', component: DataSourceAddComponent, outlet: 'internal'},
+  { path: 'profile-page', component: ProfilePageComponent, outlet: 'internal'}
+  ]
   },
 
 // Redirect invalid paths to default page
