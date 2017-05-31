@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -8,7 +7,10 @@ import { UserService } from '../_services/user.service';
   selector: 'app-registration-page',
   templateUrl: 'registration.component.html'
 })
-
+/**
+ * RegistrationComponent displays a registration form to the user.
+ * If registration is successful, this will prompt the user to login.
+ */
 export class RegistrationComponent {
   model: any = {};
   loading = false;
@@ -22,7 +24,7 @@ export class RegistrationComponent {
     this.userService.create(this.model)
       .subscribe(
         data => {
-          // Registration successful, navigate to login
+          // If data exists, registration was successful, navigate to login component
           this.router.navigate(['/login']);
         },
         error => {

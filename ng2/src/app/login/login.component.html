@@ -1,4 +1,3 @@
-
 <div>
   <div class="container">
     <div class="row" style="background:white; opacity:0.75;">
@@ -50,10 +49,15 @@
 
       <!-- Additional Details -->
       <div class="col-sm-5 col-md-6 col-lg-7 details">
-        <p><strong>Welcome to PatternFly | open interface project!</strong>
-          This is placeholder text, only. Use this area to place any information or introductory message about your application that may be relevant for users. For example, you might include news or information about the latest release of your product here&mdash;such as a version number.</p>
-
-        <!-- TODO: Find an appropriate place for the register and cancel buttons  -->
+        <p>
+          <strong>Welcome to Stackbutton!</strong>
+        </p>
+        <p>
+          This is placeholder text, only.Use this area to place any information or introductory message about
+          your application that may be relevant for users. For example, you might include news or
+          information about the latest release of your product here&mdash;such as a version number.
+        </p>
+        <!-- Navigation buttons  -->
         <div>
           <a [routerLink]="['/splash-page', {outlets: { splash: ['registration']}}]" class="btn btn-link">Register</a>
           <a [routerLink]="['/splash-page']" class="btn btn-link">Cancel</a>
@@ -62,4 +66,3 @@
     </div><!-- End row -->
   </div><!-- End container -->
 </div><!-- End login-pf -->
-
