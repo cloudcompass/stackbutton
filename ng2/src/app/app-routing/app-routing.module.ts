@@ -1,24 +1,31 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from '../_guards/auth.guard'; // For preventing un-authorized access to pages
+
+// Splash page components
+import { SplashPageComponent } from '../splash-page/splash-page.component';
+import { SplashTitleCardComponent } from '../splash-title-card/splash-title-card.component';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
+import { DownloadComponent } from '../download/download.component';
+
+// Internal page components
+import { InternalPageComponent } from '../internal-page/internal-page.component';
 import { StatusBoardComponent } from '../status-board/status-board.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
-import { ListViewComponent } from '../list-view/list-view.component';
-import { TabViewComponent } from '../tab-view/tab-view.component';
-import { DownloadComponent } from '../download/download.component';
 import { DefaultPageComponent } from '../default-page/default-page.component';
-import { SplashPageComponent } from '../splash-page/splash-page.component';
-import { InternalPageComponent } from '../internal-page/internal-page.component';
-import { SplashTitleCardComponent } from '../splash-title-card/splash-title-card.component';
 import { ProfilePageComponent } from '../profile-page/profile-page.component';
 import { DataSourceAddComponent } from '../data-source-add/data-source-add.component';
 import { DataSourceManageComponent } from '../data-source-manage/data-source-manage.component';
 
+// TODO: Necessary internal components?
+import { ListViewComponent } from '../list-view/list-view.component';
+import { TabViewComponent } from '../tab-view/tab-view.component';
+
 const appRoutes: Routes = [
   { path: '', component: DefaultPageComponent },
 
+  // Setup 'splash-page' routing and routing for it's nested router: 'splash'
   {
     path: 'splash-page',
     component: SplashPageComponent,
@@ -45,6 +52,7 @@ const appRoutes: Routes = [
       },
     ]
   },
+  // Setup 'internal-page' routing and routing for it's nested router: 'internal'
   {
     path: 'internal-page',
     component: InternalPageComponent,
@@ -68,31 +76,25 @@ const appRoutes: Routes = [
         component: EmptyStateComponent,
         outlet: 'internal'
       },
-      // {
-      //   path: 'tab-view',
-      //   component: TabViewComponent,
-      //   outlet: 'internal'
-      // },
-      // {
-      //   path: 'list-view',
-      //   component: ListViewComponent,
-      //   outlet: 'internal'
-      // },
-      // TODO: Add profile and management
-
-  { path: 'empty-state', component: EmptyStateComponent, canActivate: [AuthGuard]},
-//  { path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'status-board' , component: StatusBoardComponent, canActivate: [AuthGuard] },
-  // TODO
-  { path: 'tab-view', component: TabViewComponent},
-  { path: 'list-view', component: ListViewComponent },
-  { path: 'data-source-manage', component: DataSourceManageComponent, outlet: 'internal'},
-  { path: 'data-source-add', component: DataSourceAddComponent, outlet: 'internal'},
-  { path: 'profile-page', component: ProfilePageComponent, outlet: 'internal'}
-  ]
+      {
+        path: 'data-source-manage',
+        component: DataSourceManageComponent,
+        outlet: 'internal'
+      },
+      {
+        path: 'data-source-add',
+        component: DataSourceAddComponent,
+        outlet: 'internal'
+      },
+      {
+        path: 'profile-page',
+        component: ProfilePageComponent,
+        outlet: 'internal'
+      }
+    ]
   },
 
-// Redirect invalid paths to default page
+  // Redirect invalid paths to default page
   { path: '**', redirectTo: '' },
 ];
 
