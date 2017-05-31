@@ -1,38 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../_models/user';
-import { UserService } from '../_services/user.service';
-
-import { GithubIssuesService } from '../_services/github-issues.service';
-import { GithubUserService } from '../_services/github-user.service';
-
-
 @Component({
   selector: 'app-status-board',
   templateUrl: './status-board.component.html',
   styleUrls: ['./status-board.component.css']
 })
+
+/**
+ * StatusBoardComponent houses several filter options that can be selected then applied.
+ * It will then use the filters to create and display data visualization widgets based on a data source.
+ * If no data sources exist, an empty-state (getting started) page will be displayed, prompting the user to add services
+ */
 export class StatusBoardComponent implements OnInit {
 
-  currentUser: User;
-  users: User[] = [];
+  // TODO: Declare filter values here
+  private sourceFilter: string;
+  private typeFilter: string;
+  private teamFilter: string;
+  private tagFilters: string[];
 
-  constructor(private userService: UserService,
-              private gis: GithubIssuesService,
-              private gus: GithubUserService) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  }
+  private dataSource: any[]; // TODO: Replace any[] with dataSource[] type, once it's created
+
+  constructor() { }
 
   ngOnInit() {
-    this.loadAllUsers();
+    // Attempt to populate datasource[] by looking in the database for stored information
+
+    // If datasource[] is then found to be empty, display the empty-state (getting-started) component
+    // Else display the status-board and filter options
   }
 
-  deleteUser(id: number) {
-    this.userService.delete(id).subscribe(() => { this.loadAllUsers(); });
+  /**
+   * Use the selected filters and iterate through stored data sources.
+   * If a data source matches the filter criteria, generate the associated widget and add it to the status board
+   */
+  applyFilters() {
+    // Iterate data sources and check against filters
+    // ie. if (ds.source == filter.souce && ds.type == filter.type) generateWidget(ds.source, ds.type, ds.serviceID)
   }
 
-  private loadAllUsers() {
-    this.userService.getAll().subscribe(users => { this.users = users; });
+  /**
+   * Generate a widget to display data to the status board
+   *
+   * @param widgetSource  Source of the data (Github, Openshift, etc)
+   * @param widgetType  Type of widget to generate (Commits, Issues, Pods, etc)
+   * @param serviceID Unique service id that will be used to grab information from the server
+   */
+  generateWidget(widgetSource: string, widgetType: string, serviceID: number) {
+    // Generate the widget and add it to the status board's display area
   }
-
 }
