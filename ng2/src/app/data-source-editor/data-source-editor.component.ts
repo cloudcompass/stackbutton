@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-data-source-editor',
   templateUrl: './data-source-editor.component.html',
@@ -9,7 +10,8 @@ export class DataSourceEditorComponent implements OnInit {
   isClicked: Boolean = false;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   onSubmit(form: any): void {
     console.log('you submitted value:', form);

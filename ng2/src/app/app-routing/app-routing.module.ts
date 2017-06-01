@@ -15,7 +15,7 @@ import { StatusBoardComponent } from '../status-board/status-board.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { DefaultPageComponent } from '../default-page/default-page.component';
 import { ProfilePageComponent } from '../profile-page/profile-page.component';
-import { DataSourceAddComponent } from '../data-source-add/data-source-add.component';
+import { DataSourceEditorComponent } from '../data-source-editor/data-source-editor.component';
 import { DataSourceManageComponent } from '../data-source-manage/data-source-manage.component';
 
 // TODO: Necessary internal components?
@@ -82,8 +82,8 @@ const appRoutes: Routes = [
         outlet: 'internal'
       },
       {
-        path: 'data-source-add',
-        component: DataSourceAddComponent,
+        path: 'data-source-editor',
+        component: DataSourceEditorComponent,
         outlet: 'internal'
       },
       {
