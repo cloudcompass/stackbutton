@@ -1,0 +1,28 @@
+<div class="col-xs-12 col-sm-6 col-lg-6">
+  <div class="card-pf">
+    <div class="card-pf-heading">
+      <h2 class="card-pf-title">
+        OpenShift Project Card
+      </h2>
+    </div><!-- End Card Header -->
+
+    <div class="card-pf-body">
+      <p>Project name: {{projectName}}</p>
+      <p>API Version: {{apiVersion}}</p>
+
+      <p><strong>Members</strong></p>
+      <p *ngFor="let member of projectMembers">{{member.name}}</p>
+
+      <p><strong>Routes</strong></p>
+      <p *ngFor="let route of projectRoutes">{{route.metadata.name}}</p>
+
+      <p><strong>Services</strong></p>
+      <p *ngFor="let service of projectServices">{{service.metadata.name}}</p>
+
+      <p><strong>Pods</strong></p>
+      <p *ngFor="let pod of projectPods">{{pod.metadata.name}}</p>
+
+    </div><!-- End Card Body -->
+
+  </div><!-- End Card -->
+</div>
