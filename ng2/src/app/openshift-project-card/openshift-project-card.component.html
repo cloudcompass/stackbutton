@@ -11,7 +11,7 @@
       <p>API Version: {{apiVersion}}</p>
 
       <p><strong>Members</strong></p>
-      <p *ngFor="let member of projectMembers">{{member.name}}</p>
+      <p *ngFor="let member of projectMembers">{{member.name}} - {{member.role}}</p>
 
       <p><strong>Routes</strong></p>
       <p *ngFor="let route of projectRoutes">{{route.metadata.name}}</p>

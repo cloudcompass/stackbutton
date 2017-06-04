@@ -51,7 +51,7 @@ import { BaseRequestOptions } from '@angular/http';
 
 // TODO: Is this necessary now?
 import * as $ from 'jquery';
-import { OpenshiftPodCardComponent } from './openshift-pod-card/openshift-pod-card.component';
+
 import { OpenshiftProjectCardComponent } from './openshift-project-card/openshift-project-card.component';
 
 @NgModule({
@@ -83,7 +83,6 @@ import { OpenshiftProjectCardComponent } from './openshift-project-card/openshif
     DataSourceEditorComponent,
     DataSourceManageComponent,
     DataSourceAddComponent,
-    OpenshiftPodCardComponent,
     OpenshiftProjectCardComponent,
   ],
   providers: [

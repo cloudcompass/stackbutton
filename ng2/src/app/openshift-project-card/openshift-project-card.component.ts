@@ -42,7 +42,23 @@ export class OpenshiftProjectCardComponent implements OnInit {
             switch (item.kind) {
               case 'Route': this.projectRoutes.push(item); break;
               case 'Service': this.projectServices.push(item); break
-              case 'Pod': this.projectPods.push(item); break;
+              case 'Pod':
+                this.projectPods.push(item);
+                const itm: OpenShiftPod = item;
+                console.log('  Pod name: ' + itm.metadata.name);
+                console.log('  Pod namespace: ' + itm.metadata.namespace);
+
+                for (const container of itm.spec.containers) {
+                  console.log('    Container name: ' + container.name);
+                  console.log('    Container image: ' + container.image);
+                  if (container.ports) {
+                    console.log('      Ports: ');
+                    for (const port of container.ports) {
+                      console.log('      ' + port.containerPort + '/' + port.protocol);
+                    }
+                  }
+                }
+                break;
             }
           }
 

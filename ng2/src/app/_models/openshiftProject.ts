@@ -1,24 +1,20 @@
 /**
- * Created by Garmonz on 2017-06-03.
+ * TODO: Find out what this is based on
  */
-import { OpenShiftPod } from './openshiftPod';
-import { OpenShiftService } from '../_services/openshift.service';
-import { OpenShiftRoute } from './openshiftRoute';
-
 export class OpenShiftProject {
+  // Custom elements
   project: string;
   members: {
     name: string;
     role: string;
     uuid: string;
   }[];
-  apiVersion: string;
-  items: {
-    // Route, Service, Pod
-    // item: OpenShiftRoute | OpenShiftService | OpenShiftPod;
-  }[];
+
   kind: string;
-  metaData: {};
+  apiVersion: string;
+  metaData: {}; // ListMeta? Actual type depends on this list type
+  items: any[]; // Route, Service, Pod. Actual type depends on this list type
+
   resourceVersion: string;
   selfLink: string;
 }

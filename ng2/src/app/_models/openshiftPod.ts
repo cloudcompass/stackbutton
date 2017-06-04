@@ -1,117 +1,103 @@
+import { OpenShiftContainer } from './openshiftContainer';
+
 /**
- * Created by Garmonz on 2017-06-02.
+ * Version 1 of the OpenShift/Kubernetes Pod API structure, plus some additions
+ *
+ * Note: The Majority of the comments (// ObjectMeta) denote the class definition outlined in the api documentation
+ * The idea was to model these and fit them in at a later time
  */
 export class OpenShiftPod {
+  kind: string;
   apiVersion: string;
-  kind: string; // Seen: Route, Pod, Service
   metadata: {
-    // annotations
-    creationTimestamp: string;
-    generateName: string;
-    labels: {
-      app: string;
-      deployment: string;
-      deploymentconfig: string;
-      'hawkular-openshift-agent': string;
-    };
     name: string;
+    generateName: string;
     namespace: string;
-    resourceVersion: string;
     selfLink: string;
     uid: string;
-  }; // End metadata
+    resourceVersion: string;
+    generation: number;
+    creationTimestamp: string;
+    deletionTimestamp: string;
+    labels: any;
+    annotations: any;
+  }; // ObjectMeta
   spec: {
-    containers: {
-      command: string[];
-      env: {
-        name: string;
-        value: string;
-      }[];
-      image: string;
-      imagePullPolicy: string; // Seen: Always
-      name: string;
-      ports: {
-        containerPort: number;
-        protocol: string;
-      }[];
-      readinessProbe: {
-        failureThreshold: number;
-        httpGet: {
-          path: string;
-          port: number;
-          scheme: string;
-        };
-        initialDelaySeconds: number;
-        periodSeconds: number;
-        successThreshold: number;
-        timeoutSeconds: number;
-      };
-      resources: {};
-      securityContext: {
-        capabilities: {
-          drop: string[];
-        };
-        privileged: boolean;
-        runAsUser: number;
-        setLinuxOptions: {
-          level: string;
-        };
-      };
-      terminationMessagePath: string;
-      volumeMounts: {
-        mountPath: string;
-        name: string;
-        readOnly: boolean;
-      }[];
-    }[]; // End containers
-    dnsPolicy: string;
-    imagePullSecrets: {
-      name: string;
-    }[];
-    nodeName: string;
+    volumes: any[]; // Volume
+    containers: OpenShiftContainer[];
     restartPolicy: string;
+    terminationGracePeriodSeconds: number;
+    activeDeadlineSeconds: number;
+    dnsPolicy: string;
+    nodeSelector: any;
+    host: string;
+    serviceAccountName: string;
+    serviceAccount: string;
+    nodeName: string;
+    imagePullSecrets: any[]; // LocalObjectReference
+    // TODO: securityContext not seen in official API?
     securityContext: {
       fsGroup: number;
       seLinuxOptions: {
         level: string;
       }
     };
-    serviceAccount: string;
-    serviceAccountName: string;
-    terminationGracePeriodSeconds: number;
-    volumes: {
-      emptyDir: {};
-      name: string;
-      secret: {
-        defaultMode: number;
-        secretName: string;
-      }
-    }[];
-  }; // End spec
+  }; // PodSpec
   status: {
+    phase: string;
     conditions: {
+      type: string; // Seen: Initialized, Ready, PodScheduled
+      status: string;
+      // Not in Kubernetes doc
       lastProbeTime: any; // string? only saw null
       lastTransitionTime: string;
-      status: string;
-      type: string; // Seen: Initialized, Ready, PodScheduled
-    }[];
+    }[]; // PodCondition
+    message: string;
+    reason: string;
+    hostIP: string;
+    podIP: string;
+    startTime: string;
     containerStatuses: {
-      containerID: string;
-      image: string;
-      imageID: string;
-      lastState: {};
       name: string;
-      ready: boolean;
-      restartCount: number;
       state: {
+        waiting: {
+          reason: string;
+        }; // ContainerStateWaiting
         running: {
           startedAt: string;
-        }
-      }
-    }[];
-      hostIP: string;
-      phase: string; // Seen: running
-      podIP: string;
-      startTime: string;
-  }; // End status
+        }; // ContainerStateRunning
+        terminated: {
+          exitCode: number;
+          signal: number;
+          reason: string;
+          message: string;
+          startedAt: string;
+          finishedAt: string;
+          containerID: string;
+        }; // ContainerStateWaiting
+      }; // ContainerState
+      lastState: {
+        waiting: {
+          reason: string;
+        }; // ContainerStateWaiting
+        running: {
+          startedAt: string;
+        }; // ContainerStateRunning
+        terminated: {
+          exitCode: number;
+          signal: number;
+          reason: string;
+          message: string;
+          startedAt: string;
+          finishedAt: string;
+          containerID: string;
+        }; // ContainerStateWaiting
+      }; // ContainerState
+      ready: boolean;
+      restartCount: number;
+      image: string;
+      imageID: string;
+      containerID: string;
+    }[]; // ContainerStatus
+  }; // PodStatus
 }

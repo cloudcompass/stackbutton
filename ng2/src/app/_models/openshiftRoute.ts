@@ -1,33 +1,47 @@
 /**
- * Created by Garmonz on 2017-06-02.
+ * Version 1 of OpenShift's Route API structure
+ *
+ * Note: The Majority of the comments (// ObjectMeta) denote the class definition outlined in the api documentation
+ * The idea was to model these and fit them in at a later time
  */
 export class OpenShiftRoute {
-  apiVersion: string;
   kind: string;
+  apiVersion: string;
   metadata: {
-    // annotations
-    creationTimestamp: string;
-    labels: {
-      app: string;
-    };
     name: string;
+    generateName: string;
     namespace: string;
-    resourceVersion: string;
     selfLink: string;
     uid: string;
-  };
+    resourceVersion: string;
+    generation: number;
+    creationTimestamp: string;
+    deletionTimestamp: string;
+    labels: any;
+    annotations: any;
+  }; // ObjectMeta
   spec: {
     host: string;
+    path: string;
+    to: {
+      kind: string;
+      namespace: string;
+      name: string;
+      uid: string;
+      apiVersion: string;
+      resourceVersion: string;
+      fieldPath: string;
+      // TODO: Addition?
+      weight: number;
+    }; // ObjectReference
+    tls: any; // TLSConfig
+
+    // TODO: Additions?
     port: {
       targetPort: string;
     };
-    to: {
-      kind: string;
-      name: string;
-      weight: number;
-    };
     wildcardPolicy: string;
-  };
+  }; // RouteSpec
   status: {
     ingress: {
       conditions: {
@@ -39,5 +53,5 @@ export class OpenShiftRoute {
       routerName: string;
       wildcardPolicy: string;
     }[];
-  };
+  }; // RouteStatus -- had no official documentation
 }
