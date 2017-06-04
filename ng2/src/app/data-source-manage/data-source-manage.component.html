@@ -1,3 +1,75 @@
-<p>
-  data-source-manage works!
-</p>
+<div class="container-fluid">
+  <div class="list-group list-view-pf list-view-pf-view">
+    <div class="list-group-item">
+      <div class="list-view-pf-checkbox">
+        <input type="checkbox">
+      </div>
+      <div class="list-view-pf-actions">
+        <button class="btn btn-default">Edit</button>
+        <button class="btn btn-default">Delete</button>
+      </div>
+      <div class="list-view-pf-main-info">
+        <div class="list-view-pf-left">
+          <span class="fa fa-database list-view-pf-icon-sm"></span>
+        </div>
+        <div class="list-view-pf-body">
+          <div class="list-view-pf-description">
+            <div class="list-group-item-heading">
+              OpenShift
+            </div>
+            <div class="list-group-item-text">
+              <div class="list-view-pf-additional-info-item">
+                <span class="pficon pficon-flag"></span>
+                <strong>Tags: </strong>yoyo, IDPISPOPD, Gorilla
+              </div>            </div>
+          </div>
+          <div class="list-view-pf-additional-info">
+            <div class="list-view-pf-additional-info-item">
+              <span class="pficon pficon-user"></span>
+              <strong>Team: </strong> Lee, Sheryll, Curtis, Stephen, Shea
+            </div>
+            <div class="list-view-pf-additional-info-item">
+              <span class="pficon pficon-project"></span>
+              <strong>Project: </strong>Stackbutton
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      // Row Checkbox Selection
+      $("input[type='checkbox']").change(function (e) {
+        if ($(this).is(":checked")) {
+          $(this).closest('.list-group-item').addClass("active");
+        } else {
+          $(this).closest('.list-group-item').removeClass("active");
+        }
+      });
+      // toggle dropdown menu
+      $('.list-view-pf-actions').on('show.bs.dropdown', function () {
+        var $this = $(this);
+        var $dropdown = $this.find('.dropdown');
+        var space = $(window).height() - $dropdown[0].getBoundingClientRect().top - $this.find('.dropdown-menu').outerHeight(true);
+        $dropdown.toggleClass('dropup', space < 10);
+      });
+      // allow users to select multiple list items with shift key
+      $('.list-group').on('click', '.list-view-pf-checkbox>input', function(event) {
+        var $list = $('.list-group');
+        var prevIndex = $list.data('preIndex');
+        var $listItems = $list.children('.list-group-item');
+        var $currentItem = $(this).closest('.list-group-item');
+        if(event.shiftKey && prevIndex > -1 && this.checked) {
+          var currentIndex = $listItems.index($currentItem);
+          var $selectScope = currentIndex - prevIndex > 0
+            ? $currentItem.prevAll().not($listItems.eq(prevIndex).prevAll().addBack())
+            : $listItems.eq(prevIndex).prevAll().not($currentItem.prevAll().addBack());
+          $selectScope.addClass('active').find('.list-view-pf-checkbox').children('input').prop('checked', true);
+        }
+        $list.data('preIndex', this.checked ? $listItems.index($currentItem) : -1);
+      });
+
+    });
+  </script>
+</div>
