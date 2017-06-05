@@ -8,6 +8,14 @@ import { OpenShiftPod } from '../_models/openshiftPod';
   templateUrl: './openshift-project-card.component.html',
   styleUrls: ['./openshift-project-card.component.css']
 })
+
+/**
+ * Let's plan this out...
+ *
+ * On init, grab the openshift data and parse it
+ * Create components based on the data gathered
+ *
+ */
 export class OpenshiftProjectCardComponent implements OnInit {
 
   private projectName: string;
@@ -19,6 +27,7 @@ export class OpenshiftProjectCardComponent implements OnInit {
   private projectPods: OpenShiftPod[];
 
   constructor(private openShiftService: OpenShiftService) {
+
     this.projectMembers = [];
     this.projectRoutes = [];
     this.projectServices = [];

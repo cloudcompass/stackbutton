@@ -1,0 +1,13 @@
+<div class="col-xs-12 col-sm-6 col-lg-6">
+  <div class="card-pf">
+    <div *ngIf="hasData">
+      <p>Deployment Config: <a>{{deploymentConfig}}</a> - {{daysSinceCreation}} days ago</p>
+      <p>Container: {{containers[0].name.toUpperCase()}}</p>
+      <p>[=] Image: {{containers[0].image}}</p>
+      <p>v^v Ports: <span *ngFor="let port of containers[0].ports">{{port.containerPort}}/{{port.protocol}}, </span></p>
+    </div>
+    <div *ngIf="!hasData">
+      <p>No data</p>
+    </div>
+  </div>
+</div>

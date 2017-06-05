@@ -53,6 +53,10 @@ import { BaseRequestOptions } from '@angular/http';
 import * as $ from 'jquery';
 
 import { OpenshiftProjectCardComponent } from './openshift-project-card/openshift-project-card.component';
+import { OpenshiftPodComponent } from './openshift-pod/openshift-pod.component';
+import { OpenshiftRouteComponent } from './openshift-route/openshift-route.component';
+import { OpenshiftServiceComponent } from './openshift-service/openshift-service.component';
+
 
 @NgModule({
   imports: [
@@ -84,6 +88,9 @@ import { OpenshiftProjectCardComponent } from './openshift-project-card/openshif
     DataSourceManageComponent,
     DataSourceAddComponent,
     OpenshiftProjectCardComponent,
+    OpenshiftPodComponent,
+    OpenshiftRouteComponent,
+    OpenshiftServiceComponent,
   ],
   providers: [
     AuthGuard,
