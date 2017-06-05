@@ -206,7 +206,16 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": "[{\"name\": \"sql\", \"kind\": \"Service\"}, {\"name\": \"elasticsearch\", \"kind\": \"Service\"}]"
+                    "service.alpha.openshift.io/dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
                 },
                 "creationTimestamp": "2017-05-29T03:09:33Z",
                 "labels": {
@@ -245,7 +254,16 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": "[{\"name\": \"sql\", \"kind\": \"Service\"}, {\"name\": \"elasticsearch\", \"kind\": \"Service\"}]"
+                    "service.alpha.openshift.io/dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
                 },
                 "creationTimestamp": "2017-05-29T03:09:33Z",
                 "labels": {
@@ -290,7 +308,16 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": "[{\"name\": \"sql\", \"kind\": \"Service\"}, {\"name\": \"elasticsearch\", \"kind\": \"Service\"}]"
+                    "service.alpha.openshift.io/dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
                 },
                 "creationTimestamp": "2017-05-29T03:09:33Z",
                 "labels": {
@@ -1591,7 +1618,16 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": "[{\"name\": \"sql\", \"kind\": \"Service\"}, {\"name\": \"elasticsearch\", \"kind\": \"Service\"}]"
+                    "service.alpha.openshift.io/dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
                 },
                 "creationTimestamp": "2017-05-29T03:09:33Z",
                 "labels": {
@@ -1630,7 +1666,16 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": "[{\"name\": \"sql\", \"kind\": \"Service\"}, {\"name\": \"elasticsearch\", \"kind\": \"Service\"}]"
+                    "service.alpha.openshift.io/dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
                 },
                 "creationTimestamp": "2017-05-29T03:09:33Z",
                 "labels": {
@@ -1675,7 +1720,16 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": "[{\"name\": \"sql\", \"kind\": \"Service\"}, {\"name\": \"elasticsearch\", \"kind\": \"Service\"}]"
+                    "service.alpha.openshift.io/dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
                 },
                 "creationTimestamp": "2017-05-29T03:09:33Z",
                 "labels": {
