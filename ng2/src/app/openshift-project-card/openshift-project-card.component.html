@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-sm-6 col-lg-6">
+<div class="col-xs-24 col-sm-12 col-lg-12">
   <div class="card-pf">
     <div class="card-pf-heading">
       <h2 class="card-pf-title">
@@ -10,17 +10,28 @@
       <p>Project name: {{projectName}}</p>
       <p>API Version: {{apiVersion}}</p>
 
-      <p><strong>Members</strong></p>
-      <p *ngFor="let member of projectMembers">{{member.name}} - {{member.role}}</p>
+      <div class="row row-cards-pf">
+        <p><strong>Members</strong></p>
+        <p *ngFor="let member of projectMembers">{{member.name}} - {{member.role}}</p>
+      </div>
 
-      <p><strong>Routes</strong></p>
-      <p *ngFor="let route of projectRoutes">{{route.metadata.name}}</p>
+      <div class="row row-cards-pf">
+        <p><strong>Routes</strong></p>
+        <p *ngFor="let route of projectRoutes">{{route.metadata.name}}</p>
+      </div>
 
-      <p><strong>Services</strong></p>
-      <p *ngFor="let service of projectServices">{{service.metadata.name}}</p>
+      <div class="row row-cards-pf">
+        <p><strong>Services</strong></p>
+        <div *ngFor="let service of projectServices">
+          <app-openshift-service [serviceData]="service"
+                                 [podData]="getPodNamed(service.metadata.name)"></app-openshift-service>
+        </div>
+      </div>
 
-      <p><strong>Pods</strong></p>
-      <p *ngFor="let pod of projectPods">{{pod.metadata.name}}</p>
+      <div class="row row-cards-pf">
+        <p><strong>Pods</strong></p>
+        <p *ngFor="let pod of projectPods">{{pod.metadata.name}}</p>
+      </div>
 
     </div><!-- End Card Body -->
 

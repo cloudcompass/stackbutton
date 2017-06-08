@@ -51,25 +51,20 @@ export class OpenshiftProjectCardComponent implements OnInit {
             switch (item.kind) {
               case 'Route': this.projectRoutes.push(item); break;
               case 'Service': this.projectServices.push(item); break
-              case 'Pod':
-                this.projectPods.push(item);
-                const itm: OpenShiftPod = item;
-                console.log('  Pod name: ' + itm.metadata.name);
-                console.log('  Pod namespace: ' + itm.metadata.namespace);
-
-                for (const container of itm.spec.containers) {
-                  console.log('    Container name: ' + container.name);
-                  console.log('    Container image: ' + container.image);
-                  if (container.ports) {
-                    console.log('      Ports: ');
-                    for (const port of container.ports) {
-                      console.log('      ' + port.containerPort + '/' + port.protocol);
-                    }
-                  }
-                }
-                break;
+              case 'Pod': this.projectPods.push(item); break;
+              default: console.log('Unexpected item kind found: ' + item.kind);
             }
           }
+
+          // Now that the route, service, and pod data is populated, work out the connections
+          // Create pods
+          // Then create services
+          // Then create routes
+
+          console.log(this.projectRoutes[0].metadata.name);
+          console.log(this.projectServices[1]);
+          console.log(this.projectPods[2].metadata.name);
+
 
           // TEMP: Only here due to poor planning. Break after first project.
           break;
@@ -80,6 +75,15 @@ export class OpenshiftProjectCardComponent implements OnInit {
         // TODO: Display an error to the user
       }
     );
+  }
+
+  private getPodNamed(podName: string): OpenShiftPod {
+    for (const pod of this.projectPods) {
+      if (pod.metadata.labels.app === podName) {
+        return pod;
+      }
+    };
+    return null;
   }
 
   ngOnInit() {

@@ -1,7 +1,12 @@
 <div class="col-xs-12 col-sm-6 col-lg-6">
   <div class="card-pf">
     <div *ngIf="hasData">
-      <p>O-> <a>{{name}}</a> <></p>
+      <div>
+        <p>O-> <a>{{serviceName}}</a> <></p>
+      </div>
+      <div>
+        <app-openshift-pod [podData]="podData"></app-openshift-pod>
+      </div>
     </div>
     <div *ngIf="!hasData">
       <p>No data</p>
