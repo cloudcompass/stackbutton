@@ -206,7 +206,7 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": [
+                    "dependencies": [
                         {
                             "name": "sql",
                             "kind": "Service"
@@ -254,7 +254,7 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": [
+                    "dependencies": [
                         {
                             "name": "sql",
                             "kind": "Service"
@@ -308,7 +308,7 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": [
+                    "dependencies": [
                         {
                             "name": "sql",
                             "kind": "Service"
@@ -1618,7 +1618,7 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": [
+                    "dependencies": [
                         {
                             "name": "sql",
                             "kind": "Service"
@@ -1666,7 +1666,7 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": [
+                    "dependencies": [
                         {
                             "name": "sql",
                             "kind": "Service"
@@ -1720,7 +1720,7 @@
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp",
-                    "service.alpha.openshift.io/dependencies": [
+                    "dependencies": [
                         {
                             "name": "sql",
                             "kind": "Service"

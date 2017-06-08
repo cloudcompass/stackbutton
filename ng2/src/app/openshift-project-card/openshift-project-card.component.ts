@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenShiftService } from '../_services/openshift.service';
+import { OpenShiftServiceModel } from '../_models/openshiftService';
 import { OpenShiftRoute } from '../_models/openshiftRoute';
 import { OpenShiftPod } from '../_models/openshiftPod';
 
@@ -23,7 +24,7 @@ export class OpenshiftProjectCardComponent implements OnInit {
 
   private projectMembers: string[];
   private projectRoutes: OpenShiftRoute[];
-  private projectServices: OpenShiftService[];
+  private projectServices: OpenShiftServiceModel[];
   private projectPods: OpenShiftPod[];
 
   constructor(private openShiftService: OpenShiftService) {
@@ -77,16 +78,25 @@ export class OpenshiftProjectCardComponent implements OnInit {
     );
   }
 
-  private getPodNamed(podName: string): OpenShiftPod {
+  ngOnInit() { }
+
+  getServiceNamed(serviceName: string): OpenShiftServiceModel {
+    for (const service of this.projectServices) {
+      // console.log('gSN: ' + serviceName + ' : ' + service.metadata.name);
+      if (service.metadata.name === serviceName) {
+        return service;
+      }
+    }
+    return null;
+  }
+
+  getPodNamed(podName: string): OpenShiftPod {
     for (const pod of this.projectPods) {
       if (pod.metadata.labels.app === podName) {
         return pod;
       }
     };
     return null;
-  }
-
-  ngOnInit() {
   }
 
 }

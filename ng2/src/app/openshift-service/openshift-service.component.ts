@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OpenShiftService } from '../_models/openshiftService';
+import { OpenShiftServiceModel } from '../_models/openshiftService';
 import { OpenShiftPod } from '../_models/openshiftPod';
 
 @Component({
@@ -8,7 +8,7 @@ import { OpenShiftPod } from '../_models/openshiftPod';
   styleUrls: ['./openshift-service.component.css']
 })
 export class OpenshiftServiceComponent implements OnInit {
-  @Input() serviceData: OpenShiftService;
+  @Input() serviceData: OpenShiftServiceModel;
   @Input() podData: OpenShiftPod;
 
   private hasData: boolean;

@@ -4,7 +4,7 @@
  * Note: The Majority of the comments (// ObjectMeta) denote the class definition outlined in the api documentation
  * The idea was to model these and fit them in at a later time
  */
-export class OpenShiftService {
+export class OpenShiftServiceModel {
   kind: string;
   apiVersion: string;
   metadata: {
@@ -18,7 +18,12 @@ export class OpenShiftService {
     creationTimestamp: string;
     deletionTimestamp: string;
     labels: any;
-    annotations: any;
+    annotations: {
+      dependencies: {
+        name: string;
+        kind: string;
+      }[];
+    };
   }; // ObjectMeta
   secrets: any[]; // ObjectReference
   imagePullSecrets: any[]; // LocalObjectReference

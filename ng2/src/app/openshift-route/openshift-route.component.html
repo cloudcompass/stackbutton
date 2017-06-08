@@ -1,7 +1,13 @@
-<div class="col-xs-12 col-sm-6 col-lg-6">
+<div class="col-xs-24 col-sm-12 col-lg-12">
   <div class="card-pf">
     <div *ngIf="hasData">
-      <p>v <strong>{{appName.toUpperCase()}}</strong> - []^ <a>{{host}}</a></p>
+      <div style="background:lightblue"> <!-- Temp style to be removed -->
+        <p>v <strong>{{appName.toUpperCase()}}</strong> - []^ <a>{{host}}</a></p>
+      </div>
+      <p><strong>Attached Services</strong></p>
+      <div *ngFor="let name of serviceNames">
+        {{name}}
+      </div>
     </div>
     <div *ngIf="!hasData">
       <p>No data</p>
