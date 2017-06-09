@@ -1,6 +1,6 @@
 <div class="col-xs-24 col-sm-12 col-lg-12">
   <div class="card-pf">
-    <div *ngIf="hasData">
+    <div *ngIf="routeData">
       <div style="background:lightblue"> <!-- Temp style to be removed -->
         <p>v <strong>{{appName.toUpperCase()}}</strong> - []^ <a>{{host}}</a></p>
       </div>
@@ -9,8 +9,8 @@
         {{name}}
       </div>
     </div>
-    <div *ngIf="!hasData">
-      <p>No data</p>
+    <div *ngIf="!routeData">
+      <p>Loading Router Data...</p>
     </div>
   </div>
 </div>

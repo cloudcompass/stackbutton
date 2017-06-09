@@ -31,6 +31,7 @@ export class OpenShiftService {
   constructor(private http: Http) { }
 
   /**
+   * <description>
    *
    * @returns {Map<any>}
    */
@@ -41,12 +42,13 @@ export class OpenShiftService {
   }
 
   /**
+   * <description>
    *
    * @param projectName
    * @returns {Map<any>}
    */
   getOpenShiftProject(projectName: string): Observable<any> {
-    console.log('getOpenShiftProject: ' + projectName);
+    // console.log('getOpenShiftProject: ' + projectName);
     return this.http
       .get('assets/sampleData/sample-openShift-data.json')
       .map(res => {
@@ -56,40 +58,33 @@ export class OpenShiftService {
           if (project.project === projectName) return project;
         }
 
-        // Hey, this is obviously bad practice, but it's here for now
-        // TODO: Figure out appropriate handling of errors for map(). Look into custom Response objects maybe? IDK
+        // Note: Shoddy error-handling
         return {
-          'error': 'Openshift Project name not found: ' + projectName
+          'error': 'OpenShift Project name not found: ' + projectName
         };
 
       });
   }
 
   /**
+   * <description>
    *
    * @param projectName
    * @param serviceName
    * @returns {Map<any>}
    */
   getProjectService(projectName: string, serviceName: string): Observable<any> {
-    console.log('getProjectService: ' + projectName + ' : ' + serviceName);
+    // console.log('getProjectService: ' + projectName + ' : ' + serviceName);
 
     return this.http
       .get('assets/sampleData/sample-openShift-data.json')
       .map(res => {
         const data = res.json();
 
-        console.log('data: ' + data);
-
         for (const project of data) {
-          console.log('project');
           if (project.project === projectName) {
-            console.log('found project');
             for (const item of project.items) {
-
-              console.log('item kind: ' + item.kind);
               if (item.kind === 'Service') {
-                console.log('service found: ' + item);
                 if (item.metadata.name === serviceName) return item;
               }
             }
@@ -103,19 +98,21 @@ export class OpenShiftService {
 
         // Note: Shoddy error-handling
         return {
-          'error': 'Openshift Project name not found: ' + projectName
+          'error': 'OpenShift Project name not found: ' + projectName
         };
       });
   }
 
   /**
+   * <description>
    *
    * @param projectName
    * @param podName
    * @returns {Map<any>}
    */
   getProjectPod(projectName: string, podName: string): Observable<any> {
-    console.log('getProjectPod: ' + projectName + ' : ' + podName);
+    // console.log('getProjectPod: ' + projectName + ' : ' + podName);
+
     return this.http
       .get('assets/sampleData/sample-openShift-data.json')
       .map(res => {
@@ -138,13 +135,21 @@ export class OpenShiftService {
 
         // Note: Shoddy error-handling
         return {
-          'error': 'Openshift Project name not found: ' + projectName
+          'error': 'OpenShift Project name not found: ' + projectName
         };
       });
   }
 
+  /**
+   * <description>
+   *
+   * @param projectName
+   * @param routeName
+   * @returns {Map<any>}
+   */
   getProjectRoute(projectName: string, routeName: string): Observable<any> {
-    console.log('getProjectRoute: ' + projectName + ' : ' + routeName);
+    // console.log('getProjectRoute: ' + projectName + ' : ' + routeName);
+
     return this.http
       .get('assets/sampleData/sample-openShift-data.json')
       .map(res => {
@@ -167,10 +172,8 @@ export class OpenShiftService {
 
         // Note: Shoddy error-handling
         return {
-          'error': 'Openshift Project name not found: ' + projectName
+          'error': 'OpenShift Project name not found: ' + projectName
         };
       });
   }
-
-
 }

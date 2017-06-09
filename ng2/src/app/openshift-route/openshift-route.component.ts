@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OpenShiftRoute } from '../_models/openshiftRoute';
 import { OpenShiftServiceModel } from '../_models/openshiftService';
+import {OpenShiftService} from "../_services/openshift.service";
 
 @Component({
   selector: 'app-openshift-route',
@@ -8,41 +9,31 @@ import { OpenShiftServiceModel } from '../_models/openshiftService';
   styleUrls: ['./openshift-route.component.css']
 })
 export class OpenshiftRouteComponent implements OnInit {
-  @Input() routeData: OpenShiftRoute;
-  @Input() mainService: OpenShiftServiceModel;
+  @Input() name: string;
+  @Input() projectName: string;
 
-  private data: any;
-  private hasData: boolean;
+  private routeData: OpenShiftRoute;
+
   private appName: string;
   private host: string;
 
   private services: OpenShiftServiceModel[];
   private serviceNames: string[];
 
-  constructor() {
-    this.hasData = false;
-  }
+  constructor(private openShiftService: OpenShiftService) { }
 
   ngOnInit() {
-    this.hasData = true;
 
-    this.hasData = true;
-    this.appName = this.routeData.metadata.labels.app;
-    this.host = this.routeData.spec.host;
-
-    this.services = [];
-    this.services.push(this.mainService);
-
-    this.serviceNames = [];
-    this.serviceNames.push(this.mainService.metadata.name);
-
-    if (this.mainService) {
-      if (this.mainService.metadata.annotations.dependencies) {
-        for (const dependentService of this.mainService.metadata.annotations.dependencies) {
-          console.log('depserv: ' + dependentService.name);
-          this.serviceNames.push(dependentService.name);
-        }
+    this.openShiftService.getProjectRoute(this.projectName, this.name).subscribe(
+      data => {
+        // Get route data
+        // Use route data to populate main service - route.spec.to.name
+        // Use main service to link service dependencies - service.meta.annotations.dependencies
+        // display it in a nice package
+      },
+      error => {
+        console.log('Error retrieving OpenShift route: ' + error);
       }
-    }
+    );
   }
 }

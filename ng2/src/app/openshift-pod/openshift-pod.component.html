@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="hasData">
+  <div *ngIf="podData">
     <p>Deployment Config: <a>{{deploymentConfig}}</a> - {{daysSinceCreation}} days ago</p>
     <div *ngFor="let container of containers">
       <p>Container: {{container.name.toUpperCase()}}</p>
@@ -7,7 +7,7 @@
       <p>v^v Ports: <span *ngFor="let port of container.ports">{{port.containerPort}}/{{port.protocol}}, </span></p>
     </div>
   </div>
-  <div *ngIf="!hasData">
-    <p>Loading...</p>
+  <div *ngIf="!podData">
+    <p>Loading Pod Data...</p>
   </div>
 </div>

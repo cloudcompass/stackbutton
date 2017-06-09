@@ -18,6 +18,8 @@
       <div class="row row-cards-pf">
         <p><strong>Routes</strong></p>
         <div *ngFor="let route of projectRoutes">
+          <app-openshift-route [name]="route.metadata.name"
+                               [projectName]="projectName"></app-openshift-route>
           <!--
           <app-openshift-route [routeData]="route"
                                [mainService]="getServiceNamed(route.spec.to.name)"></app-openshift-route>
