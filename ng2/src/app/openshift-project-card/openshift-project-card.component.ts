@@ -29,7 +29,6 @@ export class OpenshiftProjectCardComponent implements OnInit {
   private projectPods: OpenShiftPod[];
 
   constructor(private openShiftService: OpenShiftService) {
-    console.log('wtf');
 
     this.projectMembers = [];
     this.projectRoutes = [];
@@ -81,6 +80,7 @@ export class OpenshiftProjectCardComponent implements OnInit {
 
     // TESTING
 
+    /*
     this.openShiftService.getOpenShiftProject('Eclipse-Kapua').subscribe(
       data => {
         // This check shouldn't have to go here, but a hack on the getOpenShiftProject warrants it
@@ -99,7 +99,7 @@ export class OpenshiftProjectCardComponent implements OnInit {
       }
     );
 
-      this.openShiftService.getProjectPod('Eclipse-Kapua', 'sql').subscribe(
+    this.openShiftService.getProjectRoute('Eclipse-Kapua', 'console').subscribe(
       data => {
         // This check shouldn't have to go here, but a hack on the getProjectService warrants it
         // TODO: Figure out appropriate handling of errors for map(). Look into custom Response objects maybe? IDK
@@ -114,30 +114,10 @@ export class OpenshiftProjectCardComponent implements OnInit {
         console.log('getOpenShiftProject fail: ' + error);
       }
     );
-
+    */
 
 
   }
 
   ngOnInit() { }
-
-  getServiceNamed(serviceName: string): OpenShiftServiceModel {
-    for (const service of this.projectServices) {
-      // console.log('gSN: ' + serviceName + ' : ' + service.metadata.name);
-      if (service.metadata.name === serviceName) {
-        return service;
-      }
-    }
-    return null;
-  }
-
-  getPodNamed(podName: string): OpenShiftPod {
-    for (const pod of this.projectPods) {
-      if (pod.metadata.labels.app === podName) {
-        return pod;
-      }
-    };
-    return null;
-  }
-
 }

@@ -46,6 +46,7 @@ export class OpenShiftService {
    * @returns {Map<any>}
    */
   getOpenShiftProject(projectName: string): Observable<any> {
+    console.log('getOpenShiftProject: ' + projectName);
     return this.http
       .get('assets/sampleData/sample-openShift-data.json')
       .map(res => {
@@ -71,22 +72,31 @@ export class OpenShiftService {
    * @returns {Map<any>}
    */
   getProjectService(projectName: string, serviceName: string): Observable<any> {
+    console.log('getProjectService: ' + projectName + ' : ' + serviceName);
+
     return this.http
       .get('assets/sampleData/sample-openShift-data.json')
       .map(res => {
         const data = res.json();
 
+        console.log('data: ' + data);
+
         for (const project of data) {
+          console.log('project');
           if (project.project === projectName) {
+            console.log('found project');
             for (const item of project.items) {
+
+              console.log('item kind: ' + item.kind);
               if (item.kind === 'Service') {
+                console.log('service found: ' + item);
                 if (item.metadata.name === serviceName) return item;
               }
             }
 
             // Note: Shoddy error-handling
             return {
-              'error': 'No project items found that match type and name: ' + serviceName
+              'error': 'Service not found in project items: ' + serviceName
             };
           }
         }
@@ -98,7 +108,14 @@ export class OpenShiftService {
       });
   }
 
+  /**
+   *
+   * @param projectName
+   * @param podName
+   * @returns {Map<any>}
+   */
   getProjectPod(projectName: string, podName: string): Observable<any> {
+    console.log('getProjectPod: ' + projectName + ' : ' + podName);
     return this.http
       .get('assets/sampleData/sample-openShift-data.json')
       .map(res => {
@@ -114,18 +131,46 @@ export class OpenShiftService {
 
             // Note: Shoddy error-handling
             return {
-              'error': 'No project items found that match type and name: ' + podName
+              'error': 'Pod not found in project items: ' + podName
             };
           }
         }
 
         // Note: Shoddy error-handling
         return {
-          'error': 'Openshift Pod name not found: ' + projectName
+          'error': 'Openshift Project name not found: ' + projectName
         };
       });
   }
 
+  getProjectRoute(projectName: string, routeName: string): Observable<any> {
+    console.log('getProjectRoute: ' + projectName + ' : ' + routeName);
+    return this.http
+      .get('assets/sampleData/sample-openShift-data.json')
+      .map(res => {
+        const data = res.json();
+
+        for (const project of data) {
+          if (project.project === projectName) {
+            for (const item of project.items) {
+              if (item.kind === 'Route') {
+                if (item.metadata.name === routeName) return item;
+              }
+            }
+
+            // Note: Shoddy error-handling
+            return {
+              'error': 'Route not found in project items: ' + routeName
+            };
+          }
+        }
+
+        // Note: Shoddy error-handling
+        return {
+          'error': 'Openshift Project name not found: ' + projectName
+        };
+      });
+  }
 
 
 }

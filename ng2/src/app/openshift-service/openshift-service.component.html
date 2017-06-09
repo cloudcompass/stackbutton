@@ -5,11 +5,11 @@
         <p>O-> <a>{{serviceName}}</a> <></p>
       </div>
       <div>
-        <app-openshift-pod [podData]="podData"></app-openshift-pod>
+        <app-openshift-pod [name]="podName" [projectName]="projectName"></app-openshift-pod>
       </div>
     </div>
     <div *ngIf="!hasData">
-      <p>No data</p>
+      <p>Loading...</p>
     </div>
   </div>
 </div>
