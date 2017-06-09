@@ -3,6 +3,7 @@ import { OpenShiftService } from '../_services/openshift.service';
 import { OpenShiftServiceModel } from '../_models/openshiftService';
 import { OpenShiftRoute } from '../_models/openshiftRoute';
 import { OpenShiftPod } from '../_models/openshiftPod';
+import {OpenShiftProject} from "../_models/openshiftProject";
 
 @Component({
   selector: 'app-openshift-project-card',
@@ -28,6 +29,7 @@ export class OpenshiftProjectCardComponent implements OnInit {
   private projectPods: OpenShiftPod[];
 
   constructor(private openShiftService: OpenShiftService) {
+    console.log('wtf');
 
     this.projectMembers = [];
     this.projectRoutes = [];
@@ -76,6 +78,45 @@ export class OpenshiftProjectCardComponent implements OnInit {
         // TODO: Display an error to the user
       }
     );
+
+    // TESTING
+
+    this.openShiftService.getOpenShiftProject('Eclipse-Kapua').subscribe(
+      data => {
+        // This check shouldn't have to go here, but a hack on the getOpenShiftProject warrants it
+        // TODO: Figure out appropriate handling of errors for map(). Look into custom Response objects maybe? IDK
+        if (data.error) {
+          console.log('getOpenShiftProject error: ' + data.error);
+        }
+
+        // Cast the data to the expected model, since that's what's expected to return
+        const proj: OpenShiftProject = data;
+        console.log('getOpenShiftProject success: ' + proj.project);
+        console.log('getOpenShiftProject success: ' + proj.members[0].name);
+      },
+      error => {
+        console.log('getOpenShiftProject fail: ' + error);
+      }
+    );
+
+      this.openShiftService.getProjectPod('Eclipse-Kapua', 'sql').subscribe(
+      data => {
+        // This check shouldn't have to go here, but a hack on the getProjectService warrants it
+        // TODO: Figure out appropriate handling of errors for map(). Look into custom Response objects maybe? IDK
+        if (data.error) {
+          console.log('getProjectPod error: ' + data.error);
+        }
+
+        // Cast the data to the expected model, since that's what's expected to return
+        console.log('pod found: ' + JSON.stringify(data));
+      },
+      error => {
+        console.log('getOpenShiftProject fail: ' + error);
+      }
+    );
+
+
+
   }
 
   ngOnInit() { }
