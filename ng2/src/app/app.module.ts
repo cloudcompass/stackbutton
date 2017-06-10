@@ -42,6 +42,7 @@ import { GithubService } from './_services/github.service';
 import { GithubUserService } from './_services/github-user.service';
 import { GithubIssuesService } from './_services/github-issues.service';
 import { GithubCommitsService } from './_services/github-commits.service';
+import { OpenShiftService } from './_services/openshift.service';
 
 // Used to create fake backend, to be removed
 import { fakeBackendProvider } from './_helpers/fake-backend';
@@ -50,6 +51,12 @@ import { BaseRequestOptions } from '@angular/http';
 
 // TODO: Is this necessary now?
 import * as $ from 'jquery';
+
+import { OpenshiftProjectCardComponent } from './openshift-project-card/openshift-project-card.component';
+import { OpenshiftPodComponent } from './openshift-pod/openshift-pod.component';
+import { OpenshiftRouteComponent } from './openshift-route/openshift-route.component';
+import { OpenshiftServiceComponent } from './openshift-service/openshift-service.component';
+
 
 @NgModule({
   imports: [
@@ -80,6 +87,10 @@ import * as $ from 'jquery';
     DataSourceEditorComponent,
     DataSourceManageComponent,
     DataSourceAddComponent,
+    OpenshiftProjectCardComponent,
+    OpenshiftPodComponent,
+    OpenshiftRouteComponent,
+    OpenshiftServiceComponent,
   ],
   providers: [
     AuthGuard,
@@ -89,6 +100,9 @@ import * as $ from 'jquery';
     GithubUserService,
     GithubIssuesService,
     GithubCommitsService,
+
+    // Testing
+    OpenShiftService,
 
     // Used to create fake backend, to be removed
     fakeBackendProvider,

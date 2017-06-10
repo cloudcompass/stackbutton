@@ -1,0 +1,21 @@
+<div class="col-xs-24 col-sm-12 col-lg-12" style="background:greenyellow">
+  <div *ngIf="!loading">
+    <!-- Route Header -->
+    <div style="background:antiquewhite">
+      <span class="fa fa-caret-down"></span>
+      <strong>{{appName.toUpperCase()}}</strong>
+      -
+      <span class="pficon-arrow"></span>
+      <a>{{host}}</a>
+    </div>
+
+    <!-- Route Body -->
+    <div *ngFor="let service of services">
+      <app-openshift-service [projectName]="projectName"
+                             [name]="service.metadata.name"></app-openshift-service>
+    </div>
+  </div>
+  <div *ngIf="loading">
+    <span class="fa fa-spinner fa-spin"></span>Loading Router Data...
+  </div>
+</div>

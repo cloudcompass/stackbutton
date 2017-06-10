@@ -1,0 +1,2821 @@
+[
+{
+    "project" : "Eclipse-Kapua",
+    "members" : [
+  	{
+	    "name": "Stephen Curran",
+	    "role": "admin",
+	    "uuid": "2340e059af04950b03c0de0334068"
+	  },
+	  {
+	    "name": "Shea Phillips",
+	    "role": "contribute",
+	    "uuid": "69375f93948e800a05869c0405be04dfe23"
+	  }
+    ],
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Route",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/host.generated": "true"
+                },
+                "creationTimestamp": "2017-05-29T03:09:34Z",
+                "labels": {
+                    "app": "kapua-api"
+                },
+                "name": "api",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1103",
+                "selfLink": "/oapi/v1/namespaces/eclipse-kapua/routes/api",
+                "uid": "3da31ad8-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "host": "api-eclipse-kapua.10.0.75.2.xip.io",
+                "port": {
+                    "targetPort": "http"
+                },
+                "to": {
+                    "kind": "Service",
+                    "name": "kapua-api",
+                    "weight": 100
+                },
+                "wildcardPolicy": "None"
+            },
+            "status": {
+                "ingress": [
+                    {
+                        "conditions": [
+                            {
+                                "lastTransitionTime": "2017-05-29T03:09:34Z",
+                                "status": "True",
+                                "type": "Admitted"
+                            }
+                        ],
+                        "host": "api-eclipse-kapua.10.0.75.2.xip.io",
+                        "routerName": "router",
+                        "wildcardPolicy": "None"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Route",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/host.generated": "true"
+                },
+                "creationTimestamp": "2017-05-29T03:09:34Z",
+                "labels": {
+                    "app": "kapua-broker"
+                },
+                "name": "broker",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1097",
+                "selfLink": "/oapi/v1/namespaces/eclipse-kapua/routes/broker",
+                "uid": "3d88cb0e-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "host": "broker-eclipse-kapua.10.0.75.2.xip.io",
+                "port": {
+                    "targetPort": "mqtt-websocket-tcp"
+                },
+                "to": {
+                    "kind": "Service",
+                    "name": "kapua-broker",
+                    "weight": 100
+                },
+                "wildcardPolicy": "None"
+            },
+            "status": {
+                "ingress": [
+                    {
+                        "conditions": [
+                            {
+                                "lastTransitionTime": "2017-05-29T03:09:34Z",
+                                "status": "True",
+                                "type": "Admitted"
+                            }
+                        ],
+                        "host": "broker-eclipse-kapua.10.0.75.2.xip.io",
+                        "routerName": "router",
+                        "wildcardPolicy": "None"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Route",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/host.generated": "true"
+                },
+                "creationTimestamp": "2017-05-29T03:09:34Z",
+                "labels": {
+                    "app": "kapua-console"
+                },
+                "name": "console",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1100",
+                "selfLink": "/oapi/v1/namespaces/eclipse-kapua/routes/console",
+                "uid": "3d999a85-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "host": "console-eclipse-kapua.10.0.75.2.xip.io",
+                "port": {
+                    "targetPort": "http"
+                },
+                "to": {
+                    "kind": "Service",
+                    "name": "kapua-console",
+                    "weight": 100
+                },
+                "wildcardPolicy": "None"
+            },
+            "status": {
+                "ingress": [
+                    {
+                        "conditions": [
+                            {
+                                "lastTransitionTime": "2017-05-29T03:09:34Z",
+                                "status": "True",
+                                "type": "Admitted"
+                            }
+                        ],
+                        "host": "console-eclipse-kapua.10.0.75.2.xip.io",
+                        "routerName": "router",
+                        "wildcardPolicy": "None"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "elasticsearch"
+                },
+                "name": "elasticsearch",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1092",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/elasticsearch",
+                "uid": "3d826e71-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.194.195",
+                "ports": [
+                    {
+                        "name": "http",
+                        "port": 9200,
+                        "protocol": "TCP",
+                        "targetPort": 9200
+                    },
+                    {
+                        "name": "transport",
+                        "port": 9300,
+                        "protocol": "TCP",
+                        "targetPort": 9300
+                    }
+                ],
+                "selector": {
+                    "app": "elasticsearch",
+                    "deploymentconfig": "elasticsearch"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "kapua-api"
+                },
+                "name": "kapua-api",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1088",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/kapua-api",
+                "uid": "3d69ed76-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.36.193",
+                "ports": [
+                    {
+                        "name": "http",
+                        "port": 8080,
+                        "protocol": "TCP",
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "app": "kapua-api",
+                    "deploymentconfig": "kapua-api"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "kapua-broker"
+                },
+                "name": "kapua-broker",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1069",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/kapua-broker",
+                "uid": "3d3be7b2-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.87.69",
+                "ports": [
+                    {
+                        "name": "mqtt-tcp",
+                        "port": 1883,
+                        "protocol": "TCP",
+                        "targetPort": 1883
+                    },
+                    {
+                        "name": "mqtt-websocket-tcp",
+                        "port": 61614,
+                        "protocol": "TCP",
+                        "targetPort": 61614
+                    }
+                ],
+                "selector": {
+                    "app": "kapua-broker",
+                    "deploymentconfig": "kapua-broker"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "kapua-console"
+                },
+                "name": "kapua-console",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1078",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/kapua-console",
+                "uid": "3d4ad381-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.63.228",
+                "ports": [
+                    {
+                        "name": "http",
+                        "port": 8080,
+                        "protocol": "TCP",
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "app": "kapua-console",
+                    "deploymentconfig": "kapua-console"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "sql"
+                },
+                "name": "sql",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1055",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/sql",
+                "uid": "3d115f18-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.80.134",
+                "ports": [
+                    {
+                        "name": "h2-sql",
+                        "port": 3306,
+                        "protocol": "TCP",
+                        "targetPort": 3306
+                    },
+                    {
+                        "name": "h2-web",
+                        "port": 8181,
+                        "protocol": "TCP",
+                        "targetPort": 8181
+                    }
+                ],
+                "selector": {
+                    "app": "sql",
+                    "deploymentconfig": "sql"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"elasticsearch-1\",\"uid\":\"3d188e0a-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"20900\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "elasticsearch",
+                    "openshift.io/deployment.name": "elasticsearch-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:03:50Z",
+                "generateName": "elasticsearch-1-",
+                "labels": {
+                    "app": "elasticsearch",
+                    "deployment": "elasticsearch-1",
+                    "deploymentconfig": "elasticsearch",
+                    "hawkular-openshift-agent": "jolokia-kapua"
+                },
+                "name": "elasticsearch-1-bsjsp",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "20966",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/elasticsearch-1-bsjsp",
+                "uid": "e7312244-46e3-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "elasticsearch",
+                            "-Etransport.host=_site_",
+                            "-Ecluster.name=kapua-datastore",
+                            "-Ediscovery.type=single-node"
+                        ],
+                        "env": [
+                            {
+                                "name": "ES_JAVA_OPTS",
+                                "value": "-Xms512m -Xmx512m"
+                            }
+                        ],
+                        "image": "elasticsearch:5.4",
+                        "imagePullPolicy": "Always",
+                        "name": "elasticsearch",
+                        "ports": [
+                            {
+                                "containerPort": 9200,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 9300,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": 9200,
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 5
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/usr/share/elasticsearch/data",
+                                "name": "elasticsearch-data"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "emptyDir": {},
+                        "name": "elasticsearch-data"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:50Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:04:22Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:50Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://60774a05b7b37d42c8281b350498016830f33cfa709ffd2906f68810eb973740",
+                        "image": "elasticsearch:5.4",
+                        "imageID": "docker-pullable://elasticsearch@sha256:b8697c807aa65316714a5074ef039c42e6c4b400a6986c18b9a88ef37636acbc",
+                        "lastState": {},
+                        "name": "elasticsearch",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:03:54Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.8",
+                "startTime": "2017-06-01T16:03:50Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"kapua-api-1\",\"uid\":\"3cff0e78-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"20835\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "kapua-api",
+                    "openshift.io/deployment.name": "kapua-api-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:03:34Z",
+                "generateName": "kapua-api-1-",
+                "labels": {
+                    "app": "kapua-api",
+                    "deployment": "kapua-api-1",
+                    "deploymentconfig": "kapua-api",
+                    "hawkular-openshift-agent": "jolokia-kapua"
+                },
+                "name": "kapua-api-1-876zg",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "20997",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/kapua-api-1-876zg",
+                "uid": "dd730598-46e3-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "JAVA_OPTS",
+                                "value": "-Dcommons.db.connection.host=$SQL_SERVICE_HOST -Dcommons.db.connection.port=$SQL_PORT_3306_TCP_PORT -Dbroker.host=$KAPUA_BROKER_SERVICE_HOST -Ddatastore.elasticsearch.nodes=$ELASTICSEARCH_PORT_9200_TCP_ADDR -javaagent:/jolokia-jvm-agent.jar=port=8778,protocol=https,caCert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,clientPrincipal=cn=system:master-proxy,useSslClientAuthentication=true,extraClientCheck=true,host=0.0.0.0,discoveryEnabled=false,user=jolokia,password=GdGLDdaw4dntshO"
+                            }
+                        ],
+                        "image": "kapua/kapua-api:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "kapua-console",
+                        "ports": [
+                            {
+                                "containerPort": 8778,
+                                "name": "jolokia",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": 8080,
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 5
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hawkular-openshift-agent-jetty"
+                        },
+                        "name": "hawkular-openshift-agent"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:34Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:05:05Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:34Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://c7bd25b2fbf8353b2e039dc3c8e0f4422562d59507d5f818c45ed301e709e722",
+                        "image": "kapua/kapua-api:latest",
+                        "imageID": "docker-pullable://kapua/kapua-api@sha256:d3efb4e623cd97f55b9247faad6f88025331384e60dd6b88bf816639bad412ea",
+                        "lastState": {},
+                        "name": "kapua-console",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:03:59Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.2",
+                "startTime": "2017-06-01T16:03:34Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"kapua-broker-1\",\"uid\":\"3ce593d0-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"1116\"}}\n",
+                    "openshift.io/container.kapua-broker.image.entrypoint": "[\"/maven/bin/activemq\",\"console\"]",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "kapua-broker",
+                    "openshift.io/deployment.name": "kapua-broker-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-05-29T03:09:35Z",
+                "generateName": "kapua-broker-1-",
+                "labels": {
+                    "app": "kapua-broker",
+                    "deployment": "kapua-broker-1",
+                    "deploymentconfig": "kapua-broker",
+                    "hawkular-openshift-agent": "jolokia-broker"
+                },
+                "name": "kapua-broker-1-h2z4v",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "20249",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/kapua-broker-1-h2z4v",
+                "uid": "3e70fc3a-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "ACTIVEMQ_OPTS",
+                                "value": "-Dcommons.db.connection.host=$SQL_SERVICE_HOST -Dcommons.db.connection.port=$SQL_PORT_3306_TCP_PORT -Dmetrics.enable.jmx=true -Ddatastore.elasticsearch.nodes=$ELASTICSEARCH_PORT_9200_TCP_ADDR -javaagent:/jolokia-jvm-agent.jar=port=8778,protocol=https,caCert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,clientPrincipal=cn=system:master-proxy,useSslClientAuthentication=true,extraClientCheck=true,host=0.0.0.0,discoveryEnabled=false,user=jolokia,password=GdGLDdaw4dntshO"
+                            }
+                        ],
+                        "image": "kapua/kapua-broker:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "kapua-broker",
+                        "ports": [
+                            {
+                                "containerPort": 8778,
+                                "name": "jolokia",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 1883,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 61614,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "tcpSocket": {
+                                "port": 1883
+                            },
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/maven/data",
+                                "name": "kapua-broker-volume-1"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "emptyDir": {},
+                        "name": "kapua-broker-volume-1"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hawkular-openshift-agent-broker"
+                        },
+                        "name": "hawkular-openshift-agent"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-05-29T03:09:35Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T15:17:02Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-05-29T03:09:35Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://04c44da9dd1b050c37b7a1d244f5df0f0b28cf2209f44d5b8d8096cfd140360d",
+                        "image": "kapua/kapua-broker:latest",
+                        "imageID": "docker-pullable://kapua/kapua-broker@sha256:ac9bc970bcc42892841d3932b0c57e16d487afd8488278bcb95d8a35ab4abcef",
+                        "lastState": {
+                            "terminated": {
+                                "containerID": "docker://0c556e048317003850623ba981f05b0554bd8c2033bf62708f729a18300c671b",
+                                "exitCode": 1,
+                                "finishedAt": "2017-06-01T15:16:39Z",
+                                "reason": "Error",
+                                "startedAt": "2017-06-01T15:16:03Z"
+                            }
+                        },
+                        "name": "kapua-broker",
+                        "ready": true,
+                        "restartCount": 2,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T15:16:44Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.4",
+                "startTime": "2017-05-29T03:09:35Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"kapua-console-1\",\"uid\":\"3cf75509-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"20948\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "kapua-console",
+                    "openshift.io/deployment.name": "kapua-console-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:04:08Z",
+                "generateName": "kapua-console-1-",
+                "labels": {
+                    "app": "kapua-console",
+                    "deployment": "kapua-console-1",
+                    "deploymentconfig": "kapua-console",
+                    "hawkular-openshift-agent": "jolokia-jetty"
+                },
+                "name": "kapua-console-1-px29m",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "21002",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/kapua-console-1-px29m",
+                "uid": "f180b84d-46e3-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "JAVA_OPTS",
+                                "value": "-Dcommons.db.connection.host=$SQL_SERVICE_HOST -Dcommons.db.connection.port=$SQL_PORT_3306_TCP_PORT -Dbroker.host=$KAPUA_BROKER_SERVICE_HOST -Ddatastore.elasticsearch.nodes=$ELASTICSEARCH_PORT_9200_TCP_ADDR -javaagent:/jolokia-jvm-agent.jar=port=8778,protocol=https,caCert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,clientPrincipal=cn=system:master-proxy,useSslClientAuthentication=true,extraClientCheck=true,host=0.0.0.0,discoveryEnabled=false,user=jolokia,password=GdGLDdaw4dntshO"
+                            }
+                        ],
+                        "image": "kapua/kapua-console:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "kapua-console",
+                        "ports": [
+                            {
+                                "containerPort": 8778,
+                                "name": "jolokia",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": 8080,
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 5
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hawkular-openshift-agent-jetty"
+                        },
+                        "name": "hawkular-openshift-agent"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:04:08Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:05:09Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:04:08Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://76be2d1faaa1c870d5540059d4d1734efd59b0c22a4c695248ff9f72aef52749",
+                        "image": "kapua/kapua-console:latest",
+                        "imageID": "docker-pullable://kapua/kapua-console@sha256:041b51fe9cbbd9c7b70e1f14978ab1b9f2e8aaa912ade7bf461eca4a1b65d253",
+                        "lastState": {},
+                        "name": "kapua-console",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:04:34Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.3",
+                "startTime": "2017-06-01T16:04:08Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"kura-simulator-1\",\"uid\":\"f73d0646-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"21073\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "kura-simulator",
+                    "openshift.io/deployment.name": "kura-simulator-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:09:10Z",
+                "generateName": "kura-simulator-1-",
+                "labels": {
+                    "app": "kura-simulator",
+                    "deployment": "kura-simulator-1",
+                    "deploymentconfig": "kura-simulator"
+                },
+                "name": "kura-simulator-1-wsp0m",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "21087",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/kura-simulator-1-wsp0m",
+                "uid": "a57d6447-46e4-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "KSIM_BROKER_HOST",
+                                "value": "${KAPUA_BROKER_SERVICE_HOST}"
+                            },
+                            {
+                                "name": "KSIM_BROKER_PORT",
+                                "value": "${KAPUA_BROKER_SERVICE_PORT}"
+                            },
+                            {
+                                "name": "KSIM_NAME_FACTORY",
+                                "value": "host:addr"
+                            },
+                            {
+                                "name": "KSIM_NUM_GATEWAYS",
+                                "value": "10"
+                            }
+                        ],
+                        "image": "ctron/kura-simulator@sha256:525993bc17e9d2ecaa694cbf1b1820421a7885e2486451ca679fe98efe8520af",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "kura-simulator",
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:09:10Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:09:11Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:09:10Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://5e81b078f7a6c1577a744fdc1894c11c51c4a699e95f9e232ef507e1971f0853",
+                        "image": "ctron/kura-simulator@sha256:525993bc17e9d2ecaa694cbf1b1820421a7885e2486451ca679fe98efe8520af",
+                        "imageID": "docker-pullable://ctron/kura-simulator@sha256:525993bc17e9d2ecaa694cbf1b1820421a7885e2486451ca679fe98efe8520af",
+                        "lastState": {},
+                        "name": "kura-simulator",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:09:11Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.6",
+                "startTime": "2017-06-01T16:09:10Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"sql-1\",\"uid\":\"3ce19164-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"20867\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "sql",
+                    "openshift.io/deployment.name": "sql-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:03:42Z",
+                "generateName": "sql-1-",
+                "labels": {
+                    "app": "sql",
+                    "deployment": "sql-1",
+                    "deploymentconfig": "sql",
+                    "hawkular-openshift-agent": "jolokia-java"
+                },
+                "name": "sql-1-bdljm",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "20975",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/sql-1-bdljm",
+                "uid": "e217d081-46e3-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "H2_OPTS",
+                                "value": "-javaagent:/jolokia-jvm-agent.jar=port=8778,protocol=https,caCert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,clientPrincipal=cn=system:master-proxy,useSslClientAuthentication=true,extraClientCheck=true,host=0.0.0.0,discoveryEnabled=false,user=jolokia,password=GdGLDdaw4dntshO"
+                            }
+                        ],
+                        "image": "kapua/kapua-sql:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "sql",
+                        "ports": [
+                            {
+                                "containerPort": 8778,
+                                "name": "jolokia",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 3306,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 8181,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "tcpSocket": {
+                                "port": 3306
+                            },
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/opt/h2-data",
+                                "name": "sql-data"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "emptyDir": {},
+                        "name": "sql-data"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hawkular-openshift-agent-java"
+                        },
+                        "name": "hawkular-openshift-agent"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:42Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:04:32Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:42Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://4a982e62926094241edbdf83401fe64cb0dc175a9dfd211642553417fecaac26",
+                        "image": "kapua/kapua-sql:latest",
+                        "imageID": "docker-pullable://kapua/kapua-sql@sha256:55bad62cc95799ebd2deffb4b887688aa804a889409eaf7eaeece677e77f1886",
+                        "lastState": {},
+                        "name": "sql",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:03:50Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.5",
+                "startTime": "2017-06-01T16:03:42Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {},
+    "resourceVersion": "",
+    "selfLink": ""
+},
+{
+    "project" : "Sample2",
+    "members" : [
+	{
+	    "name": "Lee Combs",
+	    "role": "admin",
+	    "uuid": "2340e059af04950b03c0de0334068"
+	},
+	{
+	    "name": "Sheryll Tabamo",
+	    "role": "admin",
+	    "uuid": "82fe2c3a5c34b04950b03c0de0334068"
+	},
+	{
+	    "name": "Curtis Laycraft",
+	    "role": "contribute",
+	    "uuid": "69375f93948e800a05869c0405be04dfe23"
+	}
+    ],
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Route",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/host.generated": "true"
+                },
+                "creationTimestamp": "2017-05-29T03:09:34Z",
+                "labels": {
+                    "app": "kapua-api"
+                },
+                "name": "api",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1103",
+                "selfLink": "/oapi/v1/namespaces/eclipse-kapua/routes/api",
+                "uid": "3da31ad8-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "host": "api-eclipse-kapua.10.0.75.2.xip.io",
+                "port": {
+                    "targetPort": "http"
+                },
+                "to": {
+                    "kind": "Service",
+                    "name": "kapua-api",
+                    "weight": 100
+                },
+                "wildcardPolicy": "None"
+            },
+            "status": {
+                "ingress": [
+                    {
+                        "conditions": [
+                            {
+                                "lastTransitionTime": "2017-05-29T03:09:34Z",
+                                "status": "True",
+                                "type": "Admitted"
+                            }
+                        ],
+                        "host": "api-eclipse-kapua.10.0.75.2.xip.io",
+                        "routerName": "router",
+                        "wildcardPolicy": "None"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Route",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/host.generated": "true"
+                },
+                "creationTimestamp": "2017-05-29T03:09:34Z",
+                "labels": {
+                    "app": "kapua-broker"
+                },
+                "name": "broker",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1097",
+                "selfLink": "/oapi/v1/namespaces/eclipse-kapua/routes/broker",
+                "uid": "3d88cb0e-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "host": "broker-eclipse-kapua.10.0.75.2.xip.io",
+                "port": {
+                    "targetPort": "mqtt-websocket-tcp"
+                },
+                "to": {
+                    "kind": "Service",
+                    "name": "kapua-broker",
+                    "weight": 100
+                },
+                "wildcardPolicy": "None"
+            },
+            "status": {
+                "ingress": [
+                    {
+                        "conditions": [
+                            {
+                                "lastTransitionTime": "2017-05-29T03:09:34Z",
+                                "status": "True",
+                                "type": "Admitted"
+                            }
+                        ],
+                        "host": "broker-eclipse-kapua.10.0.75.2.xip.io",
+                        "routerName": "router",
+                        "wildcardPolicy": "None"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Route",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/host.generated": "true"
+                },
+                "creationTimestamp": "2017-05-29T03:09:34Z",
+                "labels": {
+                    "app": "kapua-console"
+                },
+                "name": "console",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1100",
+                "selfLink": "/oapi/v1/namespaces/eclipse-kapua/routes/console",
+                "uid": "3d999a85-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "host": "console-eclipse-kapua.10.0.75.2.xip.io",
+                "port": {
+                    "targetPort": "http"
+                },
+                "to": {
+                    "kind": "Service",
+                    "name": "kapua-console",
+                    "weight": 100
+                },
+                "wildcardPolicy": "None"
+            },
+            "status": {
+                "ingress": [
+                    {
+                        "conditions": [
+                            {
+                                "lastTransitionTime": "2017-05-29T03:09:34Z",
+                                "status": "True",
+                                "type": "Admitted"
+                            }
+                        ],
+                        "host": "console-eclipse-kapua.10.0.75.2.xip.io",
+                        "routerName": "router",
+                        "wildcardPolicy": "None"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "elasticsearch"
+                },
+                "name": "elasticsearch",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1092",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/elasticsearch",
+                "uid": "3d826e71-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.194.195",
+                "ports": [
+                    {
+                        "name": "http",
+                        "port": 9200,
+                        "protocol": "TCP",
+                        "targetPort": 9200
+                    },
+                    {
+                        "name": "transport",
+                        "port": 9300,
+                        "protocol": "TCP",
+                        "targetPort": 9300
+                    }
+                ],
+                "selector": {
+                    "app": "elasticsearch",
+                    "deploymentconfig": "elasticsearch"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "kapua-api"
+                },
+                "name": "kapua-api",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1088",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/kapua-api",
+                "uid": "3d69ed76-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.36.193",
+                "ports": [
+                    {
+                        "name": "http",
+                        "port": 8080,
+                        "protocol": "TCP",
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "app": "kapua-api",
+                    "deploymentconfig": "kapua-api"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "kapua-broker"
+                },
+                "name": "kapua-broker",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1069",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/kapua-broker",
+                "uid": "3d3be7b2-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.87.69",
+                "ports": [
+                    {
+                        "name": "mqtt-tcp",
+                        "port": 1883,
+                        "protocol": "TCP",
+                        "targetPort": 1883
+                    },
+                    {
+                        "name": "mqtt-websocket-tcp",
+                        "port": 61614,
+                        "protocol": "TCP",
+                        "targetPort": 61614
+                    }
+                ],
+                "selector": {
+                    "app": "kapua-broker",
+                    "deploymentconfig": "kapua-broker"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "dependencies": [
+                        {
+                            "name": "sql",
+                            "kind": "Service"
+                        },
+                        {
+                            "name": "elasticsearch",
+                            "kind": "Service"
+                        }
+                    ]
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "kapua-console"
+                },
+                "name": "kapua-console",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1078",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/kapua-console",
+                "uid": "3d4ad381-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.63.228",
+                "ports": [
+                    {
+                        "name": "http",
+                        "port": 8080,
+                        "protocol": "TCP",
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "app": "kapua-console",
+                    "deploymentconfig": "kapua-console"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                },
+                "creationTimestamp": "2017-05-29T03:09:33Z",
+                "labels": {
+                    "app": "sql"
+                },
+                "name": "sql",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "1055",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/services/sql",
+                "uid": "3d115f18-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "clusterIP": "172.30.80.134",
+                "ports": [
+                    {
+                        "name": "h2-sql",
+                        "port": 3306,
+                        "protocol": "TCP",
+                        "targetPort": 3306
+                    },
+                    {
+                        "name": "h2-web",
+                        "port": 8181,
+                        "protocol": "TCP",
+                        "targetPort": 8181
+                    }
+                ],
+                "selector": {
+                    "app": "sql",
+                    "deploymentconfig": "sql"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"elasticsearch-1\",\"uid\":\"3d188e0a-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"20900\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "elasticsearch",
+                    "openshift.io/deployment.name": "elasticsearch-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:03:50Z",
+                "generateName": "elasticsearch-1-",
+                "labels": {
+                    "app": "elasticsearch",
+                    "deployment": "elasticsearch-1",
+                    "deploymentconfig": "elasticsearch",
+                    "hawkular-openshift-agent": "jolokia-kapua"
+                },
+                "name": "elasticsearch-1-bsjsp",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "20966",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/elasticsearch-1-bsjsp",
+                "uid": "e7312244-46e3-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "elasticsearch",
+                            "-Etransport.host=_site_",
+                            "-Ecluster.name=kapua-datastore",
+                            "-Ediscovery.type=single-node"
+                        ],
+                        "env": [
+                            {
+                                "name": "ES_JAVA_OPTS",
+                                "value": "-Xms512m -Xmx512m"
+                            }
+                        ],
+                        "image": "elasticsearch:5.4",
+                        "imagePullPolicy": "Always",
+                        "name": "elasticsearch",
+                        "ports": [
+                            {
+                                "containerPort": 9200,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 9300,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": 9200,
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 5
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/usr/share/elasticsearch/data",
+                                "name": "elasticsearch-data"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "emptyDir": {},
+                        "name": "elasticsearch-data"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:50Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:04:22Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:50Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://60774a05b7b37d42c8281b350498016830f33cfa709ffd2906f68810eb973740",
+                        "image": "elasticsearch:5.4",
+                        "imageID": "docker-pullable://elasticsearch@sha256:b8697c807aa65316714a5074ef039c42e6c4b400a6986c18b9a88ef37636acbc",
+                        "lastState": {},
+                        "name": "elasticsearch",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:03:54Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.8",
+                "startTime": "2017-06-01T16:03:50Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"kapua-api-1\",\"uid\":\"3cff0e78-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"20835\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "kapua-api",
+                    "openshift.io/deployment.name": "kapua-api-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:03:34Z",
+                "generateName": "kapua-api-1-",
+                "labels": {
+                    "app": "kapua-api",
+                    "deployment": "kapua-api-1",
+                    "deploymentconfig": "kapua-api",
+                    "hawkular-openshift-agent": "jolokia-kapua"
+                },
+                "name": "kapua-api-1-876zg",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "20997",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/kapua-api-1-876zg",
+                "uid": "dd730598-46e3-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "JAVA_OPTS",
+                                "value": "-Dcommons.db.connection.host=$SQL_SERVICE_HOST -Dcommons.db.connection.port=$SQL_PORT_3306_TCP_PORT -Dbroker.host=$KAPUA_BROKER_SERVICE_HOST -Ddatastore.elasticsearch.nodes=$ELASTICSEARCH_PORT_9200_TCP_ADDR -javaagent:/jolokia-jvm-agent.jar=port=8778,protocol=https,caCert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,clientPrincipal=cn=system:master-proxy,useSslClientAuthentication=true,extraClientCheck=true,host=0.0.0.0,discoveryEnabled=false,user=jolokia,password=GdGLDdaw4dntshO"
+                            }
+                        ],
+                        "image": "kapua/kapua-api:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "kapua-console",
+                        "ports": [
+                            {
+                                "containerPort": 8778,
+                                "name": "jolokia",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": 8080,
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 5
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hawkular-openshift-agent-jetty"
+                        },
+                        "name": "hawkular-openshift-agent"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:34Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:05:05Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:34Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://c7bd25b2fbf8353b2e039dc3c8e0f4422562d59507d5f818c45ed301e709e722",
+                        "image": "kapua/kapua-api:latest",
+                        "imageID": "docker-pullable://kapua/kapua-api@sha256:d3efb4e623cd97f55b9247faad6f88025331384e60dd6b88bf816639bad412ea",
+                        "lastState": {},
+                        "name": "kapua-console",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:03:59Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.2",
+                "startTime": "2017-06-01T16:03:34Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"kapua-broker-1\",\"uid\":\"3ce593d0-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"1116\"}}\n",
+                    "openshift.io/container.kapua-broker.image.entrypoint": "[\"/maven/bin/activemq\",\"console\"]",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "kapua-broker",
+                    "openshift.io/deployment.name": "kapua-broker-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-05-29T03:09:35Z",
+                "generateName": "kapua-broker-1-",
+                "labels": {
+                    "app": "kapua-broker",
+                    "deployment": "kapua-broker-1",
+                    "deploymentconfig": "kapua-broker",
+                    "hawkular-openshift-agent": "jolokia-broker"
+                },
+                "name": "kapua-broker-1-h2z4v",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "20249",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/kapua-broker-1-h2z4v",
+                "uid": "3e70fc3a-441c-11e7-80fe-e2104ab5c22e"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "ACTIVEMQ_OPTS",
+                                "value": "-Dcommons.db.connection.host=$SQL_SERVICE_HOST -Dcommons.db.connection.port=$SQL_PORT_3306_TCP_PORT -Dmetrics.enable.jmx=true -Ddatastore.elasticsearch.nodes=$ELASTICSEARCH_PORT_9200_TCP_ADDR -javaagent:/jolokia-jvm-agent.jar=port=8778,protocol=https,caCert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,clientPrincipal=cn=system:master-proxy,useSslClientAuthentication=true,extraClientCheck=true,host=0.0.0.0,discoveryEnabled=false,user=jolokia,password=GdGLDdaw4dntshO"
+                            }
+                        ],
+                        "image": "kapua/kapua-broker:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "kapua-broker",
+                        "ports": [
+                            {
+                                "containerPort": 8778,
+                                "name": "jolokia",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 1883,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 61614,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "tcpSocket": {
+                                "port": 1883
+                            },
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/maven/data",
+                                "name": "kapua-broker-volume-1"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "emptyDir": {},
+                        "name": "kapua-broker-volume-1"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hawkular-openshift-agent-broker"
+                        },
+                        "name": "hawkular-openshift-agent"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-05-29T03:09:35Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T15:17:02Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-05-29T03:09:35Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://04c44da9dd1b050c37b7a1d244f5df0f0b28cf2209f44d5b8d8096cfd140360d",
+                        "image": "kapua/kapua-broker:latest",
+                        "imageID": "docker-pullable://kapua/kapua-broker@sha256:ac9bc970bcc42892841d3932b0c57e16d487afd8488278bcb95d8a35ab4abcef",
+                        "lastState": {
+                            "terminated": {
+                                "containerID": "docker://0c556e048317003850623ba981f05b0554bd8c2033bf62708f729a18300c671b",
+                                "exitCode": 1,
+                                "finishedAt": "2017-06-01T15:16:39Z",
+                                "reason": "Error",
+                                "startedAt": "2017-06-01T15:16:03Z"
+                            }
+                        },
+                        "name": "kapua-broker",
+                        "ready": true,
+                        "restartCount": 2,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T15:16:44Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.4",
+                "startTime": "2017-05-29T03:09:35Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"kapua-console-1\",\"uid\":\"3cf75509-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"20948\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "kapua-console",
+                    "openshift.io/deployment.name": "kapua-console-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:04:08Z",
+                "generateName": "kapua-console-1-",
+                "labels": {
+                    "app": "kapua-console",
+                    "deployment": "kapua-console-1",
+                    "deploymentconfig": "kapua-console",
+                    "hawkular-openshift-agent": "jolokia-jetty"
+                },
+                "name": "kapua-console-1-px29m",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "21002",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/kapua-console-1-px29m",
+                "uid": "f180b84d-46e3-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "JAVA_OPTS",
+                                "value": "-Dcommons.db.connection.host=$SQL_SERVICE_HOST -Dcommons.db.connection.port=$SQL_PORT_3306_TCP_PORT -Dbroker.host=$KAPUA_BROKER_SERVICE_HOST -Ddatastore.elasticsearch.nodes=$ELASTICSEARCH_PORT_9200_TCP_ADDR -javaagent:/jolokia-jvm-agent.jar=port=8778,protocol=https,caCert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,clientPrincipal=cn=system:master-proxy,useSslClientAuthentication=true,extraClientCheck=true,host=0.0.0.0,discoveryEnabled=false,user=jolokia,password=GdGLDdaw4dntshO"
+                            }
+                        ],
+                        "image": "kapua/kapua-console:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "kapua-console",
+                        "ports": [
+                            {
+                                "containerPort": 8778,
+                                "name": "jolokia",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": 8080,
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 5
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hawkular-openshift-agent-jetty"
+                        },
+                        "name": "hawkular-openshift-agent"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:04:08Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:05:09Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:04:08Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://76be2d1faaa1c870d5540059d4d1734efd59b0c22a4c695248ff9f72aef52749",
+                        "image": "kapua/kapua-console:latest",
+                        "imageID": "docker-pullable://kapua/kapua-console@sha256:041b51fe9cbbd9c7b70e1f14978ab1b9f2e8aaa912ade7bf461eca4a1b65d253",
+                        "lastState": {},
+                        "name": "kapua-console",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:04:34Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.3",
+                "startTime": "2017-06-01T16:04:08Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"kura-simulator-1\",\"uid\":\"f73d0646-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"21073\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "kura-simulator",
+                    "openshift.io/deployment.name": "kura-simulator-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:09:10Z",
+                "generateName": "kura-simulator-1-",
+                "labels": {
+                    "app": "kura-simulator",
+                    "deployment": "kura-simulator-1",
+                    "deploymentconfig": "kura-simulator"
+                },
+                "name": "kura-simulator-1-wsp0m",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "21087",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/kura-simulator-1-wsp0m",
+                "uid": "a57d6447-46e4-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "KSIM_BROKER_HOST",
+                                "value": "${KAPUA_BROKER_SERVICE_HOST}"
+                            },
+                            {
+                                "name": "KSIM_BROKER_PORT",
+                                "value": "${KAPUA_BROKER_SERVICE_PORT}"
+                            },
+                            {
+                                "name": "KSIM_NAME_FACTORY",
+                                "value": "host:addr"
+                            },
+                            {
+                                "name": "KSIM_NUM_GATEWAYS",
+                                "value": "10"
+                            }
+                        ],
+                        "image": "ctron/kura-simulator@sha256:525993bc17e9d2ecaa694cbf1b1820421a7885e2486451ca679fe98efe8520af",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "kura-simulator",
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:09:10Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:09:11Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:09:10Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://5e81b078f7a6c1577a744fdc1894c11c51c4a699e95f9e232ef507e1971f0853",
+                        "image": "ctron/kura-simulator@sha256:525993bc17e9d2ecaa694cbf1b1820421a7885e2486451ca679fe98efe8520af",
+                        "imageID": "docker-pullable://ctron/kura-simulator@sha256:525993bc17e9d2ecaa694cbf1b1820421a7885e2486451ca679fe98efe8520af",
+                        "lastState": {},
+                        "name": "kura-simulator",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:09:11Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.6",
+                "startTime": "2017-06-01T16:09:10Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"eclipse-kapua\",\"name\":\"sql-1\",\"uid\":\"3ce19164-441c-11e7-80fe-e2104ab5c22e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"20867\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "sql",
+                    "openshift.io/deployment.name": "sql-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "creationTimestamp": "2017-06-01T16:03:42Z",
+                "generateName": "sql-1-",
+                "labels": {
+                    "app": "sql",
+                    "deployment": "sql-1",
+                    "deploymentconfig": "sql",
+                    "hawkular-openshift-agent": "jolokia-java"
+                },
+                "name": "sql-1-bdljm",
+                "namespace": "eclipse-kapua",
+                "resourceVersion": "20975",
+                "selfLink": "/api/v1/namespaces/eclipse-kapua/pods/sql-1-bdljm",
+                "uid": "e217d081-46e3-11e7-b973-92b4c9772184"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "H2_OPTS",
+                                "value": "-javaagent:/jolokia-jvm-agent.jar=port=8778,protocol=https,caCert=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,clientPrincipal=cn=system:master-proxy,useSslClientAuthentication=true,extraClientCheck=true,host=0.0.0.0,discoveryEnabled=false,user=jolokia,password=GdGLDdaw4dntshO"
+                            }
+                        ],
+                        "image": "kapua/kapua-sql:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "sql",
+                        "ports": [
+                            {
+                                "containerPort": 8778,
+                                "name": "jolokia",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 3306,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 8181,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "initialDelaySeconds": 15,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "tcpSocket": {
+                                "port": 3306
+                            },
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "runAsUser": 1000050000,
+                            "seLinuxOptions": {
+                                "level": "s0:c7,c4"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/opt/h2-data",
+                                "name": "sql-data"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-v19gd",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-fkmxf"
+                    }
+                ],
+                "nodeName": "10.0.75.2",
+                "restartPolicy": "Always",
+                "securityContext": {
+                    "fsGroup": 1000050000,
+                    "seLinuxOptions": {
+                        "level": "s0:c7,c4"
+                    }
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "emptyDir": {},
+                        "name": "sql-data"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hawkular-openshift-agent-java"
+                        },
+                        "name": "hawkular-openshift-agent"
+                    },
+                    {
+                        "name": "default-token-v19gd",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-v19gd"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:42Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:04:32Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-06-01T16:03:42Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://4a982e62926094241edbdf83401fe64cb0dc175a9dfd211642553417fecaac26",
+                        "image": "kapua/kapua-sql:latest",
+                        "imageID": "docker-pullable://kapua/kapua-sql@sha256:55bad62cc95799ebd2deffb4b887688aa804a889409eaf7eaeece677e77f1886",
+                        "lastState": {},
+                        "name": "sql",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-06-01T16:03:50Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.75.2",
+                "phase": "Running",
+                "podIP": "172.17.0.5",
+                "startTime": "2017-06-01T16:03:42Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {},
+    "resourceVersion": "",
+    "selfLink": ""
+}
+]
