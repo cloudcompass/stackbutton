@@ -2,6 +2,7 @@
   <div style="background:mediumpurple">
     <div *ngIf="podData">
       <p>Deployment Config: <a>{{deploymentConfig}}</a> - {{daysSinceCreation}} days ago</p>
+
       <div *ngFor="let container of containers" style="background:yellow; padding-left: 2em;">
         <p>Container: {{container.name.toUpperCase()}}</p>
         <p><span class="pficon-image"></span> Image: {{container.image}}</p>

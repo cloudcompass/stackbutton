@@ -7,41 +7,25 @@
     </div><!-- End Card Header -->
 
     <div class="card-pf-body">
-      <p>Project name: {{projectName}}</p>
-      <p>API Version: {{apiVersion}}</p>
-
+      <!-- Basic project information -->
+      <div>
+        <p>Project name: {{projectName}}</p>
+        <p>API Version: {{apiVersion}}</p>
+      </div>
       <div class="row row-cards-pf">
         <p><strong>Members</strong></p>
         <p *ngFor="let member of projectMembers">{{member.name}} - {{member.role}}</p>
       </div>
 
+      <!-- Generate the routes for the project -->
       <div class="row row-cards-pf">
         <p><strong>Routes</strong></p>
         <div *ngFor="let route of projectRoutes">
           &nbsp; <!-- temp -->
           <app-openshift-route [name]="route.metadata.name"
                                [projectName]="projectName"></app-openshift-route>
-
         </div>
       </div>
-
-      <!--
-      <div class="row row-cards-pf">
-        <p><strong>Services</strong></p>
-        <div *ngFor="let service of projectServices">
-          <app-openshift-service [name]="service.metadata.name" [projectName]="projectName"></app-openshift-service>
-        </div>
-      </div>
-      -->
-
-      <!--
-      <div class="row row-cards-pf">
-        <p><strong>Pods</strong></p>
-        <p *ngFor="let pod of projectPods">{{pod.metadata.name}}</p>
-      </div>
-      -->
-
     </div><!-- End Card Body -->
-
   </div><!-- End Card -->
 </div>

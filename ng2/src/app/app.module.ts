@@ -46,7 +46,7 @@ import { OpenShiftService } from './_services/openshift.service';
 
 // Used to create fake backend, to be removed
 import { fakeBackendProvider } from './_helpers/fake-backend';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
 // TODO: Is this necessary now?
@@ -100,8 +100,6 @@ import { OpenshiftServiceComponent } from './openshift-service/openshift-service
     GithubUserService,
     GithubIssuesService,
     GithubCommitsService,
-
-    // Testing
     OpenShiftService,
 
     // Used to create fake backend, to be removed
