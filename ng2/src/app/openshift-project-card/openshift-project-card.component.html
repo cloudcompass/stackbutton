@@ -20,24 +20,24 @@
         <div *ngFor="let route of projectRoutes">
           <app-openshift-route [name]="route.metadata.name"
                                [projectName]="projectName"></app-openshift-route>
-          <!--
-          <app-openshift-route [routeData]="route"
-                               [mainService]="getServiceNamed(route.spec.to.name)"></app-openshift-route>
-                               -->
         </div>
       </div>
 
+      <!--
       <div class="row row-cards-pf">
         <p><strong>Services</strong></p>
         <div *ngFor="let service of projectServices">
           <app-openshift-service [name]="service.metadata.name" [projectName]="projectName"></app-openshift-service>
         </div>
       </div>
+      -->
 
+      <!--
       <div class="row row-cards-pf">
         <p><strong>Pods</strong></p>
         <p *ngFor="let pod of projectPods">{{pod.metadata.name}}</p>
       </div>
+      -->
 
     </div><!-- End Card Body -->
 

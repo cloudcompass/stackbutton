@@ -4,9 +4,9 @@
       <div style="background:lightblue"> <!-- Temp style to be removed -->
         <p>v <strong>{{appName.toUpperCase()}}</strong> - []^ <a>{{host}}</a></p>
       </div>
-      <p><strong>Attached Services</strong></p>
-      <div *ngFor="let name of serviceNames">
-        {{name}}
+      <div *ngFor="let service of services">
+        <app-openshift-service [projectName]="projectName"
+                               [name]="service.metadata.name"></app-openshift-service>
       </div>
     </div>
     <div *ngIf="!routeData">

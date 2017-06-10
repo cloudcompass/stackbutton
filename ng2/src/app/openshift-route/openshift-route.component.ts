@@ -18,18 +18,53 @@ export class OpenshiftRouteComponent implements OnInit {
   private host: string;
 
   private services: OpenShiftServiceModel[];
-  private serviceNames: string[];
 
   constructor(private openShiftService: OpenShiftService) { }
 
   ngOnInit() {
+    this.services = [];
+
+    // TODO: Explain this nonsnse
 
     this.openShiftService.getProjectRoute(this.projectName, this.name).subscribe(
       data => {
-        // Get route data
-        // Use route data to populate main service - route.spec.to.name
-        // Use main service to link service dependencies - service.meta.annotations.dependencies
-        // display it in a nice package
+        // Note - shoddy error handling
+        if (data.error) {
+          console.log('Error retrieving OpenShift Service: ' + data.error);
+          return;
+        }
+
+        this.routeData = data;
+        this.appName = this.routeData.metadata.labels.app;
+        this.host = this.routeData.spec.host;
+
+        // Start NESTING
+        this.openShiftService.getProjectService(this.projectName, this.routeData.spec.to.name).subscribe(
+          data => {
+            // Note - shoddy error handling
+            if (data.error) {
+              console.log('Error retrieving OpenShift Service: ' + data.error);
+              return;
+            }
+
+            // Add the initial service to services[], then use it to find its service dependencies
+            this.services.push(data);
+
+            for (const serviceDependency of data.metadata.annotations.dependencies) {
+              this.openShiftService.getProjectService(this.projectName, serviceDependency.name).subscribe(
+                data => {
+                  // Note - shoddy error handling
+                  if (data.error) {
+                    console.log('Error retrieving OpenShift Service: ' + data.error);
+                    return;
+                  }
+
+                  this.services.push(data);
+                }
+              );
+            }
+          }
+        );
       },
       error => {
         console.log('Error retrieving OpenShift route: ' + error);
