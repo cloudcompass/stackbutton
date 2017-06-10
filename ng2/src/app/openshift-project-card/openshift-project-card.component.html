@@ -18,8 +18,10 @@
       <div class="row row-cards-pf">
         <p><strong>Routes</strong></p>
         <div *ngFor="let route of projectRoutes">
+          &nbsp; <!-- temp -->
           <app-openshift-route [name]="route.metadata.name"
                                [projectName]="projectName"></app-openshift-route>
+
         </div>
       </div>
 

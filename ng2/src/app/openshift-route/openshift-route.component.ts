@@ -12,6 +12,7 @@ export class OpenshiftRouteComponent implements OnInit {
   @Input() name: string;
   @Input() projectName: string;
 
+  private loading: boolean;
   private routeData: OpenShiftRoute;
 
   private appName: string;
@@ -22,6 +23,8 @@ export class OpenshiftRouteComponent implements OnInit {
   constructor(private openShiftService: OpenShiftService) { }
 
   ngOnInit() {
+    this.loading = true;
+
     this.services = [];
 
     // TODO: Explain this nonsnse
@@ -60,6 +63,9 @@ export class OpenshiftRouteComponent implements OnInit {
                   }
 
                   this.services.push(data);
+
+                  // TEMP
+                  this.loading = false;
                 }
               );
             }

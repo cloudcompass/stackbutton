@@ -11,6 +11,7 @@ export class OpenshiftServiceComponent implements OnInit {
   @Input() projectName: string;
   @Input() name: string;
 
+  private loading: boolean;
   private serviceData: OpenShiftServiceModel;
   private serviceName: string;
   private podName: string;
@@ -18,6 +19,7 @@ export class OpenshiftServiceComponent implements OnInit {
   constructor(private openShiftService: OpenShiftService) { }
 
   ngOnInit() {
+
     this.openShiftService.getProjectService(this.projectName, this.name).subscribe(
       data => {
         // Note - shoddy error handling

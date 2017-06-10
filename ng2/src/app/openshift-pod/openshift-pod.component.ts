@@ -29,9 +29,11 @@ export class OpenshiftPodComponent implements OnInit {
         }
 
         this.podData = data;
+
         this.deploymentConfig = this.podData.metadata.labels.deploymentconfig;
-        this.creationTimestamp = new Date(this.podData.metadata.creationTimestamp);
         this.containers = this.podData.spec.containers;
+
+        this.creationTimestamp = new Date(this.podData.metadata.creationTimestamp);
         this.daysSinceCreation = new Date().getDate() - this.creationTimestamp.getDate();
       },
       error => {
