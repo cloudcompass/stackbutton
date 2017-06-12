@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -9,7 +9,6 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 
 import { GithubCommitModel } from '../_models/githubCommitModel';
-import { GITHUBCOMMITS } from '../sample-data/sample-github-commits';
 
 @Injectable()
 export class GithubCommitsService {
@@ -86,7 +85,9 @@ export class GithubCommitsService {
    * @returns {any} Array of sample GithubCommits
    */
   getCommitsSample(): Observable<GithubCommitModel[]> {
-    return Observable.of(GITHUBCOMMITS);
+    return this.http
+      .get('assets/sampleData/github-commits-sample-data.json')
+      .map(res => res.json());
   }
 
   /**
@@ -95,7 +96,10 @@ export class GithubCommitsService {
    * @returns {any} Array of sample GithubCommits
    */
   getCommitsSampleSlowly(): Observable<GithubCommitModel[]> {
-    return Observable.of(GITHUBCOMMITS).delay(3000);
+    return this.http
+      .get('assets/sampleData/github-commits-sample-data.json')
+      .map(res => res.json())
+      .delay(3000);
   }
 
   /**
@@ -106,5 +110,4 @@ export class GithubCommitsService {
   getCommitsSampleError(): Observable<GithubCommitModel[]> {
     return Observable.throw('Get GithubCommits Error');
   }
-
 }

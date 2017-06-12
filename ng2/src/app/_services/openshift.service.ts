@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-
 @Injectable()
 /**
  * The OpenShift Service allows the user to retrieve OpenShift project information, as well as a specific route,

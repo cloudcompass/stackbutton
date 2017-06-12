@@ -9,7 +9,6 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 
 import { GithubUserModel } from '../_models/githubUserModel';
-import { GITHUBUSER } from '../sample-data/sample-github-user';
 
 /*
 Example usage:
@@ -25,8 +24,7 @@ githubUserService.getUserPublic('Username').subscribe(
     console.log('getUser error: ' + error);
   }
 );
-
- */
+*/
 
 @Injectable()
 export class GithubUserService {
@@ -85,7 +83,9 @@ export class GithubUserService {
    * @returns {any} Sample GithubUserModel
    */
   getUserSample(): Observable<GithubUserModel> {
-    return Observable.of(GITHUBUSER);
+    return this.http
+      .get('assets/sampleData/github-user-sample-data.json')
+      .map(res => res.json());
   }
 
   /**
@@ -94,7 +94,10 @@ export class GithubUserService {
    * @returns {any} Sample GithubUserModel
    */
   getUserSampleSlowly(): Observable<GithubUserModel> {
-    return Observable.of(GITHUBUSER).delay(2000);
+    return this.http
+      .get('assets/sampleData/github-user-sample-data.json')
+      .map(res => res.json())
+      .delay(2000);
   }
 
   /**

@@ -9,7 +9,6 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 
 import { GithubIssueModel } from '../_models/githubIssueModel';
-import { GITHUBISSUES } from '../sample-data/sample-github-issues';
 
 /*
  Example usage:
@@ -29,8 +28,7 @@ import { GITHUBISSUES } from '../sample-data/sample-github-issues';
      console.log(error);
    }
  );
-
- */
+*/
 
 @Injectable()
 export class GithubIssuesService {
@@ -138,7 +136,9 @@ export class GithubIssuesService {
    * @returns {any} Array of sample GithubIssues
    */
   getIssuesSample(): Observable<GithubIssueModel[]> {
-    return Observable.of(GITHUBISSUES);
+    return this.http
+      .get('assets/sampleData/github-issues-sample-data.json')
+      .map(res => res.json());
   }
 
   /**
@@ -147,7 +147,10 @@ export class GithubIssuesService {
    * @returns {any} Array of sample GithubIssues
    */
   getIssuesSampleSlowly(): Observable<GithubIssueModel[]> {
-    return Observable.of(GITHUBISSUES).delay(2500);
+    return this.http
+      .get('assets/sampleData/github-issues-sample-data.json')
+      .map(res => res.json())
+      .delay(2500);
   }
 
   /**

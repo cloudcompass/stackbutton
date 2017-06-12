@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { GithubService } from '../_services/github.service';
 import { GithubCommitsService } from '../_services/github-commits.service';
 
 @Component({
@@ -47,8 +45,6 @@ export class CommitCardComponent implements OnInit {
     this.loadSampleData();
   }
 
-  ngAfterViewInit() { }
-
   /**
    * Increment the commitIndex if possible, then update buttons and the displayed commit information
    */
@@ -84,17 +80,17 @@ export class CommitCardComponent implements OnInit {
    */
   updateCommitInfo() {
     // Grab the current commit
-    this.currentCommit = this.commits[this.commitIndex].commit;
+    this.currentCommit = this.commits[this.commitIndex];
 
     // Update the commit information
-    this.commitAuthor = this.currentCommit.committer.name;
-    this.commitMessage = this.currentCommit.message;
+    this.commitAuthor = this.currentCommit.commit.committer.name;
+    this.commitMessage = this.currentCommit.commit.message;
     this.commitSha = this.currentCommit.sha;
 
-    const commitDate = new Date(this.currentCommit.committer.date);
+    const commitDate = new Date(this.currentCommit.commit.committer.date);
     this.commitDate = commitDate.toLocaleString();
 
-    // this.avatarUrl = this.currentCommit.committer.avatar_url;
+    // this.avatarUrl = this.currentCommit.commit.committer.avatar_url;
   }
 
   /**

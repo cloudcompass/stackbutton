@@ -38,7 +38,6 @@ import { IssuesCardComponent } from './issues-card/issues-card.component';
 // Services
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
-import { GithubService } from './_services/github.service';
 import { GithubUserService } from './_services/github-user.service';
 import { GithubIssuesService } from './_services/github-issues.service';
 import { GithubCommitsService } from './_services/github-commits.service';
@@ -96,7 +95,6 @@ import { OpenshiftServiceComponent } from './openshift-service/openshift-service
     AuthGuard,
     AuthenticationService,
     UserService,
-    GithubService,
     GithubUserService,
     GithubIssuesService,
     GithubCommitsService,
