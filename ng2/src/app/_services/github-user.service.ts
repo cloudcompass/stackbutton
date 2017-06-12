@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 
-import { GithubUser } from '../_models/githubUser';
+import { GithubUserModel } from '../_models/githubUserModel';
 import { GITHUBUSER } from '../sample-data/sample-github-user';
 
 /*
@@ -38,12 +38,12 @@ export class GithubUserService {
   }
 
   /**
-   * Get public GithubUser information using the supplied username
+   * Get public GithubUserModel information using the supplied username
    *
    * @param username  The Github username to get
    * @returns {Observable<R|T>} A GitHubUser, if found
    */
-  getUserPublic(username: string): Observable<GithubUser> {
+  getUserPublic(username: string): Observable<GithubUserModel> {
     // Ensure param validity
     if (username == null || username === '') {
       return Observable.throw('Invalid Github username supplied: ' + username);
@@ -63,7 +63,7 @@ export class GithubUserService {
    *
    * @returns {Observable<R|T>} A GitHubUser, if found
    */
-  getUserPrivate(): Observable<GithubUser> {
+  getUserPrivate(): Observable<GithubUserModel> {
     // Setup headers for authorized user get request
     const authToken = ''; // TODO - use getLocal('auth_token') to get the token
     const headers = new Headers({ 'Accept': 'application/json' });
@@ -80,29 +80,29 @@ export class GithubUserService {
   }
 
   /**
-   * Get the local sample GithubUser
+   * Get the local sample GithubUserModel
    *
-   * @returns {any} Sample GithubUser
+   * @returns {any} Sample GithubUserModel
    */
-  getUserSample(): Observable<GithubUser> {
+  getUserSample(): Observable<GithubUserModel> {
     return Observable.of(GITHUBUSER);
   }
 
   /**
    * For testing: get local sample githubUser, with a 2 second delay
    *
-   * @returns {any} Sample GithubUser
+   * @returns {any} Sample GithubUserModel
    */
-  getUserSampleSlowly(): Observable<GithubUser> {
+  getUserSampleSlowly(): Observable<GithubUserModel> {
     return Observable.of(GITHUBUSER).delay(2000);
   }
 
   /**
-   * For testing: Return an observable with an error where a GithubUser is expected
+   * For testing: Return an observable with an error where a GithubUserModel is expected
    *
    * @returns {any} Errored Observable
    */
-  getUserSampleError(): Observable<GithubUser> {
-    return Observable.throw('Get GithubUser Error');
+  getUserSampleError(): Observable<GithubUserModel> {
+    return Observable.throw('Get GithubUserModel Error');
   }
 }

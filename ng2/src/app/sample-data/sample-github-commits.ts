@@ -1,9 +1,9 @@
 /**
  * Created by Garmonz on 2017-05-14.
  */
-import { GithubCommit } from '../_models/githubCommit';
+import { GithubCommitModel } from '../_models/githubCommitModel';
 
-export const GITHUBCOMMITS: GithubCommit[] = [
+export const GITHUBCOMMITS: GithubCommitModel[] = [
   // First sample commit
   {
     url: '',

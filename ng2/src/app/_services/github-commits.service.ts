@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 
-import { GithubCommit } from '../_models/githubCommit';
+import { GithubCommitModel } from '../_models/githubCommitModel';
 import { GITHUBCOMMITS } from '../sample-data/sample-github-commits';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class GithubCommitsService {
    * @param repoName
    * @returns {any}
    */
-  getRepoCommits(ownerName: string, repoName: string): Observable<GithubCommit[]> {
+  getRepoCommits(ownerName: string, repoName: string): Observable<GithubCommitModel[]> {
     // Ensure param validity
     if (ownerName == null || ownerName === '') {
       return Observable.throw('Invalid Github owner name supplied: ' + ownerName);
@@ -51,14 +51,14 @@ export class GithubCommitsService {
   }
 
   /**
-   * Retrieve a single GithubCommit
+   * Retrieve a single GithubCommitModel
    *
    * @param ownerName
    * @param repoName
    * @param sha
    * @returns {any}
    */
-  getCommit(ownerName: string, repoName: string, sha: string): Observable<GithubCommit[]> {
+  getCommit(ownerName: string, repoName: string, sha: string): Observable<GithubCommitModel[]> {
     // Ensure param validity
     if (ownerName == null || ownerName === '') {
       return Observable.throw('Invalid Github owner name supplied: ' + ownerName);
@@ -85,7 +85,7 @@ export class GithubCommitsService {
    *
    * @returns {any} Array of sample GithubCommits
    */
-  getCommitsSample(): Observable<GithubCommit[]> {
+  getCommitsSample(): Observable<GithubCommitModel[]> {
     return Observable.of(GITHUBCOMMITS);
   }
 
@@ -94,16 +94,16 @@ export class GithubCommitsService {
    *
    * @returns {any} Array of sample GithubCommits
    */
-  getCommitsSampleSlowly(): Observable<GithubCommit[]> {
+  getCommitsSampleSlowly(): Observable<GithubCommitModel[]> {
     return Observable.of(GITHUBCOMMITS).delay(3000);
   }
 
   /**
-   * For testing: Return an observable with an error where a GithubCommit is expected
+   * For testing: Return an observable with an error where a GithubCommitModel is expected
    *
    * @returns {any} Errored Observable
    */
-  getCommitsSampleError(): Observable<GithubCommit[]> {
+  getCommitsSampleError(): Observable<GithubCommitModel[]> {
     return Observable.throw('Get GithubCommits Error');
   }
 

@@ -1,7 +1,4 @@
-/**
- * Created by Garmonz on 2017-05-14.
- */
-export class GithubIssue {
+export class GithubIssueModel {
   id: number;
   url: string;
   repository_url: string;
@@ -13,10 +10,10 @@ export class GithubIssue {
   state: string;
   title: string;
   body: string;
-  // user: GithubUser
+  // user: GithubUserModel
   issueLabel: string; // TODO - remove
   // labels: GithubLabel[];
-  // assignee: GithubUser
+  // assignee: GithubUserModel
   // milestone: GithubMilestone
   locked: boolean;
   comments: number;

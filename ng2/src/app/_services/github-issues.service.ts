@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 
-import { GithubIssue } from '../_models/githubIssue';
+import { GithubIssueModel } from '../_models/githubIssueModel';
 import { GITHUBISSUES } from '../sample-data/sample-github-issues';
 
 /*
@@ -48,7 +48,7 @@ export class GithubIssuesService {
    * @param repoName  Name of the repo
    * @returns {any} Array of GithubIssues, if any
    */
-  getRepoIssues(ownerName: string, repoName: string): Observable<GithubIssue[]> {
+  getRepoIssues(ownerName: string, repoName: string): Observable<GithubIssueModel[]> {
     // Ensure param validity
     if (ownerName == null || ownerName === '') {
       return Observable.throw('Invalid Github owner name supplied: ' + ownerName);
@@ -76,7 +76,7 @@ export class GithubIssuesService {
    * @param orgName (Optional) If given, function returns all issues for a given organization assigned to the user
    * @returns {Observable<R|T>} Array of GithubIssues, if any
    */
-  getAuthUserIssues(orgName?: string): Observable<GithubIssue[]>  {
+  getAuthUserIssues(orgName?: string): Observable<GithubIssueModel[]>  {
     // Setup headers for authorized user get request
     const authToken = ''; // TODO - use getLocal('auth_token') to get the token
     const headers = new Headers({ 'Accept': 'application/json' });
@@ -99,14 +99,14 @@ export class GithubIssuesService {
   }
 
   /**
-   * Retrieve a single GithubIssue
+   * Retrieve a single GithubIssueModel
    *
    * @param ownerName Issue owner's name
    * @param repoName  Issue repo name
    * @param issueNumber Issue number
-   * @returns {Observable<R|T>} A GithubIssue, if any
+   * @returns {Observable<R|T>} A GithubIssueModel, if any
    */
-  getIssue(ownerName: string, repoName: string, issueNumber: number): Observable<GithubIssue> {
+  getIssue(ownerName: string, repoName: string, issueNumber: number): Observable<GithubIssueModel> {
     // Ensure param validity
     if (ownerName == null || ownerName === '') {
       return Observable.throw('Invalid Github owner name supplied: ' + ownerName);
@@ -137,7 +137,7 @@ export class GithubIssuesService {
    *
    * @returns {any} Array of sample GithubIssues
    */
-  getIssuesSample(): Observable<GithubIssue[]> {
+  getIssuesSample(): Observable<GithubIssueModel[]> {
     return Observable.of(GITHUBISSUES);
   }
 
@@ -146,16 +146,16 @@ export class GithubIssuesService {
    *
    * @returns {any} Array of sample GithubIssues
    */
-  getIssuesSampleSlowly(): Observable<GithubIssue[]> {
+  getIssuesSampleSlowly(): Observable<GithubIssueModel[]> {
     return Observable.of(GITHUBISSUES).delay(2500);
   }
 
   /**
-   * For testing: Return an observable with an error where a GithubUser is expected
+   * For testing: Return an observable with an error where a GithubUserModel is expected
    *
    * @returns {any} Errored Observable
    */
-  getIssuesSampleError(): Observable<GithubIssue[]> {
+  getIssuesSampleError(): Observable<GithubIssueModel[]> {
     return Observable.throw('Get GithubIssues Error');
   }
 }

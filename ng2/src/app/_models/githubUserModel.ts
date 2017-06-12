@@ -1,7 +1,4 @@
-/**
- * Created by Garmonz on 2017-05-22.
- */
-export class GithubUser {
+export class GithubUserModel {
   login: string;
   id: number;
   avatar_url: string;

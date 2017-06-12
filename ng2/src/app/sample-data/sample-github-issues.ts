@@ -1,9 +1,9 @@
 /**
  * Created by Garmonz on 2017-05-14.
  */
-import { GithubIssue } from '../_models/githubIssue';
+import { GithubIssueModel } from '../_models/githubIssueModel';
 
-export const GITHUBISSUES: GithubIssue[] = [
+export const GITHUBISSUES: GithubIssueModel[] = [
   {
     id: 1,
     url: '',
@@ -16,10 +16,10 @@ export const GITHUBISSUES: GithubIssue[] = [
     state: '',
     title: 'Bug Title',
     body: 'Description of a bug!',
-    // user: GithubUser
+    // user: GithubUserModel
     issueLabel: 'bug', // TODO - remove
     // labels: GithubLabel[]
-    // assignee: GithubUser
+    // assignee: GithubUserModel
     // milestone: GithubMilestone
     locked: false,
     comments: 0,
@@ -40,10 +40,10 @@ export const GITHUBISSUES: GithubIssue[] = [
     state: '',
     title: 'Question Title',
     body: 'Description of a question',
-    // user: GithubUser
+    // user: GithubUserModel
     issueLabel: 'question', // TODO - remove
     // labels: GithubLabel[]
-    // assignee: GithubUser
+    // assignee: GithubUserModel
     // milestone: GithubMilestone
     locked: false,
     comments: 0,
@@ -64,10 +64,10 @@ export const GITHUBISSUES: GithubIssue[] = [
     state: '',
     title: 'Help Wanted Title',
     body: 'Description of help wanted',
-    // user: GithubUser
+    // user: GithubUserModel
     issueLabel: 'help wanted', // TODO - remove
     // labels: GithubLabel[]
-    // assignee: GithubUser
+    // assignee: GithubUserModel
     // milestone: GithubMilestone
     locked: false,
     comments: 0,
@@ -88,10 +88,10 @@ export const GITHUBISSUES: GithubIssue[] = [
     state: '',
     title: 'Enhancement Title',
     body: 'Description of an enhancement',
-    // user: GithubUser
+    // user: GithubUserModel
     issueLabel: 'enhancement', // TODO - remove
     // labels: GithubLabel[]
-    // assignee: GithubUser
+    // assignee: GithubUserModel
     // milestone: GithubMilestone
     locked: false,
     comments: 0,
@@ -112,10 +112,10 @@ export const GITHUBISSUES: GithubIssue[] = [
     state: '',
     title: 'Another Bug Title',
     body: 'Description of another bug!',
-    // user: GithubUser
+    // user: GithubUserModel
     issueLabel: 'bug', // TODO - remove
     // labels: GithubLabel[]
-    // assignee: GithubUser
+    // assignee: GithubUserModel
     // milestone: GithubMilestone
     locked: false,
     comments: 0,
@@ -136,10 +136,10 @@ export const GITHUBISSUES: GithubIssue[] = [
     state: '',
     title: 'Third Bug Title',
     body: 'Persistent Bug!',
-    // user: GithubUser
+    // user: GithubUserModel
     issueLabel: 'bug', // TODO - remove
     // labels: GithubLabel[]
-    // assignee: GithubUser
+    // assignee: GithubUserModel
     // milestone: GithubMilestone
     locked: false,
     comments: 0,

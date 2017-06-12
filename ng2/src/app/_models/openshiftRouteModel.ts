@@ -4,7 +4,7 @@
  * Note: The Majority of the comments (// ObjectMeta) denote the class definition outlined in the api documentation
  * The idea was to model these and fit them in at a later time
  */
-export class OpenShiftRoute {
+export class OpenShiftRouteModel {
   kind: string;
   apiVersion: string;
   metadata: {

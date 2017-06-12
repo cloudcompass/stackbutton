@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OpenShiftServiceModel } from '../_models/openshiftService';
+import { OpenShiftServiceModel } from '../_models/openshiftServiceModel';
 import { OpenShiftService } from '../_services/openshift.service';
 
 @Component({

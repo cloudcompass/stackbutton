@@ -1,7 +1,7 @@
 /**
- * TODO: Find out what this is based on
+ * TODO: Find out what this is based on, if anything
  */
-export class OpenShiftProject {
+export class OpenShiftProjectModel {
   // Custom elements
   project: string;
   members: {

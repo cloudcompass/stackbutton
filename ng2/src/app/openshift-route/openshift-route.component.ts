@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OpenShiftRoute } from '../_models/openshiftRoute';
-import { OpenShiftServiceModel } from '../_models/openshiftService';
+import { OpenShiftRouteModel } from '../_models/openshiftRouteModel';
+import { OpenShiftServiceModel } from '../_models/openshiftServiceModel';
 import {OpenShiftService} from "../_services/openshift.service";
 
 @Component({
@@ -27,7 +27,7 @@ export class OpenshiftRouteComponent implements OnInit {
   @Input() name: string;
   @Input() projectName: string;
 
-  private routeData: OpenShiftRoute;
+  private routeData: OpenShiftRouteModel;
 
   // Data to display
   private loading: boolean;

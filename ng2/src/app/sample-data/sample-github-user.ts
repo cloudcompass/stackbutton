@@ -1,9 +1,9 @@
 /**
  * Created by Garmonz on 2017-05-22.
  */
-import { GithubUser } from '../_models/githubUser';
+import { GithubUserModel } from '../_models/githubUserModel';
 
-export const GITHUBUSER: GithubUser = {
+export const GITHUBUSER: GithubUserModel = {
   login: 'sampleUser',
   id: 42,
   avatar_url: '',

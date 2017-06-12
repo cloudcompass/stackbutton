@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OpenShiftPod } from '../_models/openshiftPod';
+import { OpenShiftPodModel } from '../_models/openshiftPodModel';
 import { OpenShiftService } from '../_services/openshift.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class OpenshiftPodComponent implements OnInit {
   @Input() name: string;
   @Input() projectName: string;
 
-  private podData: OpenShiftPod;
+  private podData: OpenShiftPodModel;
 
   // Data to display
   private deploymentConfig: string;

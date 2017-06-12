@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
-import { GithubCommit } from '../_models/githubCommit';
+import { GithubCommitModel } from '../_models/githubCommitModel';
 
-import { GithubIssue } from '../_models/githubIssue';
+import { GithubIssueModel } from '../_models/githubIssueModel';
 import { GITHUBISSUES } from '../sample-data/sample-github-issues';
 
-import { GithubUser } from '../_models/githubUser';
+import { GithubUserModel } from '../_models/githubUserModel';
 
 import { GITHUBCOMMITS } from '../sample-data/sample-github-commits';
 
@@ -17,15 +17,15 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class GithubService {
 
-  ghUser: GithubUser;
+  ghUser: GithubUserModel;
 
   constructor(private http: Http) { }
 
-  getCommits(): Promise<GithubCommit[]> {
+  getCommits(): Promise<GithubCommitModel[]> {
     return Promise.resolve(GITHUBCOMMITS);
   }
 
-  getCommitsSample(): GithubCommit[] {
+  getCommitsSample(): GithubCommitModel[] {
     return GITHUBCOMMITS;
   }
 
@@ -33,7 +33,7 @@ export class GithubService {
    * Temporary function for testing
    * @returns {Promise<T>}
    */
-  getCommitsSlowly(): Promise<GithubCommit[]> {
+  getCommitsSlowly(): Promise<GithubCommitModel[]> {
     return new Promise(resolve => {
       // Simulate server latency with 4 second delay
       setTimeout(() => resolve(GITHUBCOMMITS), 4000);
@@ -44,7 +44,7 @@ export class GithubService {
    * Temporary function for testing
    * @returns {Promise<never>}
    */
-  getCommitsFail(): Promise<GithubCommit[]> {
+  getCommitsFail(): Promise<GithubCommitModel[]> {
     return Promise.reject('Cannot connect to network');
   }
 
@@ -52,7 +52,7 @@ export class GithubService {
    * Temporary function for testing
    * @returns {Promise<T>}
    */
-  getIssuesSlowly(): Promise<GithubIssue[]> {
+  getIssuesSlowly(): Promise<GithubIssueModel[]> {
     return new Promise(resolve => {
       // Simulate server latency with 4 second delay
       setTimeout(() => resolve(GITHUBISSUES), 4000);
@@ -63,7 +63,7 @@ export class GithubService {
    * Temporary function for testing
    * @returns {Promise<never>}
    */
-  getIssuesFail(): Promise<GithubIssue[]> {
+  getIssuesFail(): Promise<GithubIssueModel[]> {
     return Promise.reject('Cannot connect to network');
   }
 

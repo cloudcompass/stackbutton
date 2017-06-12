@@ -1,4 +1,4 @@
-import { OpenShiftContainer } from './openshiftContainer';
+import { OpenShiftContainerModel } from './openshiftContainerModel';
 
 /**
  * Version 1 of the OpenShift/Kubernetes Pod API structure, plus some additions
@@ -6,7 +6,7 @@ import { OpenShiftContainer } from './openshiftContainer';
  * Note: The Majority of the comments (// ObjectMeta) denote the class definition outlined in the api documentation
  * The idea was to model these and fit them in at a later time
  */
-export class OpenShiftPod {
+export class OpenShiftPodModel {
   kind: string;
   apiVersion: string;
   metadata: {
@@ -24,7 +24,7 @@ export class OpenShiftPod {
   }; // ObjectMeta
   spec: {
     volumes: any[]; // Volume
-    containers: OpenShiftContainer[];
+    containers: OpenShiftContainerModel[];
     restartPolicy: string;
     terminationGracePeriodSeconds: number;
     activeDeadlineSeconds: number;

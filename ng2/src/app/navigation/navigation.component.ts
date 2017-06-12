@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../_models/user';
+import { UserModel } from '../_models/userModel';
 import { UserService } from '../_services/user.service';
 import {AuthenticationService} from "../_services/authentication.service";
 import {Router} from "@angular/router";
@@ -17,8 +17,8 @@ import {Router} from "@angular/router";
  * TODO: loadAllUsers and deleteUser are temporary and should be put somewhere else at a later time
  */
 export class NavigationComponent implements OnInit {
-  currentUser: User;
-  users: User[] = [];
+  currentUser: UserModel;
+  users: UserModel[] = [];
 
   constructor(private userService: UserService,
               private authenticationService: AuthenticationService,

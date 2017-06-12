@@ -36,7 +36,7 @@ export class OpenShiftService {
    */
   getOpenShiftData(): Observable<any> {
     return this.http
-      .get('assets/sampleData/sample-openShift-data.json')
+      .get('assets/sampleData/openshift-sample-data.json')
       .map(res => res.json());
   }
 
@@ -53,7 +53,7 @@ export class OpenShiftService {
 
     // Retrieve project data, then look for the project by name, then return it
     return this.http
-      .get('assets/sampleData/sample-openShift-data.json')
+      .get('assets/sampleData/openshift-sample-data.json')
       .map(res => {
         // Convert the response to json before parsing
         for (const project of res.json()) {
@@ -79,7 +79,7 @@ export class OpenShiftService {
 
     // Retrieve project data, look for the project by name, then the service by name, then return it
     return this.http
-      .get('assets/sampleData/sample-openShift-data.json')
+      .get('assets/sampleData/openshift-sample-data.json')
       .map(res => {
         // Convert the response to json before parsing
         for (const project of res.json()) {
@@ -116,7 +116,7 @@ export class OpenShiftService {
 
     // Retrieve project data, look for the project by name, then the pod by name, then return it
     return this.http
-      .get('assets/sampleData/sample-openShift-data.json')
+      .get('assets/sampleData/openshift-sample-data.json')
       .map(res => {
         // Convert the response to json before parsing
         for (const project of res.json()) {
@@ -153,7 +153,7 @@ export class OpenShiftService {
 
     // Retrieve project data, look for the project by name, then the route by name, then return it
     return this.http
-      .get('assets/sampleData/sample-openShift-data.json')
+      .get('assets/sampleData/openshift-sample-data.json')
       .map(res => {
         // Convert the response to json before parsing
         for (const project of res.json()) {

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OpenShiftService } from '../_services/openshift.service';
-import { OpenShiftServiceModel } from '../_models/openshiftService';
-import { OpenShiftRoute } from '../_models/openshiftRoute';
-import { OpenShiftPod } from '../_models/openshiftPod';
+import { OpenShiftServiceModel } from '../_models/openshiftServiceModel';
+import { OpenShiftRouteModel } from '../_models/openshiftRouteModel';
+import { OpenShiftPodModel } from '../_models/openshiftPodModel';
 
 @Component({
   selector: 'app-openshift-project-card',
@@ -18,9 +18,9 @@ export class OpenshiftProjectCardComponent implements OnInit {
   private apiVersion: string;
 
   private projectMembers: string[];
-  private projectRoutes: OpenShiftRoute[];
+  private projectRoutes: OpenShiftRouteModel[];
   private projectServices: OpenShiftServiceModel[];
-  private projectPods: OpenShiftPod[];
+  private projectPods: OpenShiftPodModel[];
 
   constructor(private openShiftService: OpenShiftService) {
     this.projectMembers = [];

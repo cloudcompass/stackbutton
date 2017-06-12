@@ -1,7 +1,4 @@
-/**
- * Created by Garmonz on 2017-05-14.
- */
-export class GithubCommit {
+export class GithubCommitModel {
   url: string;
   sha: string;
   html_url: string;
