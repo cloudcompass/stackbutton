@@ -35,11 +35,16 @@ export class OpenshiftRouteComponent implements OnInit {
   private host: string;
   private services: OpenShiftServiceModel[];
 
+  // Testing
+  private isCollapsed: boolean;
+
   constructor(private openShiftService: OpenShiftService) { }
 
   ngOnInit() {
     this.loading = true;
     this.services = [];
+
+    this.isCollapsed = true;
 
     // First, query the service to populate the router information
     this.openShiftService.getProjectRoute(this.projectName, this.name).subscribe(
@@ -91,5 +96,9 @@ export class OpenshiftRouteComponent implements OnInit {
         console.log('Error retrieving OpenShift route: ' + error);
       }
     );
+  }
+
+  toggleCollapsed() {
+    this.isCollapsed = !this.isCollapsed;
   }
 }

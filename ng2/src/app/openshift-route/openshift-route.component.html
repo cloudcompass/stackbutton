@@ -1,21 +1,26 @@
-<div class="col-xs-24 col-sm-12 col-lg-12" style="background:greenyellow">
-  <div *ngIf="!loading">
-    <!-- Route Header -->
-    <div style="background:antiquewhite">
-      <span class="fa fa-caret-down"></span>
-      <strong>{{appName.toUpperCase()}}</strong>
-      -
-      <span class="pficon-arrow"></span>
-      <a>{{host}}</a>
-    </div>
+<div class="col-xs-24 col-sm-12 col-lg-12 card-pf">
+  <div class="">
+    <legend (click)="toggleCollapsed()" class="fields-section-header-pf">
+      <span *ngIf="loading">
+        <span class="fa fa-spinner fa-spin"></span>
+        Loading Router Data...
+      </span>
+      <span *ngIf="!loading">
+        <span *ngIf="isCollapsed" class="fa fa-angle-right"></span>
+        <span *ngIf="!isCollapsed" class="fa fa-angle-down"></span>
+        <strong>{{appName.toUpperCase()}}</strong>
+        -
+        <span class="pficon-arrow"></span>
+        <a>{{host}}</a>
+      </span>
+    </legend>
 
-    <!-- Route Body -->
-    <div *ngFor="let service of services">
-      <app-openshift-service [projectName]="projectName"
-                             [name]="service.metadata.name"></app-openshift-service>
+    <div [hidden]="isCollapsed">
+      <div *ngFor="let service of services">
+        <app-openshift-service [projectName]="projectName"
+                               [name]="service.metadata.name"></app-openshift-service>
+      </div>
     </div>
   </div>
-  <div *ngIf="loading">
-    <span class="fa fa-spinner fa-spin"></span>Loading Router Data...
-  </div>
+
 </div>
