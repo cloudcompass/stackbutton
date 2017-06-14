@@ -1,18 +1,104 @@
 <div class="cards-pf">
   <div class="container-fluid" >
-    <div class="row row-cards-pf ">
+    <div class="row row-cards-pf">
       <div class="col-md-12 card-pf">
         <div class="card-pf-heading">
           <h2 class="card-pf-title">
             Add an API key
           </h2>
         </div>
+
+        <!-- API Key submission form -->
+        <form class="form-horizontal" [formGroup]="apiForm" (ngSubmit)="apikeyFormSubmit($event)">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="source">Source</label>
+            <select id="source" formControlName="source">
+              <option value="" disabled>Choose a source</option>
+              <option *ngFor="let source of sources" [value]="source">{{source}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="apikey">API Key</label>
+            <div class="col-sm-8">
+              <input type="text" id="apikey" class="form-control" formControlName="apikey">
+              <button type="submit" class="btn btn-primary" [disabled]="apiForm.invalid">Add Key</button>
+            </div>
+          </div>
+          <div>
+            <p>Debug</p>
+            <p>Value: {{ apiForm.value | json }}</p>
+            <p>Status: {{ apiForm.status }}</p>
+          </div>
+        </form><!-- End apiForm -->
+
+        <hr>
+
+        <!-- Project Selection Form -->
+        <form class="form-horizontal" [formGroup]="projectForm" (ngSubmit)="projectFormSubmit($event)">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="apikey">API Key</label>
+            <select formControlName="project">
+              <option value="" disabled>Choose a project</option>
+              <option *ngFor="let project of projects" [value]="project">{{project}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Submit</button>
+          </div>
+        </form><!-- end projectForm -->
+
+        <hr>
+
+        <form class="form-horizontal" [formGroup]="editForm" (ngSubmit)="editFormSubmit($event)">
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="projectNameInput">Project Name</label>
+            <div class="col-sm-8">
+              <input type="text" id="projectNameInput" class="form-control" formControlName="projectName" placeholder="Stackbutton">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="projectTeamInput">Team Name</label>
+            <div class="col-sm-8">
+              <input type="text" id="projectTeamInput" class="form-control" formControlName="teamName" placeholder="BamDev">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="teamMembersInput">Team Name</label>
+            <div class="col-sm-8">
+              <input type="text" id="teamMembersInput" class="form-control" formControlName="teamMembers" placeholder="Lee Combs, Curtis LayCraft, Sheryll Tabamo">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="projectTagsInput">Tags</label>
+            <div class="col-sm-8">
+              <input type="text" id="projectTagsInput" class="form-control" formControlName="tags" placeholder="(Optional) Victoria, IDPISPOPD, yoyo">
+            </div>
+          </div>
+
+          <div>
+            <p>Debug</p>
+            <p>Value: {{ editForm.value | json }}</p>
+            <p>Status: {{ editForm.status }}</p>
+          </div>
+
+          <div>
+            <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Add Data Source</button>
+          </div>
+          <hr>
+        </form><!-- End editForm -->
+
+        <!--
+        <hr>
         <form class="form-horizontal">
 
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="api-chooser">Source</label>
+            <label class="col-sm-2 control-label" for="api-chooser-2">Source</label>
             <div class="col-sm-10">
-              <select id="api-chooser" class="selectpicker">
+              <select id="api-chooser-2" class="selectpicker">
                 <option>OpenShift</option>
                 <option>Github</option>
                 <option disabled>Slack</option>
@@ -42,7 +128,6 @@
                 <option>Stackbutton</option>
                 <option>DocTracker</option>
                 <option>ReportGenerator</option>
-                <!--<option disabled>Onions</option>-->
               </select>
             </div>
           </div>
@@ -83,10 +168,9 @@
           <p class="card-pf-subtitle">You will also be able to modify this later.</p>
 
         </form>
+        -->
       </div>
-
     </div>
-
   </div>
 </div>
 

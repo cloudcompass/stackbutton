@@ -56,13 +56,15 @@ import { OpenshiftPodComponent } from './openshift-pod/openshift-pod.component';
 import { OpenshiftRouteComponent } from './openshift-route/openshift-route.component';
 import { OpenshiftServiceComponent } from './openshift-service/openshift-service.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
