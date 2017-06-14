@@ -1,20 +1,16 @@
-<div class="col-xs-24 col-sm-12 col-lg-12">
+<div class="col-sm-12 col-lg-12">
   <div class="card-pf">
     <div class="card-pf-heading">
       <h2 class="card-pf-title">
-        OpenShift Project Card
+        <strong>OpenShift</strong> {{projectName}} <i>(API {{apiVersion}})</i>
       </h2>
     </div><!-- End Card Header -->
 
     <div class="card-pf-body">
-      <!-- Basic project information -->
-      <div>
-        <p>Project name: {{projectName}}</p>
-        <p>API Version: {{apiVersion}}</p>
-      </div>
       <div class="row row-cards-pf">
-        <p><strong>Members</strong></p>
-        <p *ngFor="let member of projectMembers">{{member.name}} - {{member.role}}</p>
+        <strong>{{projectName}} Members:</strong>
+          <span *ngFor="let member of projectMembers">{{member.name}} <i>({{member.role}})</i>,
+        </span>
       </div>
 
       <!-- Generate the routes for the project -->
@@ -28,4 +24,6 @@
       </div>
     </div><!-- End Card Body -->
   </div><!-- End Card -->
+
+
 </div>

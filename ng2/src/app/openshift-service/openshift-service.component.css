@@ -1,0 +1,15 @@
+.c3i-blue-indent {
+  padding-left: 10px;
+  border-left: #00b9e4 solid;
+}
+.c3i-r-pad{
+  padding-right:5px;
+}
+.c3i-heading{
+  border-bottom: #dddddd thin solid;
+  font-size:120%;
+  font-weight: bolder;
+  padding-bottom: 5px;
+  padding-top: 5px;
+
+}

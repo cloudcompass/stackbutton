@@ -1,0 +1,11 @@
+.c3i-grey-indent {
+  padding-left: 20px;
+  /*border-left: #00b9e4 solid; patternfly blue*/
+  border-left: #dddddd thin solid;
+}
+.c3i-indent{
+  padding-left: 20px;
+}
+.c3i-r-pad{
+  padding-right:5px;
+}
