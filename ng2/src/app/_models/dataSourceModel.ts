@@ -11,7 +11,7 @@ export class DataSourceModel {
   service: {
     type: string; // Github, OpenShift, etc.
     apikey: string;
-    misc: any[]; // ?
+    misc: string[]; // ?
   };
   serviceID: string; // Database Key
   metadata: {
