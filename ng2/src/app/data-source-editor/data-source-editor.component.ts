@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OpenShiftService } from '../_services/openshift.service';
-import {DataSourceModel} from "../_models/dataSourceModel";
+import { DataSourceModel } from '../_models/dataSourceModel';
 
 
 @Component({
@@ -155,50 +155,61 @@ export class DataSourceEditorComponent implements OnInit {
     console.log('edit submit');
     console.log(this.editForm.controls.projectName.value);
     console.log(this.editForm.controls.teamName.value);
-
     console.log(this.editForm.controls.teamMembers.value);
     console.log(this.editForm.controls.tags.value);
 
     // TODO: Build a dataSource object, and save it locally
-    const dataSource: DataSourceModel = {
-      sourceID: 'source123',
-      projectName: this.editForm.controls.projectName.value,
-      projectID: 'project123',
-      teamName: this.editForm.controls.teamName.value,
+    const dataSource: DataSourceModel = new DataSourceModel();
 
-      // Temp member value, to be generated later
-      teamMembers: [
-        {
-          name: 'Lee Combs',
-          role: 'admin',
-          uuid: 'lee123'
-        },
-        {
-          name: 'Curtis LayCraft',
-          role: 'admin',
-          uuid: 'curtis123'
-        },
-        {
-          name: 'Sheryll Tabamo',
-          role: 'contribute',
-          uuid: 'sheryll123'
-        }
-      ],
-      service: {
-        type: this.apiForm.controls.source.value as string,
-        apikey: this.apiForm.controls.apikey.value as string,
-        misc: ['']
+    dataSource.sourceID = 'source123';
+    dataSource.projectName = this.editForm.controls.projectName.value;
+    dataSource.projectName = 'project123';
+    dataSource.teamName = this.editForm.controls.teamName.value;
+
+    const teamMembersInput = this.editForm.controls.teamMembers.value as string;
+    const teamMembersSplit = teamMembersInput.split(',');
+
+    dataSource.teamMembers = [
+
+    ];
+
+    
+    for (const member of teamMembersSplit) {
+
+    }
+
+    // Temp team
+    dataSource.teamMembers = [
+      {
+        name: 'Lee Combs',
+        role: 'admin',
+        uuid: 'lee123'
       },
-      serviceID: 'service123',
-      // Temp metadata value, to be generated later
-      metadata: {
-        location: 'Victoria',
-        creationTimestamp: 'what'
+      {
+        name: 'Curtis LayCraft',
+        role: 'contribute',
+        uuid: 'curtis123'
+      },
+      {
+        name: 'Sheryll Tabamo',
+        uuid: 'sheryll123'
       }
+    ];
+    dataSource.service = {
+      type: this.apiForm.controls.source.value as string,
+      apikey: this.apiForm.controls.apikey.value as string
+    };
+    dataSource.serviceID = 'service123';
+
+    // Temp metadata
+    dataSource.metadata = {
+      location: 'Victoria'
     };
 
-    console.log('ds: ' + JSON.stringify(dataSource));
+    console.log('dataSource: ' + JSON.stringify(dataSource));
   }
+
+  // Helper methods
 
   private clearProjectForm() {
     this.projects = [];

@@ -5,17 +5,17 @@ export class DataSourceModel {
   teamName: string;
   teamMembers: {
     name: string;
-    role: string;
+    role?: string;
     uuid: string;
   }[];
   service: {
     type: string; // Github, OpenShift, etc.
     apikey: string;
-    misc: string[]; // ?
+    misc?: string[]; // ?
   };
   serviceID: string; // Database Key
   metadata: {
-    location: string;
-    creationTimestamp: string;
+    location?: string;
+    creationTimestamp?: string;
   };
 }
