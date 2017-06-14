@@ -15,8 +15,6 @@ import {DataSourceModel} from "../_models/dataSourceModel";
  *
  */
 export class DataSourceEditorComponent implements OnInit {
-  isClicked: Boolean = false;
-
   apiForm: FormGroup;
   projectForm: FormGroup;
   editForm: FormGroup;
@@ -28,16 +26,18 @@ export class DataSourceEditorComponent implements OnInit {
   private showProjectForm: boolean;
   private showEditForm: boolean;
 
+  // More temp?
+  private osData: any;
+
 
   constructor(private formBuilder: FormBuilder,
               private openshiftService: OpenShiftService) {
     this.createForm();
+    this.projects = [];
+
     this.showEditForm = false;
     this.showProjectForm = false;
     this.sources = ['Github', 'OpenShift'];
-
-    // TESTING
-    this.projects = ['Stackbutton', 'Project 2'];
   }
 
   ngOnInit() { }
@@ -61,24 +61,68 @@ export class DataSourceEditorComponent implements OnInit {
   }
 
   apikeyFormSubmit(event) {
-    this.showProjectForm = true; // TEMP
+    // Clear forms and hide edit
+    this.clearProjectForm();
+    this.clearEditForm();
+    this.showEditForm = false;
 
-    console.log('api submit');
-    console.log(this.apiForm.controls.source.value);
-    console.log(this.apiForm.controls.apikey.value);
+    // Display and populate the project form
+    this.showProjectForm = true;
 
-    // TODO: Once the api key is submitted, attempt to query the service
-    // For now, if Github, load fake projects...?
-    // For openshift, load sample data
-    // On success, activate and populate the project form
-    // On fail, display the error
+    // Based on the source selection, query the appropriate service and retrieve the projects
+    switch (this.apiForm.controls.source.value) {
+      case 'OpenShift':
+        this.openshiftService.getOpenShiftData().subscribe(
+          data => {
+            this.osData = data;
+
+            for (const project of this.osData) {
+              this.projects.push(project.project);
+            }
+          },
+          error => {
+            // TODO: Display an error to the user
+            console.log('Error retrieving OpenShift projects: ' + error);
+          }
+        );
+        break;
+      case 'Github':
+        // Load sample Github projects
+        this.projects = ['Stackbutton', 'Project 2'];
+        break;
+      default:
+        // TODO: Display an error to the user
+        console.log('Invalid API source supplied: ' + this.apiForm.controls.source.value);
+    }
   }
 
   projectFormSubmit(event) {
+    // Reset edit form
+    this.clearEditForm();
     this.showEditForm = true; // TEMP
 
-    console.log('project submit');
-    console.log(this.projectForm.controls.project.value);
+
+    // Display and populate the edit form based on the project selected
+    if (this.apiForm.controls.source.value === 'OpenShift') {
+      console.log('os');
+      for (const project of this.osData) {
+        if (project.project === this.projectForm.controls.project.value) {
+
+          let memberNames: string[] = [];
+          for (const member of project.members) {
+            memberNames.push(member.name);
+          }
+
+          this.editForm.setValue({
+            projectName: project.project,
+            teamName: '',
+            teamMembers: memberNames,
+            tags: ''
+          });
+          return;
+        }
+      }
+    }
 
     // TESTING sample data. This would be the result of the service query
     let sampleData: any;
@@ -156,5 +200,19 @@ export class DataSourceEditorComponent implements OnInit {
     console.log('ds: ' + JSON.stringify(dataSource));
   }
 
+  private clearProjectForm() {
+    this.projects = [];
+    this.projectForm.setValue({
+      project: ''
+    });
+  }
 
+  private clearEditForm() {
+    this.editForm.setValue({
+      projectName: '',
+      teamName: '',
+      teamMembers: '',
+      tags: ''
+    });
+  }
 }
