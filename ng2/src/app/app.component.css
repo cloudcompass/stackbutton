@@ -1,1 +1,13 @@
 body { background-color: #333333;}
+
+.c3i-grey-indent {
+  padding-left: 20px;
+  /*border-left: #00b9e4 solid; patternfly blue*/
+  border-left: #dddddd thin solid;
+}
+
+.c3i-blue-indent {
+  padding-left: 20px;
+  border-left: #00b9e4 solid;
+}
+

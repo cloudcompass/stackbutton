@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OpenShiftRouteModel } from '../_models/openshiftRouteModel';
 import { OpenShiftServiceModel } from '../_models/openshiftServiceModel';
-import {OpenShiftService} from "../_services/openshift.service";
+import {OpenShiftService} from '../_services/openshift.service';
 
 @Component({
   selector: 'app-openshift-route',
@@ -44,7 +44,7 @@ export class OpenshiftRouteComponent implements OnInit {
     this.loading = true;
     this.services = [];
 
-    this.isCollapsed = true;
+    this.isCollapsed = false;
 
     // First, query the service to populate the router information
     this.openShiftService.getProjectRoute(this.projectName, this.name).subscribe(
