@@ -1,7 +1,7 @@
 <div class="container-fluid">
-  <div class="row toolbar-pf">
+  <div class="row toolbar-pf" *ngIf="showFilter">
     <div class="col-lg-12">
-      <form class="toolbar-pf-actions" [formGroup]="filterForm" (ngSumit)="filterSubmit($event)">
+      <form class="toolbar-pf-actions" [formGroup]="filterForm" (ngSubmit)="filterSubmit($event)">
         <!-- Dropdown source selector -->
         <div class="col-sm-2 col-md-2 col-lg-2">
           <select class="form-control" id="source" formControlName="source">
@@ -28,7 +28,7 @@
         <!-- Submission button -->
         <div class="col-sm-2 col-md-2 col-lg-2">
           <div class="form-group toolbar-pf-find">
-            <button class="btn btn-link btn-find" type="submit">
+            <button type="submit" class="btn btn-link btn-find" >
               <span class="fa fa-search"></span>
             </button>
           </div>
@@ -38,12 +38,9 @@
   </div><!-- /row -->
 </div><!-- /container -->
 
-
-
-
 <!-- The Status-Board body -->
 <div class="cards-pf" >
   <div class="container-fluid container-cards-pf" >
-
+    <!-- Show cards here -->
   </div><!-- /container -->
 </div>

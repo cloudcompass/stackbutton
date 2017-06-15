@@ -7,7 +7,11 @@ import {observable} from "rxjs/symbol/observable";
 @Injectable()
 export class DataSourceService {
 
-  constructor() { }
+  private datasourceKey: string;
+
+  constructor() {
+    this.datasourceKey = 'stackDataSources';
+  }
 
   /**
    * Retrieve all stored dataSources
@@ -16,7 +20,9 @@ export class DataSourceService {
    * @returns {any}
    */
   getDataSources(): Observable<any> {
-    return Observable.of(JSON.parse(localStorage.getItem('stackDataSources')));
+    const storedDataSources = JSON.parse(localStorage.getItem('stackDataSources'));
+    if (storedDataSources) return Observable.of(storedDataSources);
+    else return Observable.throw('No Stored DataSources Found!');
   }
 
   /**
@@ -62,7 +68,7 @@ export class DataSourceService {
    * TODO: Only removes locally, remove from database
    */
   removeAllDataSources() {
-    // TODO: Actually remove all sources
+    localStorage.removeItem('stackDataSources');
   }
 
   /**

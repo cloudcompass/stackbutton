@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
  * If no data sources exist, an empty-state (getting started) page will be displayed, prompting the user to add services
  */
 export class StatusBoardComponent implements OnInit {
+  private showFilter: boolean;
 
   // TODO: Declare filter values here
   private sourceFilter: string;
@@ -21,7 +22,7 @@ export class StatusBoardComponent implements OnInit {
   private teamFilter: string;
   private tagFilters: string[];
 
-  private dataSource: any[]; // TODO: Replace any[] with dataSource[] type, once it's created
+  private dataSources: any; // TODO: Replace any[] with dataSource[] type, once it's created
 
   sources: string[]; // Const that should be stored elsewhere
 
@@ -30,16 +31,23 @@ export class StatusBoardComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private dataSourceService: DataSourceService) {
     this.sources = ['Github', 'OpenShift'];
-
+    this.showFilter = false;
     this.createForm();
-
   }
 
   ngOnInit() {
-    // Attempt to populate datasource[] by looking in the database for stored information
-
-    // If datasource[] is then found to be empty, display the empty-state (getting-started) component
-    // Else display the status-board and filter options
+    this.dataSourceService.getDataSources().subscribe(
+      data => {
+        console.log('stat data');
+        console.log(data);
+        for (const d of data) console.log('d: ' + d);
+        this.dataSources = data;
+        this.showFilter = true;
+      },
+      error => {
+        // Display 'getting started' / No data sources found
+      }
+    );
   }
 
   createForm() {
@@ -57,9 +65,16 @@ export class StatusBoardComponent implements OnInit {
    * Use the selected filters and iterate through stored data sources.
    * If a data source matches the filter criteria, generate the associated widget and add it to the status board
    */
-  filterSubmit() {
+  filterSubmit(event) {
     // Iterate data sources and check against filters
     // ie. if (ds.source == filter.souce && ds.type == filter.type) generateWidget(ds.source, ds.type, ds.serviceID)
+
+    console.log('filter submit');
+    console.log(this.filterForm.controls.source.value);
+    console.log(this.filterForm.controls.projectName.value);
+    console.log(this.filterForm.controls.teamName.value);
+    console.log(this.filterForm.controls.teamMembers.value);
+    console.log(this.filterForm.controls.tags.value);
   }
 
   /**
