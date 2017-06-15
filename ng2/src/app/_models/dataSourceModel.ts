@@ -11,7 +11,7 @@ export class DataSourceModel {
   service: {
     type: string; // Github, OpenShift, etc.
     apikey: string;
-    misc?: string[]; // ?
+    // misc?: string[]; // ?
   };
   serviceID: string; // Database Key
   metadata: string[]; // Should be a json object, but metadata input doesn't allow it yet
