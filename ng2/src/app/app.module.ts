@@ -42,6 +42,7 @@ import { GithubUserService } from './_services/github-user.service';
 import { GithubIssuesService } from './_services/github-issues.service';
 import { GithubCommitsService } from './_services/github-commits.service';
 import { OpenShiftService } from './_services/openshift.service';
+import { DataSourceService } from './_services/data-source.service';
 
 // Used to create fake backend, to be removed
 import { fakeBackendProvider } from './_helpers/fake-backend';
@@ -101,6 +102,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     GithubIssuesService,
     GithubCommitsService,
     OpenShiftService,
+    DataSourceService,
 
     // Used to create fake backend, to be removed
     fakeBackendProvider,
