@@ -44,7 +44,7 @@ export class OpenshiftRouteComponent implements OnInit {
     this.loading = true;
     this.services = [];
 
-    this.isCollapsed = false;
+    this.isCollapsed = true;
 
     // First, query the service to populate the router information
     this.openShiftService.getProjectRoute(this.projectName, this.name).subscribe(

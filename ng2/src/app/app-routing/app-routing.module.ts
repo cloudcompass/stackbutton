@@ -21,6 +21,7 @@ import { DataSourceManageComponent } from '../data-source-manage/data-source-man
 // TODO: Necessary internal components?
 import { ListViewComponent } from '../list-view/list-view.component';
 import { TabViewComponent } from '../tab-view/tab-view.component';
+import {DemoBoardComponent} from '../demo-board/demo-board.component';
 
 const appRoutes: Routes = [
   { path: '', component: DefaultPageComponent },
@@ -89,6 +90,11 @@ const appRoutes: Routes = [
       {
         path: 'profile-page',
         component: ProfilePageComponent,
+        outlet: 'internal'
+      },
+      {
+        path: 'demo-board',
+        component: DemoBoardComponent,
         outlet: 'internal'
       }
     ]

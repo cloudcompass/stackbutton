@@ -57,6 +57,7 @@ import { OpenshiftRouteComponent } from './openshift-route/openshift-route.compo
 import { OpenshiftServiceComponent } from './openshift-service/openshift-service.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { DemoBoardComponent } from './demo-board/demo-board.component';
 
 @NgModule({
   imports: [
@@ -92,6 +93,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     OpenshiftPodComponent,
     OpenshiftRouteComponent,
     OpenshiftServiceComponent,
+    DemoBoardComponent,
   ],
   providers: [
     AuthGuard,

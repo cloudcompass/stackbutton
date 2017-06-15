@@ -1,0 +1,19 @@
+<!-- The Status-Board body -->
+<div class="cards-pf" >
+  <div class="container-fluid container-cards-pf" >
+
+    <div class="row row-cards-pf">
+      <app-openshift-project-card [projectName]="'Eclipse-Kapua'"></app-openshift-project-card>
+    </div>
+
+    <div class="row row-cards-pf">
+      <app-commit-widget></app-commit-widget>
+      <app-issues-card></app-issues-card>
+    </div>
+
+    <div class="row row-cards-pf">
+      <app-utilization-card></app-utilization-card>
+    </div>
+
+  </div><!-- /container -->
+</div>
