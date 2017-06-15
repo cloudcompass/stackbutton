@@ -232,13 +232,14 @@ export class DataSourceEditorComponent implements OnInit {
     dataSource.metadata = metadataInput.split(',');
 
 
-    // Generate a unique id for this dataSource
+    // Generate a 'unique id' for this dataSource
     const dsID = dataSource.projectName + this.apiForm.controls.apikey.value;
     dataSource.sourceID = dsID;
 
-    // Get the local storage datasources, and add the new datasource to it
+    // Get the local storage dataSources, and add the new dataSource to it
     let storedDataSources = JSON.parse(localStorage.getItem('stackDataSources'));
 
+    // If nothing was found, create a new array. Otherwise, check to see if this project is already added
     if (!storedDataSources) storedDataSources = [];
     else {
       for (const ds of storedDataSources) {
@@ -249,11 +250,27 @@ export class DataSourceEditorComponent implements OnInit {
       }
     }
 
+    // Store the dataSource locally TODO: Store to database
     storedDataSources.push(JSON.stringify(dataSource));
     localStorage.setItem('stackDataSources', JSON.stringify(storedDataSources));
   }
 
   // Helper methods
+
+  /**
+   * Reset and hide edit/project forms, remove apikey input
+   */
+  private resetForms() {
+    this.showEditForm = false;
+    this.showProjectForm = false;
+
+    this.apiForm.patchValue({
+      apikey: ''
+    })
+
+    this.clearProjectForm();
+    this.clearEditForm();
+  }
 
   private clearProjectForm() {
     this.projects = [];
