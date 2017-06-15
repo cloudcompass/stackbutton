@@ -53,6 +53,8 @@ export class DataSourceService {
    */
   removeDataSourceByID(sourceID: string): Observable<any> {
     if (!sourceID || sourceID === '') return Observable.throw('Invalid sourceID supplied');
+
+    // TODO: Actually remove the source
   }
 
   /**
@@ -60,7 +62,7 @@ export class DataSourceService {
    * TODO: Only removes locally, remove from database
    */
   removeAllDataSources() {
-    // Do that
+    // TODO: Actually remove all sources
   }
 
   /**
