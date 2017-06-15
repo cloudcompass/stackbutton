@@ -21,15 +21,17 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="apikey">API Key</label>
             <div class="col-sm-8">
-              <input type="text" id="apikey" class="form-control" formControlName="apikey">
+              <!--Yes you can just type anything. But this placeholder looks nicer. -->
+              <input type="text" id="apikey" class="form-control" formControlName="apikey" placeholder="hint: Pick OpenShift and type 'openshift' for demo OpenShift data.">
               <button type="submit" class="btn btn-primary" [disabled]="apiForm.invalid">Add Key</button>
             </div>
           </div>
-          <hr>
         </form><!-- End apiForm -->
 
         <!-- Project Selection Form -->
         <form *ngIf="showProjectForm" class="form-horizontal" [formGroup]="projectForm" (change)="projectFormSubmit($event)">
+          <hr>
+
           <h2>Select a project</h2>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="apikey">Project</label>
