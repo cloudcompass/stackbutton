@@ -2,13 +2,14 @@
   <div class="container-fluid">
     <div class="row row-cards-pf">
       <div class="col-md-12 card-pf">
+        <!-- Header -->
         <div class="card-pf-heading">
           <h2 class="card-pf-title">
             Add an API key
           </h2>
         </div>
 
-        <!-- API Key submission form -->
+        <!-- API Key and source submission form -->
         <form class="form-horizontal" [formGroup]="apiForm" (ngSubmit)="apikeyFormSubmit($event)">
           <div class="form-group">
             <label class="col-sm-2 control-label" for="source">Source</label>
@@ -23,11 +24,6 @@
               <input type="text" id="apikey" class="form-control" formControlName="apikey">
               <button type="submit" class="btn btn-primary" [disabled]="apiForm.invalid">Add Key</button>
             </div>
-          </div>
-          <div>
-            <p>Debug</p>
-            <p>Value: {{ apiForm.value | json }}</p>
-            <p>Status: {{ apiForm.status }}</p>
           </div>
           <hr>
         </form><!-- End apiForm -->
@@ -47,7 +43,6 @@
           </div>
           <hr>
         </form><!-- end projectForm -->
-
 
         <!-- Data Source Editor Form -->
         <form *ngIf="showEditForm" class="form-horizontal" [formGroup]="editForm" (ngSubmit)="editFormSubmit($event)">
@@ -81,18 +76,12 @@
           </div>
 
           <div>
-            <p>Debug</p>
-            <p>Value: {{ editForm.value | json }}</p>
-            <p>Status: {{ editForm.status }}</p>
-          </div>
-
-          <div>
             <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Add Data Source</button>
           </div>
           <hr>
         </form><!-- End editForm -->
-      </div>
-    </div>
-  </div>
+      </div><!-- End card-pf -->
+    </div><!-- End row-cards-pf -->
+  </div><!-- End container-fluid -->
 </div>
 

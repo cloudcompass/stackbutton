@@ -14,8 +14,5 @@ export class DataSourceModel {
     misc?: string[]; // ?
   };
   serviceID: string; // Database Key
-  metadata: {
-    location?: string;
-    creationTimestamp?: string;
-  };
+  metadata: string[]; // Should be a json object, but metadata input doesn't allow it yet
 }
