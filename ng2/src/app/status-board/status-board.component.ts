@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataSourceService } from '../_services/data-source.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-status-board',
@@ -21,15 +23,33 @@ export class StatusBoardComponent implements OnInit {
 
   private dataSource: any[]; // TODO: Replace any[] with dataSource[] type, once it's created
 
-  constructor() { }
+  sources: string[]; // Const that should be stored elsewhere
+
+  filterForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder,
+              private dataSourceService: DataSourceService) {
+    this.sources = ['Github', 'OpenShift'];
+
+    this.createForm();
+
+  }
 
   ngOnInit() {
     // Attempt to populate datasource[] by looking in the database for stored information
 
     // If datasource[] is then found to be empty, display the empty-state (getting-started) component
     // Else display the status-board and filter options
+  }
 
-
+  createForm() {
+    this.filterForm = this.formBuilder.group({
+      source: '',
+      projectName: '',
+      teamName: '',
+      teamMembers: '',
+      tags: ''
+    });
   }
 
 
@@ -37,7 +57,7 @@ export class StatusBoardComponent implements OnInit {
    * Use the selected filters and iterate through stored data sources.
    * If a data source matches the filter criteria, generate the associated widget and add it to the status board
    */
-  applyFilters() {
+  filterSubmit() {
     // Iterate data sources and check against filters
     // ie. if (ds.source == filter.souce && ds.type == filter.type) generateWidget(ds.source, ds.type, ds.serviceID)
   }
