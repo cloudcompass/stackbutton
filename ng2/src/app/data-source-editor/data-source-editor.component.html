@@ -75,6 +75,9 @@
           <div>
             <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Add Data Source</button>
           </div>
+          <div *ngIf="alertMessage">
+            {{alertMessage}}
+          </div>
           <hr>
         </form><!-- End editForm -->
       </div><!-- End card-pf -->

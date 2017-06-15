@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OpenShiftService } from '../_services/openshift.service';
 import { DataSourceModel } from '../_models/dataSourceModel';
-import {local} from "d3-selection";
+import { DataSourceService } from '../_services/data-source.service';
 
 
 @Component({
@@ -17,22 +17,22 @@ export class DataSourceEditorComponent implements OnInit {
   sources: string[];
   projects: any[];
 
-
   private showProjectForm: boolean;
   private showEditForm: boolean;
 
-  // To keep a local copy of the data retrieved
-  private data: any;
 
+  private data: any; // To keep a local copy of the data retrieved
+  alertMessage: string;
 
   constructor(private formBuilder: FormBuilder,
-              private openshiftService: OpenShiftService) {
+              private openshiftService: OpenShiftService,
+              private dataSourceService: DataSourceService) {
     this.createForm();
     this.projects = [];
 
     this.showEditForm = false;
     this.showProjectForm = false;
-    this.sources = ['Github', 'OpenShift'];
+    this.sources = ['Github', 'OpenShift']; // Constant that should be set somewhere else?
   }
 
   ngOnInit() { }
@@ -73,7 +73,7 @@ export class DataSourceEditorComponent implements OnInit {
     // Based on the source selection, query the appropriate service and retrieve the projects
     switch (this.apiForm.controls.source.value) {
       case 'OpenShift':
-        // TEMP: Grab the sample data from the openshiftService
+        // TEMP: Grab the sample data from the openShiftService
         this.openshiftService.getOpenShiftData().subscribe(
           data => {
             this.data = data;
@@ -169,12 +169,6 @@ export class DataSourceEditorComponent implements OnInit {
    * @param event
    */
   editFormSubmit(event) {
-    console.log('edit submit');
-    console.log(this.editForm.controls.projectName.value);
-    console.log(this.editForm.controls.teamName.value);
-    console.log(this.editForm.controls.teamMembers.value);
-    console.log(this.editForm.controls.tags.value);
-
     // Build a dataSource object, then save it locally
     const dataSource: DataSourceModel = new DataSourceModel();
 
@@ -231,28 +225,21 @@ export class DataSourceEditorComponent implements OnInit {
     const metadataInput: string = this.editForm.controls.tags.value.toString();
     dataSource.metadata = metadataInput.split(',');
 
-
     // Generate a 'unique id' for this dataSource
     const dsID = dataSource.projectName + this.apiForm.controls.apikey.value;
     dataSource.sourceID = dsID;
 
-    // Get the local storage dataSources, and add the new dataSource to it
-    let storedDataSources = JSON.parse(localStorage.getItem('stackDataSources'));
-
-    // If nothing was found, create a new array. Otherwise, check to see if this project is already added
-    if (!storedDataSources) storedDataSources = [];
-    else {
-      for (const ds of storedDataSources) {
-        if (JSON.parse(ds).sourceID === dataSource.sourceID) {
-          console.log('Duplicate source found: ' + dataSource.sourceID);
-          return;
-        }
+    // Attempt to store the dataSource
+    this.dataSourceService.addDataSource(dataSource).subscribe(
+      data => {
+        console.log(data);
+        this.alertMessage = 'DataSource Added Successfully!';
+      },
+      error => {
+        console.log('Error adding DataSource: ' + error);
+        this.alertMessage = 'Unable to add DataSource: ' + error;
       }
-    }
-
-    // Store the dataSource locally TODO: Store to database
-    storedDataSources.push(JSON.stringify(dataSource));
-    localStorage.setItem('stackDataSources', JSON.stringify(storedDataSources));
+    );
   }
 
   // Helper methods
@@ -263,20 +250,14 @@ export class DataSourceEditorComponent implements OnInit {
   private resetForms() {
     this.showEditForm = false;
     this.showProjectForm = false;
-
-    this.apiForm.patchValue({
-      apikey: ''
-    })
-
+    this.apiForm.patchValue({ apikey: '' });
     this.clearProjectForm();
     this.clearEditForm();
   }
 
   private clearProjectForm() {
     this.projects = [];
-    this.projectForm.setValue({
-      project: ''
-    });
+    this.projectForm.setValue({ project: '' });
   }
 
   private clearEditForm() {
