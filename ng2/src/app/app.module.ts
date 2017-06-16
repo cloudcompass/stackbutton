@@ -24,7 +24,6 @@ import { StatusBoardComponent } from './status-board/status-board.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { DataSourceEditorComponent } from './data-source-editor/data-source-editor.component';
 import { DataSourceManageComponent } from './data-source-manage/data-source-manage.component';
-import { DataSourceAddComponent } from './data-source-add/data-source-add.component';
 
 // Status-board components
 import { NavigationComponent } from './navigation/navigation.component';
@@ -91,7 +90,6 @@ import { DemoBoardComponent } from './demo-board/demo-board.component';
     ProfilePageComponent,
     DataSourceEditorComponent,
     DataSourceManageComponent,
-    DataSourceAddComponent,
     OpenshiftProjectCardComponent,
     OpenshiftPodComponent,
     OpenshiftRouteComponent,
