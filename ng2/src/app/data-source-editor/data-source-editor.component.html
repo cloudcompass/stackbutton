@@ -16,7 +16,7 @@
 
             <div class="col-sm-2 col-md-2 col-lg-2">
               <button type="button" class="btn btn-default dropdown-toggle form-control"
-                      id="source" formControlName="source"
+                      id="source" formControlName="source" value="{{selectedSource}}"
                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{selectedSource}}
                 <span class="caret"></span>
               </button>
@@ -35,7 +35,7 @@
             <div class="col-sm-8">
               <!--Yes you can just type anything. But this placeholder looks nicer. -->
               <input type="text" id="apikey" class="form-control" formControlName="apikey" placeholder="hint: Pick OpenShift and type 'openshift' for demo OpenShift data.">
-              <button type="submit" class="btn btn-primary" >Add Key</button>
+              <button type="submit" class="btn btn-primary" [disabled]="apiForm.invalid" >Add Key</button>
             </div>
           </div>
         </form><!-- End apiForm -->
