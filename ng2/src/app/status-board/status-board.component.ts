@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSourceService } from '../_services/data-source.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {DataSourceModel} from "../_models/dataSourceModel";
 
 @Component({
   selector: 'app-status-board',
@@ -22,7 +23,7 @@ export class StatusBoardComponent implements OnInit {
   private teamFilter: string;
   private tagFilters: string[];
 
-  private dataSources: any; // TODO: Replace any[] with dataSource[] type, once it's created
+  private dataSources: any[]; // TODO: Replace any[] with dataSource[] type, once it's created
 
   sources: string[]; // Const that should be stored elsewhere
 
@@ -46,6 +47,7 @@ export class StatusBoardComponent implements OnInit {
       },
       error => {
         // Display 'getting started' / No data sources found
+        console.log('Error retrieving dataSources: ' + error);
       }
     );
   }
@@ -59,7 +61,6 @@ export class StatusBoardComponent implements OnInit {
       tags: ''
     });
   }
-
 
   /**
    * Use the selected filters and iterate through stored data sources.
@@ -75,6 +76,39 @@ export class StatusBoardComponent implements OnInit {
     console.log(this.filterForm.controls.teamName.value);
     console.log(this.filterForm.controls.teamMembers.value);
     console.log(this.filterForm.controls.tags.value);
+
+    const src = this.filterForm.controls.source.value.toString();
+    const pn = this.filterForm.controls.projectName.value.toString();
+    const tn = this.filterForm.controls.teamName.value.toString();
+    const tm = this.filterForm.controls.teamMembers.value.toString();
+    const tags = this.filterForm.controls.tags.value.toString();
+
+    /**
+     * Sorry about this
+     */
+    for (const dataSource of this.dataSources) {
+      const ds = JSON.parse(dataSource);
+
+      if (src && pn && tn) {
+        if (src === ds.service.type && pn === ds.projectName && tn === ds.teamName) console.log('x3 hit');
+      }
+      else if (src && pn) {
+        if (src === ds.service.type && pn === ds.projectName) console.log('srcpn hit');
+      }
+      else if (src && tn) {
+        if (src === ds.service.type && tn === ds.teamName) console.log('srctn hit');
+      }
+      else if (src) {
+        if (src === ds.service.type) console.log('src hit');
+      }
+      else if (pn) {
+        if (pn === ds.projectName) console.log('pn hit');
+      }
+      else if (tn) {
+        if (tn === ds.teamName) console.log('tn hit');
+      }
+      else console.log('no filter');
+    }
   }
 
   /**
