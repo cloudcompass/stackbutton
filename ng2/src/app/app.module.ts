@@ -68,7 +68,7 @@ import { DemoBoardComponent } from './demo-board/demo-board.component';
     FormsModule,
     HttpModule,
     routing,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent,
@@ -96,7 +96,7 @@ import { DemoBoardComponent } from './demo-board/demo-board.component';
     OpenshiftPodComponent,
     OpenshiftRouteComponent,
     OpenshiftServiceComponent,
-    DemoBoardComponent,
+    DemoBoardComponent
   ],
   providers: [
     AuthGuard,

@@ -90,7 +90,7 @@ export class DataSourceEditorComponent implements OnInit {
         break;
       case 'Github':
         // TEMP: sample Github projects
-        this.projects = ['Stackbutton', 'Project 2'];
+        this.projects = ['Stackbutton', 'Eclipse-Kapua', 'The New Facebook'];
         break;
       default:
         // TODO: Display an error to the user
@@ -226,7 +226,7 @@ export class DataSourceEditorComponent implements OnInit {
     dataSource.metadata = metadataInput.split(',');
 
     // Generate a 'unique id' for this dataSource
-    const dsID = dataSource.projectName + this.apiForm.controls.apikey.value;
+    const dsID = this.apiForm.controls.source.value + dataSource.projectName + this.apiForm.controls.apikey.value;
     dataSource.sourceID = dsID;
 
     // Attempt to store the dataSource

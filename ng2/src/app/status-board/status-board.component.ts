@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { DataSourceService } from '../_services/data-source.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {DataSourceModel} from "../_models/dataSourceModel";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { GithubProjectService } from '../_services/github-project.service';
 
 @Component({
   selector: 'app-status-board',
   templateUrl: './status-board.component.html',
-  styleUrls: ['./status-board.component.css']
+  styleUrls: ['./status-board.component.css'],
 })
 
 /**
@@ -16,24 +16,38 @@ import {DataSourceModel} from "../_models/dataSourceModel";
  */
 export class StatusBoardComponent implements OnInit {
   private showFilter: boolean;
+  private showCards: boolean;
+  filterForm: FormGroup;
 
-  // TODO: Declare filter values here
-  private sourceFilter: string;
-  private typeFilter: string;
-  private teamFilter: string;
-  private tagFilters: string[];
+  private generatedCards: boolean;
 
-  private dataSources: any[]; // TODO: Replace any[] with dataSource[] type, once it's created
+  private filteredProjects: any[];
+  private dataSources: any[];
+
+  // What am I doing
+  private osSources: any[];
+  private ghSources: any[];
+
+  private ghCommitShas: any[];
+  private ghIssueIDs: any[];
+
+  // huh
+  private ghCommits: any;
+  private ghIssues: any;
+
 
   sources: string[]; // Const that should be stored elsewhere
 
-  filterForm: FormGroup;
-
   constructor(private formBuilder: FormBuilder,
-              private dataSourceService: DataSourceService) {
+              private dataSourceService: DataSourceService,
+              private githubProjectService: GithubProjectService) {
     this.sources = ['Github', 'OpenShift'];
     this.showFilter = false;
     this.createForm();
+    this.osSources = [];
+    this.ghSources = [];
+
+    this.generatedCards = false;
   }
 
   ngOnInit() {
@@ -68,15 +82,8 @@ export class StatusBoardComponent implements OnInit {
    */
   filterSubmit(event) {
     // Iterate data sources and check against filters
-    // ie. if (ds.source == filter.souce && ds.type == filter.type) generateWidget(ds.source, ds.type, ds.serviceID)
 
-    console.log('filter submit');
-    console.log(this.filterForm.controls.source.value);
-    console.log(this.filterForm.controls.projectName.value);
-    console.log(this.filterForm.controls.teamName.value);
-    console.log(this.filterForm.controls.teamMembers.value);
-    console.log(this.filterForm.controls.tags.value);
-
+    // Short-handed helpers
     const src = this.filterForm.controls.source.value.toString();
     const pn = this.filterForm.controls.projectName.value.toString();
     const tn = this.filterForm.controls.teamName.value.toString();
@@ -85,6 +92,9 @@ export class StatusBoardComponent implements OnInit {
     const tm = this.filterForm.controls.teamMembers.value.toString();
     const tags = this.filterForm.controls.tags.value.toString();
 
+    // Reset stored filtered projects
+    this.filteredProjects = [];
+
     /**
      * Sorry about this
      */
@@ -92,49 +102,100 @@ export class StatusBoardComponent implements OnInit {
       const ds = JSON.parse(dataSource);
 
       if (src && pn && tn) {
-        if (src === ds.service.type && pn === ds.projectName && tn === ds.teamName) {
-          console.log('x3 hit');
-        }
+        if (src === ds.service.type && pn === ds.projectName && tn === ds.teamName) this.filteredProjects.push(ds);
       }
       else if (src && pn) {
-        if (src === ds.service.type && pn === ds.projectName) {
-          console.log('srcpn hit');
-        }
+        if (src === ds.service.type && pn === ds.projectName) this.filteredProjects.push(ds);
       }
       else if (src && tn) {
-        if (src === ds.service.type && tn === ds.teamName) {
-          console.log('srctn hit');
-        }
+        if (src === ds.service.type && tn === ds.teamName) this.filteredProjects.push(ds);
       }
       else if (src) {
-        if (src === ds.service.type) {
-          console.log('src hit');
-          console.log(ds);
-        }
+        if (src === ds.service.type) this.filteredProjects.push(ds);
       }
       else if (pn) {
-        if (pn === ds.projectName) {
-          console.log('pn hit');
-        }
+        if (pn === ds.projectName) this.filteredProjects.push(ds);
       }
       else if (tn) {
-        if (tn === ds.teamName) {
-          console.log('tn hit');
-        }
+        if (tn === ds.teamName) this.filteredProjects.push(ds);
       }
       else console.log('no filter');
     }
+
+    if (this.filteredProjects.length > 0) this.generateCards();
   }
 
-  /**
-   * Generate a widget to display data to the status board
-   *
-   * @param serviceSource  Source of the data (Github, Openshift, etc)
-   * @param cardType  Type of card to generate (Commits, Issues, Pods, etc)
-   * @param serviceID Unique service id that will be used to grab information from the server
-   */
-  generateCard(serviceSource: string, cardType: string, serviceID: number) {
-    // Generate the widget and add it to the status board's display area
-    console.log('Generate card: ' + serviceSource + ' : ' + cardType + ' : ' + serviceID);
+
+  generateCards() {
+    // Now what do you do
+    // You sleep on it
+    // Iterate and store shit? Can you inject html components through ts? WHO KNOWS
+
+
+    this.ghCommitShas = [];
+    this.ghIssueIDs = [];
+
+    this.ghCommits = {};
+    this.ghIssues = {};
+
+    console.log('Generate cards');
+    const ghpNames: any[] = [];
+    const osNames: any[] = [];
+
+    for (const ds of this.filteredProjects) {
+      this.showCards = true;
+      console.log('fp: ' + ds);
+      if (ds.service.type === 'OpenShift') {
+        osNames.push(ds.projectName);
+      }
+
+      if (ds.service.type === 'Github') {
+        ghpNames.push(ds.projectName);
+      }
+    }
+
+    if (ghpNames) {
+      for (const n of ghpNames) console.log('ghp: ' + n);
+      this.githubProjectService.getGithubProjectsByName(ghpNames).subscribe(
+        data => {
+          for (const project of data) {
+            for (const item of project.items) {
+              if (item.kind === 'commit') {
+                if (!this.ghCommits[project.project]) this.ghCommits[project.project] = [];
+                this.ghCommits[project.project].push(item.sha);
+              }
+              if (item.kind === 'issue') {
+                if (!this.ghIssues[project.project]) this.ghIssues[project.project] = [];
+                this.ghIssues[project.project].push(item.id);
+              }
+            }
+          }
+
+          for (const k in this.ghCommits) {
+            console.log(k + ' : ' + this.ghCommits[k]);
+          }
+
+          console.log('1' + this.ghCommits);
+          console.log('2' + this.ghCommits.keys);
+          console.log('4' + this.ghCommits.values);
+
+          console.log(this.getAsArray(this.ghCommits));
+          for (const val of this.getAsArray(this.ghCommits)) {
+            console.log(typeof this.ghCommits[val]);
+            console.log('2: ' + this.getAsArray(this.ghCommits[val]));
+          }
+
+        }
+      );
+    }
+
+    this.generatedCards = true;
   }
+
+  getAsArray(val) {
+    const ret = [];
+    for (const k in val) ret.push(k);
+    return ret;
+  }
+
 }

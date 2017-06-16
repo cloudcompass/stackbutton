@@ -41,5 +41,10 @@
 <div class="cards-pf" >
   <div class="container-fluid container-cards-pf" >
     <!-- Show cards here -->
+    <div *ngIf="ghCommits">
+      <div *ngFor="let key of getAsArray(ghCommits)">
+        <app-commit-widget [projectName]="key" [shaArray]="ghCommits[key]"></app-commit-widget>
+      </div>
+    </div>
   </div><!-- /container -->
 </div>

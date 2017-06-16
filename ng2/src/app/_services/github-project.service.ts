@@ -17,7 +17,7 @@ export class GithubProjectService {
    *
    * @returns {Map<any>}
    */
-  getGithubProjects(): Observable<any> {
+  getAllGithubProjects(): Observable<any> {
     return this.http
       .get('assets/sampleData/github-sample-data.json')
       .map(res => res.json());
@@ -48,4 +48,90 @@ export class GithubProjectService {
       });
   }
 
+  getGithubProjectsByName(namesArray: string[]): Observable<any> {
+    console.log('get ghp by names: ' + namesArray);
+
+    return this.http
+      .get('assets/sampleData/github-sample-data.json')
+      .map(res => {
+        const retVal: any[] = [];
+
+        // Convert the response to json before parsing
+        for (const project of res.json()) {
+          if (namesArray.indexOf(project.project) > -1) {
+            console.log('found match: ' + project.project);
+            retVal.push(project);
+          }
+        }
+
+        console.log('retval: ' + retVal);
+        if (retVal) return retVal;
+
+        // Note: Shoddy error-handling
+        return { 'error': 'OpenShift Project name not found: ' };
+      });
+  }
+
+  getGithubCommit(sha: string): Observable<any> {
+    return this.http
+      .get('assets/sampleData/github-sample-data.json')
+      .map(res => {
+        // Convert the response to json before parsing
+        for (const project of res.json()) {
+          for (const item of project.items) {
+            if (item.kind === 'commit') {
+              if (item.sha === sha) return item;
+            }
+          }
+        }
+
+        // Note: Shoddy error-handling
+        return { 'error': 'Github Commit sha not found: ' + sha };
+      });
+  }
+
+  getGithubCommits(shaArray: string[]): Observable<any> {
+    if (!shaArray || shaArray.length < 0) return Observable.throw('Invalid shaArray supplied: ' + shaArray);
+
+    return this.http
+      .get('assets/sampleData/github-sample-data.json')
+      .map(res => {
+        const foundCommits: any[] = [];
+
+        // Convert the response to json before parsing
+        for (const project of res.json()) {
+          for (const item of project.items) {
+            if (item.kind === 'commit') {
+              if (shaArray.indexOf(item.sha) > -1) {
+                console.log('found sha: ' + item.sha);
+                foundCommits.push(item);
+              }
+            }
+          }
+        }
+
+        if (foundCommits) return foundCommits;
+
+        // Note: Shoddy error-handling
+        return { 'error': 'Github Commit sha not found: '};
+      });
+  }
+
+  getGithubIssueByID(id: number): Observable<any> {
+    return this.http
+      .get('assets/sampleData/github-sample-data.json')
+      .map(res => {
+        // Convert the response to json before parsing
+        for (const project of res.json()) {
+          for (const item of project.items) {
+            if (item.kind === 'issue') {
+              if (item.id === id) return item;
+            }
+          }
+        }
+
+        // Note: Shoddy error-handling
+        return { 'error': 'Github Issue ID not found: ' + id};
+      });
+  }
 }

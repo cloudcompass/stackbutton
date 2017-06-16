@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GithubCommitsService } from '../_services/github-commits.service';
+import { GithubProjectService } from '../_services/github-project.service';
+import {shallowEqualArrays} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-commit-widget',
@@ -7,6 +9,8 @@ import { GithubCommitsService } from '../_services/github-commits.service';
   styleUrls: ['./commits-card.component.css']
 })
 export class CommitCardComponent implements OnInit {
+  @Input() shaArray: string[];
+  @Input() projectName: string;
 
   private repoName: string;
 
@@ -25,7 +29,8 @@ export class CommitCardComponent implements OnInit {
   private commitSha: string; // Temp?
   private avatarUrl: string;
 
-  constructor(private githubCommitsService: GithubCommitsService) {
+  constructor(private githubCommitsService: GithubCommitsService,
+              private githubProjectService: GithubProjectService) {
     this.commits = [];
     this.commitsCount = 0;
     this.commitIndex = 0;
@@ -42,7 +47,34 @@ export class CommitCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadSampleData();
+    // this.loadSampleData();
+
+    console.log('comcardpname: ' + this.projectName);
+    console.log('comcardshas: ' + this.shaArray);
+
+    this.repoName = this.projectName;
+
+
+    if (this.shaArray) {
+      this.githubProjectService.getGithubCommits(this.shaArray).subscribe(
+        data => {
+          this.commits = data;
+
+          // Setup some vars TODO: Move this to appropriate spot
+          this.loadingCommits = false;
+          this.commitIndex = 0;
+          this.commitsCount = this.commits.length;
+
+          // Enable the right button if there's more than one commit
+          if (this.commitsCount > 0) this.rightButtonDisabled = false;
+
+          this.updateCommitInfo();
+        }
+      );
+    }
+    else {
+      console.log('commit card must be supplied one or more shas');
+    }
   }
 
   /**
