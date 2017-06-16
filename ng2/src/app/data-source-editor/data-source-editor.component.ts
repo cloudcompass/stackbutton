@@ -17,11 +17,6 @@ export class DataSourceEditorComponent implements OnInit {
   sources: string[];
   projects: any[];
 
-  // this is a global value that represents whatever text is in the dropdown
-  selectedSource: string;
-
-
-
   private showProjectForm: boolean;
   private showEditForm: boolean;
 
@@ -38,7 +33,6 @@ export class DataSourceEditorComponent implements OnInit {
     this.showEditForm = false;
     this.showProjectForm = false;
     this.sources = ['Github', 'OpenShift']; // Constant that should be set somewhere else?
-    this.selectedSource = 'select'; // default value of dropdown
   }
 
   ngOnInit() { }
@@ -77,7 +71,7 @@ export class DataSourceEditorComponent implements OnInit {
     this.showProjectForm = true;
 
     // Based on the source selection, query the appropriate service and retrieve the projects
-    switch (this.selectedSource) {
+    switch (this.apiForm.controls.source.value) {
       case 'OpenShift':
         // TEMP: Grab the sample data from the openShiftService
         this.openshiftService.getOpenShiftData().subscribe(
@@ -100,7 +94,7 @@ export class DataSourceEditorComponent implements OnInit {
         break;
       default:
         // TODO: Display an error to the user
-        console.log('Invalid API source supplied: ' + this.selectedSource);
+        console.log('Invalid API source supplied: ' + this.apiForm.controls.source.value);
     }
   }
 
@@ -115,7 +109,7 @@ export class DataSourceEditorComponent implements OnInit {
     this.showEditForm = true;
 
     // Display and populate the edit form based on the project selected
-    switch (this.selectedSource) {
+    switch (this.apiForm.controls.source.value) {
       case 'OpenShift':
 
         // Iterate over the retrieved projects, find a specific project name, then populate editForm with its data
@@ -181,7 +175,7 @@ export class DataSourceEditorComponent implements OnInit {
     // Figure out project and service details
     dataSource.projectName = this.editForm.controls.projectName.value.toString();
     dataSource.service = {
-      type: this.selectedSource as string,
+      type: this.apiForm.controls.source.value as string,
       apikey: this.apiForm.controls.apikey.value as string
     };
     dataSource.serviceID = 'service123';  // TODO: Should come from query source?
@@ -204,7 +198,7 @@ export class DataSourceEditorComponent implements OnInit {
      *
      * Even then, unique ids aren't really forcible, since shared names can exist.
      */
-    // teamMembersInput can be a csv, so split the names up and add them as json objects to teamMembers
+      // teamMembersInput can be a csv, so split the names up and add them as json objects to teamMembers
     const teamMembersInput: string = this.editForm.controls.teamMembers.value.toString();
     const teamMembersSplit = teamMembersInput.split(',');
     dataSource.teamMembers = [];
@@ -227,7 +221,7 @@ export class DataSourceEditorComponent implements OnInit {
      * This would require model and input rework, but would make this much more useful
      * Could then sort by location, dates, types, etc.
      */
-    // metadata input can be a csv, sp split the input up and add them somehow
+      // metadata input can be a csv, sp split the input up and add them somehow
     const metadataInput: string = this.editForm.controls.tags.value.toString();
     dataSource.metadata = metadataInput.split(',');
 
@@ -253,8 +247,7 @@ export class DataSourceEditorComponent implements OnInit {
   /**
    * Reset and hide edit/project forms, remove apikey input
    */
-  private resetForms(setSource) {
-    this.selectedSource = setSource;
+  private resetForms() {
     this.showEditForm = false;
     this.showProjectForm = false;
     this.apiForm.patchValue({ apikey: '' });
