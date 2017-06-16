@@ -91,10 +91,17 @@
               <button type="submit" class="btn btn-primary" style="width: 100%;" [disabled]="editForm.invalid">Add Data Source</button>
             </div>
           </div>
-          <div *ngIf="alertMessage">
-            {{alertMessage}}
+          <div *ngIf="successMessage" class="alert alert-success">
+              <span class="pficon pficon-ok"></span>
+              <strong>Great success!</strong> {{successMessage}}
           </div>
-          <hr>
+          <div *ngIf="failMessage" class="alert alert-danger">
+            <span class="pficon pficon-error-circle-o"></span>
+              <strong>Uh oh.</strong> {{failMessage}}
+          </div>
+
+
+
         </form><!-- End editForm -->
       </div><!-- End card-pf -->
     </div><!-- End row-cards-pf -->

@@ -16,13 +16,15 @@ export class DataSourceEditorComponent implements OnInit {
   editForm: FormGroup;
   sources: string[];
   projects: any[];
+  hasValidKey: boolean; // if the API key has returned good data this is true.
 
   private showProjectForm: boolean;
   private showEditForm: boolean;
 
 
   private data: any; // To keep a local copy of the data retrieved
-  alertMessage: string;
+  failMessage: string;
+  successMessage: string;
 
   constructor(private formBuilder: FormBuilder,
               private openshiftService: OpenShiftService,
@@ -33,6 +35,7 @@ export class DataSourceEditorComponent implements OnInit {
     this.showEditForm = false;
     this.showProjectForm = false;
     this.sources = ['Github', 'OpenShift']; // Constant that should be set somewhere else?
+    this.hasValidKey = false; // TODO: want to disable changing the key after a source is successfully gotten.
   }
 
   ngOnInit() { }
@@ -65,7 +68,6 @@ export class DataSourceEditorComponent implements OnInit {
     // Clear forms and hide edit
     this.clearProjectForm();
     this.clearEditForm();
-    this.showEditForm = false;
 
     // Display and populate the project form
     this.showProjectForm = true;
@@ -81,20 +83,24 @@ export class DataSourceEditorComponent implements OnInit {
             for (const project of this.data) {
               this.projects.push(project.project);
             }
+
           },
           error => {
             // TODO: Display an error to the user
             console.log('Error retrieving OpenShift projects: ' + error);
           }
         );
+        this.hasValidKey = true;
         break;
       case 'Github':
         // TEMP: sample Github projects
         this.projects = ['Stackbutton', 'Project 2'];
+        this.hasValidKey = true;
         break;
       default:
         // TODO: Display an error to the user
         console.log('Invalid API source supplied: ' + this.apiForm.controls.source.value);
+        this.hasValidKey = false;
     }
   }
 
@@ -160,6 +166,19 @@ export class DataSourceEditorComponent implements OnInit {
       default:
         // TODO: Display error to the user
         console.log('Invalid project submitted: ' + this.apiForm.controls.service.value);
+    }
+  }
+
+  /* this method draws the appropriate box on the page depending on whether there was success or failure adding the data source
+
+   */
+  drawAlertBox(messageString: string, success: boolean) {
+    if (success) {
+      this.successMessage = messageString;
+      this.failMessage = null;
+    } else {
+      this.failMessage = messageString;
+      this.successMessage = null;
     }
   }
 
@@ -233,13 +252,14 @@ export class DataSourceEditorComponent implements OnInit {
     this.dataSourceService.addDataSource(dataSource).subscribe(
       data => {
         console.log(data);
-        this.alertMessage = 'DataSource Added Successfully!';
+        this.drawAlertBox('DataSource Added Successfully!', true);
       },
       error => {
         console.log('Error adding DataSource: ' + error);
-        this.alertMessage = 'Unable to add DataSource: ' + error;
+        this.drawAlertBox('Unable to add DataSource. ' + error, false);
       }
     );
+
   }
 
   // Helper methods
@@ -247,6 +267,8 @@ export class DataSourceEditorComponent implements OnInit {
   /**
    * Reset and hide edit/project forms, remove apikey input
    */
+
+
   private resetForms() {
     this.showEditForm = false;
     this.showProjectForm = false;
