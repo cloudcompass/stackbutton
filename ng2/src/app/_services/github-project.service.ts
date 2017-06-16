@@ -134,4 +134,26 @@ export class GithubProjectService {
         return { 'error': 'Github Issue ID not found: ' + id};
       });
   }
+
+  getGithubIssuesByIDs(idArray: number[]): Observable<any> {
+  return this.http
+    .get('assets/sampleData/github-sample-data.json')
+    .map(res => {
+      const retVal: any = [];
+
+      // Convert the response to json before parsing
+      for (const project of res.json()) {
+        for (const item of project.items) {
+          if (item.kind === 'issue') {
+            if (idArray.indexOf(item.id) > -1) retVal.push(item);
+          }
+        }
+      }
+
+      if (retVal) return retVal;
+
+      // Note: Shoddy error-handling
+      return { 'error': 'Github Issue ID not found'};
+    });
+  }
 }

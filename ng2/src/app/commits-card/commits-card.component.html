@@ -2,16 +2,17 @@
   <div class="card-pf">
     <div class="card-pf-heading">
       <h2 class="card-pf-title" id="repoTitle">
-        Commits
+        {{projectName}} Commits
       </h2>
     </div><!-- End Card Header -->
+
+    <!-- Card Body -->
     <div class="card-pf-body">
       <!-- Arrow Buttons and Repo Name -->
       <div style="display:flex; justify-content: space-between">
         <button [disabled]="leftButtonDisabled" type="button" class="btn btn-default" (click)="onLeftClick()">
           <
         </button>
-        <span>{{repoName ? repoName : "Null Name"}}</span>
         <button [disabled]="rightButtonDisabled" type="button" class="btn btn-default" (click)="onRightClick()">
           >
         </button>

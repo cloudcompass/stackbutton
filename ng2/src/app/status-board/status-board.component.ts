@@ -170,26 +170,9 @@ export class StatusBoardComponent implements OnInit {
               }
             }
           }
-
-          for (const k in this.ghCommits) {
-            console.log(k + ' : ' + this.ghCommits[k]);
-          }
-
-          console.log('1' + this.ghCommits);
-          console.log('2' + this.ghCommits.keys);
-          console.log('4' + this.ghCommits.values);
-
-          console.log(this.getAsArray(this.ghCommits));
-          for (const val of this.getAsArray(this.ghCommits)) {
-            console.log(typeof this.ghCommits[val]);
-            console.log('2: ' + this.getAsArray(this.ghCommits[val]));
-          }
-
         }
       );
     }
-
-    this.generatedCards = true;
   }
 
   getAsArray(val) {

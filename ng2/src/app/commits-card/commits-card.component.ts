@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GithubCommitsService } from '../_services/github-commits.service';
 import { GithubProjectService } from '../_services/github-project.service';
-import {shallowEqualArrays} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-commit-widget',
@@ -47,34 +46,26 @@ export class CommitCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.loadSampleData();
-
-    console.log('comcardpname: ' + this.projectName);
-    console.log('comcardshas: ' + this.shaArray);
-
-    this.repoName = this.projectName;
-
-
-    if (this.shaArray) {
-      this.githubProjectService.getGithubCommits(this.shaArray).subscribe(
-        data => {
-          this.commits = data;
-
-          // Setup some vars TODO: Move this to appropriate spot
-          this.loadingCommits = false;
-          this.commitIndex = 0;
-          this.commitsCount = this.commits.length;
-
-          // Enable the right button if there's more than one commit
-          if (this.commitsCount > 0) this.rightButtonDisabled = false;
-
-          this.updateCommitInfo();
-        }
-      );
+    if (!this.projectName || !this.shaArray || this.shaArray === []) {
+      console.log('Commit card requires both a project name and sha array')
+      return;
     }
-    else {
-      console.log('commit card must be supplied one or more shas');
-    }
+
+    this.githubProjectService.getGithubCommits(this.shaArray).subscribe(
+      data => {
+        this.commits = data;
+
+        // Setup some vars TODO: Move this to appropriate spot
+        this.loadingCommits = false;
+        this.commitIndex = 0;
+        this.commitsCount = this.commits.length;
+
+        // Enable the right button if there's more than one commit
+        if (this.commitsCount > 0) this.rightButtonDisabled = false;
+
+        this.updateCommitInfo();
+      }
+    );
   }
 
   /**

@@ -13,7 +13,7 @@
         </ul>
       </div>
       <h2 class="card-pf-title" id="repoTitle">
-        Issues
+        {{ projectName }} Issues
       </h2>
     </div><!-- End Card Header -->
 
@@ -23,9 +23,6 @@
         <button [disabled]="leftButtonDisabled" type="button" class="btn btn-default" (click)="onLeftClick()">
           <
         </button>
-
-        <span class="md-caption">{{repoName ? repoName : "Repo Name"}}</span>
-
         <button [disabled]="rightButtonDisabled" type="button" class="btn btn-default" (click)="onRightClick()">
           >
         </button>

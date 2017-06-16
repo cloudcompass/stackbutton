@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input } from '@angular/core';
 import { GithubIssuesService } from '../_services/github-issues.service';
+import {GithubProjectService} from "../_services/github-project.service";
 
 @Component({
   selector: 'app-issues-card',
@@ -8,6 +8,8 @@ import { GithubIssuesService } from '../_services/github-issues.service';
   styleUrls: ['./issues-card.component.css']
 })
 export class IssuesCardComponent implements OnInit {
+  @Input() projectName: string;
+  @Input() idArray: number[];
 
   private loadingIssues: boolean;
   private rightButtonDisabled: boolean;
@@ -29,7 +31,8 @@ export class IssuesCardComponent implements OnInit {
   private issueTitle: string;
   private issueMessage: string;
 
-  constructor(private githubIssuesService: GithubIssuesService) {
+  constructor(private githubIssuesService: GithubIssuesService,
+              private githubProjectService: GithubProjectService) {
     this.repoName = 'Sample Repo';
 
     this.issues = [];
@@ -69,10 +72,31 @@ export class IssuesCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadSampleData();
-  }
+    if (!this.projectName || !this.idArray || this.idArray === []) {
+      console.log('Issue card requires both a project name and ID array');
+      return;
+    }
 
-  ngAfterViewInit() { }
+    this.githubProjectService.getGithubIssuesByIDs(this.idArray).subscribe(
+      data => {
+        this.issues = data;
+
+        this.filteredIssues = this.issues;
+
+        this.loadingIssues = false;
+        this.issueIndex = 0;
+        this.issuesCount = this.issues.length;
+
+        // Enable the right button if there's more than one commit
+        if (this.issuesCount > 0) this.rightButtonDisabled = false;
+
+        this.updateIssueInfo();
+      },
+      error => {
+        console.error('Error fetching github commits: ' + error);
+      }
+    );
+  }
 
   /**
    * Increment the commitIndex if possible, then update buttons and the displayed commit information
