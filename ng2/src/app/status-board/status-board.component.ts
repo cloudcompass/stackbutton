@@ -80,6 +80,8 @@ export class StatusBoardComponent implements OnInit {
     const src = this.filterForm.controls.source.value.toString();
     const pn = this.filterForm.controls.projectName.value.toString();
     const tn = this.filterForm.controls.teamName.value.toString();
+
+    // Due to poor implementation below, team members and tags will not be used yet
     const tm = this.filterForm.controls.teamMembers.value.toString();
     const tags = this.filterForm.controls.tags.value.toString();
 
@@ -90,22 +92,36 @@ export class StatusBoardComponent implements OnInit {
       const ds = JSON.parse(dataSource);
 
       if (src && pn && tn) {
-        if (src === ds.service.type && pn === ds.projectName && tn === ds.teamName) console.log('x3 hit');
+        if (src === ds.service.type && pn === ds.projectName && tn === ds.teamName) {
+          console.log('x3 hit');
+          //
+        }
       }
       else if (src && pn) {
-        if (src === ds.service.type && pn === ds.projectName) console.log('srcpn hit');
+        if (src === ds.service.type && pn === ds.projectName) {
+          console.log('srcpn hit');
+        }
       }
       else if (src && tn) {
-        if (src === ds.service.type && tn === ds.teamName) console.log('srctn hit');
+        if (src === ds.service.type && tn === ds.teamName) {
+          console.log('srctn hit');
+        }
       }
       else if (src) {
-        if (src === ds.service.type) console.log('src hit');
+        if (src === ds.service.type) {
+          console.log('src hit');
+          console.log(ds);
+        }
       }
       else if (pn) {
-        if (pn === ds.projectName) console.log('pn hit');
+        if (pn === ds.projectName) {
+          console.log('pn hit');
+        }
       }
       else if (tn) {
-        if (tn === ds.teamName) console.log('tn hit');
+        if (tn === ds.teamName) {
+          console.log('tn hit');
+        }
       }
       else console.log('no filter');
     }
@@ -114,11 +130,12 @@ export class StatusBoardComponent implements OnInit {
   /**
    * Generate a widget to display data to the status board
    *
-   * @param widgetSource  Source of the data (Github, Openshift, etc)
-   * @param widgetType  Type of widget to generate (Commits, Issues, Pods, etc)
+   * @param serviceSource  Source of the data (Github, Openshift, etc)
+   * @param cardType  Type of card to generate (Commits, Issues, Pods, etc)
    * @param serviceID Unique service id that will be used to grab information from the server
    */
-  generateWidget(widgetSource: string, widgetType: string, serviceID: number) {
+  generateCard(serviceSource: string, cardType: string, serviceID: number) {
     // Generate the widget and add it to the status board's display area
+    console.log('Generate card: ' + serviceSource + ' : ' + cardType + ' : ' + serviceID);
   }
 }

@@ -6,7 +6,6 @@
         <div class="col-sm-2 col-md-2 col-lg-2">
           <select class="form-control" id="source" formControlName="source">
             <option value="" disabled>Select Source</option>
-            <option [value]="Any">Any</option>
             <option *ngFor="let source of sources" [value]="source">{{source}}</option>
           </select>
         </div>
