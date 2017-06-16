@@ -94,7 +94,6 @@ export class StatusBoardComponent implements OnInit {
       if (src && pn && tn) {
         if (src === ds.service.type && pn === ds.projectName && tn === ds.teamName) {
           console.log('x3 hit');
-          //
         }
       }
       else if (src && pn) {

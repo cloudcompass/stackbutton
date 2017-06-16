@@ -41,8 +41,10 @@ import { UserService } from './_services/user.service';
 import { GithubUserService } from './_services/github-user.service';
 import { GithubIssuesService } from './_services/github-issues.service';
 import { GithubCommitsService } from './_services/github-commits.service';
+import { GithubProjectService } from './_services/github-project.service';
 import { OpenShiftService } from './_services/openshift.service';
 import { DataSourceService } from './_services/data-source.service';
+
 
 // Used to create fake backend, to be removed
 import { fakeBackendProvider } from './_helpers/fake-backend';
@@ -103,6 +105,7 @@ import { DemoBoardComponent } from './demo-board/demo-board.component';
     GithubUserService,
     GithubIssuesService,
     GithubCommitsService,
+    GithubProjectService,
     OpenShiftService,
     DataSourceService,
 
