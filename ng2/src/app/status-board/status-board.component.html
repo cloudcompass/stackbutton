@@ -51,5 +51,10 @@
         <app-issues-card [projectName]="key" [idArray]="ghIssues[key]"></app-issues-card>
       </div>
     </div>
+    <div class="row row-cards-pf" *ngIf="osNames">
+      <div *ngFor="let name of osNames">
+        <app-openshift-project-card [projectName]="name"></app-openshift-project-card>
+      </div>
+    </div>
   </div><!-- /container -->
 </div>

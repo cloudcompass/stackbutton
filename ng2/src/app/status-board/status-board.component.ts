@@ -32,6 +32,7 @@ export class StatusBoardComponent implements OnInit {
   private ghIssueIDs: any[];
 
   // huh
+  private osNames: any;
   private ghCommits: any;
   private ghIssues: any;
 
@@ -140,13 +141,13 @@ export class StatusBoardComponent implements OnInit {
 
     console.log('Generate cards');
     const ghpNames: any[] = [];
-    const osNames: any[] = [];
+    this.osNames = [];
 
     for (const ds of this.filteredProjects) {
       this.showCards = true;
       console.log('fp: ' + ds);
       if (ds.service.type === 'OpenShift') {
-        osNames.push(ds.projectName);
+        this.osNames.push(ds.projectName);
       }
 
       if (ds.service.type === 'Github') {
@@ -154,6 +155,7 @@ export class StatusBoardComponent implements OnInit {
       }
     }
 
+    // Deal with found github projects
     if (ghpNames) {
       for (const n of ghpNames) console.log('ghp: ' + n);
       this.githubProjectService.getGithubProjectsByName(ghpNames).subscribe(
@@ -173,9 +175,21 @@ export class StatusBoardComponent implements OnInit {
         }
       );
     }
+
+    // Deal with found openshift projects
+    if (this.osNames) {
+      console.log('osn: ' + this.osNames);
+      for (const name of this.osNames) {
+        console.log('name: ' + name);
+      }
+    }
   }
 
-  getAsArray(val) {
+  /**
+   * Helper function that converts an object into an array
+   * Used in the *ngFor HTML divs
+   */
+  private getAsArray(val) {
     const ret = [];
     for (const k in val) ret.push(k);
     return ret;
