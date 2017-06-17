@@ -16,28 +16,17 @@ import { GithubProjectService } from '../_services/github-project.service';
  */
 export class StatusBoardComponent implements OnInit {
   private showFilter: boolean;
-  private showCards: boolean;
-  filterForm: FormGroup;
+  private filterForm: FormGroup;
 
-  private generatedCards: boolean;
-
-  private filteredProjects: any[];
   private dataSources: any[];
+  private filteredProjects: any[];
 
-  // What am I doing
-  private osSources: any[];
-  private ghSources: any[];
+  // Variables to store information required by cards to generate
+  private openShiftProjectNames: any;
+  private githubCommits: any;
+  private githubIssues: any;
 
-  private ghCommitShas: any[];
-  private ghIssueIDs: any[];
-
-  // huh
-  private osNames: any;
-  private ghCommits: any;
-  private ghIssues: any;
-
-
-  sources: string[]; // Const that should be stored elsewhere
+  private sources: string[]; // Const that should be stored elsewhere
 
   constructor(private formBuilder: FormBuilder,
               private dataSourceService: DataSourceService,
@@ -45,18 +34,15 @@ export class StatusBoardComponent implements OnInit {
     this.sources = ['Github', 'OpenShift'];
     this.showFilter = false;
     this.createForm();
-    this.osSources = [];
-    this.ghSources = [];
-
-    this.generatedCards = false;
   }
 
   ngOnInit() {
+    // Check for locally stored dataSources and, if found, display the filter options
+    // TODO: If none was found, display a 'getting started' page
     this.dataSourceService.getDataSources().subscribe(
       data => {
         console.log('stat data');
         console.log(data);
-        for (const d of data) console.log('d: ' + d);
         this.dataSources = data;
         this.showFilter = true;
       },
@@ -89,7 +75,7 @@ export class StatusBoardComponent implements OnInit {
     const pn = this.filterForm.controls.projectName.value.toString();
     const tn = this.filterForm.controls.teamName.value.toString();
 
-    // Due to poor implementation below, team members and tags will not be used yet
+    // Note: Due to poor implementation below, team members and tags will not be used yet
     const tm = this.filterForm.controls.teamMembers.value.toString();
     const tags = this.filterForm.controls.tags.value.toString();
 
@@ -126,63 +112,57 @@ export class StatusBoardComponent implements OnInit {
     if (this.filteredProjects.length > 0) this.generateCards();
   }
 
-
+  /**
+   * Iterate through filtered dataSources and extract the necessary variables that will be used
+   * to populate the cards
+   */
   generateCards() {
-    // Now what do you do
-    // You sleep on it
-    // Iterate and store shit? Can you inject html components through ts? WHO KNOWS
-
-
-    this.ghCommitShas = [];
-    this.ghIssueIDs = [];
-
-    this.ghCommits = {};
-    this.ghIssues = {};
-
-    console.log('Generate cards');
     const ghpNames: any[] = [];
-    this.osNames = [];
+    this.openShiftProjectNames = [];
 
+    // Iterate through filtered projects and populate github/openshift names
+    // This step could be integrated with below, but wasn't?
     for (const ds of this.filteredProjects) {
-      this.showCards = true;
-      console.log('fp: ' + ds);
       if (ds.service.type === 'OpenShift') {
-        this.osNames.push(ds.projectName);
+        this.openShiftProjectNames.push(ds.projectName);
       }
-
       if (ds.service.type === 'Github') {
         ghpNames.push(ds.projectName);
       }
     }
 
-    // Deal with found github projects
+    // Iterate through the found Github names, and populate commits/issues using Github project data
     if (ghpNames) {
       for (const n of ghpNames) console.log('ghp: ' + n);
-      this.githubProjectService.getGithubProjectsByName(ghpNames).subscribe(
+      this.githubProjectService.getGithubProjects(ghpNames).subscribe(
         data => {
           for (const project of data) {
             for (const item of project.items) {
               if (item.kind === 'commit') {
-                if (!this.ghCommits[project.project]) this.ghCommits[project.project] = [];
-                this.ghCommits[project.project].push(item.sha);
+                if (!this.githubCommits[project.project]) this.githubCommits[project.project] = [];
+                this.githubCommits[project.project].push(item.sha);
               }
               if (item.kind === 'issue') {
-                if (!this.ghIssues[project.project]) this.ghIssues[project.project] = [];
-                this.ghIssues[project.project].push(item.id);
+                if (!this.githubIssues[project.project]) this.githubIssues[project.project] = [];
+                this.githubIssues[project.project].push(item.id);
               }
             }
           }
+        },
+        error => {
+          console.log('Error retrieving github projects by names: ' + error);
         }
       );
     }
+  }
 
-    // Deal with found openshift projects
-    if (this.osNames) {
-      console.log('osn: ' + this.osNames);
-      for (const name of this.osNames) {
-        console.log('name: ' + name);
-      }
-    }
+  /**
+   * Clear the variables used to generate the cards
+   */
+  clearCards() {
+    this.githubCommits = {};
+    this.githubIssues = {};
+    this.openShiftProjectNames = [];
   }
 
   /**

@@ -72,12 +72,18 @@ export class IssuesCardComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.projectName === 'demo') {
+      this.projectName = 'Sample';
+      this.loadSampleData();
+      return;
+    }
+
     if (!this.projectName || !this.idArray || this.idArray === []) {
       console.log('Issue card requires both a project name and ID array');
       return;
     }
 
-    this.githubProjectService.getGithubIssuesByIDs(this.idArray).subscribe(
+    this.githubProjectService.getGithubIssues(this.idArray).subscribe(
       data => {
         this.issues = data;
 

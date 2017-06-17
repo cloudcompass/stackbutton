@@ -46,6 +46,12 @@ export class CommitCardComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.projectName === 'demo') {
+      this.projectName = 'Sample';
+      this.loadSampleData();
+      return;
+    }
+
     if (!this.projectName || !this.shaArray || this.shaArray === []) {
       console.log('Commit card requires both a project name and sha array')
       return;
@@ -55,13 +61,13 @@ export class CommitCardComponent implements OnInit {
       data => {
         this.commits = data;
 
-        // Setup some vars TODO: Move this to appropriate spot
+        // Init some variables
         this.loadingCommits = false;
         this.commitIndex = 0;
         this.commitsCount = this.commits.length;
 
         // Enable the right button if there's more than one commit
-        if (this.commitsCount > 0) this.rightButtonDisabled = false;
+        if (this.commitsCount > 1) this.rightButtonDisabled = false;
 
         this.updateCommitInfo();
       }
@@ -147,7 +153,6 @@ export class CommitCardComponent implements OnInit {
       },
       error => {
         console.error('Error fetching github commits: ' + error);
-        // TODO: Display en error of sorts to the user
       });
   }
 }
