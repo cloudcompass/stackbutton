@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input } from '@angular/core';
 import { GithubIssuesService } from '../_services/github-issues.service';
+import {GithubProjectService} from "../_services/github-project.service";
 
 @Component({
   selector: 'app-issues-card',
@@ -8,12 +8,13 @@ import { GithubIssuesService } from '../_services/github-issues.service';
   styleUrls: ['./issues-card.component.css']
 })
 export class IssuesCardComponent implements OnInit {
+  @Input() projectName: string;
+  @Input() idArray: number[];
 
   private loadingIssues: boolean;
   private rightButtonDisabled: boolean;
   private leftButtonDisabled: boolean;
 
-  private repoName: string;
   private issues;
   private currentIssue;
   private filteredIssues;
@@ -29,9 +30,9 @@ export class IssuesCardComponent implements OnInit {
   private issueTitle: string;
   private issueMessage: string;
 
-  constructor(private githubIssuesService: GithubIssuesService) {
-    this.repoName = 'Sample Repo';
-
+  constructor(private githubIssuesService: GithubIssuesService,
+              private githubProjectService: GithubProjectService) {
+    // Initialize variables
     this.issues = [];
     this.filteredIssues = [];
     this.issuesCount = 0;
@@ -69,10 +70,40 @@ export class IssuesCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadSampleData();
-  }
+    if (this.projectName === 'demo') {
+      this.projectName = 'Sample';
+      this.loadSampleData();
+      return;
+    }
 
-  ngAfterViewInit() { }
+    if (!this.projectName || !this.idArray || this.idArray === []) {
+      console.log('Issue card requires both a project name and ID array');
+      return;
+    }
+
+    // Retrieve all issues from github projects
+    // TODO: As ID doesn't ensure uniqueness, adding the projectName will be necessary going forward
+    // This assumes that IDs are unique which, in the sample data, they are
+    this.githubProjectService.getGithubIssues(this.idArray).subscribe(
+      data => {
+        this.issues = data;
+
+        this.filteredIssues = this.issues;
+
+        this.loadingIssues = false;
+        this.issueIndex = 0;
+        this.issuesCount = this.issues.length;
+
+        // Enable the right button if there's more than one commit
+        if (this.issuesCount > 1) this.rightButtonDisabled = false;
+
+        this.updateIssueInfo();
+      },
+      error => {
+        console.error('Error fetching github commits: ' + error);
+      }
+    );
+  }
 
   /**
    * Increment the commitIndex if possible, then update buttons and the displayed commit information
@@ -109,7 +140,6 @@ export class IssuesCardComponent implements OnInit {
    */
   updateIssueInfo() {
     this.currentIssue = this.filteredIssues[this.issueIndex];
-
     this.issueLabelColor = this.githubIssueColors[this.currentIssue.issueLabel];
     this.issueTitle = '#' + this.currentIssue.number + ' ' + this.currentIssue.title;
     this.issueMessage = this.currentIssue.body;
@@ -121,18 +151,11 @@ export class IssuesCardComponent implements OnInit {
    * @param filterVal The filter to apply
    */
   dropdownFilterSelect(filterVal: string) {
-    console.log('Filter: ' + filterVal);
-
     // Disable buttons
     this.leftButtonDisabled = this.rightButtonDisabled = true;
 
     // Ensure that filerVal exists within the defined filter array
     if (this.issueFilterValues.indexOf(filterVal) > -1) {
-      // Update the dropdownFilterName text
-
-      // TODO: Re-add this once drop-down menu works again
-      // document.getElementById('dropdownFilterName').innerHTML = filterVal + '<span class="caret">';
-
       // Clear then repopulate filteredIssues
       this.filteredIssues = [];
       this.issueIndex = 0;
@@ -179,9 +202,6 @@ export class IssuesCardComponent implements OnInit {
    * Populate issue widget with sample data
    */
   loadSampleData() {
-    // Sample Data
-    this.repoName = 'Sample Repo';
-
     // Clear then repopulate issues
     // TODO: getIssuesSlowly is temporary for testing, to be replaced with getIssues
     this.githubIssuesService.getIssuesSampleSlowly().subscribe(
@@ -204,7 +224,6 @@ export class IssuesCardComponent implements OnInit {
       },
       error => {
         console.error('Error fetching github commits: ' + error);
-        // TODO: Display en error of sorts to the user
       });
   }
 }

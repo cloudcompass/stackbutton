@@ -1,51 +1,66 @@
 <div class="container-fluid">
-  <div class="row toolbar-pf">
+  <div class="row toolbar-pf" *ngIf="showFilter">
     <div class="col-lg-12">
-      <form class="toolbar-pf-actions">
-        <!--<div class="col-lg-2">-->
-            <!--<button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Saved Boards <span class="caret"></span></button>-->
-            <!--<ul class="dropdown-menu">-->
-              <!--<li class="selected"><a href="#">Stackbutton-private-docs</a></li>-->
-              <!--<li><a href="#">Stackbutton-2016-team</a></li>-->
-              <!--<li><a href="#">Stackbutton-current</a></li>-->
-            <!--</ul>-->
-          <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
-          <div class="col-sm-2 col-md-2 col-lg-2">
-            <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Service <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <li class="selected"><a href="#">Github</a></li>
-              <li><a href="#">OpenShift</a></li>
-              <li><a href="#">BitBucket</a></li>
-            </ul>
-          </div><!-- /btn-group -->
+      <form class="toolbar-pf-actions" [formGroup]="filterForm" (ngSubmit)="filterSubmit($event)">
+        <!-- Dropdown source selector -->
         <div class="col-sm-2 col-md-2 col-lg-2">
-          <input type="text" class="form-control" id="project-filter" placeholder="Project Name">
+          <select class="form-control" id="source" formControlName="source">
+            <option value="">Select Source</option>
+            <option *ngFor="let source of sources" [value]="source">{{source}}</option>
+          </select>
+        </div>
+
+        <!-- Text filter inputs -->
+        <div class="col-sm-2 col-md-2 col-lg-2">
+          <input type="text" formControlName="projectName" class="form-control" placeholder="Project Name">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-          <input type="text" class="form-control" id="team-filter" placeholder="Team Name">
+          <input type="text" formControlName="teamName" class="form-control" placeholder="Team Name">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-          <input type="text" class="form-control" id="member-filter" placeholder="Team Member(s)">
+          <input type="text" formControlName="teamMembers" class="form-control" placeholder="Team Member(s)">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-          <input type="text" class="form-control" id="tag-filter" placeholder="Tag(s)">
+          <input type="text" formControlName="tags" class="form-control" placeholder="Tag(s)">
         </div>
-        <!--<div class="form-group">-->
-          <!--<button class="btn btn-default" type="button">Action</button>-->
-          <!--<button class="btn btn-default" type="button">Action</button>-->
-        <!--</div>-->
-        <div class="col-sm-2  col-md-2 col-lg-1">
+
+        <!-- Submission button -->
+        <div class="col-sm-2 col-md-2 col-lg-2">
           <div class="form-group toolbar-pf-find">
-            <button class="btn btn-link btn-find" type="button">
+            <button type="submit" class="btn btn-link btn-find" (click)="clearCards()" >
               <span class="fa fa-search"></span>
             </button>
           </div>
         </div>
       </form>
-    </div><!-- /col -->
+    </div><!-- end filter options -->
   </div><!-- /row -->
 </div><!-- /container -->
 
+<!-- The Status-Board body -->
+<div class="cards-pf" >
+  <div class="container-fluid container-cards-pf" >
+    <!-- Show cards here -->
 
+    <!-- Github Commits -->
+    <div class="row row-cards-pf" *ngIf="githubCommits">
+      <div *ngFor="let key of getAsArray(githubCommits)">
+        <app-commit-widget [projectName]="key" [shaArray]="githubCommits[key]"></app-commit-widget>
+      </div>
+    </div>
 
+    <!-- Github Issues -->
+    <div class="row row-cards-pf" *ngIf="githubIssues">
+      <div *ngFor="let key of getAsArray(githubIssues)">
+        <app-issues-card [projectName]="key" [idArray]="githubIssues[key]"></app-issues-card>
+      </div>
+    </div>
 
+    <!-- OpenShift Projects -->
+    <div class="row row-cards-pf" *ngIf="openShiftProjectNames">
+      <div *ngFor="let name of openShiftProjectNames">
+        <app-openshift-project-card [projectName]="name"></app-openshift-project-card>
+      </div>
+    </div>
+  </div><!-- /container -->
+</div>

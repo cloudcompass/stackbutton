@@ -6,14 +6,14 @@
       <!-- Dropdown Menu of Filter Values -->
       <div class="dropdown card-pf-time-frame-filter">
         <button id="dropdownFilterName" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          {{issueFilterName}}<span class="caret"></span>
+          {{issueFilterName}} <span class="fa fa-caret-down"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
           <li *ngFor="let value of issueFilterValues" (click)="dropdownFilterSelect(value)"><a>{{value}}</a></li>
         </ul>
       </div>
       <h2 class="card-pf-title" id="repoTitle">
-        Issues
+        {{ projectName }} Issues
       </h2>
     </div><!-- End Card Header -->
 
@@ -21,13 +21,10 @@
       <!-- Arrow Buttons and Repo Name -->
       <div style="display:flex; justify-content: space-between">
         <button [disabled]="leftButtonDisabled" type="button" class="btn btn-default" (click)="onLeftClick()">
-          <
+          <span class="fa fa-caret-left"></span>
         </button>
-
-        <span class="md-caption">{{repoName ? repoName : "Repo Name"}}</span>
-
         <button [disabled]="rightButtonDisabled" type="button" class="btn btn-default" (click)="onRightClick()">
-          >
+          <span class="fa fa-caret-right"></span>
         </button>
       </div>
 
@@ -36,7 +33,7 @@
         <!-- Label Bar(s) and Issue Number/Title -->
         <!-- Display a loading icon while getting issues, then display issue content -->
         <div *ngIf="loadingIssues" style="display: flex; justify-content: center;">
-          <img style="align-items: center; height: 3em; width: 3em; align-self: center;" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <span class="fa fa-spinner fa-pulse fa-4x fa-fw"></span>
         </div>
         <div *ngIf="!loadingIssues" style="display:flex; padding-top: 1em;">
           <div id="issueLabel" style="height: 3em; width: 0.4em;" [style.background]="issueLabelColor">
