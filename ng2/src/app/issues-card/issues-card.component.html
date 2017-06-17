@@ -6,7 +6,7 @@
       <!-- Dropdown Menu of Filter Values -->
       <div class="dropdown card-pf-time-frame-filter">
         <button id="dropdownFilterName" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          {{issueFilterName}}<span class="caret"></span>
+          {{issueFilterName}} <span class="fa fa-caret-down"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
           <li *ngFor="let value of issueFilterValues" (click)="dropdownFilterSelect(value)"><a>{{value}}</a></li>
@@ -21,10 +21,10 @@
       <!-- Arrow Buttons and Repo Name -->
       <div style="display:flex; justify-content: space-between">
         <button [disabled]="leftButtonDisabled" type="button" class="btn btn-default" (click)="onLeftClick()">
-          <
+          <span class="fa fa-caret-left"></span>
         </button>
         <button [disabled]="rightButtonDisabled" type="button" class="btn btn-default" (click)="onRightClick()">
-          >
+          <span class="fa fa-caret-right"></span>
         </button>
       </div>
 
