@@ -2,6 +2,7 @@ import {Component, OnInit } from '@angular/core';
 import { DataSourceService } from '../_services/data-source.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GithubProjectService } from '../_services/github-project.service';
+import {createEmptyState} from '@angular/router/src/router_state';
 
 @Component({
   selector: 'app-status-board',
@@ -15,6 +16,7 @@ import { GithubProjectService } from '../_services/github-project.service';
  * If no data sources exist, an empty-state (getting started) page will be displayed, prompting the user to add services
  */
 export class StatusBoardComponent implements OnInit {
+  emptyStateEnabled: boolean;
   private showFilter: boolean;
   private filterForm: FormGroup;
 
@@ -34,6 +36,7 @@ export class StatusBoardComponent implements OnInit {
     this.sources = ['Github', 'OpenShift'];
     this.showFilter = false;
     this.createForm();
+    this.emptyStateEnabled = true;
   }
 
   ngOnInit() {
@@ -109,7 +112,10 @@ export class StatusBoardComponent implements OnInit {
       else console.log('no filter');
     }
 
-    if (this.filteredProjects.length > 0) this.generateCards();
+    if (this.filteredProjects.length > 0) {
+      this.generateCards();
+      this.emptyStateEnabled = false;
+    }
   }
 
   /**
