@@ -4,7 +4,7 @@
       <form class="toolbar-pf-actions" [formGroup]="filterForm" (ngSubmit)="filterSubmit($event)">
         <!-- Dropdown source selector -->
         <div class="col-sm-2 col-md-2 col-lg-2">
-          <select class="form-control" id="source" formControlName="source">
+          <select class="form-control c3i-select-picker" id="source" formControlName="source">
             <option value="">Select Source</option>
             <option *ngFor="let source of sources" [value]="source">{{source}}</option>
           </select>

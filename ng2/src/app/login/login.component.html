@@ -13,7 +13,7 @@
 
               <!-- TODO: This moves the username element (or whatever) around when the error is displayed and removed. Stop it or make it all on one line -->
               <p *ngIf="f.submitted && !username.valid" class="help-block">Username is required</p>
-              <p *ngIf="!f.submitted || username.valid"></p>
+              <!--<p *ngIf="!f.submitted || username.valid"></p>-->
             </div>
           </div>
 
@@ -24,8 +24,20 @@
               <input type="password" class="form-control" name="password" placeholder="" tabindex="2" [(ngModel)]="model.password" #password="ngModel" required />
 
               <!-- TODO: This moves the password element (or whatever) around when the error is displayed and removed. Stop it or make it all on one line -->
+
               <p *ngIf="f.submitted && !password.valid" class="help-block">Password is required</p>
-              <p *ngIf="!f.submitted || password.valid"></p>
+              <!--<p *ngIf="!f.submitted && !password.valid" class="help-block">Username or password is wrong.</p>-->
+            </div>
+          </div>
+
+          <!--Error message alert-->
+          <div class="form-group" *ngIf="errorEnabled">
+            <label class="col-sm-2 col-md-2 control-label"></label>
+            <div class="col-sm-10 col-md-10">
+              <div class="alert alert-danger">
+                <span class="pficon pficon-info"></span>
+                <strong>{{errorMessage}}</strong>
+              </div>
             </div>
           </div>
 

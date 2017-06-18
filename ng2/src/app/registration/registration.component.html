@@ -64,6 +64,16 @@
             </div>
           </div>
 
+          <!--Error message alert-->
+          <div class="form-group" *ngIf="errorEnabled">
+            <label class="col-sm-2 col-md-2 control-label"></label>
+            <div class="col-sm-10 col-md-10">
+              <div class="alert alert-danger">
+                <span class="pficon pficon-info"></span>
+                <strong>{{formMessage}}</strong>
+              </div>
+            </div>
+          </div>
         </form>
       </div><!-- End register -->
 
