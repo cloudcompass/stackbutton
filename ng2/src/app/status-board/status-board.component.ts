@@ -2,8 +2,6 @@ import {Component, OnInit } from '@angular/core';
 import { DataSourceService } from '../_services/data-source.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GithubProjectService } from '../_services/github-project.service';
-import {createEmptyState} from '@angular/router/src/router_state';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-status-board',
@@ -17,8 +15,6 @@ import {forEach} from '@angular/router/src/utils/collection';
  * If no data sources exist, an empty-state (getting started) page will be displayed, prompting the user to add services
  */
 export class StatusBoardComponent implements OnInit {
-  emptyStateEnabled: boolean;
-  private showFilter: boolean;
   private filterForm: FormGroup;
 
   private dataSources: any[];
@@ -35,9 +31,7 @@ export class StatusBoardComponent implements OnInit {
               private dataSourceService: DataSourceService,
               private githubProjectService: GithubProjectService) {
     this.sources = ['Github', 'OpenShift'];
-    this.showFilter = false;
     this.createForm();
-    this.emptyStateEnabled = true;
   }
 
   ngOnInit() {
@@ -47,8 +41,6 @@ export class StatusBoardComponent implements OnInit {
         console.log('stat data');
         console.log(data);
         this.dataSources = data;
-        this.showFilter = true;
-        this.emptyStateEnabled = false;
       },
       error => {
         // Display 'getting started' / No data sources found
@@ -72,14 +64,8 @@ export class StatusBoardComponent implements OnInit {
    * If a data source matches the filter criteria, generate the associated widget and add it to the status board
    */
   filterSubmit(event) {
-    // Iterate data sources and check against filters
-    if (this.filterForm.controls.source.value.toString() === '*') {
-      // generate all possible cards.
-
-    }
-
-
-
+    // Reset stored filtered projects
+    this.filteredProjects = [];
 
     // Short-handed helpers
     const src = this.filterForm.controls.source.value.toString();
@@ -89,17 +75,13 @@ export class StatusBoardComponent implements OnInit {
     // Note: Due to poor implementation below, team members and tags will not be used yet
     const tm = this.filterForm.controls.teamMembers.value.toString();
     const tags = this.filterForm.controls.tags.value.toString();
-    // todo: these arrays should make iterating through the values easier
-    const tagsFromForm = this.arrayFromCSV(this.filterForm.controls.tags.value.toString());
-    const teamMembersFromForm = this.arrayFromCSV(this.filterForm.controls.tags.value.toString());
 
+    // Note: These arrays should make iterating through the values easier
+    const tagsArray = this.arrayFromCSV(this.filterForm.controls.teamMembers.value.toString());
+    const teamMembersArray = this.arrayFromCSV(this.filterForm.controls.tags.value.toString());
 
-    // Reset stored filtered projects
-    this.filteredProjects = [];
-
-    /**
-     * Sorry about this
-     */
+    // Iterate data sources and check against filters
+    // Note: sorry about this
     for (const dataSource of this.dataSources) {
       const ds = JSON.parse(dataSource);
 
@@ -121,7 +103,10 @@ export class StatusBoardComponent implements OnInit {
       else if (tn) {
         if (tn === ds.teamName) this.filteredProjects.push(ds);
       }
-      else this.filteredProjects.push(ds);
+      else {
+        // If no filter was supplied, just add the data source
+        this.filteredProjects.push(ds);
+      }
     }
 
     if (this.filteredProjects.length > 0) {
@@ -172,19 +157,24 @@ export class StatusBoardComponent implements OnInit {
       );
     }
   }
-  /*
-    this chops a comma separated value string into a array of trimmed strings
-  */
-  arrayFromCSV(val) {
-    const collector = [];
-    const chop = val.split(',');
-    chop.forEach((thing: string) => {
-      thing = thing.trim();
-      if (thing.toString() !== '') {
-       collector.push(thing);
-      }
-      });
-    // console.log('Collector is ' + collector.toString()); // test the output
+
+  /**
+   * Returns an array of strings from a supplied csv. Omits empty values.
+   *
+   * @param csvString
+   * @returns {string}
+   */
+  arrayFromCSV(csvString: string) {
+    if (!csvString || csvString === '') {
+      console.log('Invalid csvString supplied: ' + csvString);
+      return;
+    }
+
+    const collector: string[] = [];
+    for (const string of csvString.split(',')) {
+      if (string !== '') collector.push(string.trim());
+    }
+    // console.log('col: ' + collector.toString());
     return collector;
   }
 
@@ -206,5 +196,4 @@ export class StatusBoardComponent implements OnInit {
     for (const k in val) ret.push(k);
     return ret;
   }
-
 }

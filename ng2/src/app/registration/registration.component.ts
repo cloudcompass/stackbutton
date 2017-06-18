@@ -14,30 +14,28 @@ import { UserService } from '../_services/user.service';
 export class RegistrationComponent {
   model: any = {};
   loading = false;
-  errorEnabled: boolean;
   errorMessage: string;
+
   constructor(
     private router: Router,
     private userService: UserService) {
-    this.errorEnabled = false;
     this.errorMessage = '';
-
   }
 
   register() {
-
     // todo: check for existing username. Cannot have duplicates
+    // Note: This would be handled by userService, which would respond to the query with an error, handled here
     this.loading = true;
-    this.userService.create(this.model)
-      .subscribe(
-        data => {
-          // If data exists, registration was successful, navigate to login component
-          this.router.navigate(['/splash-page', {outlets: { splash: ['login']}}]);
-        },
-        error => {
-          // TODO: Display an error to the user
-          console.log(error);
-          this.loading = false;
-        });
+    this.userService.create(this.model).subscribe(
+      data => {
+        // If data exists, registration was successful, navigate to login component
+        this.router.navigate(['/splash-page', {outlets: { splash: ['login']}}]);
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = 'Problem with registration';
+        this.loading = false;
+      }
+    );
   }
 }

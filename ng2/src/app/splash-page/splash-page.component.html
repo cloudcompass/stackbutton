@@ -34,7 +34,7 @@
     </div><!-- /navbar body -->
   </nav> <!-- End navbar -->
 
-  <!-- The internal named router for login, registration, and download -->
+  <!-- The internal named router for splash title card, login, registration, and download -->
   <div class="jumbotron" style="height: auto; background: none;" >
     <router-outlet name="splash"></router-outlet>
   </div>
@@ -46,9 +46,11 @@
   <div class="container-fluid">
     <h2>What is StackButton?</h2>
     <p>
-      Stackbutton is designed for DevOps and delivers an easy-to-deploy, central monitoring system for cloud-based services. It is designed to play with these technologies.
+      Stackbutton is designed for DevOps and delivers an easy-to-deploy, central monitoring system for cloud-based
+      services. It is designed to play with these technologies.
     </p>
     <div class="row">
+      <!-- NodeJS -->
       <div class="col-xs-6 col-sm-6 col-md-3" align="center">
         <a href="https://nodejs.org/en/">
           <img src="../../assets/nodejs.png" alt="NodeJS" />
@@ -56,9 +58,12 @@
         <h3>NodeJS</h3>
         <p align="left">
           <strong>NodeJS</strong>
-          - Stackbutton is built in Angular and TypeScript, which allows for object-oriented web development and responsive user interactions.
+          - Stackbutton is built in JavaScript and runs on NodeJS. This makes interactions from a browser quick and
+          responsive.
         </p>
       </div>
+
+      <!-- Angular -->
       <div class="col-xs-6 col-sm-6 col-md-3" align="center">
         <a href="http://angular.io">
           <img src="../../assets/angular.png" alt="Angular" />
@@ -66,20 +71,24 @@
         <h3>Angular</h3>
         <p align ="left">
           <strong>Angular</strong>
-          - Stackbutton is built in Angular and TypeScript, which allows for object-oriented web development and responsive user interactions.
+          - Stackbutton is built in Angular and TypeScript, which allows for object-oriented web development and
+          responsive user interactions.
       </div>
+
+      <!-- OpenShift -->
       <div class="col-xs-6 col-sm-6 col-md-3" align="center">
         <a href="http://www.openshift.com">
           <img src="../../assets/openshift.png" alt="OpenShift" />
         </a>
-        <div>
         <h3>OpenShift</h3>
-          <p align ="left">
-            <strong>OpenShift</strong>
-            - OpenShift  is an application development and hosting platform that automates the provisioning, management, and scaling of Stackbutton alongside other containers.
-          </p>
-        </div>
+        <p align ="left">
+          <strong>OpenShift</strong>
+          - OpenShift  is an application development and hosting platform that automates the provisioning, management,
+          and scaling of Stackbutton alongside other containers.
+        </p>
       </div>
+
+      <!-- PatternFly -->
       <div class="col-xs-6 col-sm-6 col-md-3" align="center">
         <a href="http://github.com">
           <img src="../../assets/patternfly.png" alt="PatternFly" />
@@ -88,8 +97,9 @@
         <p align ="left">
           <strong>PatternFly</strong>
           - The user interface is built in PatternFly which is a UI framework for enterprise web applications.
+        </p>
       </div>
-    </div>
-  </div>
 
+    </div><!-- ./row -->
+  </div><!-- ./container -->
 </div>

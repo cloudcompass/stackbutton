@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DataSourceService } from '../_services/data-source.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { DataSourceService } from '../_services/data-source.service';
 })
 export class DataSourceViewComponent implements OnInit {
   @Input() sourceID: string;
+  @Output() destroyCheck: EventEmitter<string>;
 
   private projectName: string;
   private teamName: string;
@@ -15,7 +16,9 @@ export class DataSourceViewComponent implements OnInit {
   private teamMembers: string[];
   private tags: string[];
 
-  constructor(private dataSourceService: DataSourceService) { }
+  constructor(private dataSourceService: DataSourceService) {
+    this.destroyCheck = new EventEmitter<string>();
+  }
 
   ngOnInit() {
     this.dataSourceService.getDataSourceByID(this.sourceID).subscribe(
@@ -37,7 +40,7 @@ export class DataSourceViewComponent implements OnInit {
         }
       },
       error => {
-
+        console.log('Error retrieving data source ' + this.sourceID + ': ' + error);
       }
     );
   }
@@ -49,8 +52,7 @@ export class DataSourceViewComponent implements OnInit {
   }
 
   deleteClick() {
-    console.log('Delete click: ' + this.sourceID);
     this.dataSourceService.removeDataSourceByID(this.sourceID);
+    this.destroyCheck.emit('destroyed');
   }
-
 }
