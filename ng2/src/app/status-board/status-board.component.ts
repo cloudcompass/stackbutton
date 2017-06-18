@@ -2,8 +2,6 @@ import {Component, OnInit } from '@angular/core';
 import { DataSourceService } from '../_services/data-source.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GithubProjectService } from '../_services/github-project.service';
-import {createEmptyState} from '@angular/router/src/router_state';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-status-board',
