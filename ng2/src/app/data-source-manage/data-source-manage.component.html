@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <!-- Display an empty state if no source IDs are found -->
   <!-- Else display the sources -->
-  <div *ngIf="!sourceIDArray">
+  <div *ngIf="!dataSourceService.hasDataSources()">
     <app-empty-state></app-empty-state>
   </div>
-  <div *ngIf="sourceIDArray" class="list-group list-view-pf list-view-pf-view">
+  <div *ngIf="dataSourceService.hasDataSources()" class="list-group list-view-pf list-view-pf-view">
     <div *ngFor="let sourceID of sourceIDArray">
       <app-data-source-view [sourceID]="sourceID" (destroyCheck)="removeView(sourceID)"></app-data-source-view>
     </div>

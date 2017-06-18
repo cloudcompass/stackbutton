@@ -117,4 +117,14 @@ export class DataSourceService {
     localStorage.setItem('stackDataSources', JSON.stringify(storedDataSources));
     return Observable.of('Success');
   }
+
+  /**
+   * Return if data sources exist
+   * 
+   * @returns {boolean}
+   */
+  hasDataSources(): Boolean {
+    if (!localStorage.getItem(this.datasourceKey)) return false;
+    else return true;
+  }
 }

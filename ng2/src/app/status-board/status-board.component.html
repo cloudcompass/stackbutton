@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <!-- If there are no data sources, display an empty state -->
   <!-- Otherwise display filter options and cards -->
-  <div *ngIf="!dataSources">
+  <div *ngIf="!dataSourceService.hasDataSources()">
     <app-empty-state></app-empty-state>
   </div>
-  <div *ngIf="dataSources">
+  <div *ngIf="dataSourceService.hasDataSources()">
     <!-- Filter tool Bar -->
     <div class="row toolbar-pf">
       <div class="col-lg-12">

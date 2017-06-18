@@ -9,7 +9,9 @@ import { DataSourceService } from '../_services/data-source.service';
 export class DataSourceManageComponent implements OnInit {
   private sourceIDArray: string[];
 
-  constructor(private dataSourceService: DataSourceService) {}
+  constructor(private dataSourceService: DataSourceService) {
+    console.log('dss bo: ' + this.dataSourceService.hasDataSources());
+  }
 
   ngOnInit() {
     // Check for locally stored dataSources and populate the array used to generate the components
