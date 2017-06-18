@@ -12,5 +12,8 @@ export class DownloadComponent implements OnInit {
   ngOnInit() {
 
   }
+  over(){
+    console.log("Mouseover called");
+  }
 
 }
