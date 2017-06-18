@@ -1,0 +1,55 @@
+<div class="list-group-item">
+  <!-- Option Buttons -->
+  <div class="list-view-pf-actions">
+    <button class="btn btn-default" (click)="editClick()">Edit</button>
+    <button class="btn btn-default" (click)="deleteClick()">Delete</button>
+  </div>
+
+  <!-- Body -->
+  <div class="list-view-pf-main-info">
+    <!-- Service Icon -->
+    <div class="list-view-pf-left">
+      <span *ngIf="serviceType=='Github'" class="fa fa-github list-view-pf-icon-sm"></span>
+      <span *ngIf="serviceType=='OpenShift'" class="fa fa-circle-o list-view-pf-icon-sm" style="color:red"></span>
+    </div>
+
+    <div class="list-view-pf-body">
+      <div class="list-view-pf-description">
+        <!-- Header -->
+        <div class="list-group-item-heading">
+          {{serviceType}}
+        </div>
+
+        <!-- Additional Info -->
+        <div class="list-group-item-text">
+          <div class="list-view-pf-additional-info-item">
+            <span class="pficon pficon-project"></span>
+            <strong>Project: </strong>
+            {{projectName}}
+          </div>
+          <div class="list-view-pf-additional-info-item">
+            <span class="pficon pficon-user"></span>
+            <strong>Team: </strong>
+            <span *ngFor="let member of teamMembers">{{member}},&nbsp;</span>
+          </div>
+          <div *ngIf="tags" class="list-view-pf-additional-info-item">
+            <span class="pficon pficon-flag"></span>
+            <strong>Tags: </strong>
+            <span *ngFor="let tag of tags">{{tag}},&nbsp;</span>
+          </div>
+        </div>
+      </div>
+
+      <!--
+      <div class="list-view-pf-additional-info">
+        <div *ngIf="tags" class="list-view-pf-additional-info-item">
+          <span class="pficon pficon-flag"></span>
+          <strong>Tags: </strong>
+          <span *ngFor="let tag of tags">{{tag}}</span>
+        </div>
+      </div>
+      -->
+    </div><!-- end body -->
+  </div><!-- end main info -->
+</div>
+

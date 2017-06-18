@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
+import { DataSourceService } from '../_services/data-source.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { GithubProjectService } from '../_services/github-project.service';
+import {createEmptyState} from '@angular/router/src/router_state';
 
 @Component({
   selector: 'app-status-board',
   templateUrl: './status-board.component.html',
-  styleUrls: ['./status-board.component.css']
+  styleUrls: ['./status-board.component.css'],
 })
 
 /**
@@ -12,44 +16,169 @@ import { Component, OnInit } from '@angular/core';
  * If no data sources exist, an empty-state (getting started) page will be displayed, prompting the user to add services
  */
 export class StatusBoardComponent implements OnInit {
+  emptyStateEnabled: boolean;
+  private showFilter: boolean;
+  private filterForm: FormGroup;
 
-  // TODO: Declare filter values here
-  private sourceFilter: string;
-  private typeFilter: string;
-  private teamFilter: string;
-  private tagFilters: string[];
+  private dataSources: any[];
+  private filteredProjects: any[];
 
-  private dataSource: any[]; // TODO: Replace any[] with dataSource[] type, once it's created
+  // Variables to store information required by cards to generate
+  private openShiftProjectNames: any;
+  private githubCommits: any;
+  private githubIssues: any;
 
-  constructor() { }
+  private sources: string[]; // Const that should be stored elsewhere
 
-  ngOnInit() {
-    // Attempt to populate datasource[] by looking in the database for stored information
-
-    // If datasource[] is then found to be empty, display the empty-state (getting-started) component
-    // Else display the status-board and filter options
-
-
+  constructor(private formBuilder: FormBuilder,
+              private dataSourceService: DataSourceService,
+              private githubProjectService: GithubProjectService) {
+    this.sources = ['Github', 'OpenShift'];
+    this.showFilter = false;
+    this.createForm();
+    this.emptyStateEnabled = true;
   }
 
+  ngOnInit() {
+    // Check for locally stored dataSources and, if found, display the filter options
+    // TODO: If none was found, display a 'getting started' page
+    this.dataSourceService.getDataSources().subscribe(
+      data => {
+        console.log('stat data');
+        console.log(data);
+        this.dataSources = data;
+        this.showFilter = true;
+      },
+      error => {
+        // Display 'getting started' / No data sources found
+        console.log('Error retrieving dataSources: ' + error);
+      }
+    );
+  }
+
+  createForm() {
+    this.filterForm = this.formBuilder.group({
+      source: '',
+      projectName: '',
+      teamName: '',
+      teamMembers: '',
+      tags: ''
+    });
+  }
 
   /**
    * Use the selected filters and iterate through stored data sources.
    * If a data source matches the filter criteria, generate the associated widget and add it to the status board
    */
-  applyFilters() {
+  filterSubmit(event) {
     // Iterate data sources and check against filters
-    // ie. if (ds.source == filter.souce && ds.type == filter.type) generateWidget(ds.source, ds.type, ds.serviceID)
+
+    // Short-handed helpers
+    const src = this.filterForm.controls.source.value.toString();
+    const pn = this.filterForm.controls.projectName.value.toString();
+    const tn = this.filterForm.controls.teamName.value.toString();
+
+    // Note: Due to poor implementation below, team members and tags will not be used yet
+    const tm = this.filterForm.controls.teamMembers.value.toString();
+    const tags = this.filterForm.controls.tags.value.toString();
+
+    // Reset stored filtered projects
+    this.filteredProjects = [];
+
+    /**
+     * Sorry about this
+     */
+    for (const dataSource of this.dataSources) {
+      const ds = JSON.parse(dataSource);
+
+      if (src && pn && tn) {
+        if (src === ds.service.type && pn === ds.projectName && tn === ds.teamName) this.filteredProjects.push(ds);
+      }
+      else if (src && pn) {
+        if (src === ds.service.type && pn === ds.projectName) this.filteredProjects.push(ds);
+      }
+      else if (src && tn) {
+        if (src === ds.service.type && tn === ds.teamName) this.filteredProjects.push(ds);
+      }
+      else if (src) {
+        if (src === ds.service.type) this.filteredProjects.push(ds);
+      }
+      else if (pn) {
+        if (pn === ds.projectName) this.filteredProjects.push(ds);
+      }
+      else if (tn) {
+        if (tn === ds.teamName) this.filteredProjects.push(ds);
+      }
+      else console.log('no filter');
+    }
+
+    if (this.filteredProjects.length > 0) {
+      this.generateCards();
+      this.emptyStateEnabled = false;
+    }
   }
 
   /**
-   * Generate a widget to display data to the status board
-   *
-   * @param widgetSource  Source of the data (Github, Openshift, etc)
-   * @param widgetType  Type of widget to generate (Commits, Issues, Pods, etc)
-   * @param serviceID Unique service id that will be used to grab information from the server
+   * Iterate through filtered dataSources and extract the necessary variables that will be used
+   * to populate the cards
    */
-  generateWidget(widgetSource: string, widgetType: string, serviceID: number) {
-    // Generate the widget and add it to the status board's display area
+  generateCards() {
+    const ghpNames: any[] = [];
+    this.openShiftProjectNames = [];
+
+    // Iterate through filtered projects and populate github/openshift names
+    // This step could be integrated with below, but wasn't?
+    for (const ds of this.filteredProjects) {
+      if (ds.service.type === 'OpenShift') {
+        this.openShiftProjectNames.push(ds.projectName);
+      }
+      if (ds.service.type === 'Github') {
+        ghpNames.push(ds.projectName);
+      }
+    }
+
+    // Iterate through the found Github names, and populate commits/issues using Github project data
+    if (ghpNames) {
+      for (const n of ghpNames) console.log('ghp: ' + n);
+      this.githubProjectService.getGithubProjects(ghpNames).subscribe(
+        data => {
+          for (const project of data) {
+            for (const item of project.items) {
+              if (item.kind === 'commit') {
+                if (!this.githubCommits[project.project]) this.githubCommits[project.project] = [];
+                this.githubCommits[project.project].push(item.sha);
+              }
+              if (item.kind === 'issue') {
+                if (!this.githubIssues[project.project]) this.githubIssues[project.project] = [];
+                this.githubIssues[project.project].push(item.id);
+              }
+            }
+          }
+        },
+        error => {
+          console.log('Error retrieving github projects by names: ' + error);
+        }
+      );
+    }
   }
+
+  /**
+   * Clear the variables used to generate the cards
+   */
+  clearCards() {
+    this.githubCommits = {};
+    this.githubIssues = {};
+    this.openShiftProjectNames = [];
+  }
+
+  /**
+   * Helper function that converts an object into an array
+   * Used in the *ngFor HTML divs
+   */
+  private getAsArray(val) {
+    const ret = [];
+    for (const k in val) ret.push(k);
+    return ret;
+  }
+
 }

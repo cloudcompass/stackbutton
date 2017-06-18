@@ -15,11 +15,17 @@ export class LoginComponent implements OnInit {
   model: any = {};
   loading = false;
   returnUrl: string;
+  // these define what is shown in the login error message
+  errorMessage: string;
+  errorEnabled: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService) {
+    this.errorMessage = ''; // no message is displayed by default.
+    this.errorEnabled = false;
+  }
 
   ngOnInit() {
     // Get return url from route parameters or default to '/'
@@ -27,6 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+
     this.loading = true;
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
@@ -35,7 +42,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          // TODO: Display an error to the user
+          this.errorEnabled = true;
+          this.errorMessage = 'Problem with username or password';
           console.log(error);
           this.loading = false;
         });

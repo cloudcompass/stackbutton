@@ -40,8 +40,10 @@ import { UserService } from './_services/user.service';
 import { GithubUserService } from './_services/github-user.service';
 import { GithubIssuesService } from './_services/github-issues.service';
 import { GithubCommitsService } from './_services/github-commits.service';
+import { GithubProjectService } from './_services/github-project.service';
 import { OpenShiftService } from './_services/openshift.service';
 import { DataSourceService } from './_services/data-source.service';
+
 
 // Used to create fake backend, to be removed
 import { fakeBackendProvider } from './_helpers/fake-backend';
@@ -58,6 +60,7 @@ import { OpenshiftServiceComponent } from './openshift-service/openshift-service
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { DemoBoardComponent } from './demo-board/demo-board.component';
+import { DataSourceViewComponent } from './data-source-view/data-source-view.component';
 
 @NgModule({
   imports: [
@@ -65,7 +68,7 @@ import { DemoBoardComponent } from './demo-board/demo-board.component';
     FormsModule,
     HttpModule,
     routing,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent,
@@ -93,6 +96,7 @@ import { DemoBoardComponent } from './demo-board/demo-board.component';
     OpenshiftRouteComponent,
     OpenshiftServiceComponent,
     DemoBoardComponent,
+    DataSourceViewComponent
   ],
   providers: [
     AuthGuard,
@@ -101,6 +105,7 @@ import { DemoBoardComponent } from './demo-board/demo-board.component';
     GithubUserService,
     GithubIssuesService,
     GithubCommitsService,
+    GithubProjectService,
     OpenShiftService,
     DataSourceService,
 

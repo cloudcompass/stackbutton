@@ -1,4 +1,5 @@
 <!-- The Status-Board body -->
+<app-empty-state></app-empty-state>
 <div class="cards-pf" >
   <div class="container-fluid container-cards-pf" >
 
@@ -7,8 +8,8 @@
     </div>
 
     <div class="row row-cards-pf">
-      <app-commit-widget></app-commit-widget>
-      <app-issues-card></app-issues-card>
+      <app-commit-widget [projectName]="'demo'"></app-commit-widget>
+      <app-issues-card [projectName]="'demo'"></app-issues-card>
     </div>
 
     <div class="row row-cards-pf">

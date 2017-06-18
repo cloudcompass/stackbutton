@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GithubCommitsService } from '../_services/github-commits.service';
+import { GithubProjectService } from '../_services/github-project.service';
 
 @Component({
   selector: 'app-commit-widget',
@@ -7,6 +8,8 @@ import { GithubCommitsService } from '../_services/github-commits.service';
   styleUrls: ['./commits-card.component.css']
 })
 export class CommitCardComponent implements OnInit {
+  @Input() shaArray: string[];
+  @Input() projectName: string;
 
   private repoName: string;
 
@@ -25,7 +28,8 @@ export class CommitCardComponent implements OnInit {
   private commitSha: string; // Temp?
   private avatarUrl: string;
 
-  constructor(private githubCommitsService: GithubCommitsService) {
+  constructor(private githubCommitsService: GithubCommitsService,
+              private githubProjectService: GithubProjectService) {
     this.commits = [];
     this.commitsCount = 0;
     this.commitIndex = 0;
@@ -42,7 +46,32 @@ export class CommitCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadSampleData();
+    if (this.projectName === 'demo') {
+      this.projectName = 'Sample';
+      this.loadSampleData();
+      return;
+    }
+
+    if (!this.projectName || !this.shaArray || this.shaArray === []) {
+      console.log('Commit card requires both a project name and sha array')
+      return;
+    }
+
+    this.githubProjectService.getGithubCommits(this.shaArray).subscribe(
+      data => {
+        this.commits = data;
+
+        // Init some variables
+        this.loadingCommits = false;
+        this.commitIndex = 0;
+        this.commitsCount = this.commits.length;
+
+        // Enable the right button if there's more than one commit
+        if (this.commitsCount > 1) this.rightButtonDisabled = false;
+
+        this.updateCommitInfo();
+      }
+    );
   }
 
   /**
@@ -124,7 +153,6 @@ export class CommitCardComponent implements OnInit {
       },
       error => {
         console.error('Error fetching github commits: ' + error);
-        // TODO: Display en error of sorts to the user
       });
   }
 }
