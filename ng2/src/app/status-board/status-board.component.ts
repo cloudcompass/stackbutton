@@ -3,6 +3,7 @@ import { DataSourceService } from '../_services/data-source.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GithubProjectService } from '../_services/github-project.service';
 import {createEmptyState} from '@angular/router/src/router_state';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-status-board',
@@ -41,13 +42,13 @@ export class StatusBoardComponent implements OnInit {
 
   ngOnInit() {
     // Check for locally stored dataSources and, if found, display the filter options
-    // TODO: If none was found, display a 'getting started' page
     this.dataSourceService.getDataSources().subscribe(
       data => {
         console.log('stat data');
         console.log(data);
         this.dataSources = data;
         this.showFilter = true;
+        this.emptyStateEnabled = false;
       },
       error => {
         // Display 'getting started' / No data sources found
@@ -72,6 +73,13 @@ export class StatusBoardComponent implements OnInit {
    */
   filterSubmit(event) {
     // Iterate data sources and check against filters
+    if (this.filterForm.controls.source.value.toString() === '*') {
+      // generate all possible cards.
+
+    }
+
+
+
 
     // Short-handed helpers
     const src = this.filterForm.controls.source.value.toString();
@@ -81,6 +89,10 @@ export class StatusBoardComponent implements OnInit {
     // Note: Due to poor implementation below, team members and tags will not be used yet
     const tm = this.filterForm.controls.teamMembers.value.toString();
     const tags = this.filterForm.controls.tags.value.toString();
+    // todo: these arrays should make iterating through the values easier
+    const tagsFromForm = this.arrayFromCSV(this.filterForm.controls.tags.value.toString());
+    const teamMembersFromForm = this.arrayFromCSV(this.filterForm.controls.tags.value.toString());
+
 
     // Reset stored filtered projects
     this.filteredProjects = [];
@@ -109,12 +121,11 @@ export class StatusBoardComponent implements OnInit {
       else if (tn) {
         if (tn === ds.teamName) this.filteredProjects.push(ds);
       }
-      else console.log('no filter');
+      else this.filteredProjects.push(ds);
     }
 
     if (this.filteredProjects.length > 0) {
       this.generateCards();
-      this.emptyStateEnabled = false;
     }
   }
 
@@ -160,6 +171,21 @@ export class StatusBoardComponent implements OnInit {
         }
       );
     }
+  }
+  /*
+    this chops a comma separated value string into a array of trimmed strings
+  */
+  arrayFromCSV(val) {
+    const collector = [];
+    const chop = val.split(',');
+    chop.forEach((thing: string) => {
+      thing = thing.trim();
+      if (thing.toString() !== '') {
+       collector.push(thing);
+      }
+      });
+    // console.log('Collector is ' + collector.toString()); // test the output
+    return collector;
   }
 
   /**

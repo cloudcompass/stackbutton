@@ -14,15 +14,14 @@ export class EmptyStateComponent implements OnInit {
   tooltipText = '';
 
 
-  constructor(private _router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     document.body.style.backgroundColor = '#fff';
   }
 
   mainAction(event) {
-    (<any>this.pfTooltip).el.nativeElement.close();
-    this._router.navigateByUrl('/status-board');
+    this.router.navigate(['/internal-page', {outlets: { internal: ['data-source-editor']}}]);
   }
 
 }
