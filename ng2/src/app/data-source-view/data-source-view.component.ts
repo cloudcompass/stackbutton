@@ -15,7 +15,11 @@ export class DataSourceViewComponent implements OnInit {
   private teamMembers: string[];
   private tags: string[];
 
-  constructor(private dataSourceService: DataSourceService) { }
+  isDeleted: boolean;
+
+  constructor(private dataSourceService: DataSourceService) {
+    this.isDeleted = false;
+  }
 
   ngOnInit() {
     this.dataSourceService.getDataSourceByID(this.sourceID).subscribe(
@@ -51,6 +55,7 @@ export class DataSourceViewComponent implements OnInit {
   deleteClick() {
     console.log('Delete click: ' + this.sourceID);
     this.dataSourceService.removeDataSourceByID(this.sourceID);
+    this.isDeleted = true;
   }
 
 }

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { DataSourceModel } from '../_models/dataSourceModel';
 import { Observable } from 'rxjs/Observable';
-import {observable} from "rxjs/symbol/observable";
+import {observable} from 'rxjs/symbol/observable';
+import {isSuccess} from '@angular/http/src/http_utils';
+
 
 
 @Injectable()
@@ -53,14 +55,23 @@ export class DataSourceService {
   /**
    * Remove a dataSource by ID
    * TODO: Only removes locally, remove from database
-   *
+   * TODO: Lee you should double check to be sure this meets your backend specs. -C
    * @param sourceID
    * @returns {any}
    */
   removeDataSourceByID(sourceID: string): Observable<any> {
     if (!sourceID || sourceID === '') return Observable.throw('Invalid sourceID supplied');
 
-    // TODO: Actually remove the source
+    const storedDataSources = JSON.parse(localStorage.getItem('stackDataSources'));
+    const updatedDataSources = [];
+    for (const ds of storedDataSources){
+      if (JSON.parse(ds).sourceID !== sourceID) {
+        updatedDataSources.push(ds);
+      }
+    }
+    // console.log(JSON.stringify(updatedDataSources));
+    localStorage.setItem('stackDataSources', JSON.stringify(updatedDataSources));
+    return Observable.of('success');
   }
 
   /**

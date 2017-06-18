@@ -180,10 +180,8 @@ export class StatusBoardComponent implements OnInit {
     const chop = val.split(',');
     chop.forEach((thing: string) => {
       thing = thing.trim();
-      if (thing.toString() !== '') {
-       collector.push(thing);
-      }
-      });
+      if (thing.toString() !== '') collector.push(thing);
+    });
     // console.log('Collector is ' + collector.toString()); // test the output
     return collector;
   }
