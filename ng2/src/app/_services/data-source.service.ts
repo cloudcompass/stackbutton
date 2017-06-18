@@ -69,8 +69,13 @@ export class DataSourceService {
         updatedDataSources.push(ds);
       }
     }
-    // console.log(JSON.stringify(updatedDataSources));
-    localStorage.setItem('stackDataSources', JSON.stringify(updatedDataSources));
+    // This must be eradicated so elements that check for the existence like the empty-component hide or show proper.
+    if (updatedDataSources.length < 1){
+      this.removeAllDataSources();
+    }
+    else {
+      localStorage.setItem('stackDataSources', JSON.stringify(updatedDataSources));
+    }
     return Observable.of('success');
   }
 
