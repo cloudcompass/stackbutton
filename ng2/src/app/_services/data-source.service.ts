@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataSourceModel } from '../_models/dataSourceModel';
 import { Observable } from 'rxjs/Observable';
-import {observable} from 'rxjs/symbol/observable';
-import {isSuccess} from '@angular/http/src/http_utils';
-
-
 
 @Injectable()
 export class DataSourceService {
@@ -37,7 +33,7 @@ export class DataSourceService {
   getDataSourceByID(sourceID: string): Observable<any> {
     if (!sourceID || sourceID === '') return Observable.throw('Invalid sourceID supplied');
 
-    const storedDataSources = JSON.parse(localStorage.getItem('stackDataSources'));
+    const storedDataSources = JSON.parse(localStorage.getItem(this.datasourceKey));
 
     // If nothing was found, create a new array. Otherwise, check to see if this project is already added
     if (storedDataSources) {
@@ -55,27 +51,32 @@ export class DataSourceService {
   /**
    * Remove a dataSource by ID
    * TODO: Only removes locally, remove from database
-   * TODO: Lee you should double check to be sure this meets your backend specs. -C
+   *
    * @param sourceID
    * @returns {any}
    */
   removeDataSourceByID(sourceID: string): Observable<any> {
     if (!sourceID || sourceID === '') return Observable.throw('Invalid sourceID supplied');
 
-    const storedDataSources = JSON.parse(localStorage.getItem('stackDataSources'));
+    const storedDataSources = JSON.parse(localStorage.getItem(this.datasourceKey));
+    if (!storedDataSources) return Observable.throw('No stored data sources found!');
+
+    // Iterate over stored data sources to build the new data sources, skipping the once with the supplied sourceID
     const updatedDataSources = [];
     for (const ds of storedDataSources){
       if (JSON.parse(ds).sourceID !== sourceID) {
         updatedDataSources.push(ds);
       }
     }
-    // This must be eradicated so elements that check for the existence like the empty-component hide or show proper.
-    if (updatedDataSources.length < 1){
+
+    // If no data sources are left, clean up local storage. Else update its value.
+    if (updatedDataSources.length < 1) {
       this.removeAllDataSources();
     }
     else {
-      localStorage.setItem('stackDataSources', JSON.stringify(updatedDataSources));
+      localStorage.setItem(this.datasourceKey, JSON.stringify(updatedDataSources));
     }
+
     return Observable.of('success');
   }
 
