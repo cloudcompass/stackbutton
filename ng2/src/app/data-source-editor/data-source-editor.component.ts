@@ -10,17 +10,18 @@ import { DataSourceService } from '../_services/data-source.service';
   templateUrl: './data-source-editor.component.html',
   styleUrls: ['./data-source-editor.component.css']
 })
+/**
+ * TODO: If a valid API key is submitted, you might want to lock that part of the form down
+ */
 export class DataSourceEditorComponent implements OnInit {
   apiForm: FormGroup;
   projectForm: FormGroup;
   editForm: FormGroup;
   sources: string[];
   projects: any[];
-  hasValidKey: boolean; // if the API key has returned good data this is true.
 
   private showProjectForm: boolean;
   private showEditForm: boolean;
-
 
   private data: any; // To keep a local copy of the data retrieved
   failMessage: string;
@@ -35,7 +36,6 @@ export class DataSourceEditorComponent implements OnInit {
     this.showEditForm = false;
     this.showProjectForm = false;
     this.sources = ['Github', 'OpenShift']; // Constant that should be set somewhere else?
-    this.hasValidKey = false; // TODO: want to disable changing the key after a source is successfully gotten.
   }
 
   ngOnInit() { }
@@ -79,28 +79,23 @@ export class DataSourceEditorComponent implements OnInit {
         this.openshiftService.getOpenShiftData().subscribe(
           data => {
             this.data = data;
-
             for (const project of this.data) {
               this.projects.push(project.project);
             }
-
           },
           error => {
             // TODO: Display an error to the user
             console.log('Error retrieving OpenShift projects: ' + error);
           }
         );
-        this.hasValidKey = true;
         break;
       case 'Github':
         // TEMP: sample Github projects
         this.projects = ['Stackbutton', 'Eclipse-Kapua', 'The New Facebook'];
-        this.hasValidKey = true;
         break;
       default:
         // TODO: Display an error to the user
         console.log('Invalid API source supplied: ' + this.apiForm.controls.source.value);
-        this.hasValidKey = false;
     }
   }
 
@@ -169,19 +164,6 @@ export class DataSourceEditorComponent implements OnInit {
     }
   }
 
-  /* this method draws the appropriate box on the page depending on whether there was success or failure adding the data source
-
-   */
-  drawAlertBox(messageString: string, success: boolean) {
-    if (success) {
-      this.successMessage = messageString;
-      this.failMessage = null;
-    } else {
-      this.failMessage = messageString;
-      this.successMessage = null;
-    }
-  }
-
   /**
    * Grab the user inputs on the editForm, generate a dataSource object, then store it locally (TODO: store to db)
    *
@@ -202,22 +184,26 @@ export class DataSourceEditorComponent implements OnInit {
     // Figure out team details
     dataSource.teamName = this.editForm.controls.teamName.value;
 
-    /**
-     * ///////////////
-     * // Dev Note //
-     * //////////////
-     *
-     * The teamMembersInput sucks being here. While you can add team members with just their name,
-     * this doesn't really allow member roles or unique ids... That should be coming straight from the service
-     * query itself, but, even then, not all sources are guaranteed to have roles and ids.
-     *
-     * This should be re-thought out and managed differently. Either have the teamMembers input force a role input,
-     * have the queries attempt to parse the original service query and match team names, or just have the original
-     * team members immutable, and teamMembers input would tack on team members that aren't generated from the query.
-     *
-     * Even then, unique ids aren't really forcible, since shared names can exist.
+
+    /*
+
+    ///////////////
+    // Dev Note //
+    //////////////
+
+    The teamMembersInput sucks being here. While you can add team members with just their name,
+    this doesn't really allow member roles or unique ids... That should be coming straight from the service
+    query itself, but, even then, not all sources are guaranteed to have roles and ids.
+
+    This should be re-thought out and managed differently. Either have the teamMembers input force a role input,
+    have the queries attempt to parse the original service query and match team names, or just have the original
+    team members immutable, and teamMembers input would tack on team members that aren't generated from the query.
+
+    Even then, unique ids aren't really forcible, since shared names can exist.
      */
-      // teamMembersInput can be a csv, so split the names up and add them as json objects to teamMembers
+
+    // teamMembersInput can be a csv, so split the names up and add them as json objects to teamMembers
+    // TODO: Since csv is expected, trim whitespace and remove empty values
     const teamMembersInput: string = this.editForm.controls.teamMembers.value.toString();
     const teamMembersSplit = teamMembersInput.split(',');
     dataSource.teamMembers = [];
@@ -231,16 +217,16 @@ export class DataSourceEditorComponent implements OnInit {
       dataSource.teamMembers.push(obj);
     };
 
-    /**
-     * ///////////////
-     * // Dev Note //
-     * //////////////
-     *
-     * Metadata should be stored as a json object instead of a string array.
-     * This would require model and input rework, but would make this much more useful
-     * Could then sort by location, dates, types, etc.
+    /*
+    ///////////////
+    // Dev Note //
+    //////////////
+
+    Metadata should be stored as a json object instead of a string array.
+    This would require model and input rework, but would make this much more useful
+    Could then sort by location, dates, types, etc.
      */
-      // metadata input can be a csv, sp split the input up and add them somehow
+    // TODO: Since csv is expected, trim whitespace and remove empty values
     const metadataInput: string = this.editForm.controls.tags.value.toString();
     dataSource.metadata = metadataInput.split(',');
 
@@ -256,19 +242,33 @@ export class DataSourceEditorComponent implements OnInit {
       },
       error => {
         console.log('Error adding DataSource: ' + error);
-        this.drawAlertBox('Unable to add DataSource. ' + error, false);
+        this.drawAlertBox('Unable to add DataSource: ' + error, false);
       }
     );
-
   }
 
-  // Helper methods
+  // Helper Methods
+
+  /**
+   * Populate either success or fail message
+   *
+   * @param messageString The message to display
+   * @param success True for success message, false for fail
+   */
+  drawAlertBox(messageString: string, success: boolean) {
+    if (success) {
+      this.successMessage = messageString;
+      this.failMessage = null;
+    }
+    else {
+      this.failMessage = messageString;
+      this.successMessage = null;
+    }
+  }
 
   /**
    * Reset and hide edit/project forms, remove apikey input
    */
-
-
   private resetForms() {
     this.showEditForm = false;
     this.showProjectForm = false;
