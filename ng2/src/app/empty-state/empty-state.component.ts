@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-empty-state',
@@ -7,13 +7,6 @@ import {Router} from '@angular/router';
   styleUrls: ['./empty-state.component.css']
 })
 export class EmptyStateComponent implements OnInit {
-
-  @ViewChild('pfTooltip') pfTooltip: ElementRef;
-
-  // TODO: this tooltip doesn't work. It may be missing a required library or dependency. IDK.
-  tooltipText = '';
-
-
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -23,5 +16,4 @@ export class EmptyStateComponent implements OnInit {
   mainAction(event) {
     this.router.navigate(['/internal-page', {outlets: { internal: ['data-source-editor']}}]);
   }
-
 }
