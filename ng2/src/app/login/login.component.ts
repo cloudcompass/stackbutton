@@ -32,15 +32,15 @@ export class LoginComponent implements OnInit {
   login() {
     this.loading = true;
     this.authenticationService.login(this.model.username, this.model.password).subscribe(
-        data => {
-          // If data exists, the login was successful
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          console.log('Authenication error: ' + error);
-          this.errorMessage = 'Problem with username or password';
-          this.loading = false;
-        }
+      data => {
+        // If data exists, the login was successful
+        this.router.navigate([this.returnUrl]);
+      },
+      error => {
+        console.log('Authenication error: ' + error);
+        this.errorMessage = 'Problem with username or password';
+        this.loading = false;
+      }
     );
   }
 }
