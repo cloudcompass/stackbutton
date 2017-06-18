@@ -8,27 +8,27 @@ import { DataSourceService } from '../_services/data-source.service';
 })
 export class DataSourceManageComponent implements OnInit {
   private sourceIDArray: string[];
-  emptyStateEnabled: boolean;
 
   constructor(private dataSourceService: DataSourceService) {}
 
   ngOnInit() {
-    // Check for locally stored dataSources and, if found, display the filter options
+    // Check for locally stored dataSources and populate the array used to generate the components
     this.dataSourceService.getDataSources().subscribe(
       data => {
         this.sourceIDArray = [];
         for (const d of data) {
           this.sourceIDArray.push(JSON.parse(d).sourceID);
         }
-        console.log(data);
-        this.emptyStateEnabled = false;
       },
       error => {
-        // Display 'getting started' / No data sources found
         console.log('Error retrieving dataSources: ' + error);
-        this.emptyStateEnabled = true;
       }
     );
   }
 
+  removeView(sourceID: string) {
+    const index: number = this.sourceIDArray.indexOf(sourceID);
+    if (index !== -1) this.sourceIDArray.splice(index, 1);
+    if (this.sourceIDArray.length === 0) this.sourceIDArray = null;
+  }
 }
