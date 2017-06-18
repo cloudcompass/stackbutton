@@ -174,7 +174,7 @@ export class StatusBoardComponent implements OnInit {
     for (const string of csvString.split(',')) {
       if (string !== '') collector.push(string.trim());
     }
-    console.log('col: ' + collector.toString());
+    // console.log('col: ' + collector.toString());
     return collector;
   }
 
