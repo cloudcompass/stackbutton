@@ -1,0 +1,54 @@
+
+<div class="col-xs-12 col-sm-6 col-lg-6">
+  <div class="card-pf">
+
+    <div class="card-pf-heading">
+      <!-- Dropdown Menu of Filter Values -->
+      <div class="dropdown card-pf-time-frame-filter">
+        <button id="dropdownFilterName" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          {{issueFilterName}} <span class="fa fa-caret-down"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li *ngFor="let value of issueFilterValues" (click)="dropdownFilterSelect(value)"><a>{{value}}</a></li>
+        </ul>
+      </div>
+      <h2 class="card-pf-title" id="repoTitle">
+        {{ projectName }} Issues
+      </h2>
+    </div><!-- End Card Header -->
+
+    <div class="card-pf-body">
+      <!-- Arrow Buttons and Repo Name -->
+      <div style="display:flex; justify-content: space-between">
+        <button [disabled]="leftButtonDisabled" type="button" class="btn btn-default" (click)="onLeftClick()">
+          <span class="fa fa-caret-left"></span>
+        </button>
+        <button [disabled]="rightButtonDisabled" type="button" class="btn btn-default" (click)="onRightClick()">
+          <span class="fa fa-caret-right"></span>
+        </button>
+      </div>
+
+      <!-- Issues Body -->
+      <div>
+        <!-- Label Bar(s) and Issue Number/Title -->
+        <!-- Display a loading icon while getting issues, then display issue content -->
+        <div *ngIf="loadingIssues" style="display: flex; justify-content: center;">
+          <span class="fa fa-spinner fa-pulse fa-4x fa-fw"></span>
+        </div>
+        <div *ngIf="!loadingIssues" style="display:flex; padding-top: 1em;">
+          <div id="issueLabel" style="height: 3em; width: 0.4em;" [style.background]="issueLabelColor">
+            <!-- Tooltip of issue label name -->
+          </div>
+          <div *ngIf="!loadingIssues" style="padding-top: 0.75em; padding-left: 0.5em;">
+            {{issueTitle ? issueTitle : "Issue Title"}}
+          </div>
+        </div>
+
+        <!-- Issue Message -->
+        <div *ngIf="!loadingIssues" style="padding-top: 1em;">
+          {{issueMessage ? issueMessage : "Issue Message"}}
+        </div>
+      </div><!-- End Issues Body -->
+    </div><!-- End Card Body -->
+  </div><!-- End Card -->
+</div>

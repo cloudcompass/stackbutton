@@ -1,0 +1,143 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <br/>
+      <pf-tabs #pfTabs (tabChanged)="onTabChanged($event)">
+        <pf-tab tabTitle="Typography">
+          <h1>Application Heading h1</h1>
+          <section>
+            <h2>Body Copy h2</h2>
+            <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+            <h3>Lead Body Copy h3</h3>
+            <p class="lead">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.</p>
+          </section>
+        </pf-tab>
+        <pf-tab tabTitle="Emphasis">
+          <section>
+            <h2>Emphasis</h2>
+            <div class="row">
+              <div class="col-sm-6 col-md-5">
+                <h3>Small Text</h3>
+                <small>This line of text is meant to be treated as fine print.</small>
+                <h3>Bold</h3>
+                <p>The following snippet of text is <strong>rendered as bold text</strong>.</p>
+                <h3>Italics</h3>
+                <p>The following snippet of text is <em>rendered as italicized text</em>.</p>
+                <h3>Link Text</h3>
+                <p>The follong snippet of text is <a href="#">rendered as link text</a>.</p>
+              </div><!-- /col -->
+              <div class="col-sm-6 col-md-7">
+                <h3>Description</h3>
+                <dl>
+                  <dt>Description lists</dt>
+                  <dd>A description list is perfect for defining terms.</dd>
+                  <dt>Euismod</dt>
+                  <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                  <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                  <dt>Malesuada porta</dt>
+                  <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                  <dt>Description lists</dt>
+                  <dd>A description list is perfect for defining terms.</dd>
+                  <dt>Euismod</dt>
+                  <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                  <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                  <dt>Malesuada porta</dt>
+                  <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                  <dt>Felis euismod semper eget lacinia</dt>
+                  <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+                </dl>
+              </div><!-- /col -->
+            </div><!-- /row -->
+            <h3>Alignment classes</h3>
+            <table class="table table-bordered">
+              <tbody><tr>
+                <td class="text-left">
+                  Left aligned text.
+                </td>
+                <td class="text-center">
+                  Center aligned text.
+                </td>
+                <td class="text-right">
+                  Right aligned text.
+                </td>
+              </tr>
+              </tbody></table>
+          </section>
+        </pf-tab>
+        <pf-tab tabTitle="Lists">
+          <section>
+            <h2>Lists</h2>
+            <div class="row">
+              <div class="col-sm-6 col-md-3">
+                <h3>Unordered</h3>
+                <ul>
+                  <li>Lorem ipsum dolor sit amet</li>
+                  <li>Consectetur adipiscing elit</li>
+                  <li>Integer molestie lorem at massa</li>
+                  <li>Facilisis in pretium nisl aliquet</li>
+                  <li>Nulla volutpat aliquam velit
+                    <ul>
+                      <li>Phasellus iaculis neque</li>
+                      <li>Purus sodales ultricies</li>
+                      <li>Vestibulum laoreet porttitor sem</li>
+                      <li>Ac tristique libero volutpat at</li>
+                    </ul>
+                  </li>
+                  <li>Faucibus porta lacus fringilla vel</li>
+                  <li>Aenean sit amet erat nunc</li>
+                  <li>Eget porttitor lorem</li>
+                </ul>
+              </div><!-- /col -->
+              <div class="col-sm-6 col-md-3">
+                <h3>Ordered</h3>
+                <ol>
+                  <li>Lorem ipsum dolor sit amet</li>
+                  <li>Consectetur adipiscing elit</li>
+                  <li>Integer molestie lorem at massa</li>
+                  <li>Facilisis in pretium nisl aliquet</li>
+                  <li>Nulla volutpat aliquam velit</li>
+                  <li>Faucibus porta lacus fringilla vel</li>
+                  <li>Aenean sit amet erat nunc</li>
+                  <li>Eget porttitor lorem</li>
+                </ol>
+              </div><!-- /col -->
+              <div class="clearfix visible-sm"></div>
+              <div class="col-sm-6 col-md-3">
+                <h3>Unstyled</h3>
+                <ul class="list-unstyled">
+                  <li>Lorem ipsum dolor sit amet</li>
+                  <li>Consectetur adipiscing elit</li>
+                  <li>Integer molestie lorem at massa</li>
+                  <li>Facilisis in pretium nisl aliquet</li>
+                  <li>Nulla volutpat aliquam velit
+                    <ul>
+                      <li>Phasellus iaculis neque</li>
+                      <li>Purus sodales ultricies</li>
+                      <li>Vestibulum laoreet porttitor sem</li>
+                      <li>Ac tristique libero volutpat at</li>
+                    </ul>
+                  </li>
+                  <li>Faucibus porta lacus fringilla vel</li>
+                  <li>Aenean sit amet erat nunc</li>
+                  <li>Eget porttitor lorem</li>
+                </ul>
+              </div><!-- /col -->
+              <div class="col-sm-6 col-md-3">
+                <h3>Inline</h3>
+                <ul class="list-inline">
+                  <li>Lorem ipsum</li>
+                  <li>Phasellus iaculis</li>
+                  <li>Nulla volutpat</li>
+                </ul>
+              </div><!-- /col -->
+            </div><!-- /row -->
+          </section>
+        </pf-tab>
+      </pf-tabs>
+    </div>
+  </div>
+</div>

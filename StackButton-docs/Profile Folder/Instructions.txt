@@ -1,0 +1,91 @@
+ADOBE INDESIGN PRINTING INSTRUCTIONS FOR SERVICE PROVIDER REPORT
+
+PUBLICATION NAME: Profile.indd
+
+PACKAGE DATE: 2017-06-07 7:59 PM
+Creation Date: 2017-06-07
+Modification Date: 2017-06-07
+
+CONTACT INFORMATION
+
+Company Name: 
+Contact: 
+Address: 
+
+
+
+
+
+Phone: 
+Fax: 
+Email: 
+
+SPECIAL INSTRUCTIONS AND OTHER NOTES
+
+
+
+
+
+
+External Plug-ins 0
+Non Opaque Objects :None
+
+FONTS
+5 Fonts Used; 0 Missing, 0 Embedded, 0 Incomplete, 0 Protected
+
+Fonts Packaged
+- Name: GaramondPremrPro; Type: OpenType Type 1, Status: OK
+- Name: GaramondPremrPro-Bd; Type: OpenType Type 1, Status: OK
+- Name: GaramondPremrPro-BdCapt; Type: OpenType Type 1, Status: OK
+- Name: HelveticaNeueLTPro-Bd; Type: OpenType Type 1, Status: OK
+- Name: HelveticaNeueLTPro-MdCn; Type: OpenType Type 1, Status: OK
+
+
+COLORS AND INKS
+4 Process Inks; 0 Spot Inks
+
+- Name and Type: Process Cyan; Angle: 71.565; Lines/Inch: 63.245
+- Name and Type: Process Magenta; Angle: 18.434; Lines/Inch: 63.245
+- Name and Type: Process Yellow; Angle: 0.000; Lines/Inch: 66.666
+- Name and Type: Process Black; Angle: 45.000; Lines/Inch: 70.710
+
+
+LINKS AND IMAGES
+(Missing & Embedded Links Only)
+Links and Images: 5 Links Found; 0 Modified, 0 Missing 0 Inaccessible
+Images: 0 Embedded, 3 use RGB color space
+
+
+PRINT SETTINGS
+PPD: Adobe PDF, (Adobe PDF)
+Printing To: Printer
+Number of Copies: 1
+Reader Spreads: No
+Even/Odd Pages: Both
+Pages: All
+Proof: No
+Tiling: None
+Scale: 100%, 100%
+Page Position: Upper Left
+Print Layers: Visible & Printable Layers
+Printer's Marks: None
+Bleed: 0 in, 0 in, 0 in, 0 in
+Color: Composite CMYK
+Trapping Mode: None
+Send Image Data: Optimized Subsampling
+OPI/DCS Image Replacement: No
+Page Size: Letter
+Paper Dimensions: 8.5 in x 11 in
+Orientation: Portrait
+Negative: No
+Flip Mode: Off
+
+
+FILE PACKAGE LIST
+
+1. Profile.indd; type: Adobe InDesign publication; size: 0K
+2. GaramondPremrPro.otf; type: Font file; size: 350K
+3. GaramondPremrPro-Bd.otf; type: Font file; size: 346K
+4. GaramondPremrPro-BdCapt.otf; type: Font file; size: 337K
+5. HelveticaNeueLTPro-Bd.otf; type: Font file; size: 34K
+6. HelveticaNeueLTPro-MdCn.otf; type: Font file; size: 46K

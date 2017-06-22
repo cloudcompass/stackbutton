@@ -1,0 +1,128 @@
+<div class=" " style="background: #000000 url('../../assets/jumbotron.jpg') no-repeat fixed top center; ">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-default navbar-pf" role="navigation" style="background: none; border:none;">
+    <!-- navbar header -->
+    <div class="navbar-header" style="background: none; border:none;">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img class="navbar-brand-icon" src="../../assets/logo-alt.svg" height= "45px" alt="StackButton Logo"
+             style="float: left; padding-right: 10px;"/>
+        <h1 class="navbar-brand-name" style="float: left; margin-top: 10px;">stackbutton</h1>
+      </a>
+    </div><!-- /header -->
+
+    <!-- navbar body -->
+    <div class="navbar-collapse navbar-collapse-1 collapse" aria-expanded="false" style="height: 0px;">
+      <!-- Main navbar links to components -->
+      <ul class="nav navbar-nav navbar-primary navbar-utility">
+        <li>
+          <a [routerLink]="[{outlets: { splash: ['login']}}]">Login</a>
+        </li>
+        <li>
+          <a [routerLink]="[{outlets: { splash: ['registration']}}]">Register</a>
+        </li>
+        <li>
+          <a [routerLink]="[{outlets: { splash: ['download']}}]">Download</a>
+        </li>
+      </ul><!-- /navbar links -->
+    </div><!-- /navbar body -->
+  </nav> <!-- End navbar -->
+
+  <!-- The internal named router for splash title card, login, registration, and download -->
+  <div class="jumbotron" style="height: auto; background: none;" >
+    <router-outlet name="splash"></router-outlet>
+  </div>
+</div>
+
+<!-- 'Body' of the page. -->
+<!-- Shows information about Stackbutton and it's underlying technologies -->
+<div class="about" id="section01">
+  <div class="container-fluid">
+    <h2>What is StackButton?</h2>
+    <p>
+      Stackbutton is designed for DevOps and delivers an easy-to-deploy, central monitoring system for cloud-based
+      services. It is designed to play with these technologies.
+    </p>
+    <div class="row">
+      <!-- NodeJS -->
+      <div class="col-xs-6 col-sm-6 col-md-4" align="center">
+        <a href="https://nodejs.org/en/">
+          <img src="../../assets/nodejs.png" alt="NodeJS" />
+        </a>
+        <h3>NodeJS</h3>
+        <p align="left">
+          <strong>NodeJS</strong>
+          - Stackbutton is built in JavaScript and runs on NodeJS. This makes interactions from a browser quick and
+          responsive.
+        </p>
+      </div>
+
+      <!-- Angular -->
+      <div class="col-xs-6 col-sm-6 col-md-4" align="center">
+        <a href="http://angular.io">
+          <img src="../../assets/angular.png" alt="Angular" />
+        </a>
+        <h3>Angular</h3>
+        <p align ="left">
+          <strong>Angular</strong>
+          - Stackbutton is built in Angular and TypeScript, which allows for object-oriented web development and
+          responsive UI.
+      </div>
+
+      <!-- PatternFly  -->
+      <div class="col-xs-6 col-sm-6 col-md-4" align="center" >
+        <a href="http://www.patternfly.org">
+          <img src="../../assets/patternfly.png" alt="PatternFly" width="188"  />
+        </a>
+        <h3>PatternFly</h3>
+        <p align ="left">
+        <strong>PatternFly</strong>
+          - The user interface is built in PatternFly which is a UI framework for enterprise web applications.
+        </p>
+      </div>
+
+      <!-- Docker -->
+      <div class="col-xs-6 col-sm-6 col-md-4" align="center">
+        <a href="http://docker.com">
+          <img src="../../assets/docker.png" alt="Docker"/>
+        </a>
+        <h3>Docker</h3>
+        <p align ="left">
+        <strong>Docker</strong>
+          - Stackbutton is bundled inside of a docker container and can be easily built,
+          shared, and run with a single command.
+        </p>
+      </div>
+
+      <!-- MongoDB -->
+      <div class="col-xs-6 col-sm-6 col-md-4" align="center">
+        <a href="http://mongodb.com">
+          <img src="../../assets/mongodb.jpg" alt="Mongo"  />
+        </a>
+        <h3>MongoDB</h3>
+        <p align ="left">
+          <strong>MongoDB</strong>
+          - Data is stored and retrieved using MongoDB, allowing for perky data retrieval.
+        </p>
+      </div>
+
+      <!-- Openshift -->
+      <div class="col-xs-6 col-sm-6 col-md-4" align="center">
+        <a href="http://www.openshift.com">
+          <img src="../../assets/openshift.png" alt="Openshift" />
+        </a>
+        <h3>Openshift</h3>
+        <p align ="left">
+          <strong>OpenShift</strong>
+          - is an application development and hosting platform that automates the provisioning, management, and scaling of Stackbutton alongside other containers.
+      </div>
+
+    </div><!-- ./row -->
+  </div><!-- ./container -->
+</div>

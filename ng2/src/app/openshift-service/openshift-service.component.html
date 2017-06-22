@@ -1,0 +1,16 @@
+<div class="col-sm-6 col-lg-4">
+  <div>
+    <div *ngIf="serviceData" >
+      <div class="c3i-heading">
+        <span class="pficon-service c3i-r-pad"></span>
+        <a>{{serviceName}}</a>
+      </div>
+      <div class="c3i-blue-indent">
+        <app-openshift-pod [name]="podName" [projectName]="projectName"></app-openshift-pod>
+      </div>
+    </div>
+    <div *ngIf="!serviceData">
+      <span class="fa fa-spinner fa-spin"></span>Loading Service Data...
+    </div>
+  </div>
+</div>

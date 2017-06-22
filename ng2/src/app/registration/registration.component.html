@@ -1,0 +1,90 @@
+<div>
+  <div class="container" style="background:none">
+    <div class="row" style="background:white; opacity:0.75;">
+      <div class="col-sm-7 col-md-6 col-lg-5 login">
+        <h2>Register</h2>
+        <form name="form" class="form-horizontal" role="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+
+          <!-- First Name Input -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label class="col-sm-2 col-md-2 control-label">First Name</label>
+            <div class="col-sm-10 col-md-10">
+              <input type="text" class="form-control" name="firstName" placeholder="" tabindex="1"
+                     [(ngModel)]="model.firstName" #firstName="ngModel" required />
+              <p *ngIf="f.submitted && !firstName.valid" class="help-block">First name is required</p>
+              <p *ngIf="!f.submitted || firstName.valid"></p>
+            </div>
+          </div>
+
+          <!-- Last Name Input -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label class="col-sm-2 col-md-2 control-label">Last Name</label>
+            <div class="col-sm-10 col-md-10">
+              <input type="text" class="form-control" name="lastName" placeholder="" tabindex="1"
+                     [(ngModel)]="model.lastName" #lastName="ngModel" required />
+              <p *ngIf="f.submitted && !lastName.valid" class="help-block">Last name is required</p>
+            </div>
+          </div>
+
+          <!-- Username Input -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label class="col-sm-2 col-md-2 control-label">Username</label>
+            <div class="col-sm-10 col-md-10">
+              <input type="text" class="form-control" name="username" placeholder="" tabindex="1"
+                     [(ngModel)]="model.username" #username="ngModel" required />
+              <p *ngIf="f.submitted && !username.valid" class="help-block">Username is required</p>
+            </div>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label class="col-sm-2 col-md-2 control-label">Password</label>
+            <div class="col-sm-10 col-md-10">
+              <input type="password" class="form-control" name="password" placeholder="" tabindex="2"
+                     [(ngModel)]="model.password" #password="ngModel" required />
+              <p *ngIf="f.submitted && !password.valid" class="help-block">Password is required</p>
+            </div>
+          </div>
+
+          <!-- Additional Menu Items -->
+          <div class="form-group">
+            <div class="col-xs-8 col-sm-offset-2 col-sm-6 col-md-offset-2 col-md-6">
+              <!-- This currently exists to keep the spacing consistent with login page -->
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 submit">
+              <button type="submit" class="btn btn-primary btn-lg" tabindex="4" [disabled]="loading">Register</button>
+              <span *ngIf="loading" class="fa fa-spin fa-spinner"></span>
+            </div>
+          </div>
+
+          <!--Error message alert-->
+          <div class="form-group" *ngIf="errorMessage">
+            <label class="col-sm-2 col-md-2 control-label"></label>
+            <div class="col-sm-10 col-md-10">
+              <div class="alert alert-danger">
+                <span class="pficon pficon-info"></span>
+                <strong>{{errorMessage}}</strong>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div><!-- End register -->
+
+      <!-- Additional Details -->
+      <div class="col-sm-5 col-md-6 col-lg-7 details" align="center"><br/><br/>
+        <p>
+          <strong>StackButton Registration</strong>
+        </p>
+        <p>
+          Registering made simple<br/>
+          Have an account? click login below
+        </p>
+        <!-- Navigation buttons -->
+        <div>
+          <a [routerLink]="['/splash-page', {outlets: { splash: ['login']}}]" class="btn btn-link">Login</a>
+          <a [routerLink]="['/splash-page']" class="btn btn-link">Cancel</a>
+        </div>
+      </div>
+    </div><!-- End row -->
+  </div><!-- End container -->
+</div><!-- End div -->

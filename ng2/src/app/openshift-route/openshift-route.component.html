@@ -1,0 +1,26 @@
+<div class="col-sm-12 col-lg-12 card-pf">
+  <div>
+    <legend (click)="toggleCollapsed()" class="fields-section-header-pf">
+      <span *ngIf="loading">
+        <span class="fa fa-spinner fa-spin"></span>
+        Loading Router Data...
+      </span>
+      <span *ngIf="!loading">
+        <span *ngIf="isCollapsed" class="fa fa-angle-right"></span>
+        <span *ngIf="!isCollapsed" class="fa fa-angle-down"></span>
+        <strong>{{appName.toUpperCase()}}</strong>
+        -
+        <span class="pficon-arrow"></span>
+        <a href="http://{{host}}">{{host}}</a>
+      </span>
+    </legend>
+
+    <div [hidden]="isCollapsed">
+      <div *ngFor="let service of services">
+        <app-openshift-service [projectName]="projectName"
+                               [name]="service.metadata.name"></app-openshift-service>
+      </div>
+    </div>
+  </div>
+
+</div>

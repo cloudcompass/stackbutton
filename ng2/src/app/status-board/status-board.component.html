@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <!-- If there are no data sources, display an empty state -->
+  <!-- Otherwise display filter options and cards -->
+  <div *ngIf="!dataSourceService.hasDataSources()">
+    <app-empty-state></app-empty-state>
+  </div>
+  <div *ngIf="dataSourceService.hasDataSources()">
+    <!-- Filter tool Bar -->
+    <div class="row toolbar-pf">
+      <div class="col-lg-12">
+        <form class="toolbar-pf-actions" [formGroup]="filterForm" (ngSubmit)="filterSubmit($event)">
+          <!-- Dropdown source selector -->
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <select class="form-control c3i-select-picker" id="source" formControlName="source">
+              <option value="">All Sources</option>
+              <option *ngFor="let source of sources" [value]="source">{{source}}</option>
+            </select>
+          </div>
+
+          <!-- Text filter inputs -->
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <input type="text" formControlName="projectName" class="form-control" placeholder="Project Name">
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <input type="text" formControlName="teamName" class="form-control" placeholder="Team Name">
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <input type="text" formControlName="teamMembers" class="form-control" placeholder="Team Member(s)">
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <input type="text" formControlName="tags" class="form-control" placeholder="Tag(s)">
+          </div>
+
+          <!-- Submission button -->
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="form-group toolbar-pf-find">
+              <button type="submit" class="btn btn-link btn-find" (click)="clearCards()" >
+                <span class="fa fa-search"></span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div><!-- end filter tool bar -->
+
+    <!-- Status Board Body -->
+    <!-- If there are no filtered projects, display a user prompt to make a selection -->
+    <!-- Otherwise display the filtered project cards -->
+    <div *ngIf="!filteredProjects" class="alert alert-info">
+      <span class="pficon pficon-info"></span>
+      <strong>Apply filters above!</strong>
+    </div>
+    <div *ngIf="filteredProjects" class="cards-pf" >
+
+      <!-- Display a warning if no filtered projects were found -->
+      <div *ngIf="filteredProjects.length == 0" class="alert alert-warning">
+        <span class="pficon pficon-warning-triangle-o"></span>
+        <strong>No filtered projects found!</strong>
+      </div>
+
+      <!-- Show cards here -->
+      <div class="container-fluid container-cards-pf" >
+        <!-- Github Commits -->
+        <div class="row row-cards-pf" *ngIf="githubCommits">
+          <div *ngFor="let key of getAsArray(githubCommits)">
+            <app-commit-widget [projectName]="key" [shaArray]="githubCommits[key]"></app-commit-widget>
+          </div>
+        </div>
+
+        <!-- Github Issues -->
+        <div class="row row-cards-pf" *ngIf="githubIssues">
+          <div *ngFor="let key of getAsArray(githubIssues)">
+            <app-issues-card [projectName]="key" [idArray]="githubIssues[key]"></app-issues-card>
+          </div>
+        </div>
+
+        <!-- OpenShift Projects -->
+        <div class="row row-cards-pf" *ngIf="openShiftProjectNames">
+          <div *ngFor="let name of openShiftProjectNames">
+            <app-openshift-project-card [projectName]="name"></app-openshift-project-card>
+          </div>
+        </div>
+      </div><!-- /container -->
+    </div><!-- end filtered projects -->
+  </div><!-- end datasources -->
+</div><!-- /container -->

@@ -1,0 +1,49 @@
+<div class="col-xs-12 col-sm-6 col-lg-6">
+  <div class="card-pf">
+    <div class="card-pf-heading">
+      <h2 class="card-pf-title" id="repoTitle">
+        {{projectName}} Commits
+      </h2>
+    </div><!-- End Card Header -->
+
+    <!-- Card Body -->
+    <div class="card-pf-body">
+      <!-- Arrow Buttons and Repo Name -->
+      <div style="display:flex; justify-content: space-between">
+        <button [disabled]="leftButtonDisabled" type="button" class="btn btn-default" (click)="onLeftClick()">
+          <span class="fa fa-caret-left"></span>
+        </button>
+        <button [disabled]="rightButtonDisabled" type="button" class="btn btn-default" (click)="onRightClick()">
+          <span class="fa fa-caret-right"></span>
+        </button>
+      </div>
+
+      <!-- Commit Body -->
+      <div>
+        <!-- Author, avatar, and date -->
+        <!-- Display a loading icon while loading commits, otherwise display commit content -->
+        <div *ngIf="loadingCommits" style="display: flex; justify-content: center;">
+          <span class="fa fa-spinner fa-pulse fa-4x fa-fw"></span>
+        </div>
+        <div *ngIf="!loadingCommits" style="display:flex; padding-top: 1em;">
+          <img style="height: 5em; width: 5em;" src="../../assets/logo-alt.svg"> <!-- TODO: replace src path with {{avatarUrl}} -->
+          <div>
+            <b>Commit:
+              <span>{{commitSha}}</span>
+            </b>
+            <br>
+            <b>By:
+              <span style="color:dodgerblue">{{commitAuthor ? commitAuthor : "Author Name"}}</span>
+            </b>
+            <p id="commitDate">{{commitDate ? commitDate : "Invalid Date"}}</p>
+          </div>
+        </div>
+
+        <!-- Commit Message -->
+        <div *ngIf="!loadingCommits" id="commitMessage">
+          {{commitMessage ? commitMessage : "Commit Message"}}
+        </div>
+      </div><!-- End Commit Body -->
+    </div><!-- End Card Body -->
+  </div><!-- End Card -->
+</div>
